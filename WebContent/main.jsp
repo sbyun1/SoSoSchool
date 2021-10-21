@@ -437,7 +437,7 @@
 	            <td>별</td>
             </tr>
             <tr>
-	            <td>1</td>
+	            <td>2</td>
 	            <td>이름</td>
 	            <td>별</td>
             </tr>
