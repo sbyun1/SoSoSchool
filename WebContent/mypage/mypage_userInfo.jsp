@@ -194,8 +194,9 @@
 
     ul{list-style: none;  }
     
-    #user_update{
+        #user_update{
     	min-width: 490px;
+    	min-height: 400px;
     	padding-left:60px;
     	padding-right:40px;
     	padding-top:20px;
@@ -205,6 +206,13 @@
     	margin-top:0px;
     	border:1px solid black;
     	border-radius:45px;
+    	display: flex;
+    	flex-wrap: wrap;
+    }
+    
+    #user_update li{
+    	width:490px;
+    	height: 41px;
     }
     label{
         width: 120px;
