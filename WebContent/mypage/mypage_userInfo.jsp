@@ -283,7 +283,7 @@
 </style>
 <body>
 <header>
-     <img src = "./img/logo.png">
+     <img src = "../img/logo.png">
 </header>
 <nav>
     <%@ include file="../form/navi.jsp"%>
@@ -361,33 +361,7 @@
         </div>
     </div>
     <div class="loginboard_form">
-        <div id="loginboard">
-            <div id="imgform">
-                <div id="image">
-                    <img src="img/img01.png">
-                </div>
-                <div id="setting">
-                    <img src="img/setting.jpg">
-                </div>
-            </div>
-            <div id="right">
-                <div id="textform">
-                    <div id="name">
-                        김이름님 환영합니다
-                    </div>
-                    <div id="location">
-                        나의 소속 소모임<br>
-                        소속 도서관
-                    </div>
-                    <div id="star">
-                        ★ 별 개수
-                    </div>
-                </div>
-                <div id="logoutbuttonform">
-                    <button>로그아웃</button>
-                </div>
-            </div>
-        </div>
+      <%@ include file="../form/logout.jsp"%>
     </div>
 </section>
 <footer>

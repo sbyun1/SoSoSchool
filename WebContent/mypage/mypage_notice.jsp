@@ -7,7 +7,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>결제관리</title>
+    <title>공지사항</title>
 </head>
 <style>
 @font-face {
@@ -119,81 +119,13 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    section .loginboard_form #loginboard{
-        background-color: lightgrey;
-        width: 230px;
-        height: 190px;
-        display: inline-flex;
-        margin-top: 30px;
-        border-radius: 5%;
-       
-    }
-    section .loginboard_form #loginboard #imgform{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 80px;
-        height: 190px;
-    }
-    section .loginboard_form #loginboard #imgform #image img{
-        width: 65px;
-        height: 65px;
-        border-radius: 33px;
-        margin-left: 15px;
-    }
-    section .loginboard_form #loginboard #imgform #setting img{
-        border-radius: 10px;
-        margin-top: 20px;
-    }
-    section .loginboard_form #loginboard #right #textform{
-        min-width: 150px;
-        height: 120px;
-        text-align: center;
-        line-height: 30px;
-        font-size: 15px;
-        font-weight: bold;
-    }
-    section .loginboard_form #loginboard #right #textform #name{
-        line-height: 40px;
-        margin-top: 10px;
-    }
-    section .loginboard_form #loginboard #right #textform #location{
-        line-height: 20px;
-        margin-bottom: 15px;
-    }
-    section .loginboard_form #loginboard #right #textform #star{
-        line-height: 15px;
-    }
-    section .loginboard_form #loginboard #right #logoutbuttonform{
-        min-width: 150px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    section .loginboard_form #loginboard #right #logoutbuttonform button{
-        background-color: gray;
-        font-weight: bold;
-        color: white;
-        width: 100px;
-        height: 30px;
-        border-radius: 5%;
-        border: 0;
-        outline: 0;
-    }
-	.pay_table{
+   
+	.noti_table{
 	
 		text-align:center;
 	
 		
 	}
-	
-   #container{
-    	padding-left:50px;
-    	padding-right:100px;
-    	
-    }
-    
     
     /*푸터*/
     footer{
@@ -211,6 +143,7 @@
         user-select: none;
     }
 </style>
+
 <body>
 <header>
      <img src = "../img/logo.png">
@@ -220,81 +153,45 @@
 </nav>
 <section>
 <div class="menuform">
-    <ul id="menu">
-        <li style="margin-left: 10px">마이페이지</li>
-        <li class="li_selec">나의 학습 현황</li>
-        <li class="li_selec">상품교환</li>
-        <li class="li_selec">공지사항</li>
-        <li class="li_selec">고객문의(Q&A)</li>
-        <li class="li_selec">회원 정보 수정/탈퇴</li>
-        <li class="li_selec">결제 관리</li>
-    </ul>
+    <%@ include file="/form/mypage_menubar.jsp"%>
 </div>
 <div class="mainform">
 	<div id="mainlist" style="height:150px">
 		<div class="title" style="width: 750px; height:150px">
-			결제관리	
+			공지사항	
 		</div>
 		<div id = "container">  
-						ㅇㅇㅇ님은 서비스 구독중입니다. <!--  추후 구독여부 데이터 가져와 작성 n일경우 구독중이 아닙니다-->
-			<input type = "button" value = "구독하러 가기" onclick = ""><!--네비의 결제페이지 이동 -->
-            <table class = "pay_table" border = "1"
-            	style = "">
-               
-                <tr><!-- 구독정보 테이블의 데이터를 가져온다 -->
-                    <th>구독 시작일:</th>
-                    <td>2021/08/30</td>
-                </tr>
-                <tr>
-                    <th>구독 종료일:</th>
-                    <td>2021/10/29</td>
-                </tr>
-                <tr>
-                    <th>구독 개월수:</th>
-                    <td>2달</td>
-                </tr>
-                <tr>    
-                    <th>남은 일수:</th>
-                    <td>60일</td>
-                </tr>
-                <tr>
-                    <th>월 가격정보:</th>
-                    <td>19,900원</td>
-                </tr>
-                
-               
-            </table>
+			<table class = "noti_table" border = "1">
+				<col width = "100px"><col width = "500px"><col width = "150px"><col width = "150px">
+				<tr>
+				    <th>No.</th>
+				    <th>제목</th>
+				    <th>작성자</th>
+				    <th>작성일</th>
+				</tr>
+				<c:choose>
+					<c:when test = "${empty list }">
+						<tr>
+							<td colspan = "4">======== 공지사항이 없습니다. =========</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items = "${list }" var = "dto">
+							<tr>
+								<td>${dto.noti_no }</td>											
+								<td><a href = "mypage_controller.do?command=notice_detail&noti_no=${dto.noti_no }">${dto.noti_title }</a></td>
+								<td>${dto.noti_writer }</td>
+								<td>${dto.noti_regdate }</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</table>
 		</div>			
 	</div>
 </div>
 <div class="loginboard_form">
-    <div id="loginboard">
-        <div id="imgform">
-            <div id="image">
-                <img src="../img/img01.png">
-            </div>
-            <div id="setting">
-                <img src="../img/setting.jpg">
-            </div>
-        </div>
-        <div id="right">
-            <div id="textform">
-                <div id="name">
-                    김이름님 환영합니다
-                </div>
-                <div id="location">
-                    나의 소속 소모임<br>
-                    소속 도서관
-                </div>
-                <div id="star">
-                    ★ 별 개수
-                </div>
-            </div>
-            <div id="logoutbuttonform">
-                <button>로그아웃</button>
-            </div>
-        </div>
-    </div>
+	<%@ include file="../form/logout.jsp"%>
 </div>
 </section>
 <footer>

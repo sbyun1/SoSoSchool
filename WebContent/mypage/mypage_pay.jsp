@@ -7,7 +7,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>공지사항</title>
+    <title>결제관리</title>
 </head>
 <style>
 @font-face {
@@ -181,12 +181,19 @@
         border: 0;
         outline: 0;
     }
-	.noti_table{
+	.pay_table{
 	
 		text-align:center;
 	
 		
 	}
+	
+   #container{
+    	padding-left:50px;
+    	padding-right:100px;
+    	
+    }
+    
     
     /*푸터*/
     footer{
@@ -213,77 +220,55 @@
 </nav>
 <section>
 <div class="menuform">
-    <%@ include file="../form/mypage_menubar.jsp"%>
+    <ul id="menu">
+        <li style="margin-left: 10px">마이페이지</li>
+        <li class="li_selec">나의 학습 현황</li>
+        <li class="li_selec">상품교환</li>
+        <li class="li_selec">공지사항</li>
+        <li class="li_selec">고객문의(Q&A)</li>
+        <li class="li_selec">회원 정보 수정/탈퇴</li>
+        <li class="li_selec">결제 관리</li>
+    </ul>
 </div>
 <div class="mainform">
 	<div id="mainlist" style="height:150px">
 		<div class="title" style="width: 750px; height:150px">
-			공지사항	
+			결제관리	
 		</div>
 		<div id = "container">  
-			<table class = "noti_table" border = "1">
-				<col width = "100px"><col width = "500px"><col width = "150px"><col width = "150px">
-				<tr>
-				    <th>No.</th>
-				    <td>${dto.noti_no }</td>
-				</tr>
-				<tr>
-					<th>작성일</th>
-					<td>${dto.noti_regdate }</td>
-				</tr>
-				<tr>
-				    <th>제목</th>
-				    <td>${dto.noti_title }</td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td>${dto.noti_writer }</td>
-				</tr>
-				<tr>
-					<th>공지사항</th>
-					<td><textarea cols = "60" rows = "10">${dto.noti_content }</textarea> </td>
-				</tr>
-		
-				<tr>
-					<td colspan = "2">
-					<input type = "button" value = "목록" onclick = "location.href='mypage_controller.do?command=notice'">
-					</td>
-		
-		
-		</tr>													
-						
-			</table>
+						ㅇㅇㅇ님은 서비스 구독중입니다. <!--  추후 구독여부 데이터 가져와 작성 n일경우 구독중이 아닙니다-->
+			<input type = "button" value = "구독하러 가기" onclick = ""><!--네비의 결제페이지 이동 -->
+            <table class = "pay_table" border = "1"
+            	style = "">
+               
+                <tr><!-- 구독정보 테이블의 데이터를 가져온다 -->
+                    <th>구독 시작일:</th>
+                    <td>2021/08/30</td>
+                </tr>
+                <tr>
+                    <th>구독 종료일:</th>
+                    <td>2021/10/29</td>
+                </tr>
+                <tr>
+                    <th>구독 개월수:</th>
+                    <td>2달</td>
+                </tr>
+                <tr>    
+                    <th>남은 일수:</th>
+                    <td>60일</td>
+                </tr>
+                <tr>
+                    <th>월 가격정보:</th>
+                    <td>19,900원</td>
+                </tr>
+                
+               
+            </table>
 		</div>			
 	</div>
 </div>
 <div class="loginboard_form">
-    <div id="loginboard">
-        <div id="imgform">
-            <div id="image">
-                <img src="../img/img01.png">
-            </div>
-            <div id="setting">
-                <img src="../img/setting.jpg">
-            </div>
-        </div>
-        <div id="right">
-            <div id="textform">
-                <div id="name">
-                    김이름님 환영합니다
-                </div>
-                <div id="location">
-                    나의 소속 소모임<br>
-                    소속 도서관
-                </div>
-                <div id="star">
-                    ★ 별 개수
-                </div>
-            </div>
-            <div id="logoutbuttonform">
-                <button>로그아웃</button>
-            </div>
-        </div>
-    </div>
+ 	<%@ include file="../form/logout.jsp"%>	
 </div>
 </section>
 <footer>
