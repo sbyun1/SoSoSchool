@@ -232,7 +232,7 @@
 					<td>${dto.noti_regdate }</td>
 				</tr>
 				<tr>
-				    <th>제목</th>
+				    <th>제목1</th>
 				    <td>${dto.noti_title }</td>
 				</tr>
 				<tr>
