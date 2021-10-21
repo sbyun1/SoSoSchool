@@ -36,7 +36,6 @@ public class mypage_controller extends HttpServlet {
 		}
 		/*마이페이지 공지사항 페이지*/
 		else if(command.equals("mypage_notice")) {
-			
 			List<NoticeDto> noti_list = dao.selectAll(); //전체 리스트를 가져와서 selectAll실행
 			
 			request.setAttribute("list", noti_list);

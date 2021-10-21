@@ -181,10 +181,13 @@
         border: 0;
         outline: 0;
     }
+    #container{
+    	width: 750px;
+    	display: flex;
+    	justify-content: center;
+    }
 	.noti_table{
-	
 		text-align:center;
-	
 		
 	}
     
@@ -222,7 +225,6 @@
 		</div>
 		<div id = "container">  
 			<table class = "noti_table" border = "1">
-				<col width = "100px"><col width = "500px"><col width = "150px"><col width = "150px">
 				<tr>
 				    <th>No.</th>
 				    <td>${dto.noti_no }</td>
