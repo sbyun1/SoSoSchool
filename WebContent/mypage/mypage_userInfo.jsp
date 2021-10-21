@@ -185,7 +185,11 @@
         border: 0;
         outline: 0;
     }
-    
+    #container{
+    	padding-left:50px;
+    	padding-right:100px;
+    	
+    }
     fieldset{
         border:none;
         min-width: 300px;    
@@ -196,6 +200,7 @@
     
     #user_update{
     	min-width: 490px;
+    	min-height: 400px;
     	padding-left:60px;
     	padding-right:40px;
     	padding-top:20px;
@@ -205,7 +210,24 @@
     	margin-top:0px;
     	border:1px solid black;
     	border-radius:45px;
+    	display: flex;
+    	flex-wrap: wrap;
     }
+    
+    #user_update li{
+    	width:490px;
+    	height: 41px;
+    }
+    #user_update #addr_warn{
+    	width:490px; 
+    	height: 100px
+    }
+    
+    #user_update #btn_li{
+    	width:490px; 
+    	height: 40px
+    }
+    
     label{
         width: 120px;
         display:inline-block;
@@ -232,7 +254,8 @@
     .sendform{
         margin:0px;
     } 
-    .btn{
+    
+    #user_update .btn{
     	width:100px;
     	height:50px;
     	background-color:rgb(173,175,255);
@@ -244,11 +267,9 @@
         padding: 10px;
         border: none;
         outline: none;
-    	
-    	
-    	
     }
-    #duplicate_btn{
+    
+    #user_update #duplicate_btn{
     	height:30px;
     	width:60px;
     	background-color:rgb(173,175,255);
@@ -259,11 +280,7 @@
         outline: none;
        	opacity: 0.6
     }
-    #container{
-    	padding-left:50px;
-    	padding-right:100px;
-    	
-    }
+  
     
     /*푸터*/
     footer{
@@ -299,7 +316,7 @@
             <div class="title">
                 회원정보 수정
             </div>
-        <div id = "container">  
+         
 		<form action = "" method = "post"> 
 			<input type = "hidden" name = "command" value = "mypage_userUpdate">
             <fieldset>
@@ -342,12 +359,12 @@
                     <label for = "email"><strong>이메일</strong></label>
                     <input type = "email" id = "email" name = "email" value = "test@ssschool.com"><p></p>
                 </li>
-                <li>
+                <li id = "addr_warn">
                     <label for = "text"><strong>주소</strong></label>
                     <input type = "text" id = "addr" name = "addr" value = "서울시 ㅇㅇ구 ㅇㅇ동">
                     <p style = "color:red;">*경품 배송을 위한 정확한 주소를 기입해주세요.</p>
                 </li>
-                <li>
+                <li id = "btn_li">
                		<input type="submit" class = "btn" value="수정하기"
                 		style = "margin-left:120px;">
                 	<input type="reset" class="btn" value="취소" 
@@ -357,7 +374,7 @@
             </ul>
         </fieldset>
         </form>
-        </div>
+        
         </div>
     </div>
     <div class="loginboard_form">
