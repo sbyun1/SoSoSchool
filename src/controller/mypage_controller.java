@@ -34,8 +34,7 @@ public class mypage_controller extends HttpServlet {
 			response.sendRedirect("main.jsp");
 		}
 		/*마이페이지 공지사항 페이지*/
-		else if(command.equals("notice")) {
-			
+		else if(command.equals("mypage_notice")) {
 			List<NoticeDto> noti_list = dao.selectAll(); //전체 리스트를 가져와서 selectAll실행
 			
 			request.setAttribute("list", noti_list);
@@ -47,7 +46,8 @@ public class mypage_controller extends HttpServlet {
 			NoticeDto dto = dao.selectOne(noti_no);
 			
 			request.setAttribute("dto", dto);
-			RequestDispatcher dp = request.getRequestDispatcher("/mypage/mypage_notice_detail.jsp");
+			RequestDispatcher dp = request.getRequestDispatcher("mypage/mypage_notice_detail.jsp");
+
 			dp.forward(request, response);
 		}
 		/*마이페이지 회원정보 수정 페이지*/

@@ -247,7 +247,7 @@
 						<c:forEach items = "${list }" var = "dto">
 							<tr>
 								<td>${dto.noti_no }</td>											
-								<td><a href = "qna.do?command=detail&noti_no=${dto.qna_no }">${dto.qna_title }</a></td>
+								<td><a href = "../qna.do?command=detail&noti_no=${dto.qna_no }">${dto.qna_title }</a></td>
 								<td>${dto.qna_writer }</td>
 								<td>${dto.qna_regdate }</td>
 							</tr>

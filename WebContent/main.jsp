@@ -390,7 +390,7 @@
 <!-- 공지사항 -->
 <div>
 	
-	<h3><a href= "mypage_controller.do?command=notice">공지사항</a></h3>
+	<h3><a href= "mypage_controller.do?command=mypage_notice">공지사항</a></h3>
 	
 	
 	<div id="notic">
@@ -399,7 +399,7 @@
 			<th width="200px">날짜</th>
 			<tr>
 				<td><a>공지사항</a></td>
-				<td>2021-10-10</td>
+				<td>2021-10-11</td>
 			</tr>
 		</table>
 	</div>
@@ -437,7 +437,7 @@
 	            <td>별</td>
             </tr>
             <tr>
-	            <td>1</td>
+	            <td>2</td>
 	            <td>이름</td>
 	            <td>별</td>
             </tr>
