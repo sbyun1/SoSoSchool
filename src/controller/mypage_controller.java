@@ -30,7 +30,6 @@ public class mypage_controller extends HttpServlet {
 		
 		NoticeDao dao = new NoticeDao();
 		
-		
 		if(command.equals("main")) {
 			response.sendRedirect("main.jsp");
 		}
@@ -48,6 +47,7 @@ public class mypage_controller extends HttpServlet {
 			
 			request.setAttribute("dto", dto);
 			RequestDispatcher dp = request.getRequestDispatcher("mypage/mypage_notice_detail.jsp");
+
 			dp.forward(request, response);
 		}
 		/*마이페이지 회원정보 수정 페이지*/
