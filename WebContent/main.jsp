@@ -390,7 +390,7 @@
 <!-- 공지사항 -->
 <div>
 	
-	<h3><a href= "mypage_controller.do?command=notice">공지사항</a></h3>
+	<h3><a href= "mypage_controller.do?command=mypage_notice">공지사항</a></h3>
 	
 	
 	<div id="notic">

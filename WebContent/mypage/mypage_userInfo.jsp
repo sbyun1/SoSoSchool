@@ -250,7 +250,7 @@
     }
     #duplicate_btn{
     	height:30px;
-    	min-width:10px;
+    	width:60px;
     	background-color:rgb(173,175,255);
     	cursor: pointer;
       	border-radius: 3px;
