@@ -34,9 +34,9 @@
     }
     .navi li ul{
         list-style: none;
-        position: absolute;
+        position: initial;
         left: 0;
-        width: 180px;
+        width: autopx;
         background-color: gray;
         padding: 0;
         margin: 0;
@@ -67,6 +67,7 @@
     .navi li ul li{
         transition: height 0.5s;
     }
+    
 </style>
 <body>
 <div>
