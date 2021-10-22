@@ -60,6 +60,16 @@ INSERT INTO SOSO_USER VALUES(
 	'서울시 강남구 개포동 어쩌구저쩌구 123-1101',01098765432,'test123@gmail.com',
 	DEFAULT,DEFAULT,DEFAULT,DEFAULT
 );
+
+SELECT *
+FROM (
+SELECT ROWNUM R, A.USER_NO, A.USER_ID, A.USER_POINT
+FROM(SELECT USER_NO, USER_ID, USER_POINT
+FROM SOSO_USER
+ORDER BY USER_POINT DESC) A) B
+WHERE USER_NO = 7;
+
+select * from soso_user;
 ----------------------------고객문의 게시판----------------------------------
 CREATE TABLE QNA (
 	QNA_NO NUMBER PRIMARY KEY,
