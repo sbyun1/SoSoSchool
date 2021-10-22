@@ -171,18 +171,18 @@
 </head>
 <body style="overflow-x:auto; overflow-y:scroll;">
 
-  <header><h1><a href="4.jsp"><img src="img/logo.png"></a></h1></header>
+  <header><h1><a href="4.jsp"><img src="/img/logo.png"></a></h1></header>
     <nav><%@ include file="/form/navi.jsp"%></nav>
     
     <section>
     <div class="btn-link2">
-        <input type="button" class="btn" value="로그인" onclick="location.href='login/login.jsp'">
-        <input type="button" class="btn" value="회원가입" onclick="location.href='login_controller?command=regisform'">
+        <input type="button" class="btn" value="로그인" onclick="location.href='login.jsp'">
+        <input type="button" class="btn" value="회원가입" onclick="location.href='login_controller.do?command=regisform'">
         <input type="button" class="btn" value="아이디/비밀번호 찾기" onclick="location.href='login/login.jsp'">
     </div>
     
     <div class="container">
-        <form method="post" action="login_controller?command=login">
+        <form method="post" action="login_controller.do?command=login">
               <div class="form-group">
                 <label for="">ID</label>
                 <input type="text" name="userId" class="form-control" placeholder="아이디를 입력하세요." required>

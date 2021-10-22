@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.soso.login.Dao.UserDao;
 import com.soso.login.Dto.UserDto;
 
-@WebServlet("/login_controller")
+@WebServlet("/login_controller.do")
 public class login_controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -69,7 +69,7 @@ public class login_controller extends HttpServlet {
 				out.println("<script>alert('아이디 또는 비밀번호를 다시 확인해주세요.'); location.href='2.jsp';</script>");
 			}
 		}else if(command.equals("regisform")) {
-			response.sendRedirect("login/regis.jsp");
+			response.sendRedirect("/login/regis.jsp");
 			
 		}else if(command.equals("idchk")){
 			String user_id = request.getParameter("id");

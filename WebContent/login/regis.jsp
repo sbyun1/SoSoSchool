@@ -421,7 +421,7 @@
 <body style="overflow-x:auto; overflow-y:auto;">
 
 
- <header><h1><a href="4.jsp"><img src="img/logo.png"></a></h1></header>
+ <header><h1><a href="main.jsp"><img src="/img/logo.png"></a></h1></header>
    <nav><%@ include file="/form/navi.jsp"%></nav>
     
   <section>
@@ -432,7 +432,7 @@
     </div>
     
     <div class="outer">
-        <form method="post" action="login_controller?command=insertuser">
+        <form method="post" action="login_controller.do?command=insertuser">
         <div class="inner">
         <fieldset class="regisform">
             <legend> *표시 필수 입력 사항</legend>

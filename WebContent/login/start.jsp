@@ -132,7 +132,7 @@
 </style>
 <body style="overflow-x:auto; overflow-y:scroll;">
     <header>
-     <img src="img/logo.png">
+     <img src="/img/logo.png">
     </header>
     <section id="first">
         <div class="container">
