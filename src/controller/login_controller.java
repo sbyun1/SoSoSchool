@@ -79,7 +79,7 @@ public class login_controller extends HttpServlet {
 			if(res != null) {
 				idnotuser = false;
 			}
-			response.sendRedirect("idChk.jsp?idnotused="+idnotuser);
+			response.sendRedirect("login/idChk.jsp?idnotused="+idnotuser);
 			
 		}else if(command.equals("insertuser")) {
 			

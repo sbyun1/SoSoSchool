@@ -182,7 +182,7 @@
     </div>
     
     <div class="container">
-        <form method="post" action="login_controller.do?command=login">
+        <form method="post" action="../login_controller.do?command=login">
               <div class="form-group">
                 <label for="">ID</label>
                 <input type="text" name="userId" class="form-control" placeholder="아이디를 입력하세요." required>
