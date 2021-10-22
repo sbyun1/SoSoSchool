@@ -36,12 +36,13 @@
         list-style: none;
         position: absolute;
         left: 0;
-        width: 180px;
+        width: auto;
         background-color: gray;
         padding: 0;
         margin: 0;
         opacity: 0;
         cursor:pointer;
+        position : initial;
     }
     .navi li:hover ul{
         opacity: 1;
