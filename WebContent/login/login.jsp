@@ -177,7 +177,7 @@
     <section>
     <div class="btn-link2">
         <input type="button" class="btn" value="로그인" onclick="location.href='login.jsp'">
-        <input type="button" class="btn" value="회원가입" onclick="location.href='login_controller.do?command=regisform'">
+        <input type="button" class="btn" value="회원가입" onclick="location.href='../login_controller.do?command=regisform'">
         <input type="button" class="btn" value="아이디/비밀번호 찾기" onclick="location.href='login/login.jsp'">
     </div>
     

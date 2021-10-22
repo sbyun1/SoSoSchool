@@ -28,8 +28,8 @@ public class main_controller extends HttpServlet {
 		NoticeDao dao = new NoticeDao();
 		
 		
-		if(command.equals("main")) {
-			response.sendRedirect("main.jsp");
+		if(command.equals("start")) {
+			response.sendRedirect("login/start.jsp");
 		}
 		
 		//메인페이지에 존재하는 메뉴들 클릭해서 각 컨트롤러로 넘김 (각 컨트롤러에서 세부 페이지 이동)

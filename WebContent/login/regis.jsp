@@ -286,7 +286,7 @@
          	 document.getElementsByName("parent_id")[0].focus();
  		}
      	else{
-    		var target = "login_controller?command=idchk&id="+id2.value.trim();
+    		var target = "../login_controller.do?command=idchk&id="+id2.value.trim();
     		open(target,"","width=300,height=200");
     	}
 	}
@@ -432,7 +432,7 @@
     </div>
     
     <div class="outer">
-        <form method="post" action="login_controller.do?command=insertuser">
+        <form method="post" action="../login_controller.do?command=insertuser">
         <div class="inner">
         <fieldset class="regisform">
             <legend> *표시 필수 입력 사항</legend>
