@@ -90,15 +90,15 @@
         <li>
             <a>소모임</a>
             <ul>
-                <li><a>지역별모임</a></li>
-                <li><a>채팅하기</a></li>
+                <li><a onclick="location.href='../group_seo_controller.do?command=group_border'">지역별모임</a></li>
+                <li><a onclick="location.href='../group_seo_controller.do?command=group_chat'">채팅하기</a></li>
             </ul>
         </li>
         <li>
             <a>마이페이지</a>
             <ul>
-                <li><a onclick="location.href='../mypage_controller.do?command=mypage_checkscore'">나의 학습 현황</a></li>
-                <li><a onclick="location.href='../mypage_controller.do?command=mypage_changestar'">상품 교환</a></li>
+                <li><a onclick="location.href='../mypage_seo_Controller.do?command=mypage_checkscore'">나의 학습 현황</a></li>
+                <li><a onclick="location.href='../mypage_seo_Controller.do?command=mypage_changestar'">상품 교환</a></li>
                 <li><a onclick="location.href='../mypage_controller.do?command=mypage_userinfo'">회원 정보 수정</a></li>
                 <li><a onclick="location.href='../mypage_controller.do?command=mypage_qna'">고객 문의</a></li>
             </ul>

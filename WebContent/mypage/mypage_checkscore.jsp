@@ -1,7 +1,6 @@
 <% request.setCharacterEncoding("UTF-8");%>
 <% response.setContentType("text/html; charset=UTF-8"); %>
-<%@ page import="com.soso.result.rusult_dao.result_dao" %>
-<%@ page import="org.json.simple.JSONArray" %>
+<%@ page import="result.result_dao.result_dao" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

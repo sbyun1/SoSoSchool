@@ -20,7 +20,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        min-width: 80px;
+        width: 80px;
         height: 190px;
     }
     section .loginboard_form #loginboard #imgform #image img{
@@ -73,10 +73,10 @@
 <body>
 	    <div id="loginboard">
         <div id="imgform">
-            <div id="image">
+            <div id="image" style="width: 80px; height:65px">
                 <img src="../img/img01.png">
             </div>
-            <div id="setting">
+            <div id="setting" style="width: 20px; height:40px">
                 <img src="../img/setting.jpg">
             </div>
         </div>
