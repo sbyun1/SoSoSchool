@@ -37,7 +37,7 @@
     </div>
     <div id="footer_2">
         Copyright (C) 2021 soso school Corporation all rights reserved.<br><br>
-        회사명: sosoSchool | 대표: 홍길동 | 주소: 서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F, 3F, 4F, 5F, 6F<br>
+        회사명: sosoSchool | 대표:테스트1234 | 주소: 서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F, 3F, 4F, 5F, 6F<br>
         T: 1544-9970 / F: 02-562-2378
     </div>
 	
