@@ -32,8 +32,8 @@
 <body>
 <ul id="menu">
     <li style="margin-left: 10px">마이페이지1</li>
-    <li class="li_selec"><a onclick="location.href='../mypage_seo_Controller.do?command=mypage_checkscore'">나의 학습 현황</a></li>
-    <li class="li_selec"><a onclick="location.href='../mypage_seo_Controller.do?command=mypage_changestar'">상품교환</a></li>
+    <li class="li_selec"><a onclick="location.href='../mypage_controller.do?command=mypage_checkscore'">나의 학습 현황</a></li>
+    <li class="li_selec"><a onclick="location.href='../mypage_controller.do?command=mypage_changestar'">상품교환</a></li>
     <li class="li_selec"><a onclick="location.href='../mypage_controller.do?command=mypage_notice'">공지사항</a></li>
     <li class="li_selec"><a onclick="location.href='../mypage_controller.do?command=mypage_qna'">고객문의(Q&A)<a/></li>
     <li class="li_selec"><a onclick="location.href='../mypage_controller.do?command=mypage_userinfo'">회원 정보 수정/탈퇴</a></li>
