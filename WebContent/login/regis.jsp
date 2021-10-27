@@ -10,17 +10,25 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <style type="text/css">
-      @font-face {
-    font-family: 'GowunDodum-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+		@font-face {
+			font-family: 'GowunDodum-Regular';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+		
+		body{
+		    margin: 0;
+		    padding: 0;
+		    min-width: 1400px;   /*브라우저 축소해도 요소가 깨지는것을 방지*/
+		    min-height: 650px;
+		    font-family: 'GowunDodum-Regular';
+		}
+		
         /*헤더*/
 		header{
-		    background-color: aliceblue;
 		    min-width: 100%;
-		    height: 80px;
+		    height: 120px;
 		    display: flex;
 		    align-items: center;        /*가운데 정렬*/
 		    justify-content: center;    /*가운데 정렬*/
@@ -36,7 +44,7 @@
         }
         
 		nav{
-	      	background-color: rgb(173,175,255);
+	        background-color: rgb(173,175,255);
 	        min-width: 100%;
 	        height: 50px;
 	        display: flex;
@@ -48,38 +56,33 @@
 	        user-select: none;
 		}
 		
-		body{
-		    margin: 0;
-		    padding: 0;
-		    min-width: 1400px;   /*브라우저 축소해도 요소가 깨지는것을 방지*/
-		    min-height: 650px;
-		    font-family: 'GowunDodum-Regular';
-		}
 		/*본문 구역*/
 		section{
-		    min-width: 100%;
+	        min-width: 1190px;
+	        display: flex;
+	        justify-content: center;
+	        flex-wrap: wrap;
 		}
+		
 	    /*푸터*/
-  footer{
-        background-color:rgb(233,233,236);
-        min-width: 100%;
-        min-height: 150px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-
-
+		footer{
+			background-color:rgb(233,233,236);
+			min-width: 100%;
+			min-height: 150px;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+			-ms-user-select: none;
+			-moz-user-select: none;
+			-khtml-user-select: none;
+			-webkit-user-select: none;
+			user-select: none;
+		}
          .btn-link2{
             display: flex;
             justify-content: center;
-            width: 100%;
+            width: 1000px;
             height: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -109,24 +112,26 @@
         }
         
         .outer {
+        	display:flex;
+        	width:1020px;
             text-align: center;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
         }
-
         .inner{
             display: inline-block;
+            margin-right:80px;
         }
-
         form fieldset {
             margin: 10px 0px;
         }
-
         legend {
             font-size: 18px;
             color: black;
             font-weight: 600;
         }
-
-	
 		
         li > input {
             width:330px;
@@ -146,38 +151,26 @@
             margin: 5px;
         }
         
-
         form label.reg{
             font-size: 14px;
 		    width: auto;
 		    float: inherit;
 		    margin: 15px
         }
-
         form label em {
             font-size: 15px;
             color: red;
             font-weight: 800;
         }
-
         form fieldset.sendform{
             text-align: center;
         }
-
         .regisform{
             text-align: right;
             width:540px;
             display: flex;
   			justify-content: center;
         }
-	/* 	#li_parent_id{
-		width:auto;
-		} */
-	/*  #parent_id{
-             width: 248px 
-            flex-wrap: nowrap;    
-        }  */
-
     
         #chkid-btn{
         	display: inline;
@@ -187,6 +180,7 @@
             font-size: 10px;
             color: white;
             border-radius: 2px;
+            width: 100px;
             height: 39px;
             margin:6px 3px;
             padding: 9px;
@@ -224,14 +218,6 @@
   			opacity: 0.6;
   		}
   		
-	    #new_email{        	
-        	width: 123px;
-        }
-		#textEmail{        
-			width: auto;
-			display: inline;
-        	position: inherit;
-		}
   		span {
   			font-size:16px;
   		}
@@ -266,6 +252,25 @@
             border: none;
             outline: none;
 		}
+		
+		.btn2{
+			width:100px;
+	        background: gray;
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+            border-radius: 4px;
+            margin:8px 3px;
+            padding: 9px;
+            transition: .3s;
+            border: none;
+            outline: none;
+		}
+		
+		.btn2:hover{
+			opacity: 0.6;
+		}
+		
     </style>
     
     <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -344,32 +349,29 @@
             e.value = e.value.slice(0, e.maxLength);
         }
     }
-    
-  	 $(function() {
- 		        $('#mailslc').change(function() {
-    	            if ($('#mailslc').val() == 'directly') {
-    	                $('#textEmail').attr("disabled", false);
-    	                $('#textEmail').val("");
-    	                $('#textEmail').focus();
-    	                $('#textEmail').attr('readonly',false);
-    	            } else {
-    	                $('#textEmail').val($('#mailslc').val());
-    	                $('#textEmail').attr('readonly',true);
-    	            }
-    	        })
-	});
-  	 
+
+    $(function() {
+        $('#region').change(function() {
+            if ($('#region').val() == 'directly') {
+                $('#textregion').attr("disabled", false);
+                $('#textregion').val("");
+                $('#textregion').focus();
+                $('#textregion').attr('readonly',false);
+            } else {
+                $('#textregion').val($('#region').val());
+                $('#textregion').attr('readonly',true);
+            }
+        })
+    });
   	 //주소 다음 API
      function execDaumPostcode() {
          new daum.Postcode({
              oncomplete: function(data) {
                  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                  // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
                  // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                  var roadAddr = data.roadAddress; // 도로명 주소 변수
                  var extraRoadAddr = ''; // 참고 항목 변수
-
                  // 법정동명이 있을 경우 추가한다. (법정리는 제외)
                  // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
                  if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
@@ -383,7 +385,6 @@
                  if(extraRoadAddr !== ''){
                      extraRoadAddr = ' (' + extraRoadAddr + ')';
                  }
-
                  // 우편번호와 주소 정보를 해당 필드에 넣는다.
                  document.getElementById('postcode').value = data.zonecode;
                  document.getElementById("roadAddress").value = roadAddr;
@@ -397,14 +398,12 @@
                  } else {
                      document.getElementById("extraAddress").value = '';
                  }
-
                  var guideTextBox = document.getElementById("guide");
                  // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
                  if(data.autoRoadAddress) {
                      var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                      guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
                      guideTextBox.style.display = 'block';
-
                  } else if(data.autoJibunAddress) {
                      var expJibunAddr = data.autoJibunAddress;
                      guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
@@ -425,13 +424,15 @@
    <nav><%@ include file="/form/navi.jsp"%></nav>
     
   <section>
-    <div class="btn-link2">
-        <input type="button" class="btn" value="로그인" onclick="location.href='login.jsp'">
-        <input type="button" class="btn" value="회원가입" onclick="location.href='regis.jsp'">
-        <input type="button" class="btn" value="아이디/비밀번호 찾기" onclick="location.href='login.jsp'">
-    </div>
     
     <div class="outer">
+    
+    <div class="btn-link2">
+        <input type="button" class="btn" value="로그인" onclick="location.href='../login_controller.do?command=loginform'">
+        <input type="button" class="btn" value="회원가입" onclick="../login_controller.do?command=regisform'">
+        <input type="button" class="btn" value="아이디/비밀번호 찾기" onclick="location.href='../login_controller.do?command=searchForm'">
+    </div>
+    
         <form method="post" action="../login_controller.do?command=insertuser">
         <div class="inner">
         <fieldset class="regisform">
@@ -463,9 +464,15 @@
                 <li><label class="reg" for="garde">학년<em>*</em></label>
                     <input type="number" id="garde" name="garde" min="1" max="3" placeholder="숫자만 입력해주세요." maxlength="1" onclick="idChkConfirm();" oninput="numberMaxLength(this);" required></li>
                 
-                <li><label class="reg" for="new_email">이메일</label>
-                    <input type="text" id="new_email" name="new_email" maxlength="15" onclick="idChkConfirm();" ><span>@</span>
-                    <input name="textEmail" id="textEmail" placeholder="이메일을 선택하세요." readonly>  
+
+               	<li>
+                <label class="reg" for="new_email">이메일</label>
+                	
+                    <input type="email" id="new_email" name="new_email" maxlength="50" onclick="idChkConfirm();"
+                    	placeholder="선택 입력">
+                    
+                    
+              <!--       <input name="textEmail" id="textEmail" placeholder="이메일을 선택하세요." readonly>  
                     <select id="mailslc">
                         <option value="self" disabled selected>선택</option>
                         <option value="naver.com">naver.com</option>
@@ -473,12 +480,22 @@
                         <option value="daum.com">daum.com</option>
                         <option value="yahoo.com">yahoo.com</option>
                         <option value="directly" id="textEmail">직접 입력</option>
+                    </select> -->
+                    
+                    
+                </li>
+                <li><label class="reg" for="region">지역</label>
+                    <input type="text" id="textregion" name="textregion" onclick="idChkConfirm();" placeholder="선택 하세요." readonly="readonly">
+                    <select id="region" name="region">
+                        <option value="선택하세요.">선택</option>
+                        <option value="SEOUL">서울</option>
+                        <option value="GYEONGGI">경기</option>
+                        <option value="INCHEON">인천</option>
                     </select>
                 </li>
 <!--                 
                 <li><label class="reg" for="new_address">주소</label>
                     <input type="text" id="new_address" name="new_address" maxlength="30" onclick="idChkConfirm();" ><br>
-
                     <label class="reg" for="new_address2">상세주소</label>
                     <input type="text" id="new_address2" name="new_address2" maxlength="30" onclick="idChkConfirm();" >
                     <p>경품 배송을 위한 정확한 주소를 기입해주세요.</p>
@@ -501,6 +518,7 @@
         <fieldset class="sendform">
             <input type="submit" class="btn" value="가입하기">
             <input type="reset" class="btn" value="취소">
+            <input type="button" class="btn2" value="로그인" onclick="location.href='../login_controller.do?command=loginform'">
         </fieldset>
    		</div>
   	  </form>

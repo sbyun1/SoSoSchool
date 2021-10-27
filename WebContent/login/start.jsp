@@ -11,12 +11,13 @@
 <title>Insert title here</title>
 </head>
 <style type="text/css">
-@font-face {
-    font-family: 'GowunDodum-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+	@font-face {
+	    font-family: 'GowunDodum-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	
 	body{
 	    margin: 0;
 	    padding: 0;
@@ -26,9 +27,8 @@
 	}
 	
 	header{
-	    background-color: aliceblue;
 	    min-width: 100%;
-	    height: 80px;
+	    height: 120px;
 	    display: flex;
 	    align-items: center;        /*가운데 정렬*/
 	    justify-content: center;    /*가운데 정렬*/
@@ -40,80 +40,79 @@
 	}
 	
 	header h1 a{
-	           color: black;
-	           text-decoration: none;
+        color: black;
+        text-decoration: none;
 	}
 	       
-	
-
-		
 	section{
-	    min-width: 100%;
+		min-width: 1190px;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
 	}
 		
   footer{
-        background-color:rgb(233,233,236);
-        min-width: 100%;
-        min-height: 150px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
+		background-color:rgb(233,233,236);
+		min-width: 100%;
+		min-height: 150px;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		-ms-user-select: none;
+		-moz-user-select: none;
+		-khtml-user-select: none;
+		-webkit-user-select: none;
+		user-select: none;
     }
 	
 	.container{
-	       min-height: 80vh;
-	       width: 100%;
-	       display: flex;
-	       align-items: center;
-	       justify-content: flex-start;
+		min-height: 80vh;
+		width: 600px;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
 	}
 	
 	#first{
-	       background-image: url(./img/student.jpg);
-	       background-size: 1000px 600px;
-	       background-position: right bottom;
-	       background-repeat: no-repeat;
-	       position: relative;
+		background-image: url(./img/student.jpg);
+		background-size: 1000px 600px;
+		background-position: right bottom;
+		background-repeat: no-repeat;
+		position: relative;
 	}
 	
 	#first p{
-	   display: block;
-	   width: fit-content;
-	   position: relative;
-	   color: black;
+		display: block;
+		width: fit-content;
+		position: relative;
+		color: black;
 	}
 	
 	#first .cta{
-	    display: inline-block;
-	    padding: 10px 15px;
-	    color: rgb(173,175,255);;
-	    border-radius: 10px;
-	    background-color: transparent;
-	    border: 2px solid rgb(173,175,255);;
-	    font-size: 16px;
-	    font-weight: bold;
-	    letter-spacing: .1rem;
-	    margin-top:6px;
-	    transition: .3s ease; 
-	    transition-property: background-color, color;
-	    text-decoration: none;
+		display: inline-block;
+		padding: 10px 15px;
+		color: rgb(173,175,255);;
+		border-radius: 10px;
+		background-color: transparent;
+		border: 2px solid rgb(173,175,255);;
+		font-size: 16px;
+		font-weight: bold;
+		letter-spacing: .1rem;
+		margin-top:6px;
+		transition: .3s ease; 
+		transition-property: background-color, color;
+		text-decoration: none;
 	}
 	
 	#first .cta:hover{
-	    color:white;
-	    background-color: rgb(173,175,255);;
+		color:white;
+		background-color: rgb(173,175,255);;
 	}
 	
 	.tt {
 	    position: relative;
 	    margin: 10px 165px;
-	    
 	}
 	
 	#t1{
@@ -127,7 +126,18 @@
 	    font-weight: bold;
 	}
     
-
+    #img-student {
+   		display:flex;
+    	width:400px;
+    	margin:0 185px;
+    	justify-content: center;
+    	align-items:center;
+    	align-content:center;
+    }
+    
+    #img-student > img{
+    	width:900px;
+    }
 	
 </style>
 <body style="overflow-x:auto; overflow-y:scroll;">
@@ -143,10 +153,15 @@
                 배울 수 있습니다.<br>
                 <span>국어,영어,수학과목을 쉽고 재미있게</span>
                 </p>
-                <a href="login.jsp" type="button" class="cta" onclick="login();">학습하기</a>
+                <a href="login.jsp" type="button" class="cta" onclick="location.href='../login_controller.do?command=loginform'">학습하기</a>
            
             </div>
         </div>
+        
+        <div id="img-student">
+        	<img src="/img/student.jpg">
+        </div>
+        
     </section>
     
     <footer><%@ include file="/form/footer.jsp"%></footer>

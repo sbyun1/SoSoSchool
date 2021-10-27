@@ -19,7 +19,7 @@ public class UserDao extends JDBCTemplate{
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		
-		UserDto res = new UserDto();
+		UserDto dto = new UserDto();
 		
 		String sql = "SELECT * FROM SOSO_USER WHERE USER_ID=? AND USER_PW=?";
 		
@@ -32,20 +32,22 @@ public class UserDao extends JDBCTemplate{
 			rs = pstm.executeQuery();
 			System.out.println("04.query 실행 및 리턴");
 			while(rs.next()) {
-				res.setUser_no(rs.getInt(1));
-				res.setUser_pr(rs.getString(2));
-				res.setUser_name(rs.getString(3));
-				res.setUser_id(rs.getString(4));
-				res.setUser_pw(rs.getString(5));
-				res.setUser_nn(rs.getString(6));
-				res.setGrade(rs.getInt(7));
-				res.setAddr(rs.getString(8));
-				res.setPhone(rs.getInt(9));
-				res.setEmail(rs.getString(10));
-				res.setUser_point(rs.getInt(11));
-				res.setSub_yn(rs.getString(12));
-				res.setEnabled_yn(rs.getString(13));
-				res.setUser_type(rs.getString(14));
+				dto.setUser_no(rs.getInt(1));
+				dto.setUser_pr(rs.getString(2));
+				dto.setUser_name(rs.getString(3));
+				dto.setUser_id(rs.getString(4));
+				dto.setUser_pw(rs.getString(5));
+				dto.setUser_nn(rs.getString(6));
+				dto.setGrade(rs.getInt(7));
+				dto.setAddr(rs.getString(8));
+				dto.setPhone(rs.getInt(9));
+				dto.setEmail(rs.getString(10));
+				dto.setUser_point(rs.getInt(11));
+				dto.setUser_star(rs.getInt(12));
+				dto.setSub_yn(rs.getString(13));
+				dto.setEnabled_yn(rs.getString(14));
+				dto.setUser_type(rs.getString(15));
+				dto.setRegion(rs.getString(16));
 			}
 			
 		} catch (SQLException e) {
@@ -57,7 +59,7 @@ public class UserDao extends JDBCTemplate{
 			close(con);
 			System.out.println("05.db종료\n");
 		}
-		return res;
+		return dto;
 	}
 	
 	//아이디 중복 체크
@@ -96,14 +98,9 @@ public class UserDao extends JDBCTemplate{
 		PreparedStatement pstm = null;
 		int res = 0;
 		
-		String sql = "INSERT INTO SOSO_USER VALUES(USER_NO_SQ.NEXTVAL,?,?,?,?,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT)";
+		String sql = "INSERT INTO SOSO_USER VALUES(USER_NO_SQ.NEXTVAL,?,?,?,?,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,?)";
 		
 		try {
-			
-				   /* USER_NO_SQ.NEXTVAL,'김미영','최재윤','my1007','test1234','테스트용닉네임',2,
-				    '서울시 강남구 개포동 어쩌구저쩌구 123-1101',01098765432,'test123@gmail.com',
-				    DEFAULT,DEFAULT,DEFAULT,DEFAULT */
-			
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, dto.getUser_pr());
 			pstm.setString(2, dto.getUser_name());
@@ -114,6 +111,7 @@ public class UserDao extends JDBCTemplate{
 			pstm.setString(7, dto.getAddr());
 			pstm.setInt(8, dto.getPhone());
 			pstm.setString(9, dto.getEmail());
+			pstm.setString(10, dto.getRegion());
 
 			System.out.println("03.query준비"+ sql);
 			
@@ -125,8 +123,6 @@ public class UserDao extends JDBCTemplate{
 			}else {
 				rollback(con);
 			}
-			
-			
 		} catch (SQLException e) {
 			System.out.println("3/4에러");
 			e.printStackTrace();
@@ -135,8 +131,77 @@ public class UserDao extends JDBCTemplate{
 			close(con);
 			System.out.println("05.db종료");
 		}
-		
 		return res;
+	}
+	//ID 찾기
+	public String searchId(String name,String email) {
+		String id = null;
+
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT * FROM SOSO_USER WHERE USER_NAME=? AND EMAIL=?";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, name);
+			pstm.setString(2, email);
+			System.out.println("03.query준비"+ sql);
+
+			rs = pstm.executeQuery();
+			System.out.println("04.query 실행");
+
+			while(rs.next()) {
+				id = rs.getString(4);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("3/4에러");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+			System.out.println("05.db종료");
+		}
+
+		return id;
+	}
+
+	//PW 찾기
+	public String searchPw(String name,String email,String id) {
+		String pw = null;
+
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT * FROM SOSO_USER WHERE USER_NAME=? AND EMAIL=? AND USER_ID=?";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, name);
+			pstm.setString(2, email);
+			pstm.setString(3, id);
+			System.out.println("03.query준비"+ sql);
+
+			rs = pstm.executeQuery();
+			System.out.println("04.query 실행");
+
+			while(rs.next()) {
+				pw = rs.getString(5);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("3/4에러");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+			System.out.println("05.db종료");
+		}
+
+		return pw;
 	}
 	
 	// 전체 포인트 순위
@@ -230,6 +295,53 @@ public class UserDao extends JDBCTemplate{
 		}
 		
 		return res;
+	}
+
+	//유저 하나 정보 가져오기
+	public UserDto selectuser(int user_no){
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		UserDto dto = new UserDto();
+
+		String sql = "SELECT * FROM SOSO_USER WHERE USER_NO = ?";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, user_no);
+			System.out.println("03. query 준비 " + sql);
+
+			rs = pstm.executeQuery();
+			System.out.println("04. query 실행 및 리턴");
+
+			if(rs.next()){
+				dto.setUser_no(rs.getInt(1));
+				dto.setUser_pr(rs.getString(2));
+				dto.setUser_name(rs.getString(3));
+				dto.setUser_id(rs.getString(4));
+				dto.setUser_pw(rs.getString(5));
+				dto.setUser_nn(rs.getString(6));
+				dto.setGrade(rs.getInt(7));
+				dto.setAddr(rs.getString(8));
+				dto.setPhone(rs.getInt(9));
+				dto.setEmail(rs.getString(10));
+				dto.setUser_point(rs.getInt(11));
+				dto.setUser_star(rs.getInt(12));
+				dto.setSub_yn(rs.getString(13));
+				dto.setEnabled_yn(rs.getString(14));
+				dto.setUser_type(rs.getString(15));
+				dto.setRegion(rs.getString(16));
+			}
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(con);
+			close(rs);
+			close(pstm);
+			System.out.println("05. db 종료 \n");
+		}
+		return dto;
 	}
 	
 }

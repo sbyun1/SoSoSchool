@@ -1,5 +1,6 @@
+<%@ page import="com.soso.login.Dto.UserDto" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
     
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
@@ -92,8 +93,8 @@
         <li>
             <a>소모임</a>
             <ul>
-                <li><a onclick="location.href='../group_seo_controller.do?command=group_border'">지역별모임</a></li>
-                <li><a onclick="location.href='../group_seo_controller.do?command=group_chat'">채팅하기</a></li>
+                <li><a onclick="location.href='../group_controller.do?command=group_map'">지역별모임</a></li>
+                <li><a onclick="location.href='../group_controller.do?command=group_chat'">채팅하기</a></li>
             </ul>
         </li>
         <li>

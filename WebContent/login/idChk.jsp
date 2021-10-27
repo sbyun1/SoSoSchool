@@ -9,21 +9,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-
    @font-face {
     font-family: 'GowunDodum-Regular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     }
-
 	body{
 			margin:0;
 			padding:0;
 			font-family:'GowunDodum-Regular';	
             font-size:14px;
 	}
-
 /* 	input {
 			width:300px;
             height:37px;
@@ -87,7 +84,7 @@
 			opener.document.getElementsByName("student_name")[0].focus();
 			opener.document.getElementsByName("parent_id")[0].title="y";
 			opener.document.getElementsByName("parent_id")[0].readOnly=true;
-			opener.document.getElementsByName("parent_id")[0].style.backgroundColor="rgb(233,233,236)";
+			opener.document.getElementsByName("parent_id")[0].style.backgroundColor="rgb(233,233,236)"; 
 		}else{
 			opener.document.getElementsByName("parent_id")[0].focus();
 			opener.document.getElementsByName("parent_id")[0].title="n";

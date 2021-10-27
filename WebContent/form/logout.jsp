@@ -1,3 +1,4 @@
+<%@page import="com.soso.login.Dto.UserDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -83,14 +84,14 @@
         <div id="right">
             <div id="textform">
                 <div id="name">
-                    김이름님 환영합니다
+                    ${userdto.user_name}님 환영합니다
                 </div>
                 <div id="location">
                     나의 소속 소모임<br>
                     소속 도서관
                 </div>
                 <div id="star">
-                    ★ 별 개수
+                    ★ ${userdto.user_point}
                 </div>
             </div>
             <div id="logoutbuttonform">

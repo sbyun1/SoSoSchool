@@ -1,12 +1,13 @@
-<% request.setCharacterEncoding("UTF-8");%>
+	<% request.setCharacterEncoding("UTF-8");%>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>소모임</title>
+<title>sosoSchool</title>
 </head>
 <style>
     @font-face {
@@ -38,7 +39,7 @@
     /*네비바*/
     nav{
         background-color: rgb(173,175,255);
-        width: 100%;
+        min-width: 100%;
         height: 50px;
         display: flex;
         justify-content: center;
@@ -48,7 +49,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    /*본문 X구역*/
+    /*    본문구역                                            */
     section{
         min-width: 1190px;
         display: flex;
@@ -64,25 +65,68 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    /*채팅 구역*/
-    section .chatform{
-        min-width: 980px;
-        min-height: 700px;
+    /*게시판 목록*/
+    section .borderform{
+        width: 980px;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        -ms-user-select: none;      /*드래그 금지*/
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    section .borderform #borderlist{
+        list-style: none;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    section .borderform #borderlist .one_border{
+        min-width: 300px;
+        height: 300px;
+        margin: 60px 0px 30px 100px;
+    }
+    section .borderform #borderlist .one_border #border_content{
+        width: 100%;
+        height: 100%;
         -ms-user-select: none;
         -moz-user-select: none;
         -khtml-user-select: none;
         -webkit-user-select: none;
         user-select: none;
     }
-    section .chatform #chat{
-        min-width: 800px;
-        min-height: 500px;
+    section .borderform #borderlist .one_border #border_content #img{
+        border: 1px solid black;
+        background-color: white;
+        width: 350px;
+        height: 210px;
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    section .borderform #borderlist .one_border #border_content #img img{
+		width: 50px;
+		height: 70px;
+	}
+    section .borderform #borderlist .one_border #border_content .titleform{
+        width: 100%;
+        height: 30%;
+
+    }
+    section .borderform #borderlist .one_border #border_content .titleform #title{
+        width: 100%;
+        height: 50%;
+        font-size: 30px;
+        font-weight: bold;
+        text-align: left;
+    }
+    section .borderform #borderlist .one_border #border_content .titleform #subtitle{
+        width: 100%;
+        height: 50%;
+        font-size: 25px;
+        font-weight: bold;
+        text-align: left;
     }
     /*푸터*/
     footer{
@@ -112,10 +156,25 @@
     <div class="menuform">
         <%@ include file="../form/group_menubar.jsp"%>
     </div>
-    <div class="chatform">
-        <div id="chat">
-            <script async src="//client.uchat.io/uchat.js"></script>
-<u-chat room='seoseoseotest' style="display:inline-block; width:800px; height:500px;"></u-chat>
+    <div class="borderform">
+        <div id="borderlist">
+            <c:forEach var="list" begin="1" end="9">
+                <div class="one_border">
+                    <div id="border_content">
+                        <div id="img">
+                            <img src="../img/img01.png">
+                        </div>
+                        <div class="titleform">
+                            <div id="title">
+                                제목
+                            </div>
+                            <div id="subtitle">
+                                부제목
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
         </div>
     </div>
 </section>

@@ -11,17 +11,19 @@ public class UserDto {
 	private String addr;
 	private int phone;
 	private String email;
-	private int user_point;
+	private int user_point	;
 	private String sub_yn;
 	private String enabled_yn;
 	private String user_type;
+	private String region;		//임의로 추가함
+	private int user_star;	//임의로 추가함(user_point는 랭킹용 user_star는 교환용)
 
 	public UserDto() {
 	}
 
 	public UserDto(int user_no, String user_pr, String user_name, String user_id, String user_pw, String user_nn,
 			int grade, String addr, int phone, String email, int user_point, String sub_yn, String enabled_yn,
-			String user_type) {
+			String user_type, String region) {
 		super();
 		this.user_no = user_no;
 		this.user_pr = user_pr;
@@ -37,6 +39,7 @@ public class UserDto {
 		this.sub_yn = sub_yn;
 		this.enabled_yn = enabled_yn;
 		this.user_type = user_type;
+		this.region = region;
 	}
 
 	public int getUser_no() {
@@ -151,6 +154,19 @@ public class UserDto {
 		this.user_type = user_type;
 	}
 
-	
-	
+	public String getRegion(){
+		return region;
+	}
+
+	public void setRegion(String region){
+		this.region = region;
+	}
+
+	public int getUser_star() {
+		return user_star;
+	}
+
+	public void setUser_star(int user_star) {
+		this.user_star = user_star;
+	}
 }

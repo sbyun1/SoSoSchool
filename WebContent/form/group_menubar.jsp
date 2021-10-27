@@ -36,9 +36,9 @@ body{
 <body>
 <ul id="menu">
     <li style="cursor: default;">소모임</li>
-    <li class="li_selec" onclick="location.href='../group_seo_controller.do?command=group_border'">지역별 소모임</li>
+    <li class="li_selec" onclick="location.href='../group_controller.do?command=group_map'">지역별 소모임</li>
     <li class="li_selec">소모임별 랭킹</li>
-    <li class="li_selec" onclick="location.href='../group_seo_controller.do?command=group_chat'">채팅하기</li>
+    <li class="li_selec" onclick="location.href='../group_controller.do?command=group_chat'">채팅하기</li>
 </ul>
 </body>
 </html>

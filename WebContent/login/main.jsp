@@ -14,23 +14,25 @@
 <title>Insert title here</title>
 </head>
 <%
-     		UserDto dto = (UserDto)request.getAttribute("dto");
+     		UserDto userdto = (UserDto)session.getAttribute("userdto");
 			UserDto ps = (UserDto)request.getAttribute("ps");
+			
+			
 %>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 
 <style type="text/css">
-
-@font-face {
-    font-family: 'GowunDodum-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
+		@font-face {
+			font-family: 'GowunDodum-Regular';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
 		header{
-		    background-color: aliceblue;
 		    min-width: 100%;
-		    height: 80px;
+		    height: 120px;
 		    display: flex;
 		    align-items: center;        /*가운데 정렬*/
 		    justify-content: center;    /*가운데 정렬*/
@@ -40,6 +42,7 @@
 		    -webkit-user-select: none;
 		    user-select: none;
 		}
+		
         header h1 a{
             color: black;
             text-decoration: none;
@@ -67,10 +70,11 @@
 		}
 		
 		section{
-		    min-width: 100%;
-		    display: flex;
-		    justify-content: center;
+		    min-width: 1190px;
+	        display: flex;
+	        justify-content: center;
 		}
+		
 	  	footer{
 	        background-color:rgb(233,233,236);
 	        min-width: 100%;
@@ -85,105 +89,82 @@
 	        -webkit-user-select: none;
 	        user-select: none;
 	    }
-
 		li{
 		    list-style: none;
 		}
-
         
 		#left { 
-		 color: #333;
-		 border: 1px solid #ccc;
-		 background:white;
-		 margin: 0px 5px 5px 0px;
-		 padding: 10px;
-		 height: auto;
-		 width: 80%;
-		 float: left;
+			color: #333;
+			border: 1px solid #ccc;
+			background:white;
+			margin: 0px 5px 5px 0px;
+			padding: 10px;
+			height: auto;
+			width: 952px;
+			float: left;1190
 		}
-		
-	/* 	#right { 
-		 float: right;
-		 color: #333;
-		 border: 1px solid #ccc;
-		 background:white;
-		 margin: 0px 0px 5px 0px;
-		 padding: 10px;
-		 height: auto;
-		 width: 15%;
-		 display: inline;
-		} */
-
-		/* #right  */
-	#m-right{
-			width:20%;
+		#m-right{
+			width:238px;
+		    display: flex;
+ 		   	flex-wrap: wrap;
+    		flex-direction: column;
+    		align-items: center;
 		}	 
-			
-		
 		
 		#login{
-			font-size:15px;
-			display: flex;
-			justify-content: center;
+		     width: 230px;
+	        -ms-user-select: none;
+	        -moz-user-select: none;
+	        -khtml-user-select: none;
+	        -webkit-user-select: none;
+	        user-select: none;
 		}
-			
-
-		/* #right  */
-		
-		#login .btn{
-            margin: 15px 15px 5px 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height:34px;
-            border: none;
-            outline: none;
-            background: rgb(173,175,255);
-            cursor: pointer;
-            font-size: 16px;
-            color: white;
-            border-radius: 4px;
-            transition: .3s;
-            
-        }
-        
-        #/* right  */
-        #login .btn:hover{
-            opacity: .7;
-        }
-        
-		/* #right >  */
-		
 		#rank{
-		display:flex;
-		flex-wrap: wrap;
-		align-content: center;
-		justify-content: center;
-		font-size:16px;
-		text-align: center;
+			display:flex;
+			flex-wrap: wrap;
+			align-content: center;
+			justify-content: center;
+			font-size:16px;
+			text-align: center;
 		}
 		
-		/* #right >  */
 		#rank h3{
-		margin:10px 0;
-		padding:10px 0;
-		font-size:15px;
-		text-align: center;
+			margin:10px 0;
+			padding:10px 0;
+			font-size:15px;
+			text-align: center;
 		}
 		
 		#myrank{
 			border: 2px solid black;
 		}
-
+		#kakao-link-btn{
+			margin:20px;
+		}
+		
+		#btn3 > button{
+			padding: 0;
+			border: none;
+			background: none;
+			margin:5px 10px;
+		}
+		#naver_img{
+			cursor:pointer;
+		    width: 112px;
+   			height: 101px;
+		}
 </style>
-<script type="text/javascript">
-</script>
+
 
 <body style="overflow-x:auto; overflow-y:scroll;">
 
-    <header><h1><a href="4.jsp"><img src="img/logo.png"></a></h1></header>
+    <header><h1><a onClick="top.location='javascript:location.reload()'"><img src="/img/logo.png"></a></h1></header>
     <nav><%@ include file="/form/navi.jsp"%></nav>
     
   <section>
+  
+
+  
   <div id="left">
     <!-- 동영상 -->
     <div id="video">
@@ -196,20 +177,36 @@
     <!-- 소모임 -->
     <div>
       <h3>내 주변 소모임</h3>
-      <div id="group"></div>
+      <div id="group">
+      
+      </div>
     </div>
     
     <!-- 공지사항 -->
     <div>
-      <h3>공지사항</h3>
+   		   <h3><a onClick="top.location='javascript:location.reload()'">공지사항</a></h3>
       <div id="notic">
         <table border="1">
-          <th width="900px">제목</th>
-          <th width="200px">날짜</th>
-          <tr>
-            <td><a href="">공지사항</a></td>
-            <td>2021-10-10</td>
-          </tr>
+        	<col width="900px"> <col width="200px">
+        	<tr>
+          	<th>제목</th>
+          	<th>날짜</th>
+          	</tr>
+          	<c:choose>
+					<c:when test = "${empty noti_list}">
+						<tr>
+							<td colspan = "4">======== 로그인 후에 확인 할 수 있습니다. =========</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items = "${noti_list}" var = "dto">
+							<tr>
+								<td><a href = "mypage_controller.do?command=notice_detail&noti_no=${dto.noti_no }">${dto.noti_title }</a></td>
+								<td>${dto.noti_regdate }</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+			</c:choose>
         </table>
       </div>
     </div>
@@ -218,19 +215,11 @@
   <div id="m-right">
   
     <!-- 회원 정보 -->
-   <!--  <div id="login">
-      <form action="">
-        <ul>
-          <li>님 환영합니다.</li>
-          <li><a href="">나의 소속 소모임</a></li>
-          <li>시 별무리 도서관</li>
-          <li>스티커 개수 2</li>
-          <input type ="button" class="btn" value="로그아웃" onclick="location.href='1.jsp'">
-        </ul>
-      </form>
-    </div> -->
-    
-    <div id="login"><%@ include file="/form/logout.jsp"%></div>
+    <div id="login">
+        <div class="loginboard_form">
+        	<%@ include file="../form/logout.jsp"%>
+    	</div>
+    </div>
 
     <!-- 회원 랭킹 -->
     <div id="rank">
@@ -244,13 +233,13 @@
           </tr>
          
           <c:choose>
-          	<c:when test="${empty list }">
+          	<c:when test="${empty rank_list }">
           		<tr>
-					<td colspan="4">===== 로그인 후에 확인 할 수 있습니다. =====</td>
+					<td colspan="4">로그인 후에 확인 할 수 있습니다.</td>
 				</tr>
           	</c:when>
           	<c:otherwise>
-          		<c:forEach items="${list }" var="rank" varStatus="i" end="4" >
+          		<c:forEach items="${rank_list }" var="rank" varStatus="i" end="4" >
           			<%-- <c:forEach var="i" begin="1" end="10" step="1"> --%>
 		          		<tr>
 		          			<td>${i.count }</td>
@@ -267,8 +256,23 @@
           		<td>${name }</td>
           		<td>${point }</td>
           	</tr> 
-
+  
+	  
       </table>
+  		
+		<!-- 메인페이지 , 랭크 공유x 링크 공유o -->
+		<!-- 카카오 공유 -->		
+		<a id="kakao-link-btn" href="javascript:;">
+		<img src="//dev.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+		</a>
+		
+  		<div id="btn3">
+		<!-- 네이버 공유 -->
+		<button type='button' id='naver_share' >
+		<img  id="naver_img" src="img/img_naver_share_07.png" width="68px" height="69px">
+		</button>
+		</div>
+		
     </div>
   </div>
 </section>
@@ -276,4 +280,55 @@
 
 <footer><%@ include file="/form/footer.jsp"%></footer>
 </body>
-</html>
+
+<!--  네이버 공유 -->
+<script>
+/*  로컬 url 공유 안됨*/
+$("#naver_share").click(function(e) {     
+	var share_url = 'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=soso+school';
+	var title = 'sosoSchool';
+ 	var url = 'http://share.naver.com/web/shareView.nhn?url='+encodeURIComponent(share_url)+'&title='+encodeURIComponent(title);
+ 	window.open( url, 'share', 'width=500, height=500' );
+   });
+</script>
+
+<!--  카카오 공유 -->
+<!--  개인 URL 주소 또는 포트번호만 공유 구현포트번호)http://localhost:8082 다르면 안나옴-->
+<script>
+  try {
+	  /*  카카오 개인 API */
+    Kakao.init('f2f261c1d73372ce68cafe92884b78e0')
+   
+    Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn',
+      objectType: 'feed',
+        content: {
+          title: 'SoSo School',
+          description: '초등 학습 강의',
+        imageUrl:'../img/logo',
+        link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            androidExecParams: 'test',
+        },
+      },
+   
+      buttons: [
+        {
+          title: '웹으로 이동',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+          },
+        },
+        {
+          title: '앱으로 이동',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+          },
+        },
+      ]
+    });
+  ; window.kakaoDemoCallback && window.kakaoDemoCallback() }
+  catch(e) {
+	  window.kakaoDemoException && window.kakaoDemoException(e) 
+  }
+</script>
