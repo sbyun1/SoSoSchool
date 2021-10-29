@@ -137,7 +137,7 @@
 		width: 100%;
 		height: 100%;
 		padding: 10px;
-		margin-bottom: 160px;
+		margin-bottom: 100px;
 		background-color: white;
 		border-radius: 4px;
 		box-shadow: 0 8px 16px reba(0,0,0,.3);

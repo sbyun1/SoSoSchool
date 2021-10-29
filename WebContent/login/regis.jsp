@@ -272,7 +272,24 @@
 			opacity: 0.6;
 		}
 		
-
+		.btn2{
+			width:100px;
+	        background: gray;
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+            border-radius: 4px;
+            margin:8px 3px;
+            padding: 9px;
+            transition: .3s;
+            border: none;
+            outline: none;
+		}
+		
+		.btn2:hover{
+			opacity: 0.6;
+		}
+		
     </style>
     
     <script src="http://code.jquery.com/jquery-latest.js"></script>
