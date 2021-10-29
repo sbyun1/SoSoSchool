@@ -141,7 +141,7 @@ public class UserDao extends JDBCTemplate{
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 
-		String sql = "SELECT * FROM SOSO_USER WHERE USER_NAME=? AND EMAIL=?";
+		String sql = "SELECT * FROM SOSO_USER WHERE USER_PR=? AND EMAIL=?";
 
 		try {
 			pstm = con.prepareStatement(sql);
@@ -176,7 +176,7 @@ public class UserDao extends JDBCTemplate{
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 
-		String sql = "SELECT * FROM SOSO_USER WHERE USER_NAME=? AND EMAIL=? AND USER_ID=?";
+		String sql = "SELECT * FROM SOSO_USER WHERE USER_PR=? AND EMAIL=? AND USER_ID=?";
 
 		try {
 			pstm = con.prepareStatement(sql);

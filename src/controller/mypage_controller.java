@@ -35,9 +35,6 @@ import result.result_dto.result_dto;
  * Servlet implementation class Notice
  */
 @WebServlet("/mypage_controller.do")
-
-
-
 public class mypage_controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
@@ -58,13 +55,10 @@ public class mypage_controller extends HttpServlet {
 		QnaDao Qdao = new QnaDao();
 
 		
-		if(command.equals("main")) {
-			response.sendRedirect("main.jsp");
-		}
 		/*******************마이페이지 공지사항 페이지*************************/
 		
 		//공지 전체보기
-		else if(command.equals("mypage_notice")) {
+		 if(command.equals("mypage_notice")) {
 			List<NoticeDto> noti_list = Ndao.selectAll(); //전체 리스트를 가져와서 selectAll실행
 			
 			request.setAttribute("list", noti_list);
