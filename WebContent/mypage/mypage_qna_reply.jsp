@@ -237,7 +237,8 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type = "text" name = "qna_writer"></td>
+					<td><input type = "text" name = "qna_writer" value = "${dto.user_id }"
+					readonly = "true"></td>
 				</tr>
 				<tr>
 					<th>내용</th>

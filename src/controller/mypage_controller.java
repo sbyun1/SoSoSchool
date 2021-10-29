@@ -331,7 +331,6 @@ public class mypage_controller extends HttpServlet {
 		}
 	}
 
-		
 	private void dispatch(String url, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatch = request.getRequestDispatcher(url);
 		dispatch.forward(request,response);

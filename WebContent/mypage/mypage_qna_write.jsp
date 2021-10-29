@@ -6,6 +6,7 @@
 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
+
 <html>
 <head>
     <title>문의하기</title>
@@ -220,6 +221,7 @@
     <%@ include file="../form/mypage_menubar.jsp"%>
 </div>
 <div class="mainform">
+
 	<div id="mainlist" style="height:150px">
 		<div class="title" style="width: 750px; height:150px">
 			문의하기	
@@ -236,7 +238,8 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type = "text" name = "qna_writer"></td>
+					<td><input type = "text" name = "qna_writer" value = "${dto.user_id}"
+					readonly = "true"></td>
 				</tr>
 				<tr>
 					<th>내용</th>
