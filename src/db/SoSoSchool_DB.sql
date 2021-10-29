@@ -1,36 +1,153 @@
 
+DROP TABLE SMALL_GROUP;
+DROP SEQUENCE SMALL_GROUP_SQ;
 
-------------------------------------공지사항 게사판-----------------------------------------
-CREATE TABLE NOTICE(
-	NOTI_NO NUMBER PRIMARY KEY,
-	NOTI_GNO NUMBER NOT NULL,
-	NOTI_GSQ NUMBER NOT NULL,
-	NOTI_TAB NUMBER NOT NULL,
-	NOTI_TITLE VARCHAR2(2000)NOT NULL,
-	NOTI_WRITER VARCHAR2(30) DEFAULT '관리자' NOT NULL,
-	NOTI_CONTENT VARCHAR2(4000) NOT NULL,
-	NOTI_REGDATE DATE DEFAULT SYSDATE NOT NULL
-);
---게시글 번호용 시퀸스-----
-CREATE SEQUENCE NOTI_NO_SQ NOCACHE;
----그룹 내 순서용 시퀸스
-CREATE SEQUENCE NOTI_GNO_SQ NOCACHE;
---
-INSERT INTO NOTICE VALUES(
-	NOTI_NO_SQ.NEXTVAL, NOTI_GNO_SQ.NEXTVAL, 1, 0, 
-	'테스트 데이터 입니다', DEFAULT, '테스트데이터', DEFAULT
-);
+CREATE TABLE SMALL_GROUP(
+            GBOARD_NO NUMBER NOT NULL ,
+            GBOARD_TITLE VARCHAR2(100) NOT NULL ,
+﻿
+DROP TABLE SMALL_GROUP;
+DROP SEQUENCE SMALL_GROUP_SQ;
 
---값 테스트--
-INSERT INTO NOTICE VALUES(
-	NOTI_NO_SQ.NEXTVAL, NOTI_GNO_SQ.NEXTVAL, 1, 0, 
-	'테스트 데이터 222입니다', DEFAULT, '테스트데이터222', DEFAULT
+CREATE TABLE SMALL_GROUP(
+            GBOARD_NO NUMBER NOT NULL ,
+            GBOARD_TITLE VARCHAR2(100) NOT NULL ,
+            GBOARD_SUBTITLE VARCHAR2(100) NOT NULL ,
+            GBOARD_CONTENT VARCHAR2(4000) NOT NULL ,
+            GBOARD_IMG VARCHAR2(100) NOT NULL,  --이미지파일 이름
+            GBOARD_REGDATE DATE NOT NULL,
+            GBOARD_REGION VARCHAR2(200) NOT NULL ,
+            GBOARD_LiBRARY VARCHAR2(200) NOT NULL ,
+            CONSTRAINT GBOARD_NO_PK PRIMARY KEY (GBOARD_NO)
 );
 
-SELECT * FROM NOTICE;
+CREATE SEQUENCE SMALL_GROUP_SQ NOCACHE;
 
------------------------------------------소소유저 정보-------------------------------------------------------
+SELECT * FROM SMALL_GROUP;
+
+SELECT * FROM SMALL_GROUP WHERE GBOARD_REGION = 'INCHEON' AND GBOARD_LIBRARY = 'A도서관';
+
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트1','테스트1','테스트1','img1'
+    , SYSDATE, 'SEOUL', 'A도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트1','테스트1','테스트1','img2'
+    , SYSDATE, 'SEOUL', 'A도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트1','테스트1','테스트1','img3'
+    , SYSDATE, 'SEOUL', 'A도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트1','테스트1','테스트1','img1'
+    , SYSDATE, 'SEOUL', 'A도서관'
+    );
+
+
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트2','테스트2','테스트2','img1'
+    , SYSDATE, 'SEOUL', 'B도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트2','테스트2','테스트2','img2'
+    , SYSDATE, 'SEOUL', 'B도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트2','테스트2','테스트2','img3'
+    , SYSDATE, 'SEOUL', 'B도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트2','테스트2','테스트2','img1'
+    , SYSDATE, 'SEOUL', 'B도서관'
+    );
+
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트3','테스트3','테스트3','img1'
+    , SYSDATE, 'SEOUL', 'C도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트3','테스트3','테스트3','img2'
+    , SYSDATE, 'SEOUL', 'C도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트3','테스트3','테스트3','img3'
+    , SYSDATE, 'SEOUL', 'C도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트3','테스트3','테스트3','img1'
+    , SYSDATE, 'SEOUL', 'C도서관'
+    );
+
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트32','테스트23','테스트423412','img1'
+    , SYSDATE, 'GYEONGGI', 'A도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트323','테스트3','테스트3GSA','img2'
+    , SYSDATE, 'GYEONGGI', 'C도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트3','테스트3','테스트3DSD','img3'
+    , SYSDATE, 'GYEONGGI', 'C도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트33','테스트3','테스트341','img1'
+    , SYSDATE, 'INCHEON', 'C도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트34123','테스트3','테스트323','img2'
+    , SYSDATE, 'INCHEON', 'C도서관'
+    );
+INSERT INTO SMALL_GROUP VALUES
+    (
+        SMALL_GROUP_SQ.nextval, '테스트334','테스트33','테스트32','img3'
+    , SYSDATE, 'INCHEON', 'A도서관'
+    );
+
+
+---------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE RESULT(
+       USER_ID VARCHAR2(30) NOT NULL ,
+       MONTH NUMBER NOT NULL,
+       KOR NUMBER NOT NULL ,
+       MATH NUMBER NOT NULL ,
+       ENG NUMBER NOT NULL
+);
+
+INSERT INTO RESULT VALUES ('seo5921', 10, 100, 98, 98);
+INSERT INTO RESULT VALUES ('seo5921', 8, 96, 98, 76);
+INSERT INTO RESULT VALUES ('seo5921', 9, 97, 34, 68);
+
+select * from RESULT;
+
+SELECT * FROM RESULT WHERE USER_ID='weed';
+SELECT * FROM RESULT WHERE USER_ID='weed' AND MONTH = EXTRACT(MONTH FROM SYSDATE)-2;
+
+
+
+-------------------------------------------------------------------------------------------
+
 DROP TABLE SOSO_USER;
+DROP SEQUENCE USER_NO_SQ;
 
 CREATE TABLE SOSO_USER(
       USER_NO NUMBER PRIMARY KEY,
@@ -56,26 +173,109 @@ CREATE TABLE SOSO_USER(
       CONSTRAINT soso_user_user_type CHECK (USER_TYPE IN ('USER','ADMIN'))
 );
 
---회원번호용 시퀸스---
 CREATE SEQUENCE USER_NO_SQ NOCACHE;
 
+INSERT INTO SOSO_USER VALUES
+    (
+        USER_NO_SQ.nextval, '김미영', '김주이', 'seo5921','a1234','qlok','1'
+        ,'경기도','01092035921','seo59212naver.com',DEFAULT, DEFAULT, DEFAULT, DEFAULT,
+        DEFAULT,'SEOUL'
+    );
+
+INSERT INTO SOSO_USER VALUES
+    (
+        USER_NO_SQ.nextval, '김니니', '김주삼', 'seo1234','a1234','IKLA','2'
+        ,'경기도','01092035921','seo5921@naver.com',DEFAULT, DEFAULT, DEFAULT, DEFAULT,
+        DEFAULT,'GYEONGGI'
+    );
+
+INSERT INTO SOSO_USER VALUES
+    (
+        USER_NO_SQ.nextval, '김미재', '김미이', 'seo4321','a1234','qk','3'
+        ,'경기도','01092035921','seo5931@naver.com',DEFAULT, DEFAULT, DEFAULT, DEFAULT,
+        DEFAULT,'INCHEON'
+    );
+
+SELECT * FROM SOSO_USER;
+SELECT * FROM SOSO_USER WHERE REGION = 'SEOUL' ORDER BY USER_POINT DESC;
+SELECT * FROM(SELECT ROWNUM R, A.USER_NO, A.USER_ID, A.USER_POINT FROM(SELECT USER_NO, USER_ID, USER_POINT, REGION FROM SOSO_USER WHERE REGION = ? ORDER BY USER_POINT DESC) A) WHERE USER_NO = ?;
+
+SELECT USER_NO, USER_ID, USER_POINT, REGION FROM SOSO_USER WHERE REGION = 'SEOUL' ORDER BY USER_POINT DESC;
+------------------------------------공지사항 게사판-----------------------------------------
+DROP TABLE NOTICE;
+DROP SEQUENCE NOTI_NO_SQ;
+DROP SEQUENCE NOTI_GNO_SQ;
+
+CREATE TABLE NOTICE(
+       NOTI_NO NUMBER PRIMARY KEY,
+       NOTI_GNO NUMBER NOT NULL,
+       NOTI_GSQ NUMBER NOT NULL,
+       NOTI_TAB NUMBER NOT NULL,
+       NOTI_TITLE VARCHAR2(2000)NOT NULL,
+       NOTI_WRITER VARCHAR2(30) DEFAULT '관리자' NOT NULL,
+       NOTI_CONTENT VARCHAR2(4000) NOT NULL,
+       NOTI_REGDATE DATE DEFAULT SYSDATE NOT NULL
+);
+--게시글 번호용 시퀸스-----
+CREATE SEQUENCE NOTI_NO_SQ NOCACHE;
+---그룹 내 순서용 시퀸스
+CREATE SEQUENCE NOTI_GNO_SQ NOCACHE;
+--
+INSERT INTO NOTICE VALUES(
+                             NOTI_NO_SQ.NEXTVAL, NOTI_GNO_SQ.NEXTVAL, 1, 0,
+                             '테스트 데이터 입니다', DEFAULT, '테스트데이터', DEFAULT
+                         );
+
 --값 테스트--
-INSERT INTO SOSO_USER VALUES(
-	USER_NO_SQ.NEXTVAL,'김미영','최재윤','my1007','test1234','테스트용닉네임',2,
-	'서울시 강남구 개포동 어쩌구저쩌구 123-1101',01098765432,'test123@gmail.com',
-	DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,'SEOUL'
+INSERT INTO NOTICE VALUES(
+                             NOTI_NO_SQ.NEXTVAL, NOTI_GNO_SQ.NEXTVAL, 1, 0,
+                             '테스트 데이터 222입니다', DEFAULT, '테스트데이터222', DEFAULT
+                         );
+
+SELECT * FROM NOTICE;
+
+----------------------------상품 관련 테이블---------------------------------------------------------------
+DROP TABLE GIFT_BOARD;
+DROP SEQUENCE GIFT_TABLE_SQ;
+
+CREATE TABLE GIFT_BOARD(
+    GI_NO NUMBER PRIMARY KEY ,
+    GI_TITLE VARCHAR2(100) NOT NULL ,
+    GI_PRIZE NUMBER NOT NULL ,
+    GI_STOCK NUMBER NOT NULL,
+    GI_IMG VARCHAR2(100) NOT NULL
 );
 
-SELECT *
-FROM (
-SELECT ROWNUM R, A.USER_NO, A.USER_ID, A.USER_POINT
-FROM(SELECT USER_NO, USER_ID, USER_POINT
-FROM SOSO_USER
-ORDER BY USER_POINT DESC) A) B
-WHERE USER_NO = 7;
+CREATE SEQUENCE GIFT_TABLE_SQ;
 
-select * from soso_user;
-----------------------------고객문의 게시판----------------------------------
+INSERT INTO GIFT_BOARD VALUES (
+    GIFT_TABLE_SQ.nextval, '바나나우유', 20, 20, 'banana'
+);
+
+INSERT INTO GIFT_BOARD VALUES (
+    GIFT_TABLE_SQ.nextval, '가나초콜릿', 10, 20, 'chocolate'
+);
+
+INSERT INTO GIFT_BOARD VALUES (
+    GIFT_TABLE_SQ.nextval, '삼각김밥', 50, 20, 'gimbab'
+);
+
+INSERT INTO GIFT_BOARD VALUES (
+    GIFT_TABLE_SQ.nextval, '도시락', 80, 1, 'dosirak'
+);
+
+INSERT INTO GIFT_BOARD VALUES (
+    GIFT_TABLE_SQ.nextval, '닌텐도', 100, 1, 'nintendo'
+);
+UPDATE GIFT_BOARD SET GI_PRIZE = 1000 WHERE GI_NO = 5;
+
+SELECT * FROM GIFT_BOARD;x
+select * from SOSO_USER;
+
+UPDATE SOSO_USER SET USER_STAR = 300 WHERE USER_NO = 1;
+UPDATE SOSO_USER SET USER_STAR = 200 WHERE USER_NO = 7;
+UPDATE SOSO_USER SET USER_STAR = 100 WHERE USER_NO = 8;
+
 CREATE TABLE QNA (
 	QNA_NO NUMBER PRIMARY KEY,
 	QNA_GNO NUMBER NOT NULL,
