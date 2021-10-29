@@ -9,6 +9,7 @@
 <head>
     <title>공지사항</title>
 </head>
+
 <style>
 @font-face {
     font-family: 'GowunDodum-Regular';
@@ -19,7 +20,7 @@
     body{
         margin: 0;
         padding: 0;
-        min-width: 1400px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
+        min-width: 1190px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
         min-height: 650px;
         font-family: 'GowunDodum-Regular';
     }
@@ -52,7 +53,7 @@
     }
     /*본문 구역*/
     section{
-        min-width: 100%;
+        min-width: 1190px;
         display: flex;
         justify-content: center;
     }
@@ -94,7 +95,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    /*성적표*/
+   
     section .mainform #mainlist{
         min-width: 750px;         /*메인 구역 안 width 값*/
         display: flex;
@@ -119,11 +120,16 @@
         -webkit-user-select: none;
         user-select: none;
     }
-   
+    #container{
+    	width: 750px;
+    	display: flex;
+    	justify-content: center;
+    }
 	.noti_table{
 	
 		text-align:center;
-	
+		width: 600px;
+		
 		
 	}
     
@@ -169,7 +175,7 @@
 		</div>
 		<div id = "container">  
 			<table class = "noti_table" border = "1">
-				<col width = "100px"><col width = "500px"><col width = "150px"><col width = "150px">
+				<col width = "100px"><col width = "350px"><col width = "100px"><col width = "100px">
 				<tr>
 				    <th>No.</th>
 				    <th>제목</th>
@@ -193,6 +199,11 @@
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
+				<tr>
+					<td colspan = "4">
+						<input type = "button" value = "공지사항 작성" onclick = "location.href='mypage_controller.do?command=notice_writeform'">
+					</td>
+				</tr>
 			</table>
 		</div>			
 	</div>

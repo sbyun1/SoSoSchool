@@ -19,7 +19,7 @@
     body{
         margin: 0;
         padding: 0;
-        min-width: 1400px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
+        min-width: 1190px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
         min-height: 650px;
         font-family: 'GowunDodum-Regular';
     }
@@ -52,7 +52,7 @@
     }
     /*본문 구역*/
     section{
-        min-width: 100%;
+        min-width: 1190px;
         display: flex;
         justify-content: center;
     }
@@ -119,73 +119,16 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    section .loginboard_form #loginboard{
-        background-color: lightgrey;
-        width: 230px;
-        height: 190px;
-        display: inline-flex;
-        margin-top: 30px;
-        border-radius: 5%;
-       
-    }
-    section .loginboard_form #loginboard #imgform{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 80px;
-        height: 190px;
-    }
-    section .loginboard_form #loginboard #imgform #image img{
-        width: 65px;
-        height: 65px;
-        border-radius: 33px;
-        margin-left: 15px;
-    }
-    section .loginboard_form #loginboard #imgform #setting img{
-        border-radius: 10px;
-        margin-top: 20px;
-    }
-    section .loginboard_form #loginboard #right #textform{
-        min-width: 150px;
-        height: 120px;
-        text-align: center;
-        line-height: 30px;
-        font-size: 15px;
-        font-weight: bold;
-    }
-    section .loginboard_form #loginboard #right #textform #name{
-        line-height: 40px;
-        margin-top: 10px;
-    }
-    section .loginboard_form #loginboard #right #textform #location{
-        line-height: 20px;
-        margin-bottom: 15px;
-    }
-    section .loginboard_form #loginboard #right #textform #star{
-        line-height: 15px;
-    }
-    section .loginboard_form #loginboard #right #logoutbuttonform{
-        min-width: 150px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    section .loginboard_form #loginboard #right #logoutbuttonform button{
-        background-color: gray;
-        font-weight: bold;
-        color: white;
-        width: 100px;
-        height: 30px;
-        border-radius: 5%;
-        border: 0;
-        outline: 0;
-    }
-	.noti_table{
-	
+    
+   #container{
+   		width: 750px;
+   		display: flex;
+   		justify-content: center;
+   }
+	.qna_table{
 		text-align:center;
+		width: 600px;
 	
-		
 	}
     
     /*푸터*/
@@ -213,15 +156,7 @@
 </nav>
 <section>
 <div class="menuform">
-    <ul id="menu">
-        <li style="margin-left: 10px">마이페이지</li>
-        <li class="li_selec">나의 학습 현황</li>
-        <li class="li_selec">상품교환</li>
-        <li class="li_selec">공지사항</li>
-        <li class="li_selec">고객문의(Q&A)</li>
-        <li class="li_selec">회원 정보 수정/탈퇴</li>
-        <li class="li_selec">결제 관리</li>
-    </ul>
+     <%@ include file="/form/mypage_menubar.jsp"%>
 </div>
 <div class="mainform">
 	<div id="mainlist" style="height:150px">
@@ -229,8 +164,8 @@
 			고객문의	
 		</div>
 		<div id = "container">  
-			<table class = "noti_table" border = "1">
-				<col width = "100px"><col width = "500px"><col width = "150px"><col width = "150px">
+			<table class = "qna_table" border = "1">
+				<col width = "100px"><col width = "350px"><col width = "100px"><col width = "100px">
 				<tr>
 				    <th>No.</th>
 				    <th>제목</th>
@@ -246,15 +181,22 @@
 					<c:otherwise>
 						<c:forEach items = "${list }" var = "dto">
 							<tr>
-								<td>${dto.noti_no }</td>											
-								<td><a href = "../qna.do?command=detail&noti_no=${dto.qna_no }">${dto.qna_title }</a></td>
+								<td>${dto.qna_no }</td>											
+								<td><a href = "mypage_controller.do?command=qna_detail&qna_no=${dto.qna_no }">${dto.qna_title }</a></td>
 								<td>${dto.qna_writer }</td>
 								<td>${dto.qna_regdate }</td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
+				<tr>
+					<td colspan = "4">
+					<input type = "button" value = "문의하기" onclick = "location.href='mypage_controller.do?command=qna_writeform'">
+				</td>
+				</tr>
 			</table>
+			
+			
 		</div>			
 	</div>
 </div>

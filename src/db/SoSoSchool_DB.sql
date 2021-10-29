@@ -90,3 +90,4 @@ INSERT INTO QNA VALUES(
 	NOTI_NO_SQ.NEXTVAL, NOTI_GNO_SQ.NEXTVAL, 1, 0, 
 	'문의하기 테스트데이터 입니다',  'user1', '테스트데이터', DEFAULT
 );
+select * from qna;

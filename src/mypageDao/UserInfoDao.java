@@ -1,5 +1,8 @@
 package mypageDao;
 
-public class UserInfoDao {
+import common.JDBCTemplate;
+
+public class UserInfoDao extends JDBCTemplate {
+	
 
 }

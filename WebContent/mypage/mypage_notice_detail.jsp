@@ -19,7 +19,7 @@
     body{
         margin: 0;
         padding: 0;
-        min-width: 1400px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
+        min-width: 1190px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
         min-height: 650px;
         font-family: 'GowunDodum-Regular';
     }
@@ -52,7 +52,7 @@
     }
     /*본문 구역*/
     section{
-        min-width: 100%;
+        min-width: 1190px;
         display: flex;
         justify-content: center;
     }
@@ -119,68 +119,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    section .loginboard_form #loginboard{
-        background-color: lightgrey;
-        width: 230px;
-        height: 190px;
-        display: inline-flex;
-        margin-top: 30px;
-        border-radius: 5%;
-       
-    }
-    section .loginboard_form #loginboard #imgform{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 80px;
-        height: 190px;
-    }
-    section .loginboard_form #loginboard #imgform #image img{
-        width: 65px;
-        height: 65px;
-        border-radius: 33px;
-        margin-left: 15px;
-    }
-    section .loginboard_form #loginboard #imgform #setting img{
-        border-radius: 10px;
-        margin-top: 20px;
-    }
-    section .loginboard_form #loginboard #right #textform{
-        min-width: 150px;
-        height: 120px;
-        text-align: center;
-        line-height: 30px;
-        font-size: 15px;
-        font-weight: bold;
-    }
-    section .loginboard_form #loginboard #right #textform #name{
-        line-height: 40px;
-        margin-top: 10px;
-    }
-    section .loginboard_form #loginboard #right #textform #location{
-        line-height: 20px;
-        margin-bottom: 15px;
-    }
-    section .loginboard_form #loginboard #right #textform #star{
-        line-height: 15px;
-    }
-    section .loginboard_form #loginboard #right #logoutbuttonform{
-        min-width: 150px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    section .loginboard_form #loginboard #right #logoutbuttonform button{
-        background-color: gray;
-        font-weight: bold;
-        color: white;
-        width: 100px;
-        height: 30px;
-        border-radius: 5%;
-        border: 0;
-        outline: 0;
-    }
+
     #container{
     	width: 750px;
     	display: flex;
@@ -256,7 +195,10 @@
 		
 				<tr>
 					<td colspan = "2">
-					<input type = "button" value = "목록" onclick = "location.href='mypage_controller.do?command=notice'">
+					<input type = "button" value = "목록" onclick = "location.href='mypage_controller.do?command=mypage_notice'">
+					<input type = "button" value = "수정" onclick = "location.href='mypage_controller.do?command=notice_updateform&noti_no=${dto.noti_no}'">
+					<input type = "button" value = "삭제" onclick = "location.href='mypage_controller.do?command=notice_delete&noti_no=${dto.noti_no}'">
+					
 					</td>
 		
 		
