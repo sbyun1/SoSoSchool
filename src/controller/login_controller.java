@@ -33,11 +33,16 @@ public class login_controller extends HttpServlet {
 		
 		UserDao dao = new UserDao();
 		NoticeDao nDao = new NoticeDao();
+
 		HttpSession session = request.getSession();
 
 		if(command.equals("loginform")) {
 			response.sendRedirect("/login/login.jsp");
 		}else if(command.equals("login")) {
+
+		//로그인
+		if(command.equals("login")) {
+
 			String id = request.getParameter("userId");
 			String pw = request.getParameter("userPassword");
 			
@@ -49,26 +54,34 @@ public class login_controller extends HttpServlet {
 				//유저 로그인 시 ( *관리자 로그인 시 구현 필요)
 				if(userdto.getUser_type().equals("USER")) {
 					//순위 표시
+
 					request.setAttribute("name", userdto.getUser_name());
 					request.setAttribute("point", userdto.getUser_point());
 					int no = userdto.getUser_no();
+
 					UserDto ps = dao.pointSelect(no);
 					request.setAttribute("no", ps.getUser_no());
 					List<UserDto> list = dao.pointAll();
 					request.setAttribute("rank_list", list);
-					
+	
 					//공지 사항 리스트
 					List<NoticeDto> noti_list = nDao.selectAll(); 
 					request.setAttribute("noti_list", noti_list);
 					
+				
 					
 					RequestDispatcher disp = request.getRequestDispatcher("login/main.jsp");
 					disp.forward(request, response);
+
 				}
 				
-			//id , pw 잘못 입력 했을떄
+			//id , pw 잘못 입력시
 			}else{ 
+
 				out.println("<script>alert('아이디 또는 비밀번호를 다시 확인해주세요.'); location.href='../login_controller.do?command=loginform';</script>");
+
+				out.println("<script>alert('아이디 또는 비밀번호를 다시 확인해주세요.'); location.href='login/login.jsp';</script>");
+
 			}
 		}else if(command.equals("regisform")) {
 			response.sendRedirect("/login/regis.jsp");
@@ -93,7 +106,11 @@ public class login_controller extends HttpServlet {
 			String email1 = request.getParameter("new_email");
 			//String email2 = request.getParameter("textEmail");
 			String email = email1;
+
 			//+'@'+ email2;
+
+					//+'@'+ email2;
+
 			String addr1= request.getParameter("postcode");
 			String addr2= request.getParameter("roadAddress");
 			String addr3= request.getParameter("detailAddress");
@@ -153,10 +170,16 @@ public class login_controller extends HttpServlet {
 			}else {
 				out.println("<script>alert('PW를 찾을 수 없습니다.'); location.href='../login_controller.do?command=searchPwForm';</script>");
 			}
+
 		}else if(command.equals("logout")){
 			session.invalidate();
 			response.sendRedirect("../login/login.jsp");
+
 		}
+
+		} 
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

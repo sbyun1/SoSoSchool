@@ -16,6 +16,7 @@
 		font-weight: normal;
 		font-style: normal;
 	}
+
 	body{
 		margin: 0;
 		padding: 0;
@@ -54,6 +55,7 @@
 		-webkit-user-select: none;
 		user-select: none;
 	}
+
 	section{
 		min-width: 1190px;
 		display: flex;
@@ -109,6 +111,7 @@
 		margin: 10px 0 18px 0;
 		padding: 0 10px;
 	}
+
 	.container form .btn{
 		margin-left: 50%;
 		transform: translateX(-50%);
@@ -127,13 +130,14 @@
 	.container form .btn:hover{
 		opacity: .7;
 	}
+
 	.btn-link2{
 		display: flex;
 		justify-content: center;
 		width: 100%;
 		height: 100%;
 		padding: 10px;
-		margin-bottom: 100px;
+		margin-bottom: 160px;
 		background-color: white;
 		border-radius: 4px;
 		box-shadow: 0 8px 16px reba(0,0,0,.3);
@@ -157,6 +161,7 @@
 		color:white;
 		opacity: 0.6;
 	}
+
 	p{
 		text-align: center;
 		font-size: 16px;

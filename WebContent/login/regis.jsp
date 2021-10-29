@@ -79,6 +79,7 @@
 			-webkit-user-select: none;
 			user-select: none;
 		}
+
          .btn-link2{
             display: flex;
             justify-content: center;
@@ -252,7 +253,7 @@
             border: none;
             outline: none;
 		}
-		
+
 		.btn2{
 			width:100px;
 	        background: gray;
@@ -271,6 +272,7 @@
 			opacity: 0.6;
 		}
 		
+
     </style>
     
     <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -481,8 +483,7 @@
                         <option value="yahoo.com">yahoo.com</option>
                         <option value="directly" id="textEmail">직접 입력</option>
                     </select> -->
-                    
-                    
+
                 </li>
                 <li><label class="reg" for="region">지역</label>
                     <input type="text" id="textregion" name="textregion" onclick="idChkConfirm();" placeholder="선택 하세요." readonly="readonly">
@@ -492,6 +493,7 @@
                         <option value="GYEONGGI">경기</option>
                         <option value="INCHEON">인천</option>
                     </select>
+
                 </li>
 <!--                 
                 <li><label class="reg" for="new_address">주소</label>

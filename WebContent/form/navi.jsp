@@ -35,7 +35,10 @@
     }
     .navi li ul{
         list-style: none;
+<<<<<<< HEAD
         position: initial;
+=======
+>>>>>>> 2f5e414 (start ~ main css)
         left: 0;
         width: auto;
         background-color: gray;
