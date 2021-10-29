@@ -69,6 +69,9 @@ public class QnaDao extends JDBCTemplate{
 			
 			while(rs.next()) {
 				res.setQna_no(rs.getInt(1));
+				res.setQna_gno(rs.getInt(2));
+				res.setQna_gsq(rs.getInt(3));
+				res.setQna_tab(rs.getInt(4));
 				res.setQna_title(rs.getString(5));
 				res.setQna_writer(rs.getString(6));
 				res.setQna_content(rs.getString(7));
@@ -198,7 +201,126 @@ public class QnaDao extends JDBCTemplate{
 		return res;
 	}
 	
+	public int countR(Connection con, int parentgno, int parentgsq) {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		int res = 0;
+		
+		String sql = " SELECT COUNT(*) FROM QNA WHERE QNA_GNO = ?  AND QNA_GSQ > ? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, parentgno);
+			pstm.setInt(2, parentgsq);
+			System.out.println("03. query 준비: " + sql);
+			
+			rs = pstm.executeQuery();
+			System.out.println("04. query 실행 및 리턴");
+			
+			while(rs.next()) {
+				res = rs.getInt(1);
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstm);
+		}
+		
+		return res;
+		
+	}
+	public int updateR(Connection con, int parentgno, int parentgsq) {
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		String sql = " UPDATE QNA SET QNA_GSQ = QNA_GSQ + 1 WHERE QNA_GNO = ? AND QNA_GSQ > ? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, parentgno);
+			pstm.setInt(2, parentgsq);
+			System.out.println("03. query 준비: " + sql);
+			
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+			
+		} catch (SQLException e) {
+			System.out.println("3/4단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		
+		return res;
+	}
 	
+	public int insertR(Connection con, QnaDto dto) {
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		String sql = " INSERT INTO QNA VALUES(QNA_NO_SQ.NEXTVAL, ?, ?, ?, ?, ?, ?, SYSDATE) ";
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1,dto.getQna_gno());
+			pstm.setInt(2, dto.getQna_gsq()+ 1);
+			pstm.setInt(3, dto.getQna_tab()+1);
+			pstm.setString(4, dto.getQna_title());
+			pstm.setString(5, dto.getQna_writer());
+			pstm.setString(6, dto.getQna_content());
+			System.out.println("03. query 준비: "+ sql);
+			
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+			
+	
+		} catch (SQLException e) {
+			System.out.println("3/4단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		
+		
+		return res;
+	}
+	
+	public boolean reply_logic(QnaDto dto) {
+		
+			Connection con = getConnection();
+		
+			int parentgno = dto.getQna_gno();
+			int parentgsq = dto.getQna_gsq();
+		
+			int countRes = countR(con, parentgno, parentgsq);
+			int updateRes = updateR(con, parentgno, parentgsq);
+		
+		
+			System.out.println("countRes: "+countRes);
+			System.out.println("updateRes: "+updateRes);
+			System.out.println("count==update: "+(countRes==updateRes));
+		
+			int insertRes = insertR(con,dto);
+		
+			if(countRes == updateRes && insertRes > 0 ) {
+				commit(con);
+			}else {
+				rollback(con);
+			}
+			close(con);
+			System.out.println("05. db 종료\n");
+		
+			return (countRes == updateRes && insertRes > 0 )?true:false;
+	}
+
+	
+
+
 	
 	
 }

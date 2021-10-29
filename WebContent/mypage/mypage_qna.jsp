@@ -126,7 +126,6 @@
    		justify-content: center;
    }
 	.qna_table{
-		text-align:center;
 		width: 600px;
 	
 	}
@@ -165,7 +164,7 @@
 		</div>
 		<div id = "container">  
 			<table class = "qna_table" border = "1">
-				<col width = "100px"><col width = "350px"><col width = "100px"><col width = "100px">
+				<col width = "50px"><col width = "400px"><col width = "150px"><col width = "100px">
 				<tr>
 				    <th>No.</th>
 				    <th>제목</th>
@@ -181,8 +180,13 @@
 					<c:otherwise>
 						<c:forEach items = "${list }" var = "dto">
 							<tr>
-								<td>${dto.qna_no }</td>											
-								<td><a href = "mypage_controller.do?command=qna_detail&qna_no=${dto.qna_no }">${dto.qna_title }</a></td>
+								<td>${dto.qna_no }</td>
+								<td>
+									<c:forEach begin = "1" end = "${dto.qna_tab }">
+										&nbsp;&nbsp;
+									</c:forEach>
+									<a href = "mypage_controller.do?command=qna_detail&qna_no=${dto.qna_no }">${dto.qna_title }</a>
+								</td>											
 								<td>${dto.qna_writer }</td>
 								<td>${dto.qna_regdate }</td>
 							</tr>

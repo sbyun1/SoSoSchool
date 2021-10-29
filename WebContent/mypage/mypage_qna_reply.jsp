@@ -5,9 +5,10 @@
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
-    <title>문의글보기</title>
+    <title>답글달기</title>
 </head>
 <style>
 @font-face {
@@ -94,7 +95,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    /*성적표*/
+  
     section .mainform #mainlist{
         min-width: 750px;         /*메인 구역 안 width 값*/
         display: flex;
@@ -119,14 +120,75 @@
         -webkit-user-select: none;
         user-select: none;
     }
-
+    section .loginboard_form #loginboard{
+        background-color: lightgrey;
+        width: 230px;
+        height: 190px;
+        display: inline-flex;
+        margin-top: 30px;
+        border-radius: 5%;
+       
+    }
+    section .loginboard_form #loginboard #imgform{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 80px;
+        height: 190px;
+    }
+    section .loginboard_form #loginboard #imgform #image img{
+        width: 65px;
+        height: 65px;
+        border-radius: 33px;
+        margin-left: 15px;
+    }
+    section .loginboard_form #loginboard #imgform #setting img{
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+    section .loginboard_form #loginboard #right #textform{
+        min-width: 150px;
+        height: 120px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    section .loginboard_form #loginboard #right #textform #name{
+        line-height: 40px;
+        margin-top: 10px;
+    }
+    section .loginboard_form #loginboard #right #textform #location{
+        line-height: 20px;
+        margin-bottom: 15px;
+    }
+    section .loginboard_form #loginboard #right #textform #star{
+        line-height: 15px;
+    }
+    section .loginboard_form #loginboard #right #logoutbuttonform{
+        min-width: 150px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    section .loginboard_form #loginboard #right #logoutbuttonform button{
+        background-color: gray;
+        font-weight: bold;
+        color: white;
+        width: 100px;
+        height: 30px;
+        border-radius: 5%;
+        border: 0;
+        outline: 0;
+    }
     #container{
     	width: 750px;
     	display: flex;
     	justify-content: center;
     }
 	.noti_table{
-		text-align:center;
+		
 		
 	}
     
@@ -160,45 +222,36 @@
 <div class="mainform">
 	<div id="mainlist" style="height:150px">
 		<div class="title" style="width: 750px; height:150px">
-			문의한 글 조회	
+			답글달기	
 		</div>
 		<div id = "container">  
-			<table class = "noti_table" border = "1">
-				<tr>
-				    <th>No.</th>
-				    <td>${dto.qna_no }</td>
-				</tr>
-				<tr>
-					<th>작성일</th>
-					<td>${dto.qna_regdate }</td>
-				</tr>
+		<form action = "../mypage_controller.do" method = "post">
+			<input type = "hidden" name = "command" value = "qna_reply">
+			<input type = "hidden" name = "parentqna_no" value = "${parentqna.qna_no }">
+			<table class = "qna_table" border = "1">
+				
 				<tr>
 				    <th>제목</th>
-				    <td>${dto.qna_title }</td>
+				    <td><input type = "text" name = "qna_title" value = "RE:${parentqna.qna_title }"
+				    readonly = "true"></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${dto.qna_writer }</td>
+					<td><input type = "text" name = "qna_writer"></td>
 				</tr>
 				<tr>
-					<th>문의내용</th>
-					<td><textarea cols = "60" rows = "10">${dto.qna_content }</textarea> </td>
+					<th>내용</th>
+					<td><textarea cols = "60" rows = "10" name = "qna_content"></textarea> </td>
 				</tr>
 		
 				<tr>
 					<td colspan = "2">
-					<input type = "button" value = "목록" onclick = "location.href='mypage_controller.do?command=mypage_qna'">
-					<input type = "button" value = "수정" onclick = "location.href='mypage_controller.do?command=qna_updateform&qna_no=${dto.qna_no}'">
-					<input type = "button" value = "삭제" onclick = "location.href='mypage_controller.do?command=qna_delete&qna_no=${dto.qna_no}'">
-					<input type = "button" value = "답글달기" onclick = "location.href='mypage_controller.do?command=qna_replyform&parentqna=${dto.qna_no}'">
-					
-					
+					<input type = "submit" value = "작성">
+					<input type = "button" value = "취소" onclick = "location.href='mypage_controller.do?command=qna_detail+qna_no=${parentqna.qna_no}'">
 					</td>
-		
-		
-		</tr>													
-						
+				</tr>														
 			</table>
+		</form>
 		</div>			
 	</div>
 </div>
