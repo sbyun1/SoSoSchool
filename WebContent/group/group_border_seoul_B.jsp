@@ -1,4 +1,6 @@
-	<% request.setCharacterEncoding("UTF-8");%>
+<%@ page import="group.groupDto" %>
+<%@ page import="java.util.List" %>
+<% request.setCharacterEncoding("UTF-8");%>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -145,6 +147,17 @@
         user-select: none;
     }
 </style>
+<%
+    List<groupDto> list = (List<groupDto>) request.getAttribute("list");
+%>
+<script type="text/javascript">
+    window.onload = function (){
+        if(${userdto.user_id eq null}){
+            alert("세션 만료");
+            location.href='../main_controller.do?command=start';
+        }
+    }
+</script>
 <body>
 <header>
     <%@ include file="../form/header.jsp"%>
@@ -158,18 +171,18 @@
     </div>
     <div class="borderform">
         <div id="borderlist">
-            <c:forEach var="list" begin="1" end="9">
+            <c:forEach var="list" items="${list}">
                 <div class="one_border">
                     <div id="border_content">
-                        <div id="img">
-                            <img src="../img/img01.png">
+                        <div id="img" onclick="location.href='../group_controller.do?command=board_detail&gboard_no=${list.gboard_no}&gboard_region=${list.gboard_region}&gboard_library=${list.gboard_library}'">
+                            <img src="../img/${list.gboard_img}.png">
                         </div>
-                        <div class="titleform">
+                        <div class="titleform" onclick="location.href='../group_controller.do?command=board_detail&gboard_no=${list.gboard_no}&gboard_region=${list.gboard_region}&gboard_library=${list.gboard_library}'">
                             <div id="title">
-                                제목
+                                    ${list.gboard_title}
                             </div>
-                            <div id="subtitle">
-                                부제목
+                            <div id="subtitle" onclick="location.href='../group_controller.do?command=board_detail&gboard_no=${list.gboard_no}&gboard_region=${list.gboard_region}&gboard_library=${list.gboard_library}'">
+                                    ${list.gboard_subtitle}
                             </div>
                         </div>
                     </div>

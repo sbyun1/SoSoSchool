@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="mypageDto.changeStarDto" %>
 <% request.setCharacterEncoding("UTF-8");%>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -156,6 +158,30 @@
         })
         element.checked = true;
     }
+    function changeitem(){
+        // 선택된 목록 가져오기
+        const query = 'input[name="item"]:checked';
+        const selectedEls = document.querySelectorAll(query);
+
+        // 선택된 목록에서 value 찾기
+        let result = '';
+        selectedEls.forEach((el) => {
+            result += el.value + '';
+        });
+
+        location.href='../mypage_controller.do?command=changegift&gi_no='+result+'&user_star=${userdto.user_star}&user_no=${userdto.user_no}';
+    }
+</script>
+<%
+    List<changeStarDto> list = (List<changeStarDto>) request.getAttribute("list");
+%>
+<script type="text/javascript">
+    window.onload = function (){
+        if(${userdto.user_id eq null}){
+            alert("세션 만료");
+            location.href='../main_controller.do?command=start';
+        }
+    }
 </script>
 <body>
 <header>
@@ -176,7 +202,7 @@
             <div style="width: 750px; height: 150px; display: flex; flex-wrap: wrap; margin-bottom: 50px">
                 <div style="width: 125px; height: 150px; display: block"></div>
                 <div class="star_info">
-                    ★ 나의 스티커 2개
+                    ★ 나의 스티커 ${userdto.user_star}개
                 </div>
                 <div style="width: 125px; height: 150px;"></div>
             </div>
@@ -184,11 +210,11 @@
                 <div style="width: 125px; min-height: 150px"></div>
                 <div class="prize_info" style="width: 500px; min-height: 150px; display: flex; flex-wrap: wrap">
                     <ul style="list-style: none; display: flex; flex-wrap: wrap; margin-left: 8%">
-                        <c:forEach var="list" begin="1" end="5">
+                        <c:forEach var="list" items="${list}">
                             <li style=" margin: auto 40px 10px 0px">
                                 <div id="one_board" style="width: 150px; height: 150px;">
-                                    <div id="board_img" style="width: 150px; height: 100px; border: 1px solid black"><img></div>
-                                    <div id="board_title" style="width: 150px; height: 50px; display: flex; flex-wrap: wrap; align-items: center; font-weight: bold"><input type="checkbox" name="item" onclick="checkOnlyOne(this)" style="width: 30px; height: 30px">상품명/★100</div>
+                                    <div id="board_img" style="width: 150px; height: 100px; border: 1px solid black"><img src="../img/${list.gi_img}.png"></div>
+                                    <div id="board_title" style="width: 150px; height: 50px; display: flex; flex-wrap: wrap; align-items: center; font-weight: bold"><input type="checkbox" name="item" value="${list.gi_no}" onclick="checkOnlyOne(this)" style="width: 25px; height: 25px">${list.gi_title}/★${list.gi_prize}</div>
                                 </div>
                             </li>
                         </c:forEach>
@@ -198,7 +224,7 @@
             </div>
         </div>
         <div id="buttonform">
-            <button class="button">교환하기</button>
+            <button class="button" onclick="changeitem();">교환하기</button>
         </div>
     </div>
     <div class="loginboard_form">

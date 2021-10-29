@@ -14,9 +14,5 @@
 <body>
 	<jsp:forward page = "main_controller.do?command=start"></jsp:forward> <!-- 추후 메인페이지로 이동해야함 -->
 </body>
-
-
-
-
 </html>
 

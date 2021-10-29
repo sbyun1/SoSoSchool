@@ -14,15 +14,11 @@
 <title>Insert title here</title>
 </head>
 <%
-     		UserDto userdto = (UserDto)session.getAttribute("userdto");
-			UserDto ps = (UserDto)request.getAttribute("ps");
-			
-			
+	UserDto userdto = (UserDto)session.getAttribute("userdto");
+	UserDto ps = (UserDto)request.getAttribute("ps");
 %>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-
-
 <style type="text/css">
 		@font-face {
 			font-family: 'GowunDodum-Regular';
@@ -154,17 +150,18 @@
    			height: 101px;
 		}
 </style>
-
-
+<script type="text/javascript">
+	window.onload = function (){
+		if(${userdto.user_id eq null}){
+			alert("세션 만료");
+			location.href='../main_controller.do?command=start';
+		}
+	}
+</script>
 <body style="overflow-x:auto; overflow-y:scroll;">
-
-    <header><h1><a onClick="top.location='javascript:location.reload()'"><img src="/img/logo.png"></a></h1></header>
-    <nav><%@ include file="/form/navi.jsp"%></nav>
-    
-  <section>
-  
-
-  
+<header><h1><a onClick="top.location='javascript:location.reload()'"><img src="/img/logo.png"></a></h1></header>
+<nav><%@ include file="/form/navi.jsp"%></nav>
+<section>
   <div id="left">
     <!-- 동영상 -->
     <div id="video">

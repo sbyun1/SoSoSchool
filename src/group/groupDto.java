@@ -10,11 +10,12 @@ public class groupDto {
     private String gboard_img;
     private Date regdate;
     private String gboard_region;
+    private String gboard_library;
 
     public groupDto() {
     }
 
-    public groupDto(int gboard_no, String gboard_title, String gboard_subtitle, String gboard_content, String gboard_img, Date regdate, String gboard_region) {
+    public groupDto(int gboard_no, String gboard_title, String gboard_subtitle, String gboard_content, String gboard_img, Date regdate, String gboard_region, String gboard_library) {
         this.gboard_no = gboard_no;
         this.gboard_title = gboard_title;
         this.gboard_subtitle = gboard_subtitle;
@@ -22,6 +23,7 @@ public class groupDto {
         this.gboard_img = gboard_img;
         this.regdate = regdate;
         this.gboard_region = gboard_region;
+        this.gboard_library = gboard_library;
     }
 
     public int getGboard_no() {
@@ -78,5 +80,13 @@ public class groupDto {
 
     public void setGboard_region(String gboard_region) {
         this.gboard_region = gboard_region;
+    }
+
+    public String getGboard_library() {
+        return gboard_library;
+    }
+
+    public void setGboard_library(String gboard_library) {
+        this.gboard_library = gboard_library;
     }
 }

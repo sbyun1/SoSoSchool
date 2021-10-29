@@ -71,6 +71,11 @@
         outline: 0;
     }
 </style>
+<script type="text/javascript">
+    function logout(){
+        location.href='../login_controller.do?command=logout';
+    }
+</script>
 <body>
 	    <div id="loginboard">
         <div id="imgform">
@@ -87,15 +92,16 @@
                     ${userdto.user_name}님 환영합니다
                 </div>
                 <div id="location">
-                    나의 소속 소모임<br>
-                    소속 도서관
+<%--                    나의 소속 소모임<br>--%>
+<%--                    소속 도서관--%>
+                    나의 포인트<br><br>
                 </div>
                 <div id="star">
                     ★ ${userdto.user_point}
                 </div>
             </div>
             <div id="logoutbuttonform">
-                <button>로그아웃</button>
+                <button onclick="logout();">로그아웃</button>
             </div>
         </div>
     </div>

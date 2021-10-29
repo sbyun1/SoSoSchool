@@ -101,6 +101,14 @@
         user-select: none;
     }
 </style>
+<script type="text/javascript">
+    window.onload = function (){
+        if(${userdto.user_id eq null}){
+            alert("세션 만료");
+            location.href='../main_controller.do?command=start';
+        }
+    }
+</script>
 <body>
 <header>
     <%@ include file="../form/header.jsp"%>
@@ -237,13 +245,13 @@
 
                 //도서관 클릭 이벤트 생성
                 kakao.maps.event.addListener(marker1, 'click', function() {
-                    location.href='https://www.google.com';
+                    location.href='../group_controller.do?command=group_border&gboard_region=GYEONGGI&gboard_library=A도서관';
                 });
                 kakao.maps.event.addListener(marker2, 'click', function() {
-                    location.href='https://www.naver.com';
+                    location.href='../group_controller.do?command=group_border&gboard_region=GYEONGGI&gboard_library=B도서관';
                 });
                 kakao.maps.event.addListener(marker3, 'click', function() {
-                    location.href='https://www.daum.net';
+                    location.href='../group_controller.do?command=group_border&gboard_region=GYEONGGI&gboard_library=C도서관';
                 });
 
                 var infowindow1 = new kakao.maps.InfoWindow({

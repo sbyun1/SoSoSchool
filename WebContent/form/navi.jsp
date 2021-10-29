@@ -71,6 +71,64 @@
     }
     
 </style>
+<script type="text/javascript">
+    function group_board(){
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+            location.href='../group_controller.do?command=group_map&user_no=${userdto.user_no}'
+        }
+    }
+    function  group_chat(){
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+            location.href='../group_controller.do?command=group_chat&user_no=${userdto.user_no}'
+        }
+    }
+    function mypage_checkscore(){
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+            location.href='../mypage_controller.do?command=mypage_checkscore&user_id=${userdto.user_id}'
+        }
+    }
+    function mypage_changestar(){
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+            location.href='../mypage_controller.do?command=mypage_changestar'
+        }
+    }
+    function mypage_userinfo(){
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+            location.href='../mypage_controller.do?command=mypage_userinfo'
+        }
+    }
+    function mypage_qna(){
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+            location.href='../mypage_controller.do?command=mypage_qna'
+        }
+    }
+    function group_main(){
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+            location.href='../group_controller.do?command=group_main&user_no=${userdto.user_no}&region=${userdto.region}'
+        }
+    }
+</script>
 <body>
 <div>
     <ul class="navi">
@@ -91,19 +149,19 @@
             </ul>
         </li>
         <li>
-            <a>소모임</a>
+            <a onclick="group_main();">소모임</a>
             <ul>
-                <li><a onclick="location.href='../group_controller.do?command=group_map'">지역별모임</a></li>
-                <li><a onclick="location.href='../group_controller.do?command=group_chat'">채팅하기</a></li>
+                <li><a onclick="group_board();">지역별모임</a></li>
+                <li><a onclick="group_chat()">채팅하기</a></li>
             </ul>
         </li>
         <li>
             <a>마이페이지</a>
             <ul>
-                <li><a onclick="location.href='../mypage_controller.do?command=mypage_checkscore'">나의 학습 현황</a></li>
-                <li><a onclick="location.href='../mypage_controller.do?command=mypage_changestar'">상품 교환</a></li>
-                <li><a onclick="location.href='../mypage_controller.do?command=mypage_userinfo'">회원 정보 수정</a></li>
-                <li><a onclick="location.href='../mypage_controller.do?command=mypage_qna'">고객 문의</a></li>
+                <li><a onclick="mypage_checkscore();">나의 학습 현황</a></li>
+                <li><a onclick="mypage_changestar();">상품 교환</a></li>
+                <li><a onclick="mypage_userinfo();">회원 정보 수정</a></li>
+                <li><a onclick="mypage_qna();">고객 문의</a></li>
             </ul>
         </li>
         <li><a>결제하기</a></li>

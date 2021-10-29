@@ -1,12 +1,15 @@
+<%@ page import="java.util.List" %>
+<%@ page import="group.groupDto" %>
 <% request.setCharacterEncoding("UTF-8");%>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>소모임</title>
+    <meta charset="UTF-8">
+    <title>sosoSchool</title>
 </head>
 <style>
     @font-face {
@@ -38,7 +41,7 @@
     /*네비바*/
     nav{
         background-color: rgb(173,175,255);
-        width: 100%;
+        min-width: 100%;
         height: 50px;
         display: flex;
         justify-content: center;
@@ -48,7 +51,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    /*본문 X구역*/
+    /*    본문구역                                            */
     section{
         min-width: 1190px;
         display: flex;
@@ -64,25 +67,15 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    /*채팅 구역*/
-    section .chatform{
-        min-width: 980px;
-        min-height: 700px;
+    /*게시판 목록*/
+    section .borderform{
+        width: 980px;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        -ms-user-select: none;
+        -ms-user-select: none;      /*드래그 금지*/
         -moz-user-select: none;
         -khtml-user-select: none;
         -webkit-user-select: none;
         user-select: none;
-    }
-    section .chatform #chat{
-        min-width: 800px;
-        min-height: 500px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
     /*푸터*/
     footer{
@@ -101,6 +94,9 @@
         user-select: none;
     }
 </style>
+<%
+    groupDto dto = (groupDto) request.getAttribute("dto");
+%>
 <script type="text/javascript">
     window.onload = function (){
         if(${userdto.user_id eq null}){
@@ -120,10 +116,25 @@
     <div class="menuform">
         <%@ include file="../form/group_menubar.jsp"%>
     </div>
-    <div class="chatform">
-        <div id="chat">
-            <script async src="//client.uchat.io/uchat.js"></script>
-            <u-chat room='Semi_gyeonggi' style="display:inline-block; width:800px; height:500px;"></u-chat>
+    <div class="borderform">
+        <div id="board_detail" style="display: flex; flex-wrap: wrap; align-items:center; width: 980px;">
+            <div id="titleform" style="width: 980px; height: 120px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-bottom: 0px">
+                <div style="width: 300px; font-size: 25px; font-weight: bold; display: flex; justify-content: center; align-items: center">제목</div>
+                <div style="width: 680px; font-size: 15px; display: flex; align-items: center">${dto.gboard_title}</div>
+            </div>
+            <div id="subtitleform" style="width: 980px; height: 50px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center">
+                <div style="width: 300px; font-size: 25px; font-weight: bold; display: flex; justify-content: center; align-items: center">부제목</div>
+                <div style="width: 680px; font-size: 15px; display: flex; align-items: center">${dto.gboard_subtitle}</div>
+            </div>
+            <div id="contentform" style="width: 980px; height: 230px; display: flex; flex-wrap: wrap; align-items: center">
+                <div style="width: 300px; font-size: 25px; font-weight: bold; display: flex; justify-content: center; ">내용</div>
+                <div style="width: 680px; font-size: 15px; display: flex; align-items: center">
+                	<textarea style="width: 680px; min-height: 180px; resize: none;" readonly>${dto.gboard_content}</textarea>
+                </div>
+            </div>
+            <div id="buttonform" style="width: 980px; height: 100px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center">
+                <button style="width: 200px; height: 50px; font-size: 20px; font-weight: bold; background-color: rgb(173,175,255); border: 0; outline: 0; color: white; border-radius: 10px" onclick="javascript:history.back(-1)">목록으로</button>
+            </div>
         </div>
     </div>
 </section>

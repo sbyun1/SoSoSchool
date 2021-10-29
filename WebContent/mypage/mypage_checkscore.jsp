@@ -244,6 +244,14 @@
         chart.draw(view, options);
     }
 </script>
+<script type="text/javascript">
+    window.onload = function (){
+        if(${userdto.user_id eq null}){
+            alert("세션 만료");
+            location.href='../main_controller.do?command=start';
+        }
+    }
+</script>
 <body>
 <header>
     <%@ include file="../form/header.jsp"%>

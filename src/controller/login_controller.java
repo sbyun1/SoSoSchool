@@ -68,7 +68,7 @@ public class login_controller extends HttpServlet {
 				
 			//id , pw 잘못 입력 했을떄
 			}else{ 
-				out.println("<script>alert('아이디 또는 비밀번호를 다시 확인해주세요.'); location.href='2.jsp';</script>");
+				out.println("<script>alert('아이디 또는 비밀번호를 다시 확인해주세요.'); location.href='../login_controller.do?command=loginform';</script>");
 			}
 		}else if(command.equals("regisform")) {
 			response.sendRedirect("/login/regis.jsp");
@@ -153,6 +153,9 @@ public class login_controller extends HttpServlet {
 			}else {
 				out.println("<script>alert('PW를 찾을 수 없습니다.'); location.href='../login_controller.do?command=searchPwForm';</script>");
 			}
+		}else if(command.equals("logout")){
+			session.invalidate();
+			response.sendRedirect("../login/login.jsp");
 		}
 	}
 

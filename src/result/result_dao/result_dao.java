@@ -10,16 +10,17 @@ public class result_dao extends JDBCTemplate {
     //성적 가져오기
 
     //현재
-    public result_dto select_month(){
+    public result_dto select_month(String user_id){
         Connection con = getConnection();
         PreparedStatement pstm = null;
         ResultSet rs = null;
         result_dto res = new result_dto();
 
-        String sql = "SELECT * FROM RESULT WHERE USER_ID='weed'";    //user_id로 where 작성 예정
+        String sql = "SELECT * FROM RESULT WHERE USER_ID=?";    //user_id로 where 작성 예정
 
         try {
             pstm = con.prepareStatement(sql);
+            pstm.setString(1, user_id);
             System.out.println("03. query 준비 " + sql);
 
             rs = pstm.executeQuery();
@@ -44,16 +45,17 @@ public class result_dao extends JDBCTemplate {
         return res;
     }
     //한달전
-    public result_dto select_month_1(){
+    public result_dto select_month_1(String user_id){
         Connection con = getConnection();
         PreparedStatement pstm = null;
         ResultSet rs = null;
         result_dto res = new result_dto();
 
-        String sql = "SELECT * FROM RESULT WHERE USER_ID='weed' AND MONTH = EXTRACT(MONTH FROM SYSDATE)-1";    //user_id로 where 작성 예정
+        String sql = "SELECT * FROM RESULT WHERE USER_ID= ? AND MONTH = EXTRACT(MONTH FROM SYSDATE)-1";    //user_id로 where 작성 예정
 
         try {
             pstm = con.prepareStatement(sql);
+            pstm.setString(1, user_id);
             System.out.println("03. query 준비 " + sql);
 
             rs = pstm.executeQuery();
@@ -78,16 +80,17 @@ public class result_dao extends JDBCTemplate {
         return res;
     }
     //두달전
-    public result_dto select_month_2(){
+    public result_dto select_month_2(String user_id){
         Connection con = getConnection();
         PreparedStatement pstm = null;
         ResultSet rs = null;
         result_dto res = new result_dto();
 
-        String sql = "SELECT * FROM RESULT WHERE USER_ID='weed' AND MONTH = EXTRACT(MONTH FROM SYSDATE)-2";    //user_id로 where 작성 예정
+        String sql = "SELECT * FROM RESULT WHERE USER_ID= ? AND MONTH = EXTRACT(MONTH FROM SYSDATE)-2";    //user_id로 where 작성 예정
 
         try {
             pstm = con.prepareStatement(sql);
+            pstm.setString(1, user_id);
             System.out.println("03. query 준비 " + sql);
 
             rs = pstm.executeQuery();
