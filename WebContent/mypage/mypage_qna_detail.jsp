@@ -94,7 +94,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    /*성적표*/
+
     section .mainform #mainlist{
         min-width: 750px;         /*메인 구역 안 width 값*/
         display: flex;
@@ -145,6 +145,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
+    
 </style>
 <body>
 <header>

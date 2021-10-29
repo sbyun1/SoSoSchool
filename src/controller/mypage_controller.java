@@ -35,6 +35,9 @@ import result.result_dto.result_dto;
  * Servlet implementation class Notice
  */
 @WebServlet("/mypage_controller.do")
+
+
+
 public class mypage_controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
@@ -263,6 +266,17 @@ public class mypage_controller extends HttpServlet {
 			}
 			
 		}
+		else if(command.equals("mypage_pay_manage")) {
+		
+			response.sendRedirect("mypage/mypage_pay_manage.jsp");
+		}
+		
+		
+		
+		
+		
+		
+		
 
 		/*상품교환 페이지 이동*/
 		else if(command.equals("mypage_changestar")){

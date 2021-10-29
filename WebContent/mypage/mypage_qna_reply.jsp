@@ -237,7 +237,7 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type = "text" name = "qna_writer" value = "${dto.user_id }"
+					<td><input type = "text" name = "qna_writer" value = "${userdto.user_id }"
 					readonly = "true"></td>
 				</tr>
 				<tr>
@@ -248,7 +248,7 @@
 				<tr>
 					<td colspan = "2">
 					<input type = "submit" value = "작성">
-					<input type = "button" value = "취소" onclick = "location.href='mypage_controller.do?command=qna_detail+qna_no=${parentqna.qna_no}'">
+					<input type = "button" value = "취소" onclick = "location.href='mypage_controller.do?command=mypage_qna'">
 					</td>
 				</tr>														
 			</table>

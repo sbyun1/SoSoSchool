@@ -5,9 +5,11 @@
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
+
 <html>
 <head>
-    <title>회원정보수정</title>
+    <title>문의하기</title>
 </head>
 <style>
 @font-face {
@@ -19,7 +21,7 @@
     body{
         margin: 0;
         padding: 0;
-        min-width: 1400px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
+        min-width: 1190px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
         min-height: 650px;
         font-family: 'GowunDodum-Regular';
     }
@@ -94,16 +96,14 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    /*성적표*/
+  
     section .mainform #mainlist{
         min-width: 750px;         /*메인 구역 안 width 값*/
         display: flex;
         flex-wrap: wrap;
-        list-style: none;
     }
     section .mainform #mainlist .title{
-        min-width: 750px;
-        min-height: 150px;
+        width: 750px;
         height:150px;
         font-size: 50px;
         font-weight: bold;
@@ -120,75 +120,18 @@
         -khtml-user-select: none;
         -webkit-user-select: none;
         user-select: none;
-       
-        
     }
-    section .loginboard_form #loginboard{
-        background-color: lightgrey;
-        width: 230px;
-        height: 190px;
-        display: inline-flex;
-        margin-top: 30px;
-        border-radius: 5%;
-       
+    
+    #container{
+    	width: 750px;
+    	display: flex;
+    	justify-content: center;
     }
-    section .loginboard_form #loginboard #imgform{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 80px;
-        height: 190px;
-    }
-    section .loginboard_form #loginboard #imgform #image img{
-        width: 65px;
-        height: 65px;
-        border-radius: 33px;
-        margin-left: 15px;
-    }
-    section .loginboard_form #loginboard #imgform #setting img{
-        border-radius: 10px;
-        margin-top: 20px;
-    }
-    section .loginboard_form #loginboard #right #textform{
-        min-width: 150px;
-        height: 120px;
-        text-align: center;
-        line-height: 30px;
-        font-size: 15px;
-        font-weight: bold;
-    }
-    section .loginboard_form #loginboard #right #textform #name{
-        line-height: 40px;
-        margin-top: 10px;
-    }
-    section .loginboard_form #loginboard #right #textform #location{
-        line-height: 20px;
-        margin-bottom: 15px;
-    }
-    section .loginboard_form #loginboard #right #textform #star{
-        line-height: 15px;
-    }
-    section .loginboard_form #loginboard #right #logoutbuttonform{
-        min-width: 150px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    section .loginboard_form #loginboard #right #logoutbuttonform button{
-        background-color: gray;
-        font-weight: bold;
-        color: white;
-        width: 100px;
-        height: 30px;
-        border-radius: 5%;
-        border: 0;
-        outline: 0;
-    }
-.btn-link2{
+
+ .btn-link2{
             display: flex;
             justify-content: center;
-            width: 100%;
+            width: 1000px;
             height: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -218,26 +161,26 @@
         }
         
         .outer {
+        	display:flex;
+        	width:1020px;
             text-align: center;
-            width:750px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
         }
-
         .inner{
             display: inline-block;
-            width:750px;
+            margin-right:80px;
         }
-
         form fieldset {
             margin: 10px 0px;
         }
-
         legend {
             font-size: 18px;
             color: black;
             font-weight: 600;
         }
-
-	
 		
         li > input {
             width:330px;
@@ -257,38 +200,26 @@
             margin: 5px;
         }
         
-
         form label.reg{
             font-size: 14px;
 		    width: auto;
 		    float: inherit;
 		    margin: 15px
         }
-
         form label em {
             font-size: 15px;
             color: red;
             font-weight: 800;
         }
-
         form fieldset.sendform{
             text-align: center;
         }
-
         .regisform{
             text-align: right;
             width:540px;
             display: flex;
   			justify-content: center;
         }
-	/* 	#li_parent_id{
-		width:auto;
-		} */
-	/*  #parent_id{
-             width: 248px 
-            flex-wrap: nowrap;    
-        }  */
-
     
         #chkid-btn{
         	display: inline;
@@ -298,6 +229,7 @@
             font-size: 10px;
             color: white;
             border-radius: 2px;
+            width: 100px;
             height: 39px;
             margin:6px 3px;
             padding: 9px;
@@ -335,14 +267,6 @@
   			opacity: 0.6;
   		}
   		
-	    #new_email{        	
-        	width: 123px;
-        }
-		#textEmail{        
-			width: auto;
-			display: inline;
-        	position: inherit;
-		}
   		span {
   			font-size:16px;
   		}
@@ -377,6 +301,24 @@
             border: none;
             outline: none;
 		}
+		
+		.btn2{
+			width:100px;
+	        background: gray;
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+            border-radius: 4px;
+            margin:8px 3px;
+            padding: 9px;
+            transition: .3s;
+            border: none;
+            outline: none;
+		}
+		
+		.btn2:hover{
+			opacity: 0.6;
+		}
     
     /*푸터*/
     footer{
@@ -393,6 +335,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
+<<<<<<< HEAD
 </style>
 
 <script type="text/javascript">
@@ -555,32 +498,34 @@
      }
     </script>
 
->>>>>>> afd0bc9 (my_pg_controller_merged)
+
+    
+</style>
+
 <body>
 <header>
      <img src = "../img/logo.png">
 </header>
 <nav>
     <%@ include file="../form/navi.jsp"%>
-
-    
 </nav>
 <section>
-    <div class="menuform">
-       <%@ include file="../form/mypage_menubar.jsp"%>
-    </div>
-    <div class="mainform">
-        <div id="mainlist">
-            <div class="title">
-                회원정보 수정
-            </div>
-            <div class="outer">
-        <form method="post" action="../mypage_controller.do?command=mypage_userUpdate">
+<div class="menuform">
+    <%@ include file="../form/mypage_menubar.jsp"%>
+</div>
+<div class="mainform">
+
+	<div id="mainlist" style="height:150px">
+		<div class="title" style="width: 750px; height:150px">
+			 회원정보 수정	
+		</div>
+			<form method="post" action="../login_controller.do?command=insertuser">
         <div class="inner">
         <fieldset class="regisform">
+            <legend> *표시 필수 입력 사항</legend>
             <ul>
-                <li><label class="reg" for="parent_name">학부모 이름</label>
-                    <input type="text" id="parent_name" name="parent_name"value = "박미영" readonly = "true"></li>
+                <li><label class="reg" for="parent_name">학부모 이름<em>*</em></label>
+                    <input type="text" id="parent_name" name="parent_name" maxlength="10" autocomplete="on" required></li>
 
                 <li id="li_parent_id"><label class="reg" for="parent_id">학부모 아이디<em>*</em></label>
                         <input type="text" id="parent_id" name="parent_id" title="n" maxlength="10"  placeholder="6자리 이상의 영문 소문자,숫자 조합" required>
@@ -605,9 +550,15 @@
                 <li><label class="reg" for="garde">학년<em>*</em></label>
                     <input type="number" id="garde" name="garde" min="1" max="3" placeholder="숫자만 입력해주세요." maxlength="1" onclick="idChkConfirm();" oninput="numberMaxLength(this);" required></li>
                 
-                <li><label class="reg" for="new_email">이메일</label>
-                    <input type="text" id="new_email" name="new_email" maxlength="15" onclick="idChkConfirm();" ><span>@</span>
-                    <input name="textEmail" id="textEmail" placeholder="이메일을 선택하세요." readonly>  
+
+               	<li>
+                <label class="reg" for="new_email">이메일</label>
+                	
+                    <input type="email" id="new_email" name="new_email" maxlength="50" onclick="idChkConfirm();"
+                    	placeholder="선택 입력">
+                    
+                    
+              <!--       <input name="textEmail" id="textEmail" placeholder="이메일을 선택하세요." readonly>  
                     <select id="mailslc">
                         <option value="self" disabled selected>선택</option>
                         <option value="naver.com">naver.com</option>
@@ -615,12 +566,22 @@
                         <option value="daum.com">daum.com</option>
                         <option value="yahoo.com">yahoo.com</option>
                         <option value="directly" id="textEmail">직접 입력</option>
+                    </select> -->
+                    
+                    
+                </li>
+                <li><label class="reg" for="region">지역</label>
+                    <input type="text" id="textregion" name="textregion" onclick="idChkConfirm();" placeholder="선택 하세요." readonly="readonly">
+                    <select id="region" name="region">
+                        <option value="선택하세요.">선택</option>
+                        <option value="SEOUL">서울</option>
+                        <option value="GYEONGGI">경기</option>
+                        <option value="INCHEON">인천</option>
                     </select>
                 </li>
 <!--                 
                 <li><label class="reg" for="new_address">주소</label>
                     <input type="text" id="new_address" name="new_address" maxlength="30" onclick="idChkConfirm();" ><br>
-
                     <label class="reg" for="new_address2">상세주소</label>
                     <input type="text" id="new_address2" name="new_address2" maxlength="30" onclick="idChkConfirm();" >
                     <p>경품 배송을 위한 정확한 주소를 기입해주세요.</p>
@@ -643,13 +604,17 @@
         <fieldset class="sendform">
             <input type="submit" class="btn" value="가입하기">
             <input type="reset" class="btn" value="취소">
+            <input type="button" class="btn2" value="로그인" onclick="location.href='../login_controller.do?command=loginform'">
         </fieldset>
    		</div>
   	  </form>
+
+				
 	</div>
-    <div class="loginboard_form">
-      <%@ include file="../form/logout.jsp"%>
-    </div>
+</div>
+<div class="loginboard_form">
+   <%@ include file="../form/logout.jsp"%>
+</div>
 </section>
 <footer>
 	<%@ include file="../form/footer.jsp"%>

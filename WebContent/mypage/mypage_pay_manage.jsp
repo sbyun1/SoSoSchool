@@ -236,9 +236,9 @@
 			결제관리	
 		</div>
 		<div id = "container">  
-						ㅇㅇㅇ님은 서비스 구독중입니다. <!--  추후 구독여부 데이터 가져와 작성 n일경우 구독중이 아닙니다-->
-			<input type = "button" value = "구독하러 가기" onclick = ""><!--네비의 결제페이지 이동 -->
-            <table class = "pay_table" border = "1"
+						<b>${userdto.user_name  }님은 서비스 구독중입니다.</b> <!--  추후 구독여부 데이터 가져와 작성 n일경우 구독중이 아닙니다-->
+			<input type = "button" value = "구독하러 가기" onclick = "location.href='../pay_controller.do?command=main'"><!--네비의 결제페이지 이동 -->
+            <table class = "pay_table" border = "1"					l
             	style = "">
                
                 <tr><!-- 구독정보 테이블의 데이터를 가져온다 -->

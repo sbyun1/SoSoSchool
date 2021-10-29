@@ -166,7 +166,7 @@
 </nav>
 <section>
 <div class="menuform">
-    <%@ include file="/form/mypage_menubar.jsp"%>
+    <%@ include file="../form/mypage_menubar.jsp"%>
 </div>
 <div class="mainform">
 	<div id="mainlist" style="height:150px">
