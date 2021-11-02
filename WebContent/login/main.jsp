@@ -175,6 +175,8 @@
 			location.href='../main_controller.do?command=start';
 		}
 	}
+	
+
 </script>
 <body style="overflow-x:auto; overflow-y:scroll;">
 <header><h1><a onClick="top.location='javascript:location.reload()'"><img src="/img/logo.png"></a></h1></header>
@@ -183,10 +185,45 @@
   <div id="left">
     <!-- 동영상 -->
     <div id="video">
-      <h3>가장 많이 조회된 동영상</h3>
-      <iframe width="220" height="200" src="https://www.youtube.com/embed/k_g7sBJ3fBg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
-      <iframe width="220" height="200" src="https://www.youtube.com/embed/k_g7sBJ3fBg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
-      <iframe width="220" height="200" src="https://www.youtube.com/embed/k_g7sBJ3fBg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+      <h3>최신 자료글</h3>
+         <table border="1">
+        	<col width="900px"> <col width="200px">
+        	<tr>
+          	<th>제목</th>
+          	<th>날짜</th>
+          	</tr>
+          	<tbody id="tbody">
+          	<c:choose>
+          	
+				<c:when test = "${userdto.grade eq '1'}">
+		        	<c:forEach items = "${grade_list }" var= "dto">
+						<tr>
+							<td><a href = "reference_controller.do?command=grade1">${dto.rboard_title }</a></td>
+							<td>${dto.rboard_regdate }</td>
+						</tr>
+					</c:forEach>
+				</c:when>
+				
+				<c:when test = "${userdto.grade eq '2'}">
+		        	<c:forEach items = "${grade_list }" var= "dto">
+						<tr>
+							<td><a href = "reference_controller.do?command=grade2">${dto.rboard_title }</a></td>
+							<td>${dto.rboard_regdate }</td>
+						</tr>
+					</c:forEach>
+				</c:when>
+				
+				<c:when test = "${userdto.grade eq '3'}">
+		        	<c:forEach items = "${grade_list }" var= "dto">
+						<tr>
+							<td><a href = "reference_controller.do?command=grade3">${dto.rboard_title }</a></td>
+							<td>${dto.rboard_regdate }</td>
+						</tr>
+					</c:forEach>
+				</c:when>				
+			</c:choose>
+			</tbody> 
+        </table>
     </div>
     
         <!-- 공지사항 -->
@@ -217,6 +254,7 @@
         </table>
       </div>
     </div>
+    
     
     <!-- 소모임 -->
     <div>

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import com.soso.login.Dao.UserDao;
 import com.soso.login.Dto.UserDto;
+import com.soso.ref.dao.referenceDao;
+import com.soso.ref.dto.referenceDto;
 
 import mypageDao.NoticeDao;
 import mypageDto.NoticeDto;
@@ -33,6 +35,7 @@ public class login_controller extends HttpServlet {
 		
 		UserDao dao = new UserDao();
 		NoticeDao nDao = new NoticeDao();
+		referenceDao rDao = new referenceDao();
 		HttpSession session = request.getSession();
 
 		if(command.equals("loginform")) {
@@ -60,10 +63,16 @@ public class login_controller extends HttpServlet {
 					//공지 사항 리스트
 					List<NoticeDto> noti_list = nDao.selectAll(); 
 					request.setAttribute("noti_list", noti_list);
+					System.out.println(userdto.getGrade());
 					
+					//자료실 리스트
+					List<referenceDto> sDto = rDao.selectGrade(userdto.getGrade());
+					request.setAttribute("grade_list", sDto);
+					 
 					
 					RequestDispatcher disp = request.getRequestDispatcher("login/main.jsp");
 					disp.forward(request, response);
+					
 
 				//어드민 로그인시
 				}else if(userdto.getUser_type().equals("ADMIN")) {
