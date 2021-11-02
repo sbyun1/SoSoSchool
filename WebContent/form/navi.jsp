@@ -131,6 +131,31 @@
             location.href='../group_controller.do?command=group_main&user_no=${userdto.user_no}&region=${userdto.region}'
         }
     }
+    function ref_grade1(){
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+            location.href='../reference_controller.do?command=grade1'
+        }
+    }
+    function ref_grade2(){
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+            location.href='../reference_controller.do?command=grade2'
+        }
+    }
+    function ref_grade3(){
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+            location.href='../reference_controller.do?command=grade3'
+        }
+    }
+    
 </script>
 <body>
 <div>
@@ -146,9 +171,9 @@
         <li>
             <a>자료실</a>
             <ul>
-                <li><a>1학년</a></li>
-                <li><a>2학년</a></li>
-                <li><a>3학년</a></li>
+                <li><a onclick="ref_grade1();">1학년</a></li>
+                <li><a onclick="ref_grade2();">2학년</a></li>
+                <li><a onclick="ref_grade3();">3학년</a></li>
             </ul>
         </li>
         <li>
