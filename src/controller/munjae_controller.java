@@ -50,6 +50,38 @@ public class munjae_controller extends HttpServlet {
 			}else if (userdto.getGrade() == 3){
 				dispatch("munjae/kor_3_dictation.jsp", request, response);
 			}
+		}else if(command.equals("kor_second")){
+			int user_no = Integer.parseInt(request.getParameter("user_no"));
+			int correct = Integer.parseInt(request.getParameter("correct"));
+
+			userdto = userdao.selectuser(user_no);
+
+			if(userdto.getGrade() == 1){
+				request.setAttribute("correct", correct);
+				dispatch("munjae/kor_1_spelling.jsp", request, response);
+			}else if (userdto.getGrade() == 2){
+				request.setAttribute("correct", correct);
+				dispatch("munjae/kor_2_spelling.jsp", request, response);
+			}else if (userdto.getGrade() == 3){
+				request.setAttribute("correct", correct);
+				dispatch("munjae/kor_3_spelling.jsp", request, response);
+			}
+		}else if(command.equals("kor_third")){
+			int user_no = Integer.parseInt(request.getParameter("user_no"));
+			int correct = Integer.parseInt(request.getParameter("correct"));
+
+			userdto = userdao.selectuser(user_no);
+
+			if(userdto.getGrade() == 1){
+				request.setAttribute("correct", correct);
+				dispatch("munjae/kor_1_spacing.jsp", request, response);
+			}else if (userdto.getGrade() == 2){
+				request.setAttribute("correct", correct);
+				dispatch("munjae/kor_2_spacing.jsp", request, response);
+			}else if (userdto.getGrade() == 3){
+				request.setAttribute("correct", correct);
+				dispatch("munjae/kor_3_spacing.jsp", request, response);
+			}
 		}
 	}
 

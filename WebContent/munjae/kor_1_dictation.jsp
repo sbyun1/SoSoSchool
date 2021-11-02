@@ -224,11 +224,13 @@ function quizCheck(){
     outputString += "<p>틀린 답은 빨간색으로 표시 하였습니다.</p>";
     outputString += "<hr><p>1번 정답: 뒤를<br>2번 정답: 따라갑니다<br>3번 정답: 꾀 많은 여우가 ";
     outputString += "<p>최종 점수는 <strong>"+sum+"점</strong> 입니다.</p>";
-    outputString += "<button onclick='location.href='../munjae_controller.do?command=''>다음 문제로 이동</button>"
+    outputString += "<input type='button' value='다음 문제로 이동' onclick="+"location.href='../munjae_controller.do?command=kor_second&user_no=${userdto.user_no}&correct="+correct+"'"+">";
     document.getElementById('resultarea').innerHTML = outputString;
     document.getElementById('resultarea').style.visibility = 'visible';
 }
- 
+function nextPage(){
+    location.href='../munjae_controller.do?command=kor_second&user_no=${userdto.user_no}'+'&correct=correct';
+}
 
 </script>
 </head>
@@ -258,7 +260,7 @@ function quizCheck(){
                 <fieldset style="border: 0">
                     <div class="name">
                         <label for="name">1학년 이름 : </label>
-                        <input type="text" id="name" name="name"/><br><hr>
+                        <input type="text" id="name" name="name" value="${userdto.user_name}"/><br><hr>
                     </div>
                     <ol>
                         <li>
