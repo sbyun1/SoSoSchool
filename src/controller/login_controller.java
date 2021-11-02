@@ -64,6 +64,12 @@ public class login_controller extends HttpServlet {
 					
 					RequestDispatcher disp = request.getRequestDispatcher("login/main.jsp");
 					disp.forward(request, response);
+
+				//어드민 로그인시
+				}else if(userdto.getUser_type().equals("ADMIN")) {
+					
+					RequestDispatcher disp = request.getRequestDispatcher("admin/admin_main.jsp");
+					disp.forward(request, response);
 				}
 				
 			//id , pw 잘못 입력 했을떄

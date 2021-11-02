@@ -149,6 +149,24 @@
 		    width: 112px;
    			height: 101px;
 		}
+		
+	    #mapform{
+	        width: 375px;
+	        border : 1px solid blakc;
+	        min-height: 350px;
+	        display: flex;
+	        align-items: center;
+	        justify-content: center;
+	        flex-direction: column;
+	    }
+	    
+	    #mapform > h4{
+	    	margin: 15px 0px 0px 0px;
+	    }
+	    
+	    #map{
+	    display:flex;
+	    }
 </style>
 <script type="text/javascript">
 	window.onload = function (){
@@ -171,15 +189,7 @@
       <iframe width="220" height="200" src="https://www.youtube.com/embed/k_g7sBJ3fBg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
     </div>
     
-    <!-- 소모임 -->
-    <div>
-      <h3>내 주변 소모임</h3>
-      <div id="group">
-      
-      </div>
-    </div>
-    
-    <!-- 공지사항 -->
+        <!-- 공지사항 -->
     <div>
    		   <h3><a onClick="top.location='javascript:location.reload()'">공지사항</a></h3>
       <div id="notic">
@@ -207,6 +217,33 @@
         </table>
       </div>
     </div>
+    
+    <!-- 소모임 -->
+    <div>
+      <h3>내 주변 소모임</h3>
+      <div id="group">
+        <div id="mapform">
+                <c:choose>
+                    <c:when test="${userdto.region eq 'SEOUL'}">
+                    	<h4>서울 도서관</h4>
+                    	<div id="map">
+                        <%@ include file="../form/map_seoul.jsp"%>
+                        </div>
+                    </c:when>
+                    <c:when test="${userdto.region eq 'GYEONGGI'}">
+                    	<h4>경기 도서관</h4>
+                        <%@ include file="../form/map_gyeonggi.jsp"%>
+                    </c:when>
+                    <c:when test="${userdto.region eq 'INCHEON'}">
+                    	<h4>인천 도서관</h4>
+                        <%@ include file="../form/map_incheon.jsp"%>
+                    </c:when>
+                </c:choose>
+            </div>
+      </div>
+    </div>
+    
+
   </div>
 
   <div id="m-right">
