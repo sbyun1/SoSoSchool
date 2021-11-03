@@ -5,15 +5,12 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.util.List;
 
 import com.soso.login.Dao.UserDao;
 import com.soso.login.Dto.UserDto;
 import group.groupDao;
 import group.groupDto;
-import result.result_dao.result_dao;
-import result.result_dto.result_dto;
 
 @WebServlet("/group_controller.do")
 public class group_controller extends HttpServlet {

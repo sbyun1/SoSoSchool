@@ -129,7 +129,10 @@
             <div id="contentform" style="width: 980px; height: 230px; display: flex; flex-wrap: wrap; align-items: center">
                 <div style="width: 300px; font-size: 25px; font-weight: bold; display: flex; justify-content: center; ">내용</div>
                 <div style="width: 680px; font-size: 15px; display: flex; align-items: center">
-                	<textarea style="width: 680px; min-height: 180px; resize: none;" readonly>${dto.gboard_content}</textarea>
+                    <div style="width: 680px; height: 180px; border: 1px solid black; overflow: auto" >
+                        ${dto.gboard_content}
+                    </div>
+<%--                	<textarea style="width: 680px; min-height: 180px; resize: none;" readonly>${dto.gboard_content}</textarea>--%>
                 </div>
             </div>
             <div id="buttonform" style="width: 980px; height: 100px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center">
