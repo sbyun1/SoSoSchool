@@ -1,19 +1,19 @@
 package result.result_dto;
 
-public class result_kor_dto {
+public class result_math_dto {
     private String user_id;
     private int month;
     private int day;
-    private int kor;
+    private int math;
 
-    public result_kor_dto() {
+    public result_math_dto() {
     }
 
-    public result_kor_dto(String user_id, int month, int day, int kor) {
+    public result_math_dto(String user_id, int month, int day, int math) {
         this.user_id = user_id;
         this.month = month;
         this.day = day;
-        this.kor = kor;
+        this.math = math;
     }
 
     public String getUser_id() {
@@ -40,11 +40,11 @@ public class result_kor_dto {
         this.day = day;
     }
 
-    public int getKor() {
-        return kor;
+    public int getMath() {
+        return math;
     }
 
-    public void setKor(int kor) {
-        this.kor = kor;
+    public void setMath(int math) {
+        this.math = math;
     }
 }

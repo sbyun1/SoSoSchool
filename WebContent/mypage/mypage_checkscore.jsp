@@ -191,12 +191,13 @@
     google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(drawChart);
     google.charts.setOnLoadCallback(drawChart_sub);
+
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ["월", "성적", { role: "style" } ],
-            ["${month_3.month}월", <fmt:formatNumber type="number" maxFractionDigits="0"  value="${(month_3.kor + month_3.math + month_3.eng) / 3}"/>, "rgb(173,175,255)"],
-            ["${month_2.month}월", <fmt:formatNumber type="number" maxFractionDigits="0"  value="${(month_2.kor + month_2.math + month_2.eng) / 3}"/>, "rgb(173,175,255)"],
-            ["${month_1.month}월", <fmt:formatNumber type="number" maxFractionDigits="0"  value="${(month_1.kor + month_1.math + month_1.eng) / 3}"/>, "rgb(173,175,255)"],
+            ["${month_kor.month - 2}월", <fmt:formatNumber type="number" maxFractionDigits="0"  value="${(month_kor_2.kor + month_eng_2.eng + month_math_2.math) / 3}"/>, "rgb(173,175,255)"],
+            ["${month_kor.month - 1}월", <fmt:formatNumber type="number" maxFractionDigits="0"  value="${(month_kor_1.kor + month_eng_1.eng + month_math_1.math) / 3}"/>, "rgb(173,175,255)"],
+            ["${month_kor.month}월", <fmt:formatNumber type="number" maxFractionDigits="0"  value="${(month_kor.kor + month_eng.eng + month_math.math) / 3}"/>, "rgb(173,175,255)"],
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -220,9 +221,9 @@
     function drawChart_sub() {
         var data = google.visualization.arrayToDataTable([
             ["과목", "성적", { role: "style" } ],
-            ["국어", ${month_1.kor}, "rgb(173,175,255)"],
-            ["영어", ${month_1.eng}, "rgb(173,175,255)"],
-            ["수학", ${month_1.math}, "rgb(173,175,255)"],
+            ["국어", ${month_kor.kor}, "rgb(173,175,255)"],
+            ["영어", ${month_eng.eng}, "rgb(173,175,255)"],
+            ["수학", ${month_math.math}, "rgb(173,175,255)"],
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -277,16 +278,16 @@
                     <th colspan="2">월간 평균 성적</th>
                 </tr>
                     <tr id="td">
-                        <td>${month_3.month}월</td>
-                        <td><fmt:formatNumber type="number" maxFractionDigits="0"  value="${(month_3.kor + month_3.math + month_3.eng) / 3}"/>점</td>
+                        <td>${month_kor.month - 2}월</td>
+                        <td><fmt:formatNumber type="number" maxFractionDigits="0"  value="${(month_kor_2.kor + month_eng_2.eng + month_math_2.math) / 3}"/>점</td>
                     </tr>
                     <tr id="td">
-                        <td>${month_2.month}월</td>
-                        <td><fmt:formatNumber type="number" maxFractionDigits="0"  value="${(month_2.kor + month_2.math + month_2.eng) / 3}"/>점</td>
+                        <td>${month_kor.month - 1}월</td>
+                        <td><fmt:formatNumber type="number" maxFractionDigits="0"  value="${(month_kor_1.kor + month_eng_1.eng + month_math_1.math) / 3}"/>점</td>
                     </tr>
                     <tr id="td">
-                        <td>${month_1.month}월</td>
-                        <td><fmt:formatNumber type="number" maxFractionDigits="0"  value="${(month_1.kor + month_1.math + month_1.eng) / 3}"/>점</td>
+                        <td>${month_kor.month}월</td>
+                        <td><fmt:formatNumber type="number" maxFractionDigits="0"  value="${(month_kor.kor + month_eng.eng + month_math.math) / 3}"/>점</td>
                     </tr>
             </table>
         </div>
@@ -300,15 +301,15 @@
                 </tr>
                 <tr id="td">
                     <td>국어</td>
-                    <td>${month_1.kor}점</td>
+                    <td>${month_kor.kor}점</td>
                 </tr>
                 <tr id="td">
                     <td>영어</td>
-                    <td>${month_1.eng}점</td>
+                    <td>${month_eng.eng}점</td>
                 </tr>
                 <tr id="td">
                     <td>수학</td>
-                    <td>${month_1.math}점</td>
+                    <td>${month_math.math}점</td>
                 </tr>
             </table>
         </div>

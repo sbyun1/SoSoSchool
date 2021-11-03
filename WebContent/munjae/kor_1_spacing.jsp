@@ -216,13 +216,14 @@ function quizCheck(){
                document.forms[0].elements[i+2].classList.add("fail");
            }
         }
-    var sum = 10 * correct;
+    var sum = 5 * correct;
     outputString = "<p>"+examineeName+" 님의</p>";
     outputString += "<p>"+year+"년 "+month+"월 "+date+"일 "+weekToday+" 계산 퀴즈 결과</p>";
     outputString += "<p>총 "+correct+"문제를 맞추셨습니다.</p>";
     outputString += "<p>틀린 답은 빨간색으로 표시 하였습니다.</p>";
     outputString += "<hr><p>1번 정답: 큰 소리로 응원합니다<br>2번 정답: 동물의 모양에 빗댄 것<br>3번 정답: 들은 체 만 체 하며<br>4번 정답: 가방을 메고 큰 소리로<br></p><hr>"; 
     outputString += "<p>최종 점수는 <strong>"+sum+"점</strong> 입니다.</p>";
+    outputString += "<input type='button' value='성적 제출하기' onclick="+"location.href='../munjae_controller.do?command=kor_final&user_no=${userdto.user_no}&correct="+correct+"&sum="+sum+"&month="+month+"&date="+date+"'"+">";
     document.getElementById('resultarea').innerHTML = outputString;
     document.getElementById('resultarea').style.visibility = 'visible';
 }
@@ -256,7 +257,7 @@ function quizCheck(){
                 <fieldset style="border: 0">
                     <div class="name">
                         <label for="name">1학년 이름 : </label>
-                        <input type="text" id="name" name="name"/><br><hr>
+                        <input type="text" id="name" name="name" value="${userdto.user_name}"/><br><hr>
                     </div>
                     <ol>
                         <li>

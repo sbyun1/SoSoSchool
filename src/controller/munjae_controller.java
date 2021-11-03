@@ -4,9 +4,14 @@ import com.soso.login.Dao.UserDao;
 import com.soso.login.Dto.UserDto;
 import mypageDao.NoticeDao;
 import mypageDto.NoticeDto;
+import result.result_dao.result_dao;
+import result.result_dto.result_eng_dto;
+import result.result_dto.result_kor_dto;
+import result.result_dto.result_math_dto;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,7 +41,7 @@ public class munjae_controller extends HttpServlet {
 		UserDao userdao = new UserDao();
 
 		//Dao 불러오는 코드
-
+		result_dao resultdao = new result_dao();
 
 		if(command.equals("kor_first")){
 			int user_no = Integer.parseInt(request.getParameter("user_no"));
@@ -81,6 +86,326 @@ public class munjae_controller extends HttpServlet {
 			}else if (userdto.getGrade() == 3){
 				request.setAttribute("correct", correct);
 				dispatch("munjae/kor_3_spacing.jsp", request, response);
+			}
+		}else if(command.equals("kor_final")){
+			int user_no = Integer.parseInt(request.getParameter("user_no"));				//유저 정보 확인용 유저 번호
+			int correct = Integer.parseInt(request.getParameter("correct"));				//맞춘 개수
+			int sum = Integer.parseInt(request.getParameter("sum"));						//점수
+			int month = Integer.parseInt(request.getParameter("month"));					//사이트 기준 월
+			int date = Integer.parseInt(request.getParameter("date"));					//사이트 기준 일
+
+			userdto = userdao.selectuser(user_no);											//유저 정보 가져오기
+
+			result_kor_dto kor_dto = resultdao.select_month_kor(userdto.getUser_id());		//이번달 국어 성적 가져오기
+			result_eng_dto eng_dto = resultdao.select_month_eng(userdto.getUser_id());		//이번달 영어 성적 가져오기
+			result_math_dto math_dto = resultdao.select_month_math(userdto.getUser_id());	//이번달 수학 성적 가져오기
+
+			if(userdto.getGrade() == 1){
+				//이번달에 문제를 플었으면
+				if(kor_dto.getMonth() == month){
+					PrintWriter writer = response.getWriter();
+					writer.println("<script type='text/javascript'>alert('이번 달에 이미 문제 풀이를 했습니다.'); location.href='../mypage_controller.do?command=mypage_checkscore&user_id="+userdto.getUser_id()+"';</script>");
+					writer.close();
+				}
+				//이번달에 문제를 안풀었으면
+				else{
+					kor_dto.setUser_id(userdto.getUser_id());
+					kor_dto.setMonth(month);
+					kor_dto.setDay(date);
+					kor_dto.setKor(sum);
+
+					resultdao.insert_kor(kor_dto);
+
+					userdao.insert_user_point(correct, userdto.getUser_id());
+					userdao.insert_user_star(correct, userdto.getUser_id());
+
+					result_kor_dto month_kor = resultdao.select_month_kor(userdto.getUser_id());
+					request.setAttribute("month_kor", month_kor);
+
+					userdto = userdao.selectuser(user_no);
+					session.setAttribute("userdto", userdto);
+
+					LocalDate now = LocalDate.now();
+
+					//이번달
+					result_eng_dto month_eng = resultdao.select_month_eng(userdto.getUser_id());
+					result_math_dto month_math = resultdao.select_month_math(userdto.getUser_id());
+
+					if(resultdao.check_eng(userdto.getUser_id()) == 0){
+						month_eng.setEng(0);
+						month_eng.setMonth(month);
+						request.setAttribute("month_eng", month_eng);
+					}
+					if(resultdao.check_math(userdto.getUser_id()) == 0){
+						month_math.setMath(0);
+						month_math.setMonth(month);
+						request.setAttribute("month_math", month_math);
+					}
+
+					//세 과목 모두 성적이 있으면 값 지정
+					if(month_eng.getMonth() == month || month_math.getMonth() == month){
+						request.setAttribute("month_eng", month_eng);
+						request.setAttribute("month_math", month_math);
+					}
+
+					//한달전
+					result_kor_dto month_kor_1 = resultdao.select_month_kor_1(userdto.getUser_id());
+					result_eng_dto month_eng_1 = resultdao.select_month_eng_1(userdto.getUser_id());
+					result_math_dto month_math_1 = resultdao.select_month_math_1(userdto.getUser_id());
+
+					if(resultdao.check_kor_1(userdto.getUser_id()) == 0){
+						month_kor_1.setKor(0);
+						month_kor_1.setMonth(month);
+						request.setAttribute("month_kor_1", month_kor_1);
+					}
+					if(resultdao.check_eng_1(userdto.getUser_id()) == 0){
+						month_eng_1.setEng(0);
+						month_eng_1.setMonth(month);
+						request.setAttribute("month_eng_1", month_eng_1);
+					}
+					if(resultdao.check_math_1(userdto.getUser_id()) == 0){
+						month_math_1.setMath(0);
+						month_math_1.setMonth(month);
+						request.setAttribute("month_math_1", month_math_1);
+					}
+
+					if(month_kor_1.getMonth() == (month-1) || month_eng_1.getMonth() == (month-1) || month_math_1.getMonth() == (month-1)) {
+						request.setAttribute("month_kor_1", month_kor_1);
+						request.setAttribute("month_eng_1", month_eng_1);
+						request.setAttribute("month_math_1", month_math_1);
+					}
+
+					//두달전
+					result_kor_dto month_kor_2 = resultdao.select_month_kor_2(userdto.getUser_id());
+					result_eng_dto month_eng_2 = resultdao.select_month_eng_2(userdto.getUser_id());
+					result_math_dto month_math_2 = resultdao.select_month_math_2(userdto.getUser_id());
+
+					if(resultdao.check_kor_2(userdto.getUser_id()) == 0){
+						month_kor_2.setKor(0);
+						month_kor_2.setMonth(month);
+						request.setAttribute("month_kor_2", month_kor_2);
+					}
+					if(resultdao.check_eng_2(userdto.getUser_id()) == 0){
+						month_eng_2.setEng(0);
+						month_eng_2.setMonth(month);
+						request.setAttribute("month_eng_2", month_eng_2);
+					}
+					if(resultdao.check_math_2(userdto.getUser_id()) == 0){
+						month_math_2.setMath(0);
+						month_math_2.setMonth(month);
+						request.setAttribute("month_math_2", month_math_2);
+					}
+
+					if(month_kor_2.getMonth() == (month-2) || month_eng_2.getMonth() == (month-2) || month_math_2.getMonth() == (month-2)) {
+						request.setAttribute("month_kor_2", month_kor_2);
+						request.setAttribute("month_eng_2", month_eng_2);
+						request.setAttribute("month_math_2", month_math_2);
+					}
+
+					dispatch("mypage/mypage_checkscore.jsp",request,response);
+				}
+			}else if (userdto.getGrade() == 2){
+				//이번달에 문제를 플었으면
+				if(kor_dto.getMonth() == month){
+					PrintWriter writer = response.getWriter();
+					writer.println("<script type='text/javascript'>alert('이번 달에 이미 문제 풀이를 했습니다.'); location.href='../mypage_controller.do?command=mypage_checkscore&user_id="+userdto.getUser_id()+"';</script>");
+					writer.close();
+				}//이번달에 문제를 안풀었으면
+				else {
+					kor_dto.setUser_id(userdto.getUser_id());
+					kor_dto.setMonth(month);
+					kor_dto.setDay(date);
+					kor_dto.setKor(sum);
+
+					resultdao.insert_kor(kor_dto);
+
+					userdao.insert_user_point(correct, userdto.getUser_id());
+					userdao.insert_user_star(correct, userdto.getUser_id());
+
+					result_kor_dto month_kor = resultdao.select_month_kor(userdto.getUser_id());
+					request.setAttribute("month_kor", month_kor);
+
+					userdto = userdao.selectuser(user_no);
+					session.setAttribute("userdto", userdto);
+					LocalDate now = LocalDate.now();
+
+					//이번달
+					result_eng_dto month_eng = resultdao.select_month_eng(userdto.getUser_id());
+					result_math_dto month_math = resultdao.select_month_math(userdto.getUser_id());
+
+					if(resultdao.check_eng(userdto.getUser_id()) == 0){
+						month_eng.setEng(0);
+						month_eng.setMonth(month);
+						request.setAttribute("month_eng", month_eng);
+					}
+					if(resultdao.check_math(userdto.getUser_id()) == 0){
+						month_math.setMath(0);
+						month_math.setMonth(month);
+						request.setAttribute("month_math", month_math);
+					}
+
+					//세 과목 모두 성적이 있으면 값 지정
+					if(month_eng.getMonth() == month || month_math.getMonth() == month){
+						request.setAttribute("month_eng", month_eng);
+						request.setAttribute("month_math", month_math);
+					}
+
+					//한달전
+					result_kor_dto month_kor_1 = resultdao.select_month_kor_1(userdto.getUser_id());
+					result_eng_dto month_eng_1 = resultdao.select_month_eng_1(userdto.getUser_id());
+					result_math_dto month_math_1 = resultdao.select_month_math_1(userdto.getUser_id());
+
+					if(resultdao.check_kor_1(userdto.getUser_id()) == 0){
+						month_kor_1.setKor(0);
+						month_kor_1.setMonth(month);
+						request.setAttribute("month_kor_1", month_kor_1);
+					}
+					if(resultdao.check_eng_1(userdto.getUser_id()) == 0){
+						month_eng_1.setEng(0);
+						month_eng_1.setMonth(month);
+						request.setAttribute("month_eng_1", month_eng_1);
+					}
+					if(resultdao.check_math_1(userdto.getUser_id()) == 0){
+						month_math_1.setMath(0);
+						month_math_1.setMonth(month);
+						request.setAttribute("month_math_1", month_math_1);
+					}
+
+					if(month_kor_1.getMonth() == (month-1) || month_eng_1.getMonth() == (month-1) || month_math_1.getMonth() == (month-1)) {
+						request.setAttribute("month_kor_1", month_kor_1);
+						request.setAttribute("month_eng_1", month_eng_1);
+						request.setAttribute("month_math_1", month_math_1);
+					}
+
+					//두달전
+					result_kor_dto month_kor_2 = resultdao.select_month_kor_2(userdto.getUser_id());
+					result_eng_dto month_eng_2 = resultdao.select_month_eng_2(userdto.getUser_id());
+					result_math_dto month_math_2 = resultdao.select_month_math_2(userdto.getUser_id());
+
+					if(resultdao.check_kor_2(userdto.getUser_id()) == 0){
+						month_kor_2.setKor(0);
+						month_kor_2.setMonth(month);
+						request.setAttribute("month_kor_2", month_kor_2);
+					}
+					if(resultdao.check_eng_2(userdto.getUser_id()) == 0){
+						month_eng_2.setEng(0);
+						month_eng_2.setMonth(month);
+						request.setAttribute("month_eng_2", month_eng_2);
+					}
+					if(resultdao.check_math_2(userdto.getUser_id()) == 0){
+						month_math_2.setMath(0);
+						month_math_2.setMonth(month);
+						request.setAttribute("month_math_2", month_math_2);
+					}
+
+					if(month_kor_2.getMonth() == (month-2) || month_eng_2.getMonth() == (month-2) || month_math_2.getMonth() == (month-2)) {
+						request.setAttribute("month_kor_2", month_kor_2);
+						request.setAttribute("month_eng_2", month_eng_2);
+						request.setAttribute("month_math_2", month_math_2);
+					}
+					dispatch("mypage/mypage_checkscore.jsp",request,response);
+				}
+			}else if (userdto.getGrade() == 3){
+				//이번달에 문제를 플었으면
+				if(kor_dto.getMonth() == month){
+					PrintWriter writer = response.getWriter();
+					writer.println("<script type='text/javascript'>alert('이번 달에 이미 문제 풀이를 했습니다.'); location.href='../mypage_controller.do?command=mypage_checkscore&user_id="+userdto.getUser_id()+"';</script>");
+					writer.close();
+				}//이번달에 문제를 안풀었으면
+				else {
+					kor_dto.setUser_id(userdto.getUser_id());
+					kor_dto.setMonth(month);
+					kor_dto.setDay(date);
+					kor_dto.setKor(sum);
+
+					resultdao.insert_kor(kor_dto);
+
+					userdao.insert_user_point(correct, userdto.getUser_id());
+					userdao.insert_user_star(correct, userdto.getUser_id());
+
+					result_kor_dto month_kor = resultdao.select_month_kor(userdto.getUser_id());
+					request.setAttribute("month_kor", month_kor);
+
+					userdto = userdao.selectuser(user_no);
+					session.setAttribute("userdto", userdto);
+					LocalDate now = LocalDate.now();
+
+					//이번달
+					result_eng_dto month_eng = resultdao.select_month_eng(userdto.getUser_id());
+					result_math_dto month_math = resultdao.select_month_math(userdto.getUser_id());
+
+					if(resultdao.check_eng(userdto.getUser_id()) == 0){
+						month_eng.setEng(0);
+						month_eng.setMonth(month);
+						request.setAttribute("month_eng", month_eng);
+					}
+					if(resultdao.check_math(userdto.getUser_id()) == 0){
+						month_math.setMath(0);
+						month_math.setMonth(month);
+						request.setAttribute("month_math", month_math);
+					}
+
+					//세 과목 모두 성적이 있으면 값 지정
+					if(month_eng.getMonth() == month || month_math.getMonth() == month){
+						request.setAttribute("month_eng", month_eng);
+						request.setAttribute("month_math", month_math);
+					}
+
+					//한달전
+					result_kor_dto month_kor_1 = resultdao.select_month_kor_1(userdto.getUser_id());
+					result_eng_dto month_eng_1 = resultdao.select_month_eng_1(userdto.getUser_id());
+					result_math_dto month_math_1 = resultdao.select_month_math_1(userdto.getUser_id());
+
+					if(resultdao.check_kor_1(userdto.getUser_id()) == 0){
+						month_kor_1.setKor(0);
+						month_kor_1.setMonth(month);
+						request.setAttribute("month_kor_1", month_kor_1);
+					}
+					if(resultdao.check_eng_1(userdto.getUser_id()) == 0){
+						month_eng_1.setEng(0);
+						month_eng_1.setMonth(month);
+						request.setAttribute("month_eng_1", month_eng_1);
+					}
+					if(resultdao.check_math_1(userdto.getUser_id()) == 0){
+						month_math_1.setMath(0);
+						month_math_1.setMonth(month);
+						request.setAttribute("month_math_1", month_math_1);
+					}
+
+					if(month_kor_1.getMonth() == (month-1) || month_eng_1.getMonth() == (month-1) || month_math_1.getMonth() == (month-1)) {
+						request.setAttribute("month_kor_1", month_kor_1);
+						request.setAttribute("month_eng_1", month_eng_1);
+						request.setAttribute("month_math_1", month_math_1);
+					}
+
+					//두달전
+					result_kor_dto month_kor_2 = resultdao.select_month_kor_2(userdto.getUser_id());
+					result_eng_dto month_eng_2 = resultdao.select_month_eng_2(userdto.getUser_id());
+					result_math_dto month_math_2 = resultdao.select_month_math_2(userdto.getUser_id());
+
+					if(resultdao.check_kor_2(userdto.getUser_id()) == 0){
+						month_kor_2.setKor(0);
+						month_kor_2.setMonth(month);
+						request.setAttribute("month_kor_2", month_kor_2);
+					}
+					if(resultdao.check_eng_2(userdto.getUser_id()) == 0){
+						month_eng_2.setEng(0);
+						month_eng_2.setMonth(month);
+						request.setAttribute("month_eng_2", month_eng_2);
+					}
+					if(resultdao.check_math_2(userdto.getUser_id()) == 0){
+						month_math_2.setMath(0);
+						month_math_2.setMonth(month);
+						request.setAttribute("month_math_2", month_math_2);
+					}
+
+					if(month_kor_2.getMonth() == (month-2) || month_eng_2.getMonth() == (month-2) || month_math_2.getMonth() == (month-2)) {
+						request.setAttribute("month_kor_2", month_kor_2);
+						request.setAttribute("month_eng_2", month_eng_2);
+						request.setAttribute("month_math_2", month_math_2);
+					}
+					dispatch("mypage/mypage_checkscore.jsp",request,response);
+				}
 			}
 		}
 	}

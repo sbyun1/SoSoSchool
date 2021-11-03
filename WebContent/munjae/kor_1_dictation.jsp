@@ -220,10 +220,9 @@ function quizCheck(){
     var sum = 10 * correct;
     outputString = "<p>"+examineeName+" 님의</p>";
     outputString += "<p>"+year+"년 "+month+"월 "+date+"일 "+weekToday+" 계산 퀴즈 결과</p>";
-    outputString += "<p>총 "+answer.length+"문제 중 "+(answer.length-correct)+"문제를 틀렸습니다.</p>";
+    outputString += "<p>총 "+correct+"문제를 맞추셨습니다.</p>";
     outputString += "<p>틀린 답은 빨간색으로 표시 하였습니다.</p>";
     outputString += "<hr><p>1번 정답: 뒤를<br>2번 정답: 따라갑니다<br>3번 정답: 꾀 많은 여우가 ";
-    outputString += "<p>최종 점수는 <strong>"+sum+"점</strong> 입니다.</p>";
     outputString += "<input type='button' value='다음 문제로 이동' onclick="+"location.href='../munjae_controller.do?command=kor_second&user_no=${userdto.user_no}&correct="+correct+"'"+">";
     document.getElementById('resultarea').innerHTML = outputString;
     document.getElementById('resultarea').style.visibility = 'visible';

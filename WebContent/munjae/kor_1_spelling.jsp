@@ -195,7 +195,7 @@
                 hide_question();
             } else {
                 document.all.timeLeft.innerHTML=0;
-                document.all.quizScore.innerHTML+="<h3>총 문제: "+(q_num-1)+"개 총 맞춘 문제 개수: "+sum+"개 점수: "+(sum*10)+"점 입니다.</h3>";   //수정함
+                document.all.quizScore.innerHTML+="<h3>총 문제: "+(q_num-1)+"개 총 맞춘 문제 개수: "+sum+"개 입니다.</h3>";   //수정함
                 document.all.quizScore.innerHTML+="<input type='button' value='다음 문제로 이동' onclick="+"location.href='../munjae_controller.do?command=kor_third&user_no=${userdto.user_no}&correct="+sum+"'"+">";  //수정함
                 document.all.quizScore.style.display="inline";
             }

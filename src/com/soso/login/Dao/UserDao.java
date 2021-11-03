@@ -469,6 +469,69 @@ public class UserDao extends JDBCTemplate{
 		}
 		return res;
 	}
+
+	//포인트 추가(랭킹용)
+	public int insert_user_point(int correct, String user_id){
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		String sql = "UPDATE SOSO_USER SET USER_POINT = USER_POINT + ? WHERE USER_ID = ?";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, correct);
+			pstm.setString(2, user_id);
+			System.out.println("03. query 준비 " + sql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+			if(res > 0){
+				commit(con);
+			}else{
+				rollback(con);
+			}
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(con);
+			close(pstm);
+		}
+		return res;
+	}
+	//스타 추가(교환용)
+	public int insert_user_star(int correct, String user_id){
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		String sql = "UPDATE SOSO_USER SET USER_STAR = SOSO_USER.USER_STAR + ? WHERE USER_ID = ?";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, correct);
+			pstm.setString(2, user_id);
+			System.out.println("03. query 준비 " + sql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+			if(res > 0){
+				commit(con);
+			}else{
+				rollback(con);
+			}
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(con);
+			close(pstm);
+		}
+		return res;
+	}
 }
 
 	

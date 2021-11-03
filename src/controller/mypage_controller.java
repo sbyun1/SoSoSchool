@@ -26,7 +26,9 @@ import mypageDto.NoticeDto;
 import mypageDto.QnaDto;
 import mypageDto.changeStarDto;
 import result.result_dao.result_dao;
-import result.result_dto.result_dto;
+import result.result_dto.result_eng_dto;
+import result.result_dto.result_kor_dto;
+import result.result_dto.result_math_dto;
 
 
 /**
@@ -280,23 +282,91 @@ public class mypage_controller extends HttpServlet {
 		/*성적 확인 페이지 이동*/
 		else if(command.equals("mypage_checkscore")){
 			String user_id = request.getParameter("user_id");
-			result_dto month_1 = resultdao.select_month(user_id);
-			result_dto month_2 = resultdao.select_month_1(user_id);
-			result_dto month_3 = resultdao.select_month_2(user_id);
 
 			LocalDate now = LocalDate.now();
-
 			int month = now.getMonthValue();
 
-			if(month_1.getMonth() ==  month){
-				request.setAttribute("month_1", month_1);
+			//이번달
+			result_kor_dto month_kor = resultdao.select_month_kor(user_id);
+			result_eng_dto month_eng = resultdao.select_month_eng(user_id);
+			result_math_dto month_math = resultdao.select_month_math(user_id);
+
+			if(resultdao.check_kor(user_id) == 0){
+				month_kor.setKor(0);
+				month_kor.setMonth(month);
+				request.setAttribute("month_kor", month_kor);
 			}
-			if(month_2.getMonth() == (month-1)){
-				request.setAttribute("month_2", month_2);
+			if(resultdao.check_eng(user_id) == 0){
+				month_eng.setEng(0);
+				month_eng.setMonth(month);
+				request.setAttribute("month_eng", month_eng);
 			}
-			if(month_3.getMonth() == (month-2)){
-				request.setAttribute("month_3", month_3);
+			if(resultdao.check_math(user_id) == 0){
+				month_math.setMath(0);
+				month_math.setMonth(month);
+				request.setAttribute("month_math", month_math);
 			}
+
+			//세 과목 모두 성적이 있으면 값 지정
+			if(month_kor.getMonth() == month || month_eng.getMonth() == month || month_math.getMonth() == month){
+				request.setAttribute("month_kor", month_kor);
+				request.setAttribute("month_eng", month_eng);
+				request.setAttribute("month_math", month_math);
+			}
+
+			 //한달전
+			 result_kor_dto month_kor_1 = resultdao.select_month_kor_1(user_id);
+			 result_eng_dto month_eng_1 = resultdao.select_month_eng_1(user_id);
+			 result_math_dto month_math_1 = resultdao.select_month_math_1(user_id);
+
+			 if(resultdao.check_kor_1(user_id) == 0){
+				 month_kor_1.setKor(0);
+				 month_kor_1.setMonth(month);
+				 request.setAttribute("month_kor_1", month_kor_1);
+			 }
+			 if(resultdao.check_eng_1(user_id) == 0){
+				 month_eng_1.setEng(0);
+				 month_eng_1.setMonth(month);
+				 request.setAttribute("month_eng_1", month_eng_1);
+			 }
+			 if(resultdao.check_math_1(user_id) == 0){
+				 month_math_1.setMath(0);
+				 month_math_1.setMonth(month);
+				 request.setAttribute("month_math_1", month_math_1);
+			 }
+
+			 if(month_kor_1.getMonth() == (month-1) || month_eng_1.getMonth() == (month-1) || month_math_1.getMonth() == (month-1)) {
+				 request.setAttribute("month_kor_1", month_kor_1);
+				 request.setAttribute("month_eng_1", month_eng_1);
+				 request.setAttribute("month_math_1", month_math_1);
+			 }
+
+			 //두달전
+			 result_kor_dto month_kor_2 = resultdao.select_month_kor_2(user_id);
+			 result_eng_dto month_eng_2 = resultdao.select_month_eng_2(user_id);
+			 result_math_dto month_math_2 = resultdao.select_month_math_2(user_id);
+
+			 if(resultdao.check_kor_2(user_id) == 0){
+				 month_kor_2.setKor(0);
+				 month_kor_2.setMonth(month);
+				 request.setAttribute("month_kor_2", month_kor_2);
+			 }
+			 if(resultdao.check_eng_2(user_id) == 0){
+				 month_eng_2.setEng(0);
+				 month_eng_2.setMonth(month);
+				 request.setAttribute("month_eng_2", month_eng_2);
+			 }
+			 if(resultdao.check_math_2(user_id) == 0){
+				 month_math_2.setMath(0);
+				 month_math_2.setMonth(month);
+				 request.setAttribute("month_math_2", month_math_2);
+			 }
+
+			 if(month_kor_2.getMonth() == (month-2) || month_eng_2.getMonth() == (month-2) || month_math_2.getMonth() == (month-2)) {
+				 request.setAttribute("month_kor_2", month_kor_2);
+				 request.setAttribute("month_eng_2", month_eng_2);
+				 request.setAttribute("month_math_2", month_math_2);
+			 }
 
 			dispatch("mypage/mypage_checkscore.jsp", request, response);
 		}
