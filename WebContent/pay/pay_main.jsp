@@ -177,7 +177,9 @@
                     msg += '결제 금액 : ' + rsp.paid_amount;
                     msg += '카드 승인번호 : ' + rsp.apply_num;
                     alert(msg);
-                    location.href="../mypage_controller.do?command=mypage_pay_manage"
+                    var user_no = ${userdto.user_no}
+                    location.href = "../mypage_controller.do?command=userSub&user_no="+user_no;
+                    
             
 
             } else {

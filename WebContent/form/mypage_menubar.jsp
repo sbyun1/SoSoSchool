@@ -43,7 +43,7 @@
     <li class="li_selec"><a onclick="location.href='../mypage_controller.do?command=mypage_notice'">공지사항</a></li>
     <li class="li_selec"><a onclick="location.href='../mypage_controller.do?command=mypage_qna'">고객문의(Q&A)<a/></li>
     <li class="li_selec"><a onclick="location.href='../mypage_controller.do?command=userinfo&user_no=${userdto.user_no}'">회원 정보 수정/탈퇴</a></li>
-    <li class="li_selec"><a onclick="location.href='../mypage_controller.do?command=mypage_pay_manage'">결제 관리</a></li>
+    <li class="li_selec"><a onclick="location.href='../mypage_controller.do?command=payinfo&user_no=${userdto.user_no}'">결제 관리</a></li>
 </ul>
 </body>
 </html>

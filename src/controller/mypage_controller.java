@@ -167,7 +167,6 @@ public class mypage_controller extends HttpServlet {
 			
 			UserDto userInfo = userdao.selectuser(user_no);
 			
-			
 			userInfo.setUser_pr(user_pr);
 			userInfo.setUser_id(user_id);
 			userInfo.setUser_name(user_name);
@@ -179,7 +178,7 @@ public class mypage_controller extends HttpServlet {
 			userInfo.setDetailAddr(detailAddr);
 			userInfo.setRegion(region);
 			
-			int res = UserInfoDao.updateUser(userInfo); 
+			int res = UserInfoDao.userUpdate(userInfo); 
 			
 			PrintWriter writer = response.getWriter();
 			
@@ -194,7 +193,30 @@ public class mypage_controller extends HttpServlet {
 			}
 		} 
 		
-				
+		/*******************회원 탈퇴: enabled_yn을 y로 바꿈****************/
+		else if(command.equals("userdisable")) {
+			int user_no = Integer.parseInt(request.getParameter("user_no"));
+			UserDto userInfo = userdao.selectuser(user_no);
+			int res = UserInfoDao.userDisable(userInfo); 
+			
+			PrintWriter writer = response.getWriter();
+			
+			if(res > 0) {
+				request.getSession().invalidate();
+	            writer.println("<script type='text/javascript'>alert('탈퇴되었습니다.'); location.href='../main_controller.do?command=start';</script>");
+	            writer.close();
+			}
+			else {
+			
+				 writer.println("<script type='text/javascript'>alert('탈퇴에 실패하였습니다\n 고객문의를 이용주세요.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
+		         writer.close();
+			}
+			
+		}
+		
+		
+		
+		
 		/*******************마이페이지 고객문의*****************************/
 		else if(command.equals("mypage_qna")) {
 			List<QnaDto> qna_list = Qdao.selectAll(); //전체 리스트를 가져와서 selectAll실행
@@ -304,11 +326,46 @@ public class mypage_controller extends HttpServlet {
 			}
 			
 		}
-		/* 결제관리 */
-		else if(command.equals("mypage_pay_manage")) {
-		
-			response.sendRedirect("mypage/mypage_pay_manage.jsp");
+		/********* 결제관리 **************/
+
+		//메뉴바에서 결제관리 누르면 이동하는 코드
+		else if(command.equals("payinfo")) {
+			int user_no = Integer.parseInt(request.getParameter("user_no"));
+			UserDto userInfo = userdao.selectuser(user_no);
+			request.setAttribute("userInfo", userInfo);
+			//RequestDispatcher dp = request.getRequestDispatcher("mypage/userinfo_test.jsp");
+			RequestDispatcher dp = request.getRequestDispatcher("mypage/mypage_pay_manage.jsp");
+			dp.forward(request, response);
+			
 		}
+		
+		
+		//결제후 y로 바꾸고 결제관리로 이동하는 코드
+		else if(command.equals("userSub")) {
+			int user_no = Integer.parseInt(request.getParameter("user_no"));
+			UserDto userInfo = userdao.selectuser(user_no);
+			int res = UserInfoDao.sub_yn(userInfo); 
+			
+			PrintWriter writer = response.getWriter();
+			
+			if(res > 0) {
+				writer.println("<script type='text/javascript'>alert('성공하였습니다.'); location.href='../mypage_controller.do?command=payinfo&user_no="+user_no+"';</script>");
+		        writer.close();
+				response.sendRedirect("mypage/mypage_pay_manage.jsp");
+			
+			}
+			else {
+			
+				 writer.println("<script type='text/javascript'>alert('탈퇴에 실패하였습니다\n 고객문의를 이용주세요.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
+		         writer.close();
+			}
+		
+		}
+		
+			
+			
+		
+		
 		
 		
 		

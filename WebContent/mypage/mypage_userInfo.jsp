@@ -520,9 +520,33 @@
      }
   	
 
- 	function updateuser(user_no){
+ 	function userUpdate(user_no){
  		location.href = "../mypage_controller.do?command=userupdateform&user_no="+user_no;
  	}
+ 	
+ 	function userDisable(user_no){
+
+ 		var result = confirm("정말 탈퇴하시겠습니까?\n탈퇴 후 재가입을 하려면 고객센터로 문의해야합니다");
+ 	
+ 		if(result){
+ 			var id = prompt("탈퇴를 위해 아이디를 입력해주세요.","");
+ 			console.log(id);
+ 			var user_id = "${userdto.user_id}";
+ 			if(user_id === id){
+				location.href = "../mypage_controller.do?command=userdisable&user_no="+user_no;
+			}
+			else{
+				alert("아이디가 일치하지않습니다.다시시도해주세요");
+				return;
+			}
+ 		}
+ 		else{
+ 			alert("취소되었습니다.")
+ 		}
+ 	}
+ 		
+ 		
+ 	
     </script>
 
 
@@ -599,8 +623,8 @@
         </fieldset>
         <fieldset class="sendform">
             
-            <input type = "button" class="btn" value = "수정" onclick = "updateuser(${userdto.user_no});"> 
-            <input type="button" class="btn2" value="회원탈퇴"><br>
+            <input type = "button" class="btn" value = "수정" onclick = "userUpdate(${userdto.user_no});"> 
+            <input type="button" class="btn2" value="회원탈퇴" onclick = "userDisable(${userdto.user_no});"><br>
             
         </fieldset>
    		</div>

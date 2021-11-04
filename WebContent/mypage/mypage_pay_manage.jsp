@@ -57,7 +57,7 @@
         justify-content: center;
     }
     /*메뉴 리스트*/
-    section .menuform{
+section .menuform{
         background-color: aliceblue;
         width: 210px;
         -ms-user-select: none;
@@ -94,7 +94,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    /*성적표*/
+ 
     section .mainform #mainlist{
         min-width: 750px;         /*메인 구역 안 width 값*/
         display: flex;
@@ -119,68 +119,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    section .loginboard_form #loginboard{
-        background-color: lightgrey;
-        width: 230px;
-        height: 190px;
-        display: inline-flex;
-        margin-top: 30px;
-        border-radius: 5%;
-       
-    }
-    section .loginboard_form #loginboard #imgform{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 80px;
-        height: 190px;
-    }
-    section .loginboard_form #loginboard #imgform #image img{
-        width: 65px;
-        height: 65px;
-        border-radius: 33px;
-        margin-left: 15px;
-    }
-    section .loginboard_form #loginboard #imgform #setting img{
-        border-radius: 10px;
-        margin-top: 20px;
-    }
-    section .loginboard_form #loginboard #right #textform{
-        min-width: 150px;
-        height: 120px;
-        text-align: center;
-        line-height: 30px;
-        font-size: 15px;
-        font-weight: bold;
-    }
-    section .loginboard_form #loginboard #right #textform #name{
-        line-height: 40px;
-        margin-top: 10px;
-    }
-    section .loginboard_form #loginboard #right #textform #location{
-        line-height: 20px;
-        margin-bottom: 15px;
-    }
-    section .loginboard_form #loginboard #right #textform #star{
-        line-height: 15px;
-    }
-    section .loginboard_form #loginboard #right #logoutbuttonform{
-        min-width: 150px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    section .loginboard_form #loginboard #right #logoutbuttonform button{
-        background-color: gray;
-        font-weight: bold;
-        color: white;
-        width: 100px;
-        height: 30px;
-        border-radius: 5%;
-        border: 0;
-        outline: 0;
-    }
+
 	.pay_table{
 	
 		text-align:center;
@@ -220,15 +159,7 @@
 </nav>
 <section>
 <div class="menuform">
-    <ul id="menu">
-        <li style="margin-left: 10px">마이페이지</li>
-        <li class="li_selec">나의 학습 현황</li>
-        <li class="li_selec">상품교환</li>
-        <li class="li_selec">공지사항</li>
-        <li class="li_selec">고객문의(Q&A)</li>
-        <li class="li_selec">회원 정보 수정/탈퇴</li>
-        <li class="li_selec">결제 관리</li>
-    </ul>
+     <%@ include file="/form/mypage_menubar.jsp"%>
 </div>
 <div class="mainform">
 	<div id="mainlist" style="height:150px">
@@ -237,7 +168,7 @@
 		</div>
 		<div id = "container">  
 						<b>${userdto.user_name  }님은 서비스 구독중입니다.</b> <!--  추후 구독여부 데이터 가져와 작성 n일경우 구독중이 아닙니다-->
-			<input type = "button" value = "구독하러 가기" onclick = "location.href='../pay_controller.do?command=main'"><!--네비의 결제페이지 이동 -->
+			<input type = "button" value = "구독하러 가기" onclick = "location.href='../pay_controller.do?command=pay_main'"><!--네비의 결제페이지 이동 -->
             <table class = "pay_table" border = "1"					l
             	style = "">
                
@@ -250,8 +181,8 @@
                     <td>2021/10/29</td>
                 </tr>
                 <tr>
-                    <th>구독 개월수:</th>
-                    <td>2달</td>
+                    <th>구독 여부:</th>
+                    <td>${userdto.sub_yn }</td>
                 </tr>
                 <tr>    
                     <th>남은 일수:</th>
