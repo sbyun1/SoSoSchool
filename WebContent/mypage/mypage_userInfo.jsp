@@ -577,7 +577,7 @@
 
 	<div id="mainlist" style="height:150px">
 		<div class="title" style="width: 750px; height:200px">
-			<img src = "../img/userinfo_2.png"
+			<img src = "../img/userinfo.png"
 			style="width: 600px; height:180px; padding: 10px">
 		</div>
 			

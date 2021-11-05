@@ -182,7 +182,7 @@
 <div class="mainform">
 	<div id="mainlist" style="height:150px">
 		<div class="title" style="width: 750px; height:200px">
-			<img src = "../img/qna1.png"
+			<img src = "../img/qna.png"
 			style="width: 700px; height:170px; padding: 10px">
 		</div>
 		<div id = "container">  
