@@ -132,22 +132,21 @@ public class login_controller extends HttpServlet {
 				idnotuser = false;
 			}
 			response.sendRedirect("login/idChk.jsp?idnotused="+idnotuser);
+			
 		}else if(command.equals("insertuser")) {
 			String user_pr = request.getParameter("parent_name");
 			String user_id = request.getParameter("parent_id");
 			String user_name = request.getParameter("student_name");
-			String user_nn = request.getParameter("nick_name");
 			String user_pw = request.getParameter("new_password");
-			int phone = Integer.parseInt(request.getParameter("chk_tel"));
+			String phone = request.getParameter("chk_tel");
 			int garde = Integer.parseInt(request.getParameter("garde"));
 			String email1 = request.getParameter("new_email");
 			//String email2 = request.getParameter("textEmail");
 			String email = email1;
 			//+'@'+ email2;
-			String addr1= request.getParameter("postcode");
-			String addr2= request.getParameter("roadAddress");
-			String addr3= request.getParameter("detailAddress");
-			String addr = addr1+" "+addr2+" "+addr3;
+			String postcode= request.getParameter("postcode");
+			String roadAddr= request.getParameter("roadAddress");
+			String detailAddr= request.getParameter("detailAddress");
 			String region = request.getParameter("region");
 
 			UserDto dto = new UserDto();
@@ -158,12 +157,9 @@ public class login_controller extends HttpServlet {
 			dto.setPhone(phone);
 			dto.setGrade(garde);
 			dto.setEmail(email);
-			dto.setAddr(addr);
-			dto.getUser_point();
-			dto.getUser_star();
-			dto.getSub_yn();
-			dto.getEnabled_yn();
-			dto.getUser_type();
+			dto.setPostcode(postcode);
+			dto.setRoadAddr(roadAddr);
+			dto.setDetailAddr(detailAddr);
 			dto.setRegion(region);
 
 			int res = dao.insertUser(dto);

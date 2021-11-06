@@ -112,8 +112,10 @@
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
-            location.href='../mypage_controller.do?command=mypage_userinfo'
+            location.href='../mypage_controller.do?command=userinfo&user_no=${userdto.user_no}'
+            
         }
+       
     }
     
     function mypage_qna(){
@@ -153,8 +155,7 @@
             location.href='../reference_controller.do?command=grade2'
         }
     }
-
-
+    
     function ref_grade3(){
     	if(${userdto.user_id eq null}){
             alert("잘못된 접근");
@@ -165,6 +166,21 @@
         }
 
     }
+
+
+ 
+
+
+    function pay_main(){
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+            location.href='../pay_controller.do?command=pay_main'
+            
+        }
+    }
+
     
     function munjae_math(){
 
@@ -233,7 +249,7 @@
                 <li><a onclick="mypage_qna();">고객 문의</a></li>
             </ul>
         </li>
-        <li><a>결제하기</a></li>
+        <li><a onclick='pay_main();'>결제하기</a></li>
     </ul>
 </div>
 </body>

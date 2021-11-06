@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <title>문의하기</title>
+    <title>회원정보수정</title>
 </head>
 <style>
 @font-face {
@@ -88,6 +88,7 @@
     /*메인 구역*/
     section .mainform{
         width: 750px;     /*메인 구역 전체 width값*/
+        min-height: 800px;
         display: flex;
         flex-wrap: wrap;
         -ms-user-select: none;      /*드래그 금지*/
@@ -96,7 +97,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
-  
+ 
     section .mainform #mainlist{
         min-width: 750px;         /*메인 구역 안 width 값*/
         display: flex;
@@ -143,6 +144,7 @@
         
  		.btn-link2 > .btn{
             background: lightgrey;
+            justify-content: center;
             cursor: pointer;
             font-size: 15px;
             color: black;
@@ -172,22 +174,31 @@
         .inner{
             display: inline-block;
             margin-right:80px;
+            height: 500px;
+            
         }
         form fieldset {
             margin: 10px 0px;
+            min-height: 900px;
+            margin-left: 30px;
         }
         legend {
             font-size: 18px;
             color: black;
             font-weight: 600;
         }
+		li{
+			list-style:none;
 		
+		}
         li > input {
             width:330px;
             height:37px;
-            font-size:14px;
+            font-size:16px;
             margin: 5px;
-            border : 1px solid #80808082;
+            border-radius: 10px;
+            border : 1px solid rgb(173,175,255);
+            text-align: center;
         }
 		
 		.inner .regisform ul {
@@ -205,20 +216,29 @@
 		    width: auto;
 		    float: inherit;
 		    margin: 15px
+		    
         }
-        form label em {
+        form input{
             font-size: 15px;
-            color: red;
+            color: blue;
             font-weight: 800;
+            border:none;
         }
+     
         form fieldset.sendform{
             text-align: center;
+            min-height: 100px;
+            justify-content: center;
         }
         .regisform{
             text-align: right;
             width:540px;
+            height: 520px;
+            min-height: 520px;
             display: flex;
-  			justify-content: center;
+  			justify-text: center;
+  			margin-left:30px;
+  			margin-top:0px;
         }
     
         #chkid-btn{
@@ -244,7 +264,12 @@
         p{
             font-size: 16px;
             font-weight: bold;
+            color: rgb(90,42,126);
+            margin: 0px;
+        	padding: 0px;
         }
+   
+  
         
        	fieldset{
   			border: 0;
@@ -255,8 +280,9 @@
             cursor: pointer;
             font-size: 20px;
             color: white;
+            justify-content: center;
             border-radius: 4px;
-            margin:0 3px;
+            margin-left: 290px;
             padding: 9px;
             transition: .3s;
             border: none;
@@ -335,8 +361,10 @@
         -webkit-user-select: none;
         user-select: none;
     }
-<<<<<<< HEAD
+
 </style>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
     window.onload = function (){
@@ -345,12 +373,7 @@
             location.href='../main_controller.do?command=start';
         }
     }
-</script>
 
-
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-    <script type="text/javascript">
     function idChk(){
     	var id = document.getElementById('parent_id').value;
     	var id2 = document.getElementsByName("parent_id")[0];
@@ -424,20 +447,19 @@
             e.value = e.value.slice(0, e.maxLength);
         }
     }
-    
-  	 $(function() {
- 		        $('#mailslc').change(function() {
-    	            if ($('#mailslc').val() == 'directly') {
-    	                $('#textEmail').attr("disabled", false);
-    	                $('#textEmail').val("");
-    	                $('#textEmail').focus();
-    	                $('#textEmail').attr('readonly',false);
-    	            } else {
-    	                $('#textEmail').val($('#mailslc').val());
-    	                $('#textEmail').attr('readonly',true);
-    	            }
-    	        })
-	});
+    $(function() {
+        $('#region').change(function() {
+            if ($('#region').val() == 'directly') {
+                $('#textregion').attr("disabled", false);
+                $('#textregion').val("");
+                $('#textregion').focus();
+                $('#textregion').attr('readonly',false);
+            } else {
+                $('#textregion').val($('#region').val());
+                $('#textregion').attr('readonly',true);
+            }
+        })
+    });
   	 
   	 //주소 다음 API
      function execDaumPostcode() {
@@ -496,6 +518,11 @@
              }
          }).open();
      }
+  	
+
+ 	function updateuser(user_no){
+ 		location.href = "../mypage_controller.do?command=userupdateform&user_no="+user_no;
+ 	}
     </script>
 
 
@@ -517,97 +544,67 @@
 
 	<div id="mainlist" style="height:150px">
 		<div class="title" style="width: 750px; height:150px">
-			 회원정보 수정	
+			 내 정보	
 		</div>
-			<form method="post" action="../login_controller.do?command=insertuser">
+			
         <div class="inner">
         <fieldset class="regisform">
-            <legend> *표시 필수 입력 사항</legend>
+       			
             <ul>
-                <li><label class="reg" for="parent_name">학부모 이름<em>*</em></label>
-                    <input type="text" id="parent_name" name="parent_name" maxlength="10" autocomplete="on" required></li>
+                <li><label class="reg" for="parent_name">학부모 이름</label>
+                    <input type="text" value = "${userdto.user_pr }" readonly = "true" onclick = "contact();"></li>
 
-                <li id="li_parent_id"><label class="reg" for="parent_id">학부모 아이디<em>*</em></label>
-                        <input type="text" id="parent_id" name="parent_id" title="n" maxlength="10"  placeholder="6자리 이상의 영문 소문자,숫자 조합" required>
-                        <button type="button" id="chkid-btn" onclick="idChk();">중복확인</button></li>
+                <li id="li_parent_id"><label class="reg" for="parent_id">학부모 아이디</label>
+                        <input type="text" value= "${userdto.user_id}" readonly = "true" onclick = "contact();"></li>
+                  
 
-                <li><label class="reg" for="student_name">자녀 이름<em>*</em></label>
-                    <input type="text" id="student_name" name="student_name" maxlength="10" onclick="idChkConfirm();" required ></li>
-                    
-                <li><label class="reg" for="nick_name">닉네임<em>*</em></label>
-                    <input type="text" id="nick_name" name="nick_name" maxlength="10" onclick="idChkConfirm();"  required></li>
+                <li><label class="reg" for="student_name">자녀 이름</label>
+                    <input type="text" id="student_name" name="student_name" 
+                    value = "${userdto.user_name }" readonly="true" onclick = "contact();"></li>
                 
-                <li><label class="reg" for="new_password">비밀번호<em>*</em></label>
-                    <input type="password" id="new_password" name="new_password" maxlength="15" placeholder="8자리 이상의 영문 소문자, 숫자 조합" onchange="pwChk()" required></li>
-                    
-                <li><label class="reg" for="chk_password">비밀번호 확인<em>*</em></label>
-                    <input type="password" id="chk_password" name="chk_password" maxlength="15" placeholder="비밀번호 재입력" onchange="pwChk()" required>
-                    	&nbsp;<span id="check">비밀번호를 입력해주세요.</span></li>
+                <li><label class="reg" for="chk_tel">휴대폰 번호</label>
+                    <input type="tel" id="chk_tel" name="chk_tel"
+                     value = "${userdto.phone }" placeholder="-없이 숫자만 입력해주세요." onchange="telChk()"></li>
                 
-                <li><label class="reg" for="chk_tel">휴대폰 번호<em>*</em></label>
-                    <input type="tel" id="chk_tel" name="chk_tel" maxlength="11" placeholder="-없이 숫자만 입력해주세요." onclick="idChkConfirm();" onchange="telChk()" required></li>
-                
-                <li><label class="reg" for="garde">학년<em>*</em></label>
-                    <input type="number" id="garde" name="garde" min="1" max="3" placeholder="숫자만 입력해주세요." maxlength="1" onclick="idChkConfirm();" oninput="numberMaxLength(this);" required></li>
-                
-
+                <li><label class="reg" for="grade">학년</label>
+                    <input type="number" id="grade" name="grade" value = "${userdto.grade}"></li>
+               
                	<li>
                 <label class="reg" for="new_email">이메일</label>
                 	
-                    <input type="email" id="new_email" name="new_email" maxlength="50" onclick="idChkConfirm();"
-                    	placeholder="선택 입력">
-                    
-                    
-              <!--       <input name="textEmail" id="textEmail" placeholder="이메일을 선택하세요." readonly>  
-                    <select id="mailslc">
-                        <option value="self" disabled selected>선택</option>
-                        <option value="naver.com">naver.com</option>
-                        <option value="gmail.com">gmail.com</option>
-                        <option value="daum.com">daum.com</option>
-                        <option value="yahoo.com">yahoo.com</option>
-                        <option value="directly" id="textEmail">직접 입력</option>
-                    </select> -->
+                    <input type="email" id="new_email" name="new_email" maxlength="50"
+                    	placeholder="user123@soso.com" value = "${userdto.email }">
                     
                     
                 </li>
                 <li><label class="reg" for="region">지역</label>
-                    <input type="text" id="textregion" name="textregion" onclick="idChkConfirm();" placeholder="선택 하세요." readonly="readonly">
-                    <select id="region" name="region">
-                        <option value="선택하세요.">선택</option>
-                        <option value="SEOUL">서울</option>
-                        <option value="GYEONGGI">경기</option>
-                        <option value="INCHEON">인천</option>
-                    </select>
+                    <input type="text" id="textregion" name="textregion" placeholder="선택 하세요."
+                    value = "${userdto.region }" readonly="readonly">
                 </li>
-<!--                 
-                <li><label class="reg" for="new_address">주소</label>
-                    <input type="text" id="new_address" name="new_address" maxlength="30" onclick="idChkConfirm();" ><br>
-                    <label class="reg" for="new_address2">상세주소</label>
-                    <input type="text" id="new_address2" name="new_address2" maxlength="30" onclick="idChkConfirm();" >
-                    <p>경품 배송을 위한 정확한 주소를 기입해주세요.</p>
-                </li> -->
+
                 
 	              <li><label class="reg" for="new_address">주소</label>
-	              	<input type="text" name="postcode" id="postcode" placeholder="우편번호">
-	              	<input type="button" id="findAdd" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소" size="60" ><br>
+	              	<input type="text" name="postcode" id="postcode" placeholder="우편번호" value = "${userdto.postcode }">
+	              
+					<input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소" value = "${userdto.roadAddr }" size="60" ><br>
 					<input type="hidden" id="jibunAddress" placeholder="지번주소"  size="60">
 					<span id="guide" style="color:#999;display:none"></span>
 	              <label class="reg" for="new_address2">상세주소</label>
-	              	<input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소"  size="60"><br>
+	              	<input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" value = "${userdto.detailAddr }" size="60"><br>
 					<input type="hidden" id="extraAddress" placeholder="참고항목"  size="60">
 					<input type="hidden" id="engAddress" placeholder="영문주소"  size="60" ><br>
-	              <p>경품 배송을 위한 정확한 주소를 기입해주세요.</p>
+	              <p>등록된 주소로 경품 배송이 되오니 반드시 확인해주세요.</p>
                 </li>
             </ul>
         </fieldset>
         <fieldset class="sendform">
-            <input type="submit" class="btn" value="가입하기">
-            <input type="reset" class="btn" value="취소">
-            <input type="button" class="btn2" value="로그인" onclick="location.href='../login_controller.do?command=loginform'">
+            
+            <input type = "button" class="btn" value = "수정" onclick = "updateuser(${userdto.user_no});"> 
+            <input type="button" class="btn2" value="회원탈퇴"><br>
+            
         </fieldset>
    		</div>
-  	  </form>
+  	 
 
 				
 	</div>

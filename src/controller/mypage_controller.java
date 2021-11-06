@@ -1,11 +1,8 @@
 package controller;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
-
 import java.time.LocalDate;
-
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,12 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
 import com.soso.login.Dao.UserDao;
 import com.soso.login.Dto.UserDto;
 
 import mypageDao.NoticeDao;
 import mypageDao.QnaDao;
+import mypageDao.UserInfoDao;
 import mypageDao.changeStarDao;
 import mypageDto.NoticeDto;
 import mypageDto.QnaDto;
@@ -50,10 +49,8 @@ public class mypage_controller extends HttpServlet {
 
 		changeStarDao changestardao = new changeStarDao();
 		UserDao userdao = new UserDao();
-
 		NoticeDao Ndao = new NoticeDao();
 		QnaDao Qdao = new QnaDao();
-
 		
 		/*******************마이페이지 공지사항 페이지*************************/
 		
@@ -136,19 +133,67 @@ public class mypage_controller extends HttpServlet {
 		}
 		
 		/**************마이페이지 회원정보 수정 페이지**************************/
-		else if(command.equals("mypage_userinfo")) {
-			response.sendRedirect("mypage/mypage_userInfo.jsp");
-		}
-		else if(command.equals("mypage_userUpdate")){
+		else if(command.equals("userinfo")) {
 			int user_no = Integer.parseInt(request.getParameter("user_no"));
-	
+			UserDto userdto = userdao.selectuser(user_no);
+			
+			request.setAttribute("userdto", userdto);
+			//RequestDispatcher dp = request.getRequestDispatcher("mypage/userinfo_test.jsp");
+			RequestDispatcher dp = request.getRequestDispatcher("mypage/mypage_userInfo.jsp");
+			dp.forward(request, response);
+			
 		}
 		
-				
-				
-				
-				
-				
+		else if(command.equals("userupdateform")) {
+			int user_no = Integer.parseInt(request.getParameter("user_no"));
+			UserDto userdto = userdao.selectuser(user_no);
+			
+			request.setAttribute("userdto", userdto);
+			dispatch("mypage/mypage_userUpdate.jsp", request, response);
+		}
+		
+		else if(command.equals("mypage_userUpdate")){
+			int user_no = Integer.parseInt(request.getParameter("user_no"));
+			String user_pr = request.getParameter("user_pr");
+			String user_id = request.getParameter("parent_id");
+			String user_name = request.getParameter("student_name");
+			String phone = request.getParameter("chk_tel");
+			int grade = Integer.parseInt(request.getParameter("grade"));
+			String email = request.getParameter("new_email");
+			String postcode= request.getParameter("postcode");
+			String roadAddr= request.getParameter("roadAddress");
+			String detailAddr= request.getParameter("detailAddress");
+			String region = request.getParameter("region");
+			
+			UserDto userInfo = userdao.selectuser(user_no);
+			
+			
+			userInfo.setUser_pr(user_pr);
+			userInfo.setUser_id(user_id);
+			userInfo.setUser_name(user_name);
+			userInfo.setPhone(phone);
+			userInfo.setGrade(grade);
+			userInfo.setEmail(email);
+			userInfo.setPostcode(postcode);
+			userInfo.setRoadAddr(roadAddr);
+			userInfo.setDetailAddr(detailAddr);
+			userInfo.setRegion(region);
+			
+			int res = UserInfoDao.updateUser(userInfo); 
+			
+			PrintWriter writer = response.getWriter();
+			
+			if(res > 0) {
+	            writer.println("<script type='text/javascript'>alert('정보가 변경되었습니다.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
+	            writer.close();
+			}
+			else {
+			
+				 writer.println("<script type='text/javascript'>alert('수정에 실패하였습니다\n 고객문의를 이용주세요.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
+		         writer.close();
+			}
+		} 
+		
 				
 		/*******************마이페이지 고객문의*****************************/
 		else if(command.equals("mypage_qna")) {
@@ -168,7 +213,6 @@ public class mypage_controller extends HttpServlet {
 
 			dp.forward(request, response);
 		}
-
 
 		else if(command.equals("qna_writeform")) {
 			response.sendRedirect("mypage/mypage_qna_write.jsp");
@@ -260,6 +304,7 @@ public class mypage_controller extends HttpServlet {
 			}
 			
 		}
+		/* 결제관리 */
 		else if(command.equals("mypage_pay_manage")) {
 		
 			response.sendRedirect("mypage/mypage_pay_manage.jsp");

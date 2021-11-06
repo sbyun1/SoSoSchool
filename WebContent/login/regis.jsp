@@ -466,9 +466,6 @@
 
                 <li><label class="reg" for="student_name">자녀 이름<em>*</em></label>
                     <input type="text" id="student_name" name="student_name" maxlength="10" onclick="idChkConfirm();" required ></li>
-                    
-                <li><label class="reg" for="nick_name">닉네임<em>*</em></label>
-                    <input type="text" id="nick_name" name="nick_name" maxlength="10" onclick="idChkConfirm();"  required></li>
                 
                 <li><label class="reg" for="new_password">비밀번호<em>*</em></label>
                     <input type="password" id="new_password" name="new_password" maxlength="15" placeholder="8자리 이상의 영문 소문자, 숫자 조합" onchange="pwChk()" required></li>

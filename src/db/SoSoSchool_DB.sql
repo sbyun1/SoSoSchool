@@ -155,10 +155,11 @@ CREATE TABLE SOSO_USER(
       USER_NAME VARCHAR2(30)NOT NULL,
       USER_ID VARCHAR(20) UNIQUE NOT NULL,
       USER_PW VARCHAR(100) NOT NULL,
-      USER_NN VARCHAR(50) UNIQUE NOT NULL,
       GRADE NUMBER NOT NULL,
-      ADDR VARCHAR2(4000) NOT NULL,
-      PHONE NUMBER NOT NULL,
+      POSTCODE VARCHAR2(100) NOT NULL,
+      ROADADDR VARCHAR2(4000) NOT NULL,
+      DETAILADDR VARCHAR2(4000) NOT NULL,
+      PHONE VARCHAR2(200) NOT NULL,
       EMAIL VARCHAR2(1000) NOT NULL,
       USER_POINT NUMBER DEFAULT 100 NOT NULL ,
       USER_STAR NUMBER DEFAULT 100 NOT NULL,
@@ -177,23 +178,23 @@ CREATE SEQUENCE USER_NO_SQ NOCACHE;
 
 INSERT INTO SOSO_USER VALUES
     (
-        USER_NO_SQ.nextval, '김미영', '김주이', 'seo5921','a1234','qlok','1'
-        ,'경기도','01092035921','seo59212naver.com',DEFAULT, DEFAULT, DEFAULT, DEFAULT,
-        DEFAULT,'SEOUL'
+        USER_NO_SQ.nextval, '김미영', '김주이', 'seo5921','a1234',1
+        ,'123456','서울시 강남구 테헤란로 17로 24','가나다빌딩 100-112','01092035921','seo59212naver.com',
+        DEFAULT, DEFAULT, DEFAULT, DEFAULT,DEFAULT,'SEOUL'
     );
 
 INSERT INTO SOSO_USER VALUES
     (
-        USER_NO_SQ.nextval, '김니니', '김주삼', 'seo1234','a1234','IKLA','2'
-        ,'경기도','01092035921','seo5921@naver.com',DEFAULT, DEFAULT, DEFAULT, DEFAULT,
-        DEFAULT,'GYEONGGI'
+        USER_NO_SQ.nextval, '김니니', '김주삼', 'seo1234','a1234',2
+        ,'331213','경기도 수원시 장안구 222로 11','고고아파트 130-1101','01092035921','seo5921@naver.com',
+        DEFAULT, DEFAULT, DEFAULT, DEFAULT,DEFAULT,'GYEONGGI'
     );
 
 INSERT INTO SOSO_USER VALUES
     (
-        USER_NO_SQ.nextval, '김미재', '김미이', 'seo4321','a1234','qk','3'
-        ,'경기도','01092035921','seo5931@naver.com',DEFAULT, DEFAULT, DEFAULT, DEFAULT,
-        DEFAULT,'INCHEON'
+        USER_NO_SQ.nextval, '김미재', '김미이', 'seo4321','a1234',3
+        ,'987134','인천광역시 남동구 정각로 9 ','미미빌라 102-121','01092035921','seo5931@naver.com',
+        DEFAULT, DEFAULT, DEFAULT, DEFAULT,DEFAULT,'INCHEON'
     );
 
     INSERT INTO SOSO_USER VALUES

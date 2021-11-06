@@ -26,7 +26,7 @@ public class pay_controller extends HttpServlet {
         String command = request.getParameter("command");
 		System.out.println("[command: " + command + "]");
 		
-		if(command.equals("main")) {
+		if(command.equals("pay_main")) {
 			response.sendRedirect("pay/pay_main.jsp");
 		}
         

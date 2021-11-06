@@ -6,10 +6,11 @@ public class UserDto {
 	private String user_name;
 	private String user_id;
 	private String user_pw;
-	private String user_nn;
 	private int grade;
-	private String addr;
-	private int phone;
+	private String postcode;
+	private String roadAddr;
+	private String detailAddr;
+	private String phone;
 	private String email;
 	private int user_point	;
 	private String sub_yn;
@@ -20,19 +21,29 @@ public class UserDto {
 
 	public UserDto() {
 	}
+	
+	//닉네임 제거 및 주소 추가한 생성자
 
-	public UserDto(int user_no, String user_pr, String user_name, String user_id, String user_pw, String user_nn,
-			int grade, String addr, int phone, String email, int user_point, String sub_yn, String enabled_yn,
-			String user_type, String region) {
+	
+
+	public int getUser_no() {
+		return user_no;
+	}
+
+
+	public UserDto(int user_no, String user_pr, String user_name, String user_id, String user_pw, int grade,
+			String postcode, String roadAddr, String detailAddr, String phone, String email, int user_point,
+			String sub_yn, String enabled_yn, String user_type, String region, int user_star) {
 		super();
 		this.user_no = user_no;
 		this.user_pr = user_pr;
 		this.user_name = user_name;
 		this.user_id = user_id;
 		this.user_pw = user_pw;
-		this.user_nn = user_nn;
 		this.grade = grade;
-		this.addr = addr;
+		this.postcode = postcode;
+		this.roadAddr = roadAddr;
+		this.detailAddr = detailAddr;
 		this.phone = phone;
 		this.email = email;
 		this.user_point = user_point;
@@ -40,10 +51,7 @@ public class UserDto {
 		this.enabled_yn = enabled_yn;
 		this.user_type = user_type;
 		this.region = region;
-	}
-
-	public int getUser_no() {
-		return user_no;
+		this.user_star = user_star;
 	}
 
 	public void setUser_no(int user_no) {
@@ -82,14 +90,6 @@ public class UserDto {
 		this.user_pw = user_pw;
 	}
 
-	public String getUser_nn() {
-		return user_nn;
-	}
-
-	public void setUser_nn(String user_nn) {
-		this.user_nn = user_nn;
-	}
-
 	public int getGrade() {
 		return grade;
 	}
@@ -98,19 +98,35 @@ public class UserDto {
 		this.grade = grade;
 	}
 
-	public String getAddr() {
-		return addr;
+	public String getPostcode() {
+		return postcode;
 	}
 
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
 
-	public int getPhone() {
+	public String getRoadAddr() {
+		return roadAddr;
+	}
+
+	public void setRoadAddr(String roadAddr) {
+		this.roadAddr = roadAddr;
+	}
+
+	public String getDetailAddr() {
+		return detailAddr;
+	}
+
+	public void setDetailAddr(String detailAddr) {
+		this.detailAddr = detailAddr;
+	}
+
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

@@ -37,17 +37,18 @@ public class UserDao extends JDBCTemplate{
 				dto.setUser_name(rs.getString(3));
 				dto.setUser_id(rs.getString(4));
 				dto.setUser_pw(rs.getString(5));
-				dto.setUser_nn(rs.getString(6));
-				dto.setGrade(rs.getInt(7));
-				dto.setAddr(rs.getString(8));
-				dto.setPhone(rs.getInt(9));
-				dto.setEmail(rs.getString(10));
-				dto.setUser_point(rs.getInt(11));
-				dto.setUser_star(rs.getInt(12));
-				dto.setSub_yn(rs.getString(13));
-				dto.setEnabled_yn(rs.getString(14));
-				dto.setUser_type(rs.getString(15));
-				dto.setRegion(rs.getString(16));
+				dto.setGrade(rs.getInt(6));
+				dto.setPostcode(rs.getString(7));
+				dto.setRoadAddr(rs.getString(8));
+				dto.setDetailAddr(rs.getString(9));
+				dto.setPhone(rs.getString(10));
+				dto.setEmail(rs.getString(11));
+				dto.setUser_point(rs.getInt(12));
+				dto.setUser_star(rs.getInt(13));
+				dto.setSub_yn(rs.getString(14));
+				dto.setEnabled_yn(rs.getString(15));
+				dto.setUser_type(rs.getString(16));
+				dto.setRegion(rs.getString(17));
 			}
 			
 		} catch (SQLException e) {
@@ -98,7 +99,8 @@ public class UserDao extends JDBCTemplate{
 		PreparedStatement pstm = null;
 		int res = 0;
 		
-		String sql = "INSERT INTO SOSO_USER VALUES(USER_NO_SQ.NEXTVAL,?,?,?,?,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,?)";
+		String sql = "INSERT INTO SOSO_USER VALUES(USER_NO_SQ.NEXTVAL,?,?,?,?,?,"
+				+ "?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,?)";
 		
 		try {
 			pstm = con.prepareStatement(sql);
@@ -106,12 +108,13 @@ public class UserDao extends JDBCTemplate{
 			pstm.setString(2, dto.getUser_name());
 			pstm.setString(3, dto.getUser_id());
 			pstm.setString(4, dto.getUser_pw());
-			pstm.setString(5, dto.getUser_nn());
-			pstm.setInt(6, dto.getGrade());
-			pstm.setString(7, dto.getAddr());
-			pstm.setInt(8, dto.getPhone());
-			pstm.setString(9, dto.getEmail());
-			pstm.setString(10, dto.getRegion());
+			pstm.setInt(5, dto.getGrade());
+			pstm.setString(6, dto.getPostcode());
+			pstm.setString(7, dto.getRoadAddr());
+			pstm.setString(8, dto.getDetailAddr());
+			pstm.setString(9, dto.getPhone());
+			pstm.setString(10, dto.getEmail());
+			pstm.setString(11, dto.getRegion());
 
 			System.out.println("03.query준비"+ sql);
 			
@@ -222,22 +225,24 @@ public class UserDao extends JDBCTemplate{
 			System.out.println("04.query 실행");
 			while(rs.next()) {
 				UserDto dto = new UserDto();
+				
 				dto.setUser_no(rs.getInt(1));
 				dto.setUser_pr(rs.getString(2));
 				dto.setUser_name(rs.getString(3));
 				dto.setUser_id(rs.getString(4));
 				dto.setUser_pw(rs.getString(5));
-				dto.setUser_nn(rs.getString(6));
-				dto.setGrade(rs.getInt(7));
-				dto.setAddr(rs.getString(8));
-				dto.setPhone(rs.getInt(9));
-				dto.setEmail(rs.getString(10));
-				dto.setUser_point(rs.getInt(11));
-				dto.setUser_star(rs.getInt(12));
-				dto.setSub_yn(rs.getString(13));
-				dto.setEnabled_yn(rs.getString(14));
-				dto.setUser_type(rs.getString(15));
-				dto.setRegion(rs.getString(16));
+				dto.setGrade(rs.getInt(6));
+				dto.setPostcode(rs.getString(7));
+				dto.setRoadAddr(rs.getString(8));
+				dto.setDetailAddr(rs.getString(9));
+				dto.setPhone(rs.getString(10));
+				dto.setEmail(rs.getString(11));
+				dto.setUser_point(rs.getInt(12));
+				dto.setUser_star(rs.getInt(13));
+				dto.setSub_yn(rs.getString(14));
+				dto.setEnabled_yn(rs.getString(15));
+				dto.setUser_type(rs.getString(16));
+				dto.setRegion(rs.getString(17));
 				
 				res.add(dto);
 			}
@@ -321,17 +326,18 @@ public class UserDao extends JDBCTemplate{
 				dto.setUser_name(rs.getString(3));
 				dto.setUser_id(rs.getString(4));
 				dto.setUser_pw(rs.getString(5));
-				dto.setUser_nn(rs.getString(6));
-				dto.setGrade(rs.getInt(7));
-				dto.setAddr(rs.getString(8));
-				dto.setPhone(rs.getInt(9));
-				dto.setEmail(rs.getString(10));
-				dto.setUser_point(rs.getInt(11));
-				dto.setUser_star(rs.getInt(12));
-				dto.setSub_yn(rs.getString(13));
-				dto.setEnabled_yn(rs.getString(14));
-				dto.setUser_type(rs.getString(15));
-				dto.setRegion(rs.getString(16));
+				dto.setGrade(rs.getInt(6));
+				dto.setPostcode(rs.getString(7));
+				dto.setRoadAddr(rs.getString(8));
+				dto.setDetailAddr(rs.getString(9));
+				dto.setPhone(rs.getString(10));
+				dto.setEmail(rs.getString(11));
+				dto.setUser_point(rs.getInt(12));
+				dto.setUser_star(rs.getInt(13));
+				dto.setSub_yn(rs.getString(14));
+				dto.setEnabled_yn(rs.getString(15));
+				dto.setUser_type(rs.getString(16));
+				dto.setRegion(rs.getString(17));
 
 				res.add(dto);
 			}
@@ -413,17 +419,18 @@ public class UserDao extends JDBCTemplate{
 				dto.setUser_name(rs.getString(3));
 				dto.setUser_id(rs.getString(4));
 				dto.setUser_pw(rs.getString(5));
-				dto.setUser_nn(rs.getString(6));
-				dto.setGrade(rs.getInt(7));
-				dto.setAddr(rs.getString(8));
-				dto.setPhone(rs.getInt(9));
-				dto.setEmail(rs.getString(10));
-				dto.setUser_point(rs.getInt(11));
-				dto.setUser_star(rs.getInt(12));
-				dto.setSub_yn(rs.getString(13));
-				dto.setEnabled_yn(rs.getString(14));
-				dto.setUser_type(rs.getString(15));
-				dto.setRegion(rs.getString(16));
+				dto.setGrade(rs.getInt(6));
+				dto.setPostcode(rs.getString(7));
+				dto.setRoadAddr(rs.getString(8));
+				dto.setDetailAddr(rs.getString(9));
+				dto.setPhone(rs.getString(10));
+				dto.setEmail(rs.getString(11));
+				dto.setUser_point(rs.getInt(12));
+				dto.setUser_star(rs.getInt(13));
+				dto.setSub_yn(rs.getString(14));
+				dto.setEnabled_yn(rs.getString(15));
+				dto.setUser_type(rs.getString(16));
+				dto.setRegion(rs.getString(17));
 			}
 		} catch (SQLException e) {
 			System.out.println("3/4 단계 오류");

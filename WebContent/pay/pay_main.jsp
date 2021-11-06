@@ -133,6 +133,12 @@
 
 <script type = "text/javascript">
 
+	window.onload = function (){
+    	if(${userdto.user_id eq null}){
+        	alert("세션 만료");
+        	location.href='../main_controller.do?command=start';
+    }
+}
 	function kakaopay(){
 		console.log()
     	// getter
@@ -149,8 +155,8 @@
             buyer_email: "${userdto.email}",
             buyer_name: "${userdto.user_name}",
             buyer_tel: "${userdto.phone}",
-            buyer_addr: "${userdto.addr}",
-            buyer_postcode: '123-456'
+            buyer_addr: "${userdto.roadAddr}" + "${userdto.detailAddr}",
+            buyer_postcode: "${userdto.postcode}"
         }, function (rsp) {
             if (rsp.success) {
             	console.log("successful response returned");
@@ -179,7 +185,7 @@
                 msg += '에러내용 : ' + rsp.error_msg;
             
             	alert(msg);
-            	location.href="../pay_controller.do?command=main"; //실패 : alert창 확인 후 이동할 url 설정
+            	location.href="../pay_controller.do?command=pay_main"; //실패 : alert창 확인 후 이동할 url 설정
             
             }
         });
