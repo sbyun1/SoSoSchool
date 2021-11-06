@@ -31,6 +31,21 @@
         font-weight: bold;
         padding: 5px 25px;
         text-decoration: none;
+        cursor:pointer;
+      
+        
+    }
+    
+      .nav_head:hover{
+        color: white;
+        font-weight: bold;
+        padding: 5px 25px;
+        text-decoration: none;
+        cursor:pointer;
+        background-color:#074163;
+        border-radius: 10px;
+       
+      
     }
     .navi li ul{
         list-style: none;
@@ -62,8 +77,10 @@
     .navi li{
         transition: all 0.2s;
     }
-    .navi li a{
+    .navi li a:hover{
         transition: all 0.2s;
+        background-color:#074163;
+        border-radius: 10px;
     }
     .navi li ul li{
         transition: height 0.5s;
@@ -213,20 +230,30 @@
         }
     }
 
+    function notice(){
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+            location.href='../mypage_controller.do?command=mypage_notice'
+        }
+    }
+
 </script>
 <body>
 <div>
     <ul class="navi">
         <li>
-            <a>학습하기</a>
+            <a class = "nav_head">학습하기</a>
             <ul>
                 <li><a onclick="munjae_kor();">국어</a></li>
                 <li><a onclick="munjae_eng();">영어</a></li>
                 <li><a onclick="munjae_math();">수학</a></li>
             </ul>
         </li>
+        
         <li>
-            <a>자료실</a>
+            <a class = "nav_head">자료실</a>
             <ul>
                 <li><a onclick="ref_grade1();">1학년</a></li>
                 <li><a onclick="ref_grade2();">2학년</a></li>
@@ -234,22 +261,26 @@
             </ul>
         </li>
         <li>
-            <a onclick="group_main();">소모임</a>
+            <a class = "nav_head"onclick="group_main();">소모임</a>
             <ul>
                 <li><a onclick="group_board();">지역별모임</a></li>
                 <li><a onclick="group_chat()">채팅하기</a></li>
             </ul>
         </li>
         <li>
-            <a>마이페이지</a>
+            <a class = "nav_head">마이페이지</a>
             <ul>
                 <li><a onclick="mypage_checkscore();">나의 학습 현황</a></li>
                 <li><a onclick="mypage_changestar();">상품 교환</a></li>
                 <li><a onclick="mypage_userinfo();">회원 정보 수정</a></li>
                 <li><a onclick="mypage_qna();">고객 문의</a></li>
+                <li><a onclick='notice();'>공지사항</a></li>
             </ul>
         </li>
-        <li><a onclick='pay_main();'>결제하기</a></li>
+        <li><a class = "nav_head" onclick='pay_main();'>결제하기</a></li>
+       
+        
+        
     </ul>
 </div>
 </body>

@@ -88,7 +88,7 @@
     /*메인 구역*/
     section .mainform{
         width: 750px;     /*메인 구역 전체 width값*/
-        min-height: 800px;
+        min-height: 900px;
         display: flex;
         flex-wrap: wrap;
         -ms-user-select: none;      /*드래그 금지*/
@@ -112,6 +112,11 @@
         align-items: center;
         justify-content: center;
     }
+     section .mainform #mainlist .title h4{
+     
+     	border-radius: 40px 0px 40px 0px;
+     	padding: 10px;
+     }
 
     /*로그인 구역*/
     section .loginboard_form{
@@ -233,8 +238,8 @@
         .regisform{
             text-align: right;
             width:540px;
-            height: 520px;
-            min-height: 520px;
+            height: 600px;
+            min-height: 600px;
             display: flex;
   			justify-text: center;
   			margin-left:30px;
@@ -309,7 +314,11 @@
   		
   		input::-webkit-input-placeholder {
 			padding:7px;
+			
 		} 
+		input{
+			font-family: 'GowunDodum-Regular';
+		}
 		
 		#findAdd{
 			display: inline;
@@ -567,11 +576,13 @@
 <div class="mainform">
 
 	<div id="mainlist" style="height:150px">
-		<div class="title" style="width: 750px; height:150px">
-			 내 정보	
+		<div class="title" style="width: 750px; height:200px">
+			<img src = "../img/userinfo_2.png"
+			style="width: 600px; height:180px; padding: 10px">
 		</div>
 			
         <div class="inner">
+        
         <fieldset class="regisform">
        			
             <ul>
@@ -598,9 +609,15 @@
                 	
                     <input type="email" id="new_email" name="new_email" maxlength="50"
                     	placeholder="user123@soso.com" value = "${userdto.email }">
-                    
-                    
                 </li>
+                
+                <li>
+                <label class="reg" for="new_email">구독여부 (Y/N)</label>
+                	
+                    <input type="text" id="subs_yn" name="subs_yn"
+                    value = "${userdto.sub_yn }">
+                </li>
+                
                 <li><label class="reg" for="region">지역</label>
                     <input type="text" id="textregion" name="textregion" placeholder="선택 하세요."
                     value = "${userdto.region }" readonly="readonly">

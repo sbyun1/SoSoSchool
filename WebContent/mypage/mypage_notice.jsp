@@ -129,10 +129,24 @@
 	
 		text-align:center;
 		width: 600px;
-		
-		
+		border-collapse: collapse;
+		border-top: 1px solid #444444;
+		border:none;
 	}
+    td{
+    border:none;
+    border-bottom: 1px solid #FAF0F4;
+ 
+    }
+    th{
+    background-color:rgb(173,175,255);
+    border:none;
+    padding: 10px;
+    }
     
+    tr:nth-child(2n){
+    background-color:#FBF4F5;
+    }
     /*푸터*/
     footer{
         background-color:rgb(233,233,236);
@@ -170,17 +184,18 @@
 </div>
 <div class="mainform">
 	<div id="mainlist" style="height:150px">
-		<div class="title" style="width: 750px; height:150px">
-			공지사항	
+		<div class="title" style="width: 750px; height:200px">
+			<img src = "../img/noti.png"
+			style="width: 600px; height:150px; padding: 30px">	
 		</div>
 		<div id = "container">  
 			<table class = "noti_table" border = "1">
 				<col width = "100px"><col width = "350px"><col width = "100px"><col width = "100px">
 				<tr>
-				    <th>No.</th>
+				    <th style = "border-top-left-radius:20px">No.</th>
 				    <th>제목</th>
 				    <th>작성자</th>
-				    <th>작성일</th>
+				    <th style = "border-top-right-radius:20px">작성일</th>
 				</tr>
 				<c:choose>
 					<c:when test = "${empty list }">
@@ -199,11 +214,17 @@
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
+				
+				<c:choose>
+					<c:when test = "${userdto.user_type == 'admin' }">
 				<tr>
-					<td colspan = "4">
+					<td colspan = "4"
+					style = "border:none; background-color:#ffffff">
 						<input type = "button" value = "공지사항 작성" onclick = "location.href='mypage_controller.do?command=notice_writeform'">
 					</td>
 				</tr>
+				</c:when>
+				</c:choose>
 			</table>
 		</div>			
 	</div>

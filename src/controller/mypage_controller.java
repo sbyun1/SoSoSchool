@@ -340,7 +340,7 @@ public class mypage_controller extends HttpServlet {
 		}
 		
 		
-		//결제후 y로 바꾸고 결제관리로 이동하는 코드
+		//결제후 y로 바꾸고 내정보로 이동하는 코드
 		else if(command.equals("userSub")) {
 			int user_no = Integer.parseInt(request.getParameter("user_no"));
 			UserDto userInfo = userdao.selectuser(user_no);
@@ -349,14 +349,14 @@ public class mypage_controller extends HttpServlet {
 			PrintWriter writer = response.getWriter();
 			
 			if(res > 0) {
-				writer.println("<script type='text/javascript'>alert('성공하였습니다.'); location.href='../mypage_controller.do?command=payinfo&user_no="+user_no+"';</script>");
+				writer.println("<script type='text/javascript'>alert('성공하였습니다.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
 		        writer.close();
 				response.sendRedirect("mypage/mypage_pay_manage.jsp");
 			
 			}
 			else {
 			
-				 writer.println("<script type='text/javascript'>alert('탈퇴에 실패하였습니다\n 고객문의를 이용주세요.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
+				 writer.println("<script type='text/javascript'>alert('실패하였습니다\n 고객문의를 이용주세요.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
 		         writer.close();
 			}
 		

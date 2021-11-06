@@ -182,12 +182,14 @@
         }
         legend {
             font-size: 16px;
-            color: black;
+            color: #555B72;
+            background-color:#F4EDB5;
             font-weight: 500;
             text-align: center;
             padding: 15px;
             border-radius:10px;
-            border : 1px solid rgb(173,175,255);
+            border : 1px dashed rgb(173,175,255);
+         
            	margin-left:10px;
             justify-content:center;
         }
@@ -208,6 +210,7 @@
 		.inner .regisform ul {
 		    margin: 0px;
    			padding: 0px 20px;
+   		
 		}
 		
         form ul li{
@@ -547,8 +550,9 @@
 <div class="mainform">
 
 	<div id="mainlist" style="height:150px">
-		<div class="title" style="width: 750px; height:150px">
-			 회원정보 수정	
+		<div class="title" style="width: 750px; height:200px">
+			<img src = "../img/userupdate.png"
+			style="width: 600px; height:180px; padding: 10px">
 		</div>
 			<form method="post" action="../mypage_controller.do?command=mypage_userUpdate">
 			<input type = "hidden" name = "user_no" value = "${userdto.user_no }">
@@ -604,11 +608,24 @@
                     <input type="text" id="textregion" name="textregion" placeholder="선택 하세요."
                     value = "${userdto.region }" readonly="readonly">
                     <select id="region" name="region">
-                        <option value="선택하세요.">선택</option>
-                        <option value="SEOUL">서울</option>
-                        <option value="GYEONGGI">경기</option>
-                        <option value="INCHEON">인천</option>
-                    </select>
+                   		<c:choose>
+                    		<c:when test = "${userdto.region == 'SEOUL' }">
+								<option value="SEOUL" selected>서울</option>
+								<option value="GYEONGGI">경기</option>
+								<option value="INCHEON">인천</option>
+							</c:when>
+                    		<c:when test = "${userdto.region == 'GYEONGGI' }">
+								<option value="SEOUL">서울</option>
+								<option value="GYEONGGI" selected>경기</option>
+								<option value="INCHEON">인천</option>
+							</c:when>
+                    		<c:when test = "${userdto.region == 'INCHEON' }">
+								<option value="SEOUL">서울</option>
+								<option value="GYEONGGI">경기</option>
+								<option value="INCHEON" selected>인천</option>
+							</c:when>
+                    	</c:choose>	
+                      </select>	
                 </li>
 
                 
@@ -617,8 +634,8 @@
 	              	<input type="button" id="findAdd" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 					<input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소" value = "${userdto.roadAddr }" size="60" ><br>
 					<input type="hidden" id="jibunAddress" placeholder="지번주소"  size="60">
-					<span id="guide" style="color:#999;display:none"></span>
-	              <label class="reg" for="new_address2">상세주소</label>
+						<span id="guide" style="color:#999;display:none"></span>
+	             	<label class="reg" for="new_address2">상세주소</label>
 	              	<input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" value = "${userdto.detailAddr }" size="60"><br>
 					<input type="hidden" id="extraAddress" placeholder="참고항목"  size="60">
 					<input type="hidden" id="engAddress" placeholder="영문주소"  size="60" ><br>
@@ -628,6 +645,8 @@
         </fieldset>
         <fieldset class="sendform">
             <input type="submit" class="btn" value="변경하기">
+            <input type="submit" class="btn" value="비밀번호 변경">
+            
             <input type="reset" class="btn2" value="돌아가기"
             onclick="location.href='../mypage_controller.do?command=userinfo&user_no=${userdto.user_no}'"><br>
             

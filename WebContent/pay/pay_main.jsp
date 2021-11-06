@@ -63,15 +63,33 @@
 	section .content{
 		min-width:1190px;
 		width:100%;
-		height:300px;
+		height:390px;
 		text-align:center;
-		background-color:lightgray;"
-	
+		
+	}
+	section .pay_outer{
+		min-width:1190px;
+		width:100%;
+		height:530px;
+		text-align:center;
+		display:flex;
+		justify-content: center;
+		margin-bottom: 50px;
+		
 	}
 	
 	section .pay{
 		justify-content: center;
+		border-radius: 100px;
+		padding-left: 50px;
+		padding-right:50px;
+		background:lightgray;
 	}
+	section #pay_now{
+		font-size: 30px;
+		font-weight:bold;
+	}
+
 	
 	/*결제종류 버튼*/
 	.pay_opt input[type="radio"] {
@@ -81,27 +99,36 @@
     .pay_opt input[type="radio"] + span {
         display: inline-block;
         padding: 15px 10px;
-        border: 1px solid #dfdfdf;
-        background-color: #ffffff;
+       
+        border-radius: 10px;
+        background-color: #113a6b;
+        color: white;
         text-align: center;
         cursor: pointer;
     }
  
     .pay_opt input[type="radio"]:checked + span {
-        background-color: #113a6b;
-        color: #ffffff;
+        background-color: #fef01b;
+        color: black;
     }
     
     #kakaopay_btn{
-    	border:none;
-    	background-color:none;
+    	border:1px solid rgb(173,175,255);
+    	background-color:rgb(173,175,255);
+    	border-radius: 10px;
+    	width:230px;
+    	height:100px;
     	cursor: pointer;
-    	
+    	color: white; 
+    	font-size: 15pt;
+    	margin-top: 30px;
+    	font-family: 'GowunDodum-Regular';
     }
     
     #kakaopay_btn:hover{
     	border:none;
-    	background-color:blue;
+    	background-color:#fef01b;
+    	color:black;
     	cursor: pointer;
     	
     }
@@ -144,8 +171,15 @@
     	// getter
     	var IMP = window.IMP;
     	IMP.init('imp70079286');
-    	var money = $('input[name="subs_time"]:checked').val();
-    	console.log(money);
+    	//var money = $('input[name="pay_opt"]:checked').val();
+    	
+    	var pay_opt = document.getElementsByName("pay_opt");
+    	for(var i = 0; i < pay_opt.length; i++){
+    		if(pay_opt[i].checked == true){
+    			var money = document.getElementsByName("pay_opt")[i].value;
+    		}
+    	
+    	}
     	
         IMP.request_pay({
             pg: 'kakao',
@@ -210,22 +244,32 @@
 	
 	<section>
 		<div class = "content">
-			<p>결제 내용 적기 블라블라</p>
+			<img src = "../img/pay_1.png"
+			style = "min-width:1190px;width:100%;height:390px;">
+		</div>
+			<div class = "content">
+			<img src = "../img/pay_2.png"
+			style = "min-width:1190px;width:100%;height:390px;">
 		</div>
 		
+		<div class = "pay_outer">
 		<div class = "pay">
 		
-			<p style="font-weight: bold">카카오페이 현재 사용가능</p>
-                <label class="pay_opt"><input type="radio" name="subs_time" value="100"><span>1개월<br>19,900원</span></label>
-                <label class="pay_opt"><input type="radio" name="subs_time" value="53700"><span>3개월(10% 할인)<br>53,700원</span></label>
-                <label class="pay_opt"><input type="radio" name="subs_time" value="95500"><span>6개월(20% 할인)<br>95,500원</span></label>
-                <label class="pay_opt"><input type="radio" name="subs_time" value="167000"><span>12개월(30%)<br>167,100원</span></label>
-              
-                <p  style="color: #ac2925; margin-top: 30px">카카오페이로 결제가능</p>
-                <button type="button" id="kakaopay_btn" onclick ="kakaopay();" >결제하기</button>
+			<p id = "pay_now">지금 구독하기</p>
+			<p>결제 옵션을 선택하세요</p>
+                <label class="pay_opt"><input type="radio" name="pay_opt" value="19900"><span>1개월<br>19,900원</span></label>
+                <label class="pay_opt"><input type="radio" name="pay_opt" value="53700"><span>3개월(10% 할인)<br>53,700원</span></label>
+                <label class="pay_opt"><input type="radio" name="pay_opt" value="95500"><span>6개월(20% 할인)<br>95,500원</span></label>
+                <label class="pay_opt"><input type="radio" name="pay_opt" value="167000"><span>12개월(30%)<br>167,100원</span></label>
+            
+                <p><button type="button" id="kakaopay_btn" onclick ="kakaopay();">카카오페이로 결제하기</button></p>
+               
+                <img src = "../img/pay_3.png"
+ 				style = "width:200px; height:150px;">
              
  		</div>
-		
+ 
+		</div>
 
 	
 	

@@ -125,10 +125,32 @@
    		display: flex;
    		justify-content: center;
    }
-	.qna_table{
-		width: 600px;
+
+    .qna_table{
 	
+		text-align:center;
+		width: 600px;
+		border-collapse: collapse;
+		border-top: 1px solid #444444;
+		border:none;
 	}
+    td{
+    border:none;
+    border-bottom: 1px solid #FAF0F4;
+    padding: 2px;
+ 
+    }
+    th{
+    background-color:rgb(173,175,255);
+    border:none;
+    padding: 10px;
+    }
+    
+    tr:nth-child(2n){
+    background-color:#FBF4F5;;
+    }
+    
+ 
     
     /*푸터*/
     footer{
@@ -159,17 +181,18 @@
 </div>
 <div class="mainform">
 	<div id="mainlist" style="height:150px">
-		<div class="title" style="width: 750px; height:150px">
-			고객문의	
+		<div class="title" style="width: 750px; height:200px">
+			<img src = "../img/qna1.png"
+			style="width: 700px; height:170px; padding: 10px">
 		</div>
 		<div id = "container">  
 			<table class = "qna_table" border = "1">
 				<col width = "50px"><col width = "400px"><col width = "150px"><col width = "100px">
 				<tr>
-				    <th>No.</th>
+				    <th style = "border-top-left-radius:20px">No.</th>
 				    <th>제목</th>
 				    <th>작성자</th>
-				    <th>작성일</th>
+				    <th style = "border-top-right-radius:20px">작성일</th>
 				</tr>
 				<c:choose>
 					<c:when test = "${empty list }">
@@ -194,7 +217,7 @@
 					</c:otherwise>
 				</c:choose>
 				<tr>
-					<td colspan = "4">
+					<td colspan = "4" style = "border:none">
 					<input type = "button" value = "문의하기" onclick = "location.href='mypage_controller.do?command=qna_writeform'">
 				</td>
 				</tr>
