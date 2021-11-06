@@ -79,6 +79,7 @@
             location.href='../group_controller.do?command=group_map&user_no=${userdto.user_no}'
         }
     }
+    
     function  group_chat(){
         if(${userdto.user_id eq null}){
             alert("잘못된 접근");
@@ -87,6 +88,7 @@
             location.href='../group_controller.do?command=group_chat&user_no=${userdto.user_no}'
         }
     }
+    
     function mypage_checkscore(){
         if(${userdto.user_id eq null}){
             alert("잘못된 접근");
@@ -95,6 +97,7 @@
             location.href='../mypage_controller.do?command=mypage_checkscore&user_id=${userdto.user_id}'
         }
     }
+    
     function mypage_changestar(){
         if(${userdto.user_id eq null}){
             alert("잘못된 접근");
@@ -103,6 +106,7 @@
             location.href='../mypage_controller.do?command=mypage_changestar'
         }
     }
+    
     function mypage_userinfo(){
         if(${userdto.user_id eq null}){
             alert("잘못된 접근");
@@ -111,6 +115,7 @@
             location.href='../mypage_controller.do?command=mypage_userinfo'
         }
     }
+    
     function mypage_qna(){
         if(${userdto.user_id eq null}){
             alert("잘못된 접근");
@@ -119,6 +124,7 @@
             location.href='../mypage_controller.do?command=mypage_qna'
         }
     }
+    
     function group_main(){
         if(${userdto.user_id eq null}){
             alert("잘못된 접근");
@@ -127,14 +133,29 @@
             location.href='../group_controller.do?command=group_main&user_no=${userdto.user_no}&region=${userdto.region}'
         }
     }
-    function ref_grade1(){
+
+
+    
+    function munjae_kor(){
+
         if(${userdto.user_id eq null}){
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
+        	  location.href='../munjae_controller.do?command=kor_first&user_no=${userdto.user_no}'
+        }
+    }
+    
+    function ref_grade1(){
+    	if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+
             location.href='../reference_controller.do?command=grade1'
         }
     }
+    
     function ref_grade2(){
         if(${userdto.user_id eq null}){
             alert("잘못된 접근");
@@ -151,7 +172,8 @@
             location.href='../reference_controller.do?command=grade3'
         }
     }
-    
+  
+
 </script>
 <body>
 <div>
@@ -159,7 +181,7 @@
         <li>
             <a>학습하기</a>
             <ul>
-                <li><a>국어</a></li>
+                <li><a onclick="munjae_kor();">국어</a></li>
                 <li><a>영어</a></li>
                 <li><a>수학</a></li>
             </ul>
