@@ -37,7 +37,7 @@ body{
 <ul id="menu">
     <li style="cursor: default;">소모임</li>
     <li class="li_selec" onclick="location.href='../group_controller.do?command=group_map&user_no=${userdto.user_no}'">지역별 소모임</li>
-    <li class="li_selec">소모임별 랭킹</li>
+<%--    <li class="li_selec">소모임별 랭킹</li>--%>
     <li class="li_selec" onclick="location.href='../group_controller.do?command=group_chat&user_no=${userdto.user_no}'">채팅하기</li>
 </ul>
 </body>

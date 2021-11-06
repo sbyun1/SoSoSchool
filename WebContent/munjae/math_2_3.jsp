@@ -185,12 +185,12 @@
 <script>
 window.addEventListener("click", init, false);
 function init () {
-    document.forms[0].elements[6].addEventListener("click", quizCheck, false);
+    document.forms[0].elements[8].addEventListener("click", quizCheck, false);
 }
 function quizCheck(){
     var examineeName = document.forms[0].name.value; // 응시자 이름
-    var answer = ['24','365','7','60']; //시험 문제의 정답
-    var correct = 0; //정답 개수 카운트
+    var answer = ['13','25','74','50','57','170']; //시험 문제의 정답
+    var correct =  <%= request.getAttribute("correct")%>; //정답 개수 카운트
     var questionElement = new Array; // 5개의 문제가 차례로 들어가는 변수
     var today = new Date(); // 날짜 작성을 위한 변수
     var year = today.getFullYear()
@@ -207,7 +207,7 @@ function quizCheck(){
     console.log(dayLabel);
     console.log(weekToday);
     
-    for(var i=0;i < 5; i++){
+    for(var i=0;i < 7; i++){
         questionElement.push(document.forms[0].elements[i+2].value);
         if(answer[i] == questionElement[i] ){
                 correct += 1;
@@ -216,13 +216,16 @@ function quizCheck(){
                document.forms[0].elements[i+2].classList.add("fail");
            }
         }
-    var sum = 10 * correct;
+    var sum = 5 * correct;
     outputString = "<p>"+examineeName+" 님의</p>";
     outputString += "<p>"+year+"년 "+month+"월 "+date+"일 "+weekToday+" 계산 퀴즈 결과</p>";
-    outputString += "<p>총 "+answer.length+"문제 중 "+(answer.length-correct)+"문제를 틀렸습니다.</p>";
+    outputString += "<p>총 "+correct+"문제를 맞추셨습니다.</p>";
     outputString += "<p>틀린 답은 빨간색으로 표시 하였습니다.</p>";
-    outputString += "<hr><p>1번 정답: 24<br>2번 정답: 365<br>3번 정답: 7<br>4번 정답: 60</p><hr>"; 
+    outputString += "<hr><p>구구단 정답<br><br>1번 정답:4x6=24 <br>2번 정답:3x9=27 <br>3번 정답:6x8=48 <br>4번 정답:7x4=28 <br>5번 정답:5x5=25 <br>6번 정답:4x9=36<br>7번 정답:3x6=18 </p><hr>"; 
+    outputString += "<hr><p>길이재기 정답<br><br>1번 정답:2m = 200cm <br>2번 정답:35m+800cm = 45m <br>3번 정답:2m+80cm =280cm <br>4번 정답:5m = 500cm <br>5번 정답:25cm+75cm = 1m <br>6번 정답:1m+20cm = 120cm<br>7번 정답: 2m40cm-1m70cm = 70cm </p><hr>"; 
+    outputString += "<hr><p>시각과 시간 정답<br><br>1번 정답:1주일6일 = 13일 <br>2번 정답:2년1개월 = 25개월 <br>3번 정답:3일2시간 = 74시간 <br>4번 정답:2일2시간 = 50시간 <br>5번 정답: 2일9시간 = 57시간 <br>6번 정답:2시간50분 = 170분 </p><hr>"; 
     outputString += "<p>최종 점수는 <strong>"+sum+"점</strong> 입니다.</p>";
+    outputString += "<input type='button' value='성적 제출하기' onclick="+"location.href='../munjae_controller.do?command=math_final&user_no=${userdto.user_no}&correct="+correct+"&sum="+sum+"&month="+month+"&date="+date+"'"+">";
     document.getElementById('resultarea').innerHTML = outputString;
     document.getElementById('resultarea').style.visibility = 'visible';
 }
@@ -256,31 +259,43 @@ function quizCheck(){
                 <fieldset style="border: 0">
                     <div class="name">
                         <label for="name">2학년 이름 : </label>
-                        <input type="text" id="name" name="name"/><br><hr>
+                        <input type="text" id="name" name="name" value="${userdto.user_name}"/><br><hr>
                         
                         빈 칸에 들어갈 숫자를 네모 칸 안에 적어주세요.
                     </div>
                     <ol>
-                        <li>
+                      <li>
                             <label for="add"></label>
-                            <h4>하루는 ___시간입니다.</h4>
+                            <h4>1주일 6일 = ____일</h4>
                             <input placeholder=""  type="text"/>
                         </li>
                         <li>
                             <label for="add"></label>
-                            <h4>1년은 ___일입니다.</h4>
+                            <h4>2년 1개월 = ___개월</h4>
                             <input placeholder=""  type="text"/>
                         </li>
                         <li>
                             <label for="sub"></label>
-                            <h4>일주일은 ___일입니다.</h4>
+                            <h4>3일 2시간 = ___시간</h4>
                             <input placeholder=""  type="text"/>
                         </li>
                         <li>
                             <label for="sub"></label>
-                            <h4>1시간은 ___분입니다.</h4>
+                            <h4>2일 2시간 = ___시간</h4>
                             <input placeholder=""  type="text"/>
                         </li>
+                        <li>
+                            <label for="sub"></label>
+                            <h4>2일 9시간 = ___시간</h4>
+                            <input placeholder=""  type="text"/>
+                        </li>
+                        <li>
+                            <label for="sub"></label>
+                            <h4>2시간 50분 = ___분</h4>
+                            <input placeholder=""  type="text"/>
+                        </li>
+                        
+                        
                         
                         
                     </ol>

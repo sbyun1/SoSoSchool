@@ -185,7 +185,7 @@
  
 <script type="text/javascript">
 var delay=60; //시간설정
-var correctAnswers=new Array("b","a","b" );  //정답
+var correctAnswers=new Array("b","a","b","a","a","a","a" );  //정답
 
 var q_num=1;
 var timer;
@@ -200,7 +200,8 @@ function show_question(){
 		hide_question();
 	} else {
 		document.all.timeLeft.innerHTML=0;
-		document.all.quizScore.innerHTML="<h3>총 문제: "+(q_num-1)+"개 정답: "+sum+"개 점수: "+(sum*10)+"점 입니다.</h3>";
+        document.all.quizScore.innerHTML+="<h3>총 문제 "+ sum +"개 맞췄습니다.</h3>";
+		document.all.quizScore.innerHTML+="<input type='button' value='다음 문제로 이동' onclick="+"location.href='../munjae_controller.do?command=eng_second&user_no=${userdto.user_no}&correct="+sum+"'"+">";
 		document.all.quizScore.style.display="inline";
 	}
 }
@@ -285,6 +286,29 @@ window.onload=show_question;
 <h3>철자가 바른 것을 고르세요.</h3>
 	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">esven</button></a><h2>VS</h2>
 	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">seven</button></a><br>
+</div>
+<div id="question4" style="display:none">
+<h3>철자가 바른 것을 고르세요.</h3>
+	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">twenty</button></a><h2>VS</h2>
+	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">tnewty</button></a><br>
+</div>
+
+<div id="question5" style="display:none">
+<h3>철자가 바른 것을 고르세요.</h3>
+	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">middle</button></a><h2>VS</h2>
+	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">mdilde</button></a><br>
+</div>
+
+<div id="question6" style="display:none">
+<h3>철자가 바른 것을 고르세요.</h3>
+	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">window</button></a><h2>VS</h2>
+	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">wndoiw</button></a><br>
+</div>
+
+<div id="question7" style="display:none">
+<h3>철자가 바른 것을 고르세요.</h3>
+	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">chair</button></a><h2>VS</h2>
+	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">carih</button></a><br>
 </div>
 
   

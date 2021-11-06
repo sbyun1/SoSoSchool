@@ -185,13 +185,13 @@
  
 <script type="text/javascript">
 var delay=60; //시간설정
-var correctAnswers=new Array("a","b","a" );  //정답
+var correctAnswers=new Array("a","b","a","b","a","b","a" );  //정답
 
 var q_num=1;
 var timer;
 var layer;
 var clock=delay;
-var sum=0;
+var sum=<%= request.getAttribute("correct")%>;  //수정함
 
 function show_question(){
 	if (layer=eval("document.all.question"+q_num)){
@@ -200,7 +200,8 @@ function show_question(){
 		hide_question();
 	} else {
 		document.all.timeLeft.innerHTML=0;
-		document.all.quizScore.innerHTML="<h3>총 문제: "+(q_num-1)+"개 정답: "+sum+"개 점수: "+(sum*10)+"점 입니다.</h3>";
+        document.all.quizScore.innerHTML+="<h3>총 문제 "+ sum +"개 맞췄습니다.</h3>";
+		document.all.quizScore.innerHTML+="<input type='button' value='다음 문제로 이동' onclick="+"location.href='../munjae_controller.do?command=math_third&user_no=${userdto.user_no}&correct="+sum+"'"+">";  //수정함
 		document.all.quizScore.style.display="inline";
 	}
 }
@@ -288,6 +289,31 @@ window.onload=show_question;
 	<h3>3.설명을 듣고 맞는 모양을 골라주세요.</h3>
 	<div style="border:1px solid black; padding:5px">뾰족한 곳이 세개입니다.</div><br><br>
 	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">△모양</button></a><h2>VS</h2>
+	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">○모양</button></a><br>
+	
+</div>
+
+<div id="question4" style="display:none">
+	<img src="../img/math_s4.jpg" width:300px; height:300px;><br>
+	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">□모양</button></a><h2>VS</h2>
+	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">△모양</button></a><br>
+	
+</div>
+<div id="question5" style="display:none">
+	<img src="../img/math_s5.jpg" width:300px; height:300px;><br>
+	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">△모양</button></a><h2>VS</h2>
+	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">○모양</button></a><br>
+	
+</div>
+<div id="question6" style="display:none">
+	<img src="../img/math_s6.jpg" width:300px; height:300px;><br>
+	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">△모양</button></a><h2>VS</h2>
+	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">○모양</button></a><br>
+	
+</div>
+<div id="question7" style="display:none">
+	<img src="../img/math_s7.jpg" width:300px; height:300px;><br>
+	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">□모양</button></a><h2>VS</h2>
 	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">○모양</button></a><br>
 	
 </div>

@@ -49,6 +49,7 @@ public class login_controller extends HttpServlet {
 			if(userdto.getUser_id() != null) {
 				session.setAttribute("userdto", userdto);
 				session.setMaxInactiveInterval(60*60);
+
 				//유저 로그인 시 ( *관리자 로그인 시 구현 필요)
 				if(userdto.getUser_type().equals("USER")) {
 					//순위 표시
@@ -82,7 +83,38 @@ public class login_controller extends HttpServlet {
 				}else if(userdto.getUser_type().equals("ADMIN")){
 					RequestDispatcher disp = request.getRequestDispatcher("admin/admin_main.jsp");
 					disp.forward(request, response);
+
+				if(userdto.getEnabled_yn().equals("Y")){
+					PrintWriter writer = response.getWriter();
+					writer.println("<script type='text/javascript'>alert('탈퇴한 회원입니다');location.href='../login_controller.do?command=loginform';</script>");
+					writer.close();
+					session.invalidate();
+				}else if(userdto.getEnabled_yn().equals("N")){
+					//유저 로그인 시 ( *관리자 로그인 시 구현 필요)
+					if(userdto.getUser_type().equals("USER")) {
+						//순위 표시
+						request.setAttribute("name", userdto.getUser_name());
+						request.setAttribute("point", userdto.getUser_point());
+						int no = userdto.getUser_no();
+						UserDto ps = dao.pointSelect(no);
+						request.setAttribute("no", ps.getUser_no());
+						List<UserDto> list = dao.pointAll();
+						request.setAttribute("rank_list", list);
+
+						//공지 사항 리스트
+						List<NoticeDto> noti_list = nDao.selectAll();
+						request.setAttribute("noti_list", noti_list);
+
+
+						RequestDispatcher disp = request.getRequestDispatcher("login/main.jsp");
+						disp.forward(request, response);
+					}else if(userdto.getUser_type().equals("ADMIN")){
+						RequestDispatcher disp = request.getRequestDispatcher("admin/admin_main.jsp");
+						disp.forward(request, response);
+					}
+
 				}
+
 				
 			//id , pw 잘못 입력 했을떄
 			}else{ 

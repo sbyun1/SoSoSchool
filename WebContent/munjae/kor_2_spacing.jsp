@@ -2,98 +2,97 @@
 <% response.setContentType("text/html; charset=UTF-8"); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>sosoSchool</title>
-<style>
-  @font-face {
-        font-family: 'GowunDodum-Regular';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
-    body{
-        margin: 0;
-        padding: 0;
-        min-width: 1190px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
-        min-height: 650px;
-        font-family: 'GowunDodum-Regular';
-    }
-    /*헤더*/
-    header{
-        min-width: 100%;
-        height: 120px;
-        display: flex;
-        align-items: center;        /*가운데 정렬*/
-        justify-content: center;    /*가운데 정렬*/
-        -ms-user-select: none;      /*드래그 금지*/
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-    /*네비바*/
-    nav{
-        background-color: rgb(173,175,255);
-        min-width: 100%;
-        height: 50px;
-        display: flex;
-        justify-content: center;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-    /*본문 구역*/
-    section{
-        min-width: 1190px;
-        display: flex;
-        justify-content: center;
-    }
-    /*메인 구역*/
-    section .mainform{
-        width: 960px;     /*메인 구역 전체 width값*/
-        display: flex;
-        flex-wrap: wrap;
-        -ms-user-select: none;      /*드래그 금지*/
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
+    <meta charset="UTF-8">
+    <title>sosoSchool</title>
+    <style>
+        @font-face {
+            font-family: 'GowunDodum-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            min-width: 1190px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
+            min-height: 650px;
+            font-family: 'GowunDodum-Regular';
+        }
+        /*헤더*/
+        header{
+            min-width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;        /*가운데 정렬*/
+            justify-content: center;    /*가운데 정렬*/
+            -ms-user-select: none;      /*드래그 금지*/
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        /*네비바*/
+        nav{
+            background-color: rgb(173,175,255);
+            min-width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            -ms-user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        /*본문 구역*/
+        section{
+            min-width: 1190px;
+            display: flex;
+            justify-content: center;
+        }
+        /*메인 구역*/
+        section .mainform{
+            width: 960px;     /*메인 구역 전체 width값*/
+            display: flex;
+            flex-wrap: wrap;
+            -ms-user-select: none;      /*드래그 금지*/
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        /*로그인 구역*/
+        section .loginboard_form{
+            width: 230px;
+            -ms-user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        /*푸터*/
+        footer{
+            background-color: rgb(233 233 236);
+            min-width: 100%;
+            min-height: 150px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            -ms-user-select: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
-    /*로그인 구역*/
-    section .loginboard_form{
-        width: 230px;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-    /*푸터*/
-    footer{
-        background-color: rgb(233 233 236);
-        min-width: 100%;
-        min-height: 150px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        font-size: 15px;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-    
-    
-     #k{
+
+        #k{
             margin-left:80px;
             background-color:skyblue;
             border-radius: 10px;
@@ -108,127 +107,126 @@
             background-color:gray;
             border-radius: 10px;
         }
-         #e{
-          padding:4px;
+        #e{
+            padding:4px;
             font-size : 25px;
             background-color:gray;
             text-align: center;
-             border-radius: 10px;
+            border-radius: 10px;
         }
-        
-         #a{
-          padding:2px;
+
+        #a{
+            padding:2px;
             font-size : 15px;
             background-color:skyblue;
             text-align: center;
-             border-radius: 10px;
+            border-radius: 10px;
         }
-           #btn_group button{
+        #btn_group button{
             border:0;
-            
+
             padding:5px;
             font-size : 25px;
         }
-          #content{
+        #content{
             margin-left : 200px;
             text-align: center;
         }
-        		
-			.jb-wrap {
-	width: 40%;
-	margin: 10px auto;
- 
-	position: relative;
-}
-.jb-wrap img {
-	width: 70%;
-	vertical-align: middle;
-	text-align: center;
-}
-.jb-text {
-	padding: 5px 10px;
-	 
-	text-align: center;
-	position: absolute;
-	top: 35%;
-	left: 50%;
-	transform: translate( -50%, -50% );
-}
-<!---->
-  .buttonss{
-      width: 200px;
-      height: 50px;
-      font-size: 20px;
-      font-weight: bold;
-      background-color: rgb(173,175,255);
-      border: 0;
-      outline: 0;
-      color: white;
-      border-radius: 10px
-  }
 
-#score {
-    color: red;
-    font-size: 1.2em;
-    font-weight: bold;
-}
-   .name{text-align: right;}
-            ol{padding:0;}
-            ol > li{color:#888;padding:5px;}
-            ol > li::after{clear: both;content:"";display: block;}
-            label{padding-left:15px;color:#333;}
-            .fail{background-color:red;color:#fff;}
-            strong{color:red;}
-            #resultarea p{text-align: left !important;color: #888;font-size: 0.8em;margin-top: 0;}
+        .jb-wrap {
+            width: 40%;
+            margin: 10px auto;
 
-</style>
-<script>
-window.addEventListener("click", init, false);
-function init () {
-    document.forms[0].elements[6].addEventListener("click", quizCheck, false);
-}
-function quizCheck(){
-    var examineeName = document.forms[0].name.value; // 응시자 이름
-    var answer = ['반듯이 꽂혀 있습니다','책읽기를 다 마칠때까지','오누이는 다치지 않고','균형을 잡으려고 애썼지만']; //시험 문제의 정답
-    var correct = 0; //정답 개수 카운트
-    var questionElement = new Array; // 5개의 문제가 차례로 들어가는 변수
-    var today = new Date(); // 날짜 작성을 위한 변수
-    var year = today.getFullYear()
-    var month = today.getMonth()+1
-    var date = today.getDate()
-    var dayLabel = today.getDay()
-    var week = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-    var weekToday = week[dayLabel];
-    var outputString =""; //최정 출력될 HTML 문자열을 위한 변수
-    
-    console.log(year);
-    console.log(month);
-    console.log(date);
-    console.log(dayLabel);
-    console.log(weekToday);
-    
-    for(var i=0;i < 5; i++){
-        questionElement.push(document.forms[0].elements[i+2].value);
-        if(answer[i] == questionElement[i] ){
-                correct += 1;
-                document.forms[0].elements[i+2].classList.remove("fail");
-           }else{
-               document.forms[0].elements[i+2].classList.add("fail");
-           }
+            position: relative;
         }
-    var sum = 10 * correct;
-    outputString = "<p>"+examineeName+" 님의</p>";
-    outputString += "<p>"+year+"년 "+month+"월 "+date+"일 "+weekToday+" 계산 퀴즈 결과</p>";
-    outputString += "<p>총 "+answer.length+"문제 중 "+(answer.length-correct)+"문제를 틀렸습니다.</p>";
-    outputString += "<p>틀린 답은 빨간색으로 표시 하였습니다.</p>";
-    outputString += "<hr><p>1번 정답: 반듯이 꽂혀 있습니다<br>2번 정답: 책읽기를 다 마칠때까지<br>3번 정답: 오누이는 다치지 않고<br>4번 정답: 균형을 잡으려고 애썼지만<br></p><hr>"; 
-    outputString += "<p>최종 점수는 <strong>"+sum+"점</strong> 입니다.</p>";
-    document.getElementById('resultarea').innerHTML = outputString;
-    document.getElementById('resultarea').style.visibility = 'visible';
-}
- 
+        .jb-wrap img {
+            width: 70%;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .jb-text {
+            padding: 5px 10px;
 
-</script>
+            text-align: center;
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate( -50%, -50% );
+        }
+        <!---->
+        .buttonss{
+            width: 200px;
+            height: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: rgb(173,175,255);
+            border: 0;
+            outline: 0;
+            color: white;
+            border-radius: 10px
+        }
+        #score {
+            color: red;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .name{text-align: right;}
+        ol{padding:0;}
+        ol > li{color:#888;padding:5px;}
+        ol > li::after{clear: both;content:"";display: block;}
+        label{padding-left:15px;color:#333;}
+        .fail{background-color:red;color:#fff;}
+        strong{color:red;}
+        #resultarea p{text-align: left !important;color: #888;font-size: 0.8em;margin-top: 0;}
+    </style>
+    <script>
+        window.addEventListener("click", init, false);
+        function init () {
+            document.forms[0].elements[8].addEventListener("click", quizCheck, false);
+        }
+        function quizCheck(){
+            var examineeName = document.forms[0].name.value; // 응시자 이름
+            var answer = ['반듯이 꽂혀 있습니다','책읽기를 다 마칠때까지','오누이는 다치지 않고','균형을 잡으려고 애썼지만','뽀얗고 포동포동한 애벌레','골을 넣는 모습']; //시험 문제의 정답
+            var correct = <%= request.getAttribute("correct")%>; //정답 개수 카운트
+            var questionElement = new Array; // 5개의 문제가 차례로 들어가는 변수
+            var today = new Date(); // 날짜 작성을 위한 변수
+            var year = today.getFullYear()
+            var month = today.getMonth()+1
+            var date = today.getDate()
+            var dayLabel = today.getDay()
+            var week = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+            var weekToday = week[dayLabel];
+            var outputString =""; //최정 출력될 HTML 문자열을 위한 변수
+
+            console.log(year);
+            console.log(month);
+            console.log(date);
+            console.log(dayLabel);
+            console.log(weekToday);
+
+            for(var i=0;i < 7; i++){
+                questionElement.push(document.forms[0].elements[i+2].value);
+                if(answer[i] == questionElement[i] ){
+                    correct += 1;
+                    document.forms[0].elements[i+2].classList.remove("fail");
+                }else{
+                    document.forms[0].elements[i+2].classList.add("fail");
+                }
+            }
+            var sum = 5 * correct;
+            outputString = "<p>"+examineeName+" 님의</p>";
+            outputString += "<p>"+year+"년 "+month+"월 "+date+"일 "+weekToday+" 계산 퀴즈 결과</p>";
+            outputString += "<p>총 "+correct+"문제를 맞추셨습니다.</p>";
+            outputString += "<p>틀린 답은 빨간색으로 표시 하였습니다.</p>";
+            outputString += "<hr><p>띄어쓰기 정답<br><br>1번 정답: 반듯이 꽂혀 있습니다<br>2번 정답: 책읽기를 다 마칠때까지<br>3번 정답: 오누이는 다치지 않고<br>4번 정답: 균형을 잡으려고 애썼지만<br>5번 정답: 뽀얗고 포동포동한 애벌레<br>6번 정답: 골을 넣는 모습</p><hr>";
+            outputString += "<p>받아쓰기 정답<br><br>1번 정답: 바른 말로 대화하기<br>2번 정답: 보름달을 가리키셨어<br>3번 정답: 생김새가 조금 다르다<br>4번 정답:저녁으로 주먹밥을 먹었다<br>5번 정답: 접시를 꺼내<br>6번 정답: 책을 잃어버렸다<br>7번 정답: 한 문제를 틀렸습니다 <hr>";
+            outputString += "<p>최종 점수는 <strong>"+sum+"점</strong> 입니다.</p>";
+            outputString += "<input type='button' value='성적 제출하기' onclick="+"location.href='../munjae_controller.do?command=kor_final&user_no=${userdto.user_no}&correct="+correct+"&sum="+sum+"&month="+month+"&date="+date+"'"+">";
+            document.getElementById('resultarea').innerHTML = outputString;
+            document.getElementById('resultarea').style.visibility = 'visible';
+        }
+
+    </script>
 </head>
 <body>
 <header>
@@ -256,7 +254,7 @@ function quizCheck(){
                 <fieldset style="border: 0">
                     <div class="name">
                         <label for="name">2학년 이름 : </label>
-                        <input type="text" id="name" name="name"/><br><hr>
+                        <input type="text" id="name" name="name" value="${userdto.user_name}"/><br><hr>
                     </div>
                     <ol>
                         <li>
@@ -276,13 +274,24 @@ function quizCheck(){
                         </li>
                         <li>
                             <label for="multi"> </label>
-                             <h4>균형을잡으려고애썼지만</h4>
+                            <h4>균형을잡으려고애썼지만</h4>
                             <input placeholder="띄어써서 적으세요."  type="text"/>
                         </li>
-                        
+                        <li>
+                            <label for="multi"> </label>
+                            <h4>뽀얗고포동포동한애벌레</h4>
+                            <input placeholder="띄어써서 적으세요."  type="text"/>
+                        </li>
+                        <li>
+                            <label for="multi"> </label>
+                            <h4>골을넣는모습</h4>
+                            <input placeholder="띄어써서 적으세요."  type="text"/>
+                        </li>
+
+
                     </ol>
                     <div>
-                       <%-- //문제 완료 버튼--%>
+                        <%-- //문제 완료 버튼--%>
                         <input type="button" name="button" value="완료"  style="width: 60px; height: 30px; font-size: 10px; font-weight: bold; background-color: rgb(173,175,255); border: 0; outline: 0; color: white; border-radius: 10px">
                     </div>
                 </fieldset>

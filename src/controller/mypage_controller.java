@@ -283,6 +283,8 @@ public class mypage_controller extends HttpServlet {
 		else if(command.equals("mypage_checkscore")){
 			String user_id = request.getParameter("user_id");
 
+			result_dao result_dao = new result_dao();
+
 			LocalDate now = LocalDate.now();
 			int month = now.getMonthValue();
 
@@ -308,11 +310,9 @@ public class mypage_controller extends HttpServlet {
 			}
 
 			//세 과목 모두 성적이 있으면 값 지정
-			if(month_kor.getMonth() == month || month_eng.getMonth() == month || month_math.getMonth() == month){
-				request.setAttribute("month_kor", month_kor);
-				request.setAttribute("month_eng", month_eng);
-				request.setAttribute("month_math", month_math);
-			}
+			request.setAttribute("month_kor", month_kor);
+			request.setAttribute("month_eng", month_eng);
+			request.setAttribute("month_math", month_math);
 
 			 //한달전
 			 result_kor_dto month_kor_1 = resultdao.select_month_kor_1(user_id);
@@ -335,11 +335,9 @@ public class mypage_controller extends HttpServlet {
 				 request.setAttribute("month_math_1", month_math_1);
 			 }
 
-			 if(month_kor_1.getMonth() == (month-1) || month_eng_1.getMonth() == (month-1) || month_math_1.getMonth() == (month-1)) {
-				 request.setAttribute("month_kor_1", month_kor_1);
-				 request.setAttribute("month_eng_1", month_eng_1);
-				 request.setAttribute("month_math_1", month_math_1);
-			 }
+			request.setAttribute("month_kor_1", month_kor_1);
+			request.setAttribute("month_eng_1", month_eng_1);
+			request.setAttribute("month_math_1", month_math_1);
 
 			 //두달전
 			 result_kor_dto month_kor_2 = resultdao.select_month_kor_2(user_id);
@@ -362,11 +360,10 @@ public class mypage_controller extends HttpServlet {
 				 request.setAttribute("month_math_2", month_math_2);
 			 }
 
-			 if(month_kor_2.getMonth() == (month-2) || month_eng_2.getMonth() == (month-2) || month_math_2.getMonth() == (month-2)) {
-				 request.setAttribute("month_kor_2", month_kor_2);
-				 request.setAttribute("month_eng_2", month_eng_2);
-				 request.setAttribute("month_math_2", month_math_2);
-			 }
+			request.setAttribute("month_kor_2", month_kor_2);
+			request.setAttribute("month_eng_2", month_eng_2);
+			request.setAttribute("month_math_2", month_math_2);
+
 
 			dispatch("mypage/mypage_checkscore.jsp", request, response);
 		}

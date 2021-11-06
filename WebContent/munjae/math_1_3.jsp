@@ -185,12 +185,12 @@
 <script>
 window.addEventListener("click", init, false);
 function init () {
-    document.forms[0].elements[6].addEventListener("click", quizCheck, false);
+    document.forms[0].elements[8].addEventListener("click", quizCheck, false);
 }
 function quizCheck(){
     var examineeName = document.forms[0].name.value; // 응시자 이름
-    var answer = ['21','34','16','26']; //시험 문제의 정답
-    var correct = 0; //정답 개수 카운트
+    var answer = ['21','34','16','26','47','56']; //시험 문제의 정답
+    var correct =  <%= request.getAttribute("correct")%>; //정답 개수 카운트
     var questionElement = new Array; // 5개의 문제가 차례로 들어가는 변수
     var today = new Date(); // 날짜 작성을 위한 변수
     var year = today.getFullYear()
@@ -207,7 +207,7 @@ function quizCheck(){
     console.log(dayLabel);
     console.log(weekToday);
     
-    for(var i=0;i < 5; i++){
+    for(var i=0;i < 7; i++){
         questionElement.push(document.forms[0].elements[i+2].value);
         if(answer[i] == questionElement[i] ){
                 correct += 1;
@@ -216,13 +216,16 @@ function quizCheck(){
                document.forms[0].elements[i+2].classList.add("fail");
            }
         }
-    var sum = 10 * correct;
+    var sum = 5 * correct;
     outputString = "<p>"+examineeName+" 님의</p>";
     outputString += "<p>"+year+"년 "+month+"월 "+date+"일 "+weekToday+" 계산 퀴즈 결과</p>";
-    outputString += "<p>총 "+answer.length+"문제 중 "+(answer.length-correct)+"문제를 틀렸습니다.</p>";
+    outputString += "<p>총 "+correct+"문제를 맞추셨습니다.</p>";
     outputString += "<p>틀린 답은 빨간색으로 표시 하였습니다.</p>";
-    outputString += "<hr><p>1번 정답: 21<br>2번 정답: 34<br>3번 정답: 16<br>4번 정답:26</p><hr>"; 
+    outputString += "<hr><p>숫자 비교<br><br>1번 정답:100 > 32 <br>2번 정답:29 > 12 <br>3번 정답:44 < 49 <br>4번 정답:47 < 87 <br>5번 정답:29 < 85 <br>6번 정답:92 > 63 <br>7번 정답:86 > 65 </p><hr>"; 
+    outputString += "<hr><p>여러가지 모양<br><br>1번 정답: 네모 모양 <br>2번 정답: 동그라미 모양 <br>3번 정답: 세모 모양 <br>4번 정답: 세모 모양<br>5번 정답: 세모 모양<br>6번 정답: 동그라미 모양<br>7번 정답: 동그라미 모양</p><hr>"; 
+    outputString += "<hr><p>덧셈과 뺄셈<br><br>1번 정답:16+5=21 <br>2번 정답:25+9=34 <br>3번 정답:2+14=16 <br>4번 정답:12+14=26 <br>5번 정답:44+3=47 <br>6번 정답:47+9=56 </p><hr>"; 
     outputString += "<p>최종 점수는 <strong>"+sum+"점</strong> 입니다.</p>";
+    outputString += "<input type='button' value='성적 제출하기' onclick="+"location.href='../munjae_controller.do?command=math_final&user_no=${userdto.user_no}&correct="+correct+"&sum="+sum+"&month="+month+"&date="+date+"'"+">";
     document.getElementById('resultarea').innerHTML = outputString;
     document.getElementById('resultarea').style.visibility = 'visible';
 }
@@ -256,7 +259,7 @@ function quizCheck(){
                 <fieldset style="border: 0">
                     <div class="name">
                         <label for="name">1학년 이름 : </label>
-                        <input type="text" id="name" name="name"/><br><hr>
+                        <input type="text" id="name" name="name" value="${userdto.user_name}"/><br><hr>
                     </div>
                     <ol>
                         <li>
@@ -277,6 +280,16 @@ function quizCheck(){
                         <li>
                             <label for="sub"></label>
                             <h4>12+14</h4>
+                            <input placeholder="더한 결과를 적으세요."  type="text"/>
+                        </li>
+                         <li>
+                            <label for="sub"></label>
+                            <h4>44+3</h4>
+                            <input placeholder="더한 결과를 적으세요."  type="text"/>
+                        </li>
+                        <li>
+                            <label for="sub"></label>
+                            <h4>47+9</h4>
                             <input placeholder="더한 결과를 적으세요."  type="text"/>
                         </li>
                         

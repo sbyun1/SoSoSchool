@@ -635,4 +635,71 @@ public class result_dao extends JDBCTemplate {
         }
         return res;
     }
+    //수학 성적
+    public int insert_math(result_math_dto math_dto){
+        Connection con = getConnection();
+        PreparedStatement pstm = null;
+        int res = 0;
+
+        String sql = "INSERT INTO RESULT_MATH VALUES (?,?,?,?)";
+
+        try {
+            pstm = con.prepareStatement(sql);
+            pstm.setString(1, math_dto.getUser_id());
+            pstm.setInt(2, math_dto.getMonth());
+            pstm.setInt(3, math_dto.getDay());
+            pstm.setInt(4, math_dto.getMath());
+            System.out.println("03. query 준비 " + sql);
+
+            res = pstm.executeUpdate();
+            System.out.println("04. query 실행 및 리턴");
+
+            if(res > 0){
+                commit(con);
+            }else{
+                rollback(con);
+            }
+        } catch (SQLException e) {
+            System.out.println("3/4 단계 오류");
+            e.printStackTrace();
+        }finally {
+            close(con);
+            close(pstm);
+        }
+        return res;
+    }
+
+    //영어 성적
+    public int insert_eng(result_eng_dto eng_dto){
+        Connection con = getConnection();
+        PreparedStatement pstm = null;
+        int res = 0;
+
+        String sql = "INSERT INTO RESULT_ENG VALUES (?,?,?,?)";
+
+        try {
+            pstm = con.prepareStatement(sql);
+            pstm.setString(1, eng_dto.getUser_id());
+            pstm.setInt(2, eng_dto.getMonth());
+            pstm.setInt(3, eng_dto.getDay());
+            pstm.setInt(4, eng_dto.getEng());
+            System.out.println("03. query 준비 " + sql);
+
+            res = pstm.executeUpdate();
+            System.out.println("04. query 실행 및 리턴");
+
+            if(res > 0){
+                commit(con);
+            }else{
+                rollback(con);
+            }
+        } catch (SQLException e) {
+            System.out.println("3/4 단계 오류");
+            e.printStackTrace();
+        }finally {
+            close(con);
+            close(pstm);
+        }
+        return res;
+    }
 }

@@ -134,18 +134,6 @@
         }
     }
 
-
-    
-    function munjae_kor(){
-
-        if(${userdto.user_id eq null}){
-            alert("잘못된 접근");
-            location.href='../login/login.jsp'
-        }else{
-        	  location.href='../munjae_controller.do?command=kor_first&user_no=${userdto.user_no}'
-        }
-    }
-    
     function ref_grade1(){
     	if(${userdto.user_id eq null}){
             alert("잘못된 접근");
@@ -157,22 +145,57 @@
     }
     
     function ref_grade2(){
-        if(${userdto.user_id eq null}){
+    	if(${userdto.user_id eq null}){
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
+
             location.href='../reference_controller.do?command=grade2'
         }
     }
+
+
     function ref_grade3(){
+    	if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+
+            location.href='../reference_controller.do?command=grade3'
+        }
+
+    }
+    
+    function munjae_math(){
+
         if(${userdto.user_id eq null}){
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
-            location.href='../reference_controller.do?command=grade3'
+        	location.href='../munjae_controller.do?command=math_first&user_no=${userdto.user_no}'
         }
     }
-  
+    
+    function munjae_eng(){
+
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+
+        	location.href='../munjae_controller.do?command=eng_first&user_no=${userdto.user_no}'
+        } 
+    }
+
+    function munjae_kor(){
+
+        if(${userdto.user_id eq null}){
+            alert("잘못된 접근");
+            location.href='../login/login.jsp'
+        }else{
+        	  location.href='../munjae_controller.do?command=kor_first&user_no=${userdto.user_no}'
+        }
+    }
 
 </script>
 <body>
@@ -182,8 +205,8 @@
             <a>학습하기</a>
             <ul>
                 <li><a onclick="munjae_kor();">국어</a></li>
-                <li><a>영어</a></li>
-                <li><a>수학</a></li>
+                <li><a onclick="munjae_eng();">영어</a></li>
+                <li><a onclick="munjae_math();">수학</a></li>
             </ul>
         </li>
         <li>

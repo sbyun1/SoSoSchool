@@ -182,58 +182,50 @@
             #resultarea p{text-align: left !important;color: #888;font-size: 0.8em;margin-top: 0;}
 
 </style>
- 
-<script type="text/javascript">
-var delay=60; //시간설정
-var correctAnswers=new Array("a","a","b","a","a","b","b");  //정답
-var q_num=1;
-var timer;
-var layer;
-var clock=delay;
-var sum=0;
-
-function show_question(){
-	if (layer=eval("document.all.question"+q_num)){
-		layer.style.display="inline";
-		document.all.timeLeft.innerHTML=clock;
-		hide_question();
-	} else {
-		document.all.timeLeft.innerHTML=0;
-        document.all.quizScore.innerHTML+="<h3>총 문제 "+ sum +"개 맞췄습니다.</h3>";
-		document.all.quizScore.innerHTML+="<input type='button' value='다음 문제로 이동' onclick="+"location.href='../munjae_controller.do?command=eng_second&user_no=${userdto.user_no}&correct="+sum+"'"+">";
-		document.all.quizScore.style.display="inline";
-	}
+<script>
+window.addEventListener("click", init, false);
+function init () {
+    document.forms[0].elements[8].addEventListener("click", quizCheck, false);
+}
+function quizCheck(){
+    var examineeName = document.forms[0].name.value; // 응시자 이름
+    var answer = ['smile','rabbit','eagle','dog','table','seven']; //시험 문제의 정답
+    var correct = <%= request.getAttribute("correct")%>; //정답 개수 카운트
+    var questionElement = new Array; // 5개의 문제가 차례로 들어가는 변수
+    var today = new Date(); // 날짜 작성을 위한 변수
+    var year = today.getFullYear()
+    var month = today.getMonth()+1
+    var date = today.getDate()
+    var dayLabel = today.getDay()
+    var week = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+    var weekToday = week[dayLabel];
+    var outputString =""; //최정 출력될 HTML 문자열을 위한 변수
+    
+    console.log(year);
+    console.log(month);
+    console.log(date);
+    console.log(dayLabel);
+    console.log(weekToday);
+    
+    for(var i=0;i < 7; i++){
+        questionElement.push(document.forms[0].elements[i+2].value);
+        if(answer[i] == questionElement[i] ){
+                correct += 1;
+                document.forms[0].elements[i+2].classList.remove("fail");
+           }else{
+               document.forms[0].elements[i+2].classList.add("fail");
+           }
+        }
+    var sum = 5 * correct;
+    outputString = "<p>"+examineeName+" 님의</p>";
+    outputString += "<p>"+year+"년 "+month+"월 "+date+"일 "+weekToday+" 계산 퀴즈 결과</p>";
+    outputString += "<p>총 "+correct+" 문제를 맞췄습니다.</p>";
+    outputString += "<p>틀린 답은 빨간색으로 표시 하였습니다.</p>";
+    outputString += "<input type='button' value='다음 문제로 이동' onclick="+"location.href='../munjae_controller.do?command=eng_third&user_no=${userdto.user_no}&correct="+correct+"'"+">";
+    document.getElementById('resultarea').innerHTML = outputString;
+    document.getElementById('resultarea').style.visibility = 'visible';
 }
 
-function hide_question(){
-	if (clock>0) {
-		document.all.timeLeft.innerHTML=clock;
-		clock--;
-		timer=setTimeout("hide_question()",1000);
-	} else {
-		clearTimeout(timer);
-		document.all.answerBoard.innerHTML=" ";
-		clock=delay;
-		layer.style.display="none";
-		q_num++;
-		show_question();
-	}
-}
-
-function check_answer(answer){
-	if (correctAnswers[q_num-1]==answer){
-		sum++;
-		document.all.answerBoard.innerHTML="<font color=blue><b><h1>정답입니다.</h1></b></font>";
-	} else {
-		document.all.answerBoard.innerHTML="<font color=red><b><h1>땡! 틀렸습니다.</h1></b></font>";
-	}
-	clock=0;
-	clearTimeout(timer);
-	timer=setTimeout("hide_question()",300);
-}
-
-window.onload=show_question;
-     
 
 </script>
 </head>
@@ -247,94 +239,65 @@ window.onload=show_question;
 <section>
     <div class="mainform">      <%--메인 구역 건들지 말것--%>
         <div id="buttonfrom" style="width: 960px; min-height: 100px; display: flex; flex-wrap: wrap">    <%--각 문제 페이지로 이동할 수 있는 버튼 구역 건들지 말것--%>
-           <div id="button_1" style="width: 320px; display: flex; align-items: center; justify-content: center">    <%--버튼을 감싸는 div태그--%>
+            <div id="button_1" style="width: 320px; display: flex; align-items: center; justify-content: center">    <%--버튼을 감싸는 div태그--%>
                 <button class="buttonss">알파벳</button>  <%--//onclick 추가해서 페이지 넘기는 기능 구현 할 것--%>
             </div>
             <div id="button_2" style="width: 320px; display: flex; align-items: center; justify-content: center">
                 <button class="buttonss">기초 단어</button>
             </div>
             <div id="button_3" style="width: 320px; display: flex; align-items: center; justify-content: center">
-                <button class="buttonss">그림 맞추기</button>
+                <button class="buttonss">그림맞추기</button>
             </div>
         </div>
         <div id="munjaeform" style="width:960px; display: flex; justify-content: center; align-items: center;"> <%--//문제 구역 해당 div태그 안에서 문제 구현할것--%>
             <div style="width: 280px"></div>    <%--//페이지 정렬를 위해 추가한 것 건들지 말것--%>
-            <div style="width: 400px"> <%--//해당 div태그 아래에 문제 추가할것--%>
-                <div style="border: 0">
-                <div id="content"><br>
-           <h1>  제한시간 : <B><span id="timeLeft"></span></B> 초 </h1>
-                   
-                    <div id="answerBoard"> </div>
-<br>
-<div id="question1" style="display:none">
-	<h3>빈 곳에 들어갈 알파벳을 골라주세요.</h3><br>
-	
-	<h2>_our</h2>
-	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">f</button></a><h2>VS</h2>
-	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">p</button></a><br>
-	 
-</div>
-
-<div id="question2" style="display:none">
-<h3>빈 곳에 들어갈 알파벳을 골라주세요.</h3><br>
-
-
-<h2>_ookstore</h2>
-	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">b</button></a><h2>VS</h2>
-	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">s</button></a><br>
-</div>
-
-<div id="question3" style="display:none">
-<h3>빈 곳에 들어갈 알파벳을 골라주세요.</h3><br>
-
-<h2>ch_rry</h2>
-	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">a</button></a><h2>VS</h2>
-	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">e</button></a><br>
-</div>
-<div id="question4" style="display:none">
-<h3>빈 곳에 들어갈 알파벳을 골라주세요.</h3><br>
-<h2>mid_le</h2>
-	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">d</button></a><h2>VS</h2>
-	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">e</button></a><br>
-</div>
-<div id="question5" style="display:none">
-<h3>빈 곳에 들어갈 알파벳을 골라주세요.</h3><br>
-
-<h2>t_ble</h2>
-	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">a</button></a><h2>VS</h2>
-	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">e</button></a><br>
-</div>
-<div id="question6" style="display:none">
-<h3>빈 곳에 들어갈 알파벳을 골라주세요.</h3><br>
-
-<h2>rabbi_</h2>
-	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">n</button></a><h2>VS</h2>
-	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">t</button></a><br>
-</div>
-<div id="question7" style="display:none">
-<h3>빈 곳에 들어갈 알파벳을 골라주세요.</h3><br>
-
-<h2>viol_n</h2>
-	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">o</button></a><h2>VS</h2>
-	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">i</button></a><br>
-</div>
-
-
-  
-
-<div id="quizScore" style="display:none">
-</div>
-             
+            <form style="width: 400px"> <%--//해당 div태그 아래에 문제 추가할것--%>
+                <fieldset style="border: 0">
+                    <div class="name">
+                        <label for="name">1학년 이름 : </label>
+                        <input type="text" id="name" name="name" value="${userdto.user_name}"/><br><hr>
+                    </div> 
+                    <h3>뜻에 맞는 영단어를 쓰세요</h3>
+                    <ol>
+                        <li>
+                            <label for="add"></label>
+                            <h4>웃다</h4>
+                            <input placeholder="결과를 적어주세요"  type="text"/>
+                        </li>
+                        <li>
+                            <label for="add"></label>
+                            <h4>토끼</h4>
+                            <input placeholder="결과를 적어주세요"  type="text"/>
+                        </li>
+                        <li>
+                            <label for="sub"></label>
+                            <h4>독수리</h4>
+                            <input placeholder="결과를 적어주세요"  type="text"/>
+                        </li>
+                        <li>
+                            <label for="sub"></label>
+                            <h4>강아지</h4>
+                            <input placeholder="결과를 적어주세요"  type="text"/>
+                        </li>
+                        <li>
+                            <label for="sub"></label>
+                            <h4>테이블</h4>
+                            <input placeholder="결과를 적어주세요"  type="text"/>
+                        </li>
+                        <li>
+                            <label for="sub"></label>
+                            <h4>7</h4>
+                            <input placeholder="결과를 적어주세요"  type="text"/>
+                        </li>
                         
-                   
-                   
-                      </div>
-                      
-                 
-                </div>
-                
-            </div><%--// 문제 구현 form 끝--%>
-            
+                        
+                    </ol>
+                    <div>
+                       <%-- //문제 완료 버튼--%>
+                        <input type="button" name="button" value="완료"  style="width: 60px; height: 30px; font-size: 10px; font-weight: bold; background-color: rgb(173,175,255); border: 0; outline: 0; color: white; border-radius: 10px">
+                    </div>
+                </fieldset>
+            </form><%--// 문제 구현 form 끝--%>
             <div style="width: 280px"></div> <%--//페이지 정렬를 위해 추가한것 건들지 말것--%>
         </div>
         <div id="resultform" style="display: flex; flex-wrap: wrap">    <%--//결과 표 나오는 구역 건들지 말것--%>
@@ -347,7 +310,6 @@ window.onload=show_question;
             <div style="width: 280px"></div>    <%--//페이지 정렬를 위해 추가한 것 건들지 말것--%>
         </div>
     </div>
-    
     <div class="loginboard_form">
         <%@ include file="../form/logout.jsp"%>
     </div>

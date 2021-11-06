@@ -185,13 +185,13 @@
  
 <script type="text/javascript">
 var delay=60; //시간설정
-var correctAnswers=new Array("a","a","b" );  //정답
+var correctAnswers=new Array("a","a","b","b","b","a","a");  //정답
 
 var q_num=1;
 var timer;
 var layer;
 var clock=delay;
-var sum=0;
+var sum=0;  //수정함
 
 function show_question(){
 	if (layer=eval("document.all.question"+q_num)){
@@ -200,7 +200,8 @@ function show_question(){
 		hide_question();
 	} else {
 		document.all.timeLeft.innerHTML=0;
-		document.all.quizScore.innerHTML="<h3>총 문제: "+(q_num-1)+"개 정답: "+sum+"개 점수: "+(sum*10)+"점 입니다.</h3>";
+        document.all.quizScore.innerHTML+="<h3>총 문제 "+ sum +"개 맞췄습니다.</h3>";
+        document.all.quizScore.innerHTML+="<input type='button' value='다음 문제로 이동' onclick="+"location.href='../munjae_controller.do?command=math_second&user_no=${userdto.user_no}&correct="+sum+"'"+">";  //수정함
 		document.all.quizScore.style.display="inline";
 	}
 }
@@ -284,6 +285,28 @@ window.onload=show_question;
 	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">44</button></a><h2>VS</h2>
 	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">49</button></a><br>
 </div>
+
+<div id="question4" style="display:none">
+<h3>4.다음 중 큰 수를 골라주세요.</h3><br>
+	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">47</button></a><h2>VS</h2>
+	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">87</button></a><br>
+</div>
+<div id="question5" style="display:none">
+<h3>5.다음 중 큰 수를 골라주세요.</h3><br>
+	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">29</button></a><h2>VS</h2>
+	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">85</button></a><br>
+</div>
+<div id="question6" style="display:none">
+<h3>6.다음 중 큰 수를 골라주세요.</h3><br>
+	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">92</button></a><h2>VS</h2>
+	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">63</button></a><br>
+</div>
+<div id="question7" style="display:none">
+<h3>7.다음 중 큰 수를 골라주세요.</h3><br>
+	<a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">86</button></a><h2>VS</h2>
+	<a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">65</button></a><br>
+</div>
+
 
   
 

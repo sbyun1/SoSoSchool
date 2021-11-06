@@ -90,8 +90,6 @@
             -webkit-user-select: none;
             user-select: none;
         }
-
-
         #k{
             margin-left:80px;
             background-color:skyblue;
@@ -114,7 +112,6 @@
             text-align: center;
             border-radius: 10px;
         }
-
         #a{
             padding:2px;
             font-size : 15px;
@@ -124,7 +121,6 @@
         }
         #btn_group button{
             border:0;
-
             padding:5px;
             font-size : 25px;
         }
@@ -132,11 +128,9 @@
             margin-left : 200px;
             text-align: center;
         }
-
         .jb-wrap {
             width: 40%;
             margin: 10px auto;
-
             position: relative;
         }
         .jb-wrap img {
@@ -146,7 +140,6 @@
         }
         .jb-text {
             padding: 5px 10px;
-
             text-align: center;
             position: absolute;
             top: 35%;
@@ -182,7 +175,7 @@
     <% int correct = request.getIntHeader("correct");%>
     <script type="text/javascript">
         var delay=60; //시간설정
-        var correctAnswers=new Array("a","b","a","b","b","a","b","b","b","b");  //정답
+        var correctAnswers=new Array("a","b","a","b","b","a","b");  //정답
         var q_num=1;
         var timer;
         var layer;
@@ -195,7 +188,7 @@
                 hide_question();
             } else {
                 document.all.timeLeft.innerHTML=0;
-                document.all.quizScore.innerHTML+="<h3>총 문제: "+(q_num-1)+"개 총 맞춘 문제 개수: "+sum+"개 입니다.</h3>";   //수정함
+                document.all.quizScore.innerHTML+="<h3>총 문제 "+ sum +"개 맞췄습니다.</h3>";   //수정함
                 document.all.quizScore.innerHTML+="<input type='button' value='다음 문제로 이동' onclick="+"location.href='../munjae_controller.do?command=kor_third&user_no=${userdto.user_no}&correct="+sum+"'"+">";  //수정함
                 document.all.quizScore.style.display="inline";
             }
@@ -226,7 +219,6 @@
             timer=setTimeout("hide_question()",300);
         }
         window.onload=show_question;
-
     </script>
 </head>
 <body>
@@ -301,23 +293,7 @@
                             <a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">붙여진</button></a><br>
                         </div>
 
-                        <div id="question8" style="display:none">
-                            <h3>8.다음 중 옳은 표기법은 무엇일까요?</h3><br>
-                            <a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">눈꼽</button></a><h2>VS</h2>
-                            <a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">눈곱</button></a><br>
-                        </div>
 
-                        <div id="question9" style="display:none">
-                            <h3>9.다음 중 옳은 표기법은 무엇일까요?</h3><br>
-                            <a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">눈똥자</button></a><h2>VS</h2>
-                            <a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">눈동자</button></a><br>
-                        </div>
-
-                        <div id="question10" style="display:none">
-                            <h3>10.다음 중 옳은 표기법은 무엇일까요?</h3><br>
-                            <a href="javascript:void(0)" onclick="check_answer('a')"><button class="buttonss">내딛이다</button></a><h2>VS</h2>
-                            <a href="javascript:void(0)" onclick="check_answer('b')"><button class="buttonss">내디디다</button></a><br>
-                        </div>
 
                         <div id="quizScore" style="display:none">
                         </div>
