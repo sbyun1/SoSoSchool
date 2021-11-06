@@ -154,17 +154,18 @@ public class changeStarDao extends JDBCTemplate {
         return res;
     }
     //상품 수량 추가
-    public int updatestock(int gi_no, int gi_stock){
+    public int updatestock(int gi_no, int gi_prize, int gi_stock){
         Connection con = getConnection();
         PreparedStatement pstm = null;
         int res = 0;
 
-        String sql = "UPDATE GIFT_BOARD SET GI_STOCK = ? WHERE GI_NO = ?";
+        String sql = "UPDATE GIFT_BOARD SET GI_PRIZE = ?, GI_STOCK = ? WHERE GI_NO = ?";
 
         try {
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, gi_stock);
-            pstm.setInt(2, gi_no);
+            pstm.setInt(1, gi_prize);
+            pstm.setInt(2, gi_stock);
+            pstm.setInt(3, gi_no);
             System.out.println("03. query 준비 " + sql);
 
             res = pstm.executeUpdate();

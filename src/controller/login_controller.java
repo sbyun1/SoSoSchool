@@ -72,11 +72,14 @@ public class login_controller extends HttpServlet {
 					
 					RequestDispatcher disp = request.getRequestDispatcher("login/main.jsp");
 					disp.forward(request, response);
+
 					
 
 				//어드민 로그인시
-				}else if(userdto.getUser_type().equals("ADMIN")) {
+				
 					
+
+				}else if(userdto.getUser_type().equals("ADMIN")){
 					RequestDispatcher disp = request.getRequestDispatcher("admin/admin_main.jsp");
 					disp.forward(request, response);
 				}
@@ -119,7 +122,6 @@ public class login_controller extends HttpServlet {
 			dto.setUser_pr(user_pr);
 			dto.setUser_id(user_id);
 			dto.setUser_name(user_name);
-			dto.setUser_nn(user_nn);
 			dto.setUser_pw(user_pw);
 			dto.setPhone(phone);
 			dto.setGrade(garde);

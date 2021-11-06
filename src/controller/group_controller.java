@@ -124,6 +124,117 @@ public class group_controller extends HttpServlet {
 
             dispatch("group/group_main.jsp", request, response);
         }
+        //관리자 기능
+
+        //게시글 내용 보기
+        else if(command.equals("group_board_detail")){
+            int gboard_no = Integer.parseInt(request.getParameter("gboard_no"));
+
+            groupDto gdto = groupdao.admin_selectOne(gboard_no);
+
+            request.setAttribute("gdto", gdto);
+
+            dispatch("admin/admin_group_board_detail.jsp",request,response);
+        }
+        else if(command.equals("group_board_detail_update")){
+            int gboard_no = Integer.parseInt(request.getParameter("gboard_no"));
+            String title = request.getParameter("title");
+            String subtitle = request.getParameter("subtitle");
+            String content = request.getParameter("content");
+            String img = request.getParameter("img");
+
+            groupDto selgdto = new groupDto();
+            selgdto.setGboard_no(gboard_no);
+            selgdto.setGboard_title(title);
+            selgdto.setGboard_subtitle(subtitle);
+            selgdto.setGboard_content(content);
+            selgdto.setGboard_img(img);
+
+            int res = groupdao.update(selgdto);
+
+            List<groupDto> list_all = groupdao.admin_selectAll();				//전체 지역 리스트 불러오기
+            List<groupDto> list_seoul = groupdao.admin_selectAll_seoul();		//서울 지역 리스트 불러오기
+            List<groupDto> list_gyeonggi = groupdao.admin_selectAll_gyeonggi();	//경기 지역 리스트 불러오기
+            List<groupDto> list_incheon = groupdao.admin_selectAll_incheon();	//인천 지역 리스트 불러오기
+
+            request.setAttribute("list_all", list_all);							//리스트 속성 지정
+            request.setAttribute("list_seoul", list_seoul);						//리스트 속성 지정
+            request.setAttribute("list_gyeonggi", list_gyeonggi);				//리스트 속성 지정
+            request.setAttribute("list_incheon", list_incheon);					//리스트 속성 지정
+
+            if(res > 0){
+                String s = "<script type='text/javascript'>"+"alert('수정 성공');"+"</script>";
+                PrintWriter out = response.getWriter();
+                out.print(s);
+                dispatch("admin/admin_group_board_list.jsp", request,response);
+            }else{
+                String s = "<script type='text/javascript'>"+"alert('수정 실패');"+"</script>";
+                PrintWriter out = response.getWriter();
+                out.print(s);
+                dispatch("admin/admin_group_board_list.jsp", request,response);
+            }
+        }
+        //게시글 삭제
+        else if(command.equals("group_board_delete")){
+            int gboard_no = Integer.parseInt(request.getParameter("gboard_no"));
+
+            int res = groupdao.delete(gboard_no);
+
+            List<groupDto> list_all = groupdao.admin_selectAll();				//전체 지역 리스트 불러오기
+            List<groupDto> list_seoul = groupdao.admin_selectAll_seoul();		//서울 지역 리스트 불러오기
+            List<groupDto> list_gyeonggi = groupdao.admin_selectAll_gyeonggi();	//경기 지역 리스트 불러오기
+            List<groupDto> list_incheon = groupdao.admin_selectAll_incheon();	//인천 지역 리스트 불러오기
+
+            request.setAttribute("list_all", list_all);							//리스트 속성 지정
+            request.setAttribute("list_seoul", list_seoul);						//리스트 속성 지정
+            request.setAttribute("list_gyeonggi", list_gyeonggi);				//리스트 속성 지정
+            request.setAttribute("list_incheon", list_incheon);					//리스트 속성 지정
+
+            if(res>0){
+                dispatch("admin/admin_group_board_list.jsp", request,response);
+            }else{
+                dispatch("admin/admin_group_board_list.jsp", request,response);
+            }
+        }
+        //게시글 추가 페이지 이동
+        else if(command.equals("group_board_insert_form")){
+            response.sendRedirect("admin/admin_group_board_insert.jsp");
+        }
+        //게시글 추가
+        else if(command.equals("group_board_detail_insert")){
+            String title = request.getParameter("title");
+            String subtitle = request.getParameter("subtitle");
+            String content = request.getParameter("content");
+            String img = request.getParameter("img");
+            String region = request.getParameter("region");
+            String library = request.getParameter("library");
+
+            groupDto insergdto = new groupDto();
+            insergdto.setGboard_title(title);
+            insergdto.setGboard_subtitle(subtitle);
+            insergdto.setGboard_content(content);
+            insergdto.setGboard_img(img);
+            insergdto.setGboard_region(region);
+            insergdto.setGboard_library(library);
+
+            int res = groupdao.insert(insergdto);
+
+            List<groupDto> list_all = groupdao.admin_selectAll();				//전체 지역 리스트 불러오기
+            List<groupDto> list_seoul = groupdao.admin_selectAll_seoul();		//서울 지역 리스트 불러오기
+            List<groupDto> list_gyeonggi = groupdao.admin_selectAll_gyeonggi();	//경기 지역 리스트 불러오기
+            List<groupDto> list_incheon = groupdao.admin_selectAll_incheon();	//인천 지역 리스트 불러오기
+
+            request.setAttribute("list_all", list_all);							//리스트 속성 지정
+            request.setAttribute("list_seoul", list_seoul);						//리스트 속성 지정
+            request.setAttribute("list_gyeonggi", list_gyeonggi);				//리스트 속성 지정
+            request.setAttribute("list_incheon", list_incheon);					//리스트 속성 지정
+
+            if(res > 0){
+                dispatch("admin/admin_group_board_list.jsp", request,response);
+            }else{
+                dispatch("admin/admin_group_board_list.jsp", request,response);
+            }
+        }
     }
 
     private void jsResponse(String msg, String url, HttpServletResponse response) throws IOException {

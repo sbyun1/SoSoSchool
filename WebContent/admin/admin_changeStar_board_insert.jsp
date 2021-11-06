@@ -122,6 +122,7 @@
         width: 400px;
         height: 40px;
     }
+
     /*이미지 구역*/
     .img_form{
         width: 1190px;
@@ -160,6 +161,7 @@
         width: 390px;
         height: 300px;
     }
+
     /*버튼 구역*/
     .button_form{
         width: 1190px;
@@ -193,6 +195,7 @@
         justify-content: center;
         align-items: center;
     }
+
     /*버튼*/
     .button{
         width: 100px;
@@ -210,6 +213,7 @@
     function change_img(){
         var selectoption = document.getElementById("img_check");
         selectoption = selectoption.options[selectoption.selectedIndex].value;
+
         if(selectoption == 'banana'){
             $("#img").attr('src','');
             $("#img").attr('src','../img/banana.png');
@@ -226,6 +230,7 @@
             $("#img").attr('src','');
             $("#img").attr('src','../img/nintendo.png');
         }
+
     }
 </script>
 <title>소그룹 게시판</title>

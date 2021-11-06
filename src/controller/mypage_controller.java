@@ -6,8 +6,6 @@ import java.io.PrintWriter;
 
 import java.time.LocalDate;
 
-import java.util.Date;
-
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -337,6 +335,69 @@ public class mypage_controller extends HttpServlet {
 				}
 			}
 		}
+		//관리자 페이지 - 상품 수정
+		else if(command.equals("changestar_value")){
+			int gi_no = Integer.parseInt(request.getParameter("gi_no"));
+			int gi_prize = Integer.parseInt(request.getParameter("gi_prize"));
+			int gi_stock = Integer.parseInt(request.getParameter("gi_stock"));
+
+			int chndto = changestardao.updatestock(gi_no, gi_prize, gi_stock);
+
+			if(chndto > 0){
+				List<changeStarDto> list = changestardao.selectall();
+				request.setAttribute("list", list);
+				dispatch("admin/admin_changeStar_board_list.jsp", request, response);
+			}else{
+				List<changeStarDto> list = changestardao.selectall();
+				request.setAttribute("list", list);
+				dispatch("admin/admin_changeStar_board_list.jsp", request, response);
+			}
+		 }
+		//관리자 페이지 - 상품 추가 페이지 이동
+		else if(command.equals("changestar_insert_form")){
+			response.sendRedirect("admin/admin_changeStar_board_insert.jsp");
+		 }
+		//관리자 페이지 - 상품 추가
+		else if(command.equals("changestar_board_insert")){
+			String title = request.getParameter("title");
+			int prize = Integer.parseInt(request.getParameter("prize"));
+			int stock = Integer.parseInt(request.getParameter("stock"));
+			String img = request.getParameter("img");
+
+			changeStarDto dto = new changeStarDto();
+			dto.setGi_title(title);
+			dto.setGi_prize(prize);
+			dto.setGi_stock(stock);
+			dto.setGi_img(img);
+
+			int res = changestardao.insertgift(dto);
+
+			if(res > 0){
+				List<changeStarDto> list = changestardao.selectall();
+				request.setAttribute("list", list);
+				dispatch("admin/admin_changeStar_board_list.jsp", request, response);
+			}else{
+				List<changeStarDto> list = changestardao.selectall();
+				request.setAttribute("list", list);
+				dispatch("admin/admin_changeStar_board_list.jsp", request, response);
+			}
+		 }
+		//관리자 페이지 - 상품 삭제
+		else if(command.equals("changestar_delete")){
+			int gi_no = Integer.parseInt(request.getParameter("gi_no"));
+
+			int res = changestardao.deletegift(gi_no);
+
+			if(res>0){
+				List<changeStarDto> list = changestardao.selectall();
+				request.setAttribute("list", list);
+				dispatch("admin/admin_changeStar_board_list.jsp", request, response);
+			}else{
+				List<changeStarDto> list = changestardao.selectall();
+				request.setAttribute("list", list);
+				dispatch("admin/admin_changeStar_board_list.jsp", request, response);
+			}
+		 }
 	}
 
 	private void dispatch(String url, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

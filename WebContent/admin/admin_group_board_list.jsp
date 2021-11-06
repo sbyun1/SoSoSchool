@@ -99,6 +99,7 @@
                 <script type="text/javascript">
                     var selectoption = document.getElementById("select_region");
                     selectoption = selectoption.options[selectoption.selectedIndex].value;
+
                     window.onload = function (){
                         if(selectoption == 'none'){
                             var tr_all = document.getElementById("board_list_form");
@@ -122,6 +123,7 @@
                     function change_region(){
                         var selectoption = document.getElementById("select_region");
                         selectoption = selectoption.options[selectoption.selectedIndex].value;
+
                         if(selectoption == 'none'){
                             var tr_all = document.getElementById("board_list_form");
                             tr_all.innerHTML="";

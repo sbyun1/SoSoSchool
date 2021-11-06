@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 메인 페이지</title>
 </head>
 <style>
 @font-face {
@@ -26,7 +26,6 @@
     }
     /*헤더*/
     header{
-        
         min-width: 100%;
         height: 120px;
         display: flex;
@@ -41,17 +40,83 @@
     section{
         min-width: 1190px;
         display: flex;
+		flex-wrap: wrap;
         justify-content: center;
+		align-items: center;
     }
+	#title_form{
+		min-width: 100%;
+		height: 100px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	#top_form{
+		width: 1180px;
+		height: 100px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	#bottom_form{
+		width: 1170px;
+		height: 100px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.button_form{
+		width: 390px;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	button{
+		width: 200px;
+		height: 50px;
+		font-size: 20px;
+		font-weight: bold;
+		background-color: rgb(173,175,255);
+		border: 0;
+		outline: 0;
+		color: white;
+		border-radius: 10px;
+	}
  </style>   
 <body>
-	<header>
-    	 <img src = "../img/logo.png">
-	</header>
-	<section>
-	<h1>관리자 페이지</h1>
-	</section>
-
-
+<header>
+	 <img src = "../img/logo.png">
+</header>
+<section>
+	<div id="title_form">
+		<h1>관리자 페이지</h1>
+	</div>
+	<div id="top_form">
+		<div class="button_form">
+			<button>공지사항 추가</button>
+		</div>
+		<div class="button_form">
+			<button>QNA 추가</button>
+		</div>
+		<div class="button_form">
+			<button>자료실 추가</button>
+		</div>
+	</div>
+	<div id="bottom_form">
+		<div class="button_form">
+			<button onclick="location.href='../admin_controller.do?command=group'">소모임 추가</button>
+		</div>
+		<div class="button_form">
+			<button onclick="location.href='../admin_controller.do?command=changestar'">상품 추가</button>
+		</div>
+		<div class="button_form">
+			<button>회원관리 추가</button>
+		</div>
+	</div>
+	<div style="width: 1190px; height: 100%; display: flex; flex-wrap: wrap; justify-content: center; align-items: center">
+		<button onclick="location.href='../login_controller.do?command=logout'">로그아웃</button>
+	</div>
+</section>
 </body>
 </html>
