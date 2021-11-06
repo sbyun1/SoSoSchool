@@ -89,8 +89,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
-
-    section .mainform #mainlist{
+	section .mainform #mainlist{
         min-width: 750px;         /*메인 구역 안 width 값*/
         display: flex;
         flex-wrap: wrap;
@@ -113,9 +112,7 @@
         -moz-user-select: none;
         -khtml-user-select: none;
         -webkit-user-select: none;
-        user-select: none;
-       
-        
+        user-select: none;   
     }
     section .loginboard_form #loginboard{
         background-color: lightgrey;
@@ -123,8 +120,7 @@
         height: 190px;
         display: inline-flex;
         margin-top: 30px;
-        border-radius: 5%;
-       
+        border-radius: 5%;      
     }
     section .loginboard_form #loginboard #imgform{
         display: flex;
@@ -195,13 +191,6 @@
         -webkit-user-select: none;
         user-select: none;
     }
-	li{
-	list-style-type : none;
-	font-weight: bold;
-	font-size: 20px;
-	font-style: normal;
-	margin-bottom: 30px;
-	}
 	.sidebar{
 	     width: 15%;
 	     float: left;
@@ -224,14 +213,9 @@
     <%@ include file="../form/navi.jsp" %>
 </nav>
 <section>
-	<div class="menuform">
-        <ul>
-            <li style="margin-bottom:60px; font-size:30px">자료실</li>
-            <li><a href="#">1학년</a></li>
-            <li><a href="#">2학년</a></li>
-            <li><a href="#">3학년</a></li>
-        </ul>
-    </div>
+	<div Class="menuform">
+		<%@ include file="../form/reference_menubar.jsp"%>
+	</div>
     <div class="mainform">
         <div id="mainlist">
             <div class="title">
@@ -265,7 +249,7 @@
 		               </c:otherwise>
 					</c:choose>
 				</table>
-				<a href="reference_controller.do?command=ref_grade1_kor">더보기</a>
+				<a href="../reference_controller.do?command=ref_grade1_kor">더보기</a>
 			</div>
 	        <div class="reference_borad">
 				<h2>수학자료</h2>
@@ -295,7 +279,7 @@
 						</c:otherwise>
 					</c:choose>					
 				</table>
-				<a href="reference_controller.do?command=ref_grade1_math">더보기</a>
+				<a href="../reference_controller.do?command=ref_grade1_math">더보기</a>
 			</div>
 	        <div class="reference_borad">
 				<h2>영어자료</h2>
@@ -325,13 +309,13 @@
 						</c:otherwise>
 					</c:choose>					
 				</table>
-				<a href="reference_controller.do?command=ref_grade1_eng">더보기</a>
+				<a href="../reference_controller.do?command=ref_grade1_eng">더보기</a>
 			</div>
 		</div>
 	</div>
 	<div class="loginboard_form">
 		<%@ include file="../form/logout.jsp"%>
-	</div>    
+	</div>
 </section>
 <div>
 	<footer>

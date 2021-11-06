@@ -114,8 +114,6 @@
         -khtml-user-select: none;
         -webkit-user-select: none;
         user-select: none;
-       
-        
     }
     section .loginboard_form #loginboard{
         background-color: lightgrey;
@@ -123,8 +121,7 @@
         height: 190px;
         display: inline-flex;
         margin-top: 30px;
-        border-radius: 5%;
-       
+        border-radius: 5%; 
     }
     section .loginboard_form #loginboard #imgform{
         display: flex;
@@ -195,13 +192,6 @@
         -webkit-user-select: none;
         user-select: none;
     }
-	li{
-	list-style-type : none;
-	font-weight: bold;
-	font-size: 20px;
-	font-style: normal;
-	margin-bottom: 30px;
-	}
 	.sidebar{
 	     width: 15%;
 	     float: left;
@@ -213,7 +203,6 @@
 	     margin:30px;
 	     flex-direction: column;       
 	   }
-
 </style>
 </head>
 <body>
@@ -224,18 +213,13 @@
     <%@ include file="../form/navi.jsp" %>
 </nav>
 <section>
-	<div class="menuform">
-        <ul>
-            <li style="margin-bottom:60px; font-size:30px">자료실</li>
-            <li><a href="#">1학년</a></li>
-            <li><a href="#">2학년</a></li>
-            <li><a href="#">3학년</a></li>
-        </ul>
-    </div>    
+	<div Class="menuform">
+		<%@ include file="../form/reference_menubar.jsp"%>
+	</div>
     <div class="mainform">
         <div id="mainlist">
             <div class="title">
-            	1학년
+            	3학년
             </div>
 		<div id="right" class="reference_borad">
 			<h2>수학자료</h2>
@@ -268,9 +252,9 @@
 		</div>
 		</div>
 	</div>
-	<div class="loginboard_form">
-		<%@ include file="../form/logout.jsp"%>
-	</div>  
+<div class="loginboard_form">
+	<%@ include file="../form/logout.jsp"%>
+</div>  
 </section>
 <div>
 	<footer>

@@ -114,8 +114,6 @@
         -khtml-user-select: none;
         -webkit-user-select: none;
         user-select: none;
-       
-        
     }
     section .loginboard_form #loginboard{
         background-color: lightgrey;
@@ -123,8 +121,7 @@
         height: 190px;
         display: inline-flex;
         margin-top: 30px;
-        border-radius: 5%;
-       
+        border-radius: 5%; 
     }
     section .loginboard_form #loginboard #imgform{
         display: flex;
@@ -195,13 +192,6 @@
         -webkit-user-select: none;
         user-select: none;
     }
-	li{
-	list-style-type : none;
-	font-weight: bold;
-	font-size: 20px;
-	font-style: normal;
-	margin-bottom: 30px;
-	}
 	.sidebar{
 	     width: 15%;
 	     float: left;
@@ -213,7 +203,6 @@
 	     margin:30px;
 	     flex-direction: column;       
 	   }
-
 </style>
 </head>
 <body>
@@ -224,14 +213,9 @@
     <%@ include file="../form/navi.jsp" %>
 </nav>
 <section>
-	<div class="menuform">
-        <ul>
-            <li style="margin-bottom:60px; font-size:30px">자료실</li>
-            <li><a href="#">1학년</a></li>
-            <li><a href="#">2학년</a></li>
-            <li><a href="#">3학년</a></li>
-        </ul>
-    </div>    
+	<div Class="menuform">
+		<%@ include file="../form/reference_menubar.jsp"%>
+	</div>   
     <div class="mainform">
         <div id="mainlist">
             <div class="title">
@@ -240,28 +224,28 @@
 		<div id="right" class="reference_borad">
 			<h2>국어자료</h2>
 			<table border="1">
-				<col width="60px">
-				<col width="500px">
-				<col width="60px">
+				<col width="100px">
+				<col width="650px">
+				<col width="100px">
 				<tr>
 					<th>NO.</th>
 					<th>제목</th>
 					<th>작성일</th>
 				</tr>
 				<c:choose>
-					<c:when test="${empty list }">
+					<c:when test="${empty kor_list }">
 						<tr>
 							<td colspan="4">----작성된 글이 존재하지 않습니다-----</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="dto" items="${kor_list }">
-							<tr>
-								<td>${dto.board_no }</td>
-								<td>${dto.board_title }</td>
-								<td>${dto.board_regdate }</td>
-							</tr>
-						</c:forEach>
+		                  <c:forEach items="${kor_list }" var="referenceDto">
+		                     <tr>
+		                        <td>${referenceDto.rboard_no }</td>
+								<td>${referenceDto.rboard_title }</td>
+								<td>${referenceDto.rboard_regdate }</td>
+		                     </tr>
+		                  </c:forEach>
 					</c:otherwise>
 				</c:choose>
 			</table>

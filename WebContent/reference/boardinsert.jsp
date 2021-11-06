@@ -114,8 +114,6 @@
         -khtml-user-select: none;
         -webkit-user-select: none;
         user-select: none;
-       
-        
     }
     section .loginboard_form #loginboard{
         background-color: lightgrey;
@@ -123,8 +121,7 @@
         height: 190px;
         display: inline-flex;
         margin-top: 30px;
-        border-radius: 5%;
-       
+        border-radius: 5%; 
     }
     section .loginboard_form #loginboard #imgform{
         display: flex;
@@ -199,14 +196,13 @@
 	     width: 15%;
 	     float: left;
 	     height: 50%;
-	   }
+	}
 	.reference_borad{
 	     display: flex;
 	     float:right;
 	     margin:30px;
 	     flex-direction: column;       
-	   }
-
+	}
 </style>
 </head>
 <body>
@@ -217,110 +213,42 @@
     <%@ include file="../form/navi.jsp" %>
 </nav>
 <section>
-	<div Class="menuform">
-		<%@ include file="../form/reference_menubar.jsp"%>
-	</div>
+<div Class="menuform">
+	<%@ include file="../form/reference_menubar.jsp"%>
+</div>
     <div class="mainform">
         <div id="mainlist">
-            <div class="title">
-            	3학년
-            </div> 
-			<div id="right" class="reference_borad">
-				<h2>국어자료</h2>
+			<div class="title">
+            	자료실 글쓰기
+            </div>
+			<form action="../reference_controller.do" method="post">
+				<input type="hidden" name="command" value="boardinsert">
 				<table border="1">
-					<col width="100px">
-					<col width="650px">
-					<col width="100px">
 					<tr>
-						<th>NO.</th>
 						<th>제목</th>
-						<th>작성일</th>
+						<td><input type="text" name="ref_writer"></td>
 					</tr>
-					<c:choose>
-						<c:when test="${empty kor_list }">
-							<tr>
-								<td colspan="4">----작성된 글이 존재하지 않습니다-----</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-		                  <c:forEach items="${kor_list }" var="referenceDto">
-		                     <tr>
-		                        <td>${referenceDto.rboard_no }</td>
-								<td>${referenceDto.rboard_title }</td>
-								<td>${referenceDto.rboard_regdate }</td>
-		                     </tr>
-		                  </c:forEach>
-		               </c:otherwise>
-					</c:choose>
-				</table>
-				<a href="../reference_controller.do?command=ref_grade1_kor">더보기</a>
-			</div>
-	        <div class="reference_borad">
-				<h2>수학자료</h2>
-				<table border="1">
-					<col width="100px">
-					<col width="650px">
-					<col width="100px">
 					<tr>
-						<th>NO.</th>
-						<th>제목</th>
-						<th>작성일</th>
+						<th>작성자</th>
+						<td><input type="text" name="ref_title"></td>
 					</tr>
-					<c:choose>
-						<c:when test="${empty list }">
-							<tr>
-								<td colspan="4">----작성된 글이 존재하지 않습니다-----</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="dto" items="${list }">
-		                     <tr>
-		                        <td>${referenceDto.rboard_no }</td>
-								<td>${referenceDto.rboard_title }</td>
-								<td>${referenceDto.rboard_regdate }</td>
-		                     </tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>					
-				</table>
-				<a href="#">더보기</a>
-			</div>
-	        <div class="reference_borad">
-				<h2>영어자료</h2>
-				<table border="1">
-					<col width="100px">
-					<col width="650px">
-					<col width="100px">
 					<tr>
-						<th>NO.</th>
-						<th>제목</th>
-						<th>작성일</th>
+						<th>내용</th>
+						<td><textarea rows="10" cols="60" name="ref_content"></textarea></td>
 					</tr>
-					<c:choose>
-						<c:when test="${empty list }">
-							<tr>
-								<td colspan="4">----작성된 글이 존재하지 않습니다-----</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="dto" items="${list }">
-								<tr>
-									<td>${dto.seq }</td>
-									<td>${dto.writer }</td>
-									<td><a href="controller.do?command=detail&seq=${dto.seq }">${dto.title }</a></td>
-									<td>${dto.regdate }</td>
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>					
+					<tr>
+						<td colspan="2" align="right">
+							<input type="submit" value="등록">
+							<input type="button" value="취소" onclick="location.href='reference_controller.do?command=ref_grade1_kor'">
+						</td>	
+					</tr>
 				</table>
-				<a href="#">더보기</a>
-			</div>
+			</form>
 		</div>
 	</div>
-	<div class="loginboard_form">
-		<%@ include file="../form/logout.jsp"%>
-	</div>    
+<div class="loginboard_form">
+	<%@ include file="../form/logout.jsp"%>
+</div>  
 </section>
 <div>
 	<footer>

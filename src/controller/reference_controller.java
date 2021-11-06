@@ -25,7 +25,7 @@ public class reference_controller extends HttpServlet {
 		
 		referenceDao dao = new referenceDao();
 		
-
+		/***자료실 더보기***/
 		if(command.equals("grade1")){
 			//국어자료
 			List<referenceDto> kor_list = dao.select(1,"KOR");
@@ -78,6 +78,18 @@ public class reference_controller extends HttpServlet {
 			request.setAttribute("eng_list", eng_list);
 			
 			dispatch("reference/reference_boardlist_1_eng.jsp", request, response);
+
+		
+		/***자료실 게시글CRUD***/
+		/*게시글작성*/
+		}else if(command.equals("ref_insertform")) {
+			dispatch("reference/boardinsert.jsp", request, response);
+		}else if(command.equals("boarddetail")) {
+			int rboard_no=Integer.parseInt(request.getParameter("rboard_no"));
+			referenceDto referenceDto = dao.selectOne(rboard_no);
+			
+			request.setAttribute("referencedto", referenceDto);
+			dispatch("reference/boarddetail.jsp", request, response);
 		}
 		
 	}

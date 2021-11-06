@@ -107,4 +107,40 @@ public class referenceDao extends JDBCTemplate{
 		return res;
 	
 	}
+	
+	public referenceDto selectOne(int rboard_no) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		referenceDto res = new referenceDto();
+		
+		String sql = " SELECT * FROM REF_BOARD WHERE RBOARD_NO=? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, rboard_no);
+			
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				res.setRboard_no(rs.getInt(1));
+				res.setRboard_title(rs.getString(2));
+				res.setRboard_content(rs.getString(3));
+				res.setRboard_regdate(rs.getDate(4));
+				res.setRboard_grade(rs.getInt(5));
+				res.setRboard_subject(rs.getString(6));
+				res.setRboard_type(rs.getString(7));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+			
+		}
+		return res;
+	}
+	
+	
 }

@@ -1,3 +1,4 @@
+<%@page import="com.soso.ref.dto.referenceDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -114,8 +115,6 @@
         -khtml-user-select: none;
         -webkit-user-select: none;
         user-select: none;
-       
-        
     }
     section .loginboard_form #loginboard{
         background-color: lightgrey;
@@ -123,8 +122,7 @@
         height: 190px;
         display: inline-flex;
         margin-top: 30px;
-        border-radius: 5%;
-       
+        border-radius: 5%; 
     }
     section .loginboard_form #loginboard #imgform{
         display: flex;
@@ -195,25 +193,30 @@
         -webkit-user-select: none;
         user-select: none;
     }
-	li{
-	list-style-type : none;
-	font-weight: bold;
-	font-size: 20px;
-	font-style: normal;
-	margin-bottom: 30px;
-	}
 	.sidebar{
 	     width: 15%;
 	     float: left;
 	     height: 50%;
-	   }
+	}
 	.reference_borad{
 	     display: flex;
 	     float:right;
 	     margin:30px;
 	     flex-direction: column;       
-	   }
-
+	}
+/*	.btn{
+	margin-left: 50%;
+	transform: translateX(-50%);
+	width: 110px;
+	height: 46px;
+	border: none;
+	outline: none;
+	background: rgb(173,175,255);
+	cursor: pointer;
+	font-size: 16px;
+	color: white;
+	border-radius: 4px;
+	}*/
 </style>
 </head>
 <body>
@@ -224,14 +227,9 @@
     <%@ include file="../form/navi.jsp" %>
 </nav>
 <section>
-	<div class="menuform">
-        <ul>
-            <li style="margin-bottom:60px; font-size:30px">자료실</li>
-            <li><a href="#">1학년</a></li>
-            <li><a href="#">2학년</a></li>
-            <li><a href="#">3학년</a></li>
-        </ul>
-    </div>    
+<div Class="menuform">
+	<%@ include file="../form/reference_menubar.jsp"%>
+</div>
     <div class="mainform">
         <div id="mainlist">
             <div class="title">
@@ -258,19 +256,24 @@
 		                  <c:forEach items="${kor_list }" var="referenceDto">
 		                     <tr>
 		                        <td>${referenceDto.rboard_no }</td>
-								<td>${referenceDto.rboard_title }</td>
+								<td><a href="reference_controller.do?command=boarddetail&rboard_no=${referenceDto.rboard_no}">${referenceDto.rboard_title }</a></td>
 								<td>${referenceDto.rboard_regdate }</td>
 		                     </tr>
 		                  </c:forEach>
 					</c:otherwise>
 				</c:choose>
+				<tr>
+					<td colspan="3" align="right">
+						<input type="button" class="btn" value="작성하기" onclick="location.href='reference_controller.do?command=ref_insertform'">
+					</td>
+				</tr>
 			</table>
 		</div>
 		</div>
 	</div>
-	<div class="loginboard_form">
-		<%@ include file="../form/logout.jsp"%>
-	</div>  
+<div class="loginboard_form">
+	<%@ include file="../form/logout.jsp"%>
+</div>  
 </section>
 <div>
 	<footer>

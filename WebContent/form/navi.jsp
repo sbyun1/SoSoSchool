@@ -23,7 +23,6 @@
         position: relative;
         padding: 0;
         line-height: 50px;
-        background-color: rgb(173,175,255);
         min-width: 180px;
         text-align: center;
     }
@@ -35,10 +34,7 @@
     }
     .navi li ul{
         list-style: none;
-<<<<<<< HEAD
         position: initial;
-=======
->>>>>>> 2f5e414 (start ~ main css)
         left: 0;
         width: auto;
         background-color: gray;
