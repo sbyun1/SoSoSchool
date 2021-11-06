@@ -209,7 +209,7 @@
             2]);
 
         var options = {
-            title: "망한 성적",
+            title: "월간 성적",
             width: 250,
             height: 270,
             bar: {groupWidth: "95%"},
@@ -235,7 +235,7 @@
             2]);
 
         var options = {
-            title: "망한 성적",
+            title: "과목별 성적",
             width: 250,
             height: 270,
             bar: {groupWidth: "95%"},
@@ -314,9 +314,7 @@
             </table>
         </div>
     </div>
-    <div id="buttonform">
-        <button class="button">성적 올리러!!<br><br>학습하기</button>
-    </div>
+    
 </div>
 <div class="loginboard_form">
     <%@ include file="../form/logout.jsp"%>

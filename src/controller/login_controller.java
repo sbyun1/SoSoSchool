@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import com.soso.login.Dao.UserDao;
 import com.soso.login.Dto.UserDto;
-import com.soso.ref.dao.referenceDao;
-import com.soso.ref.dto.referenceDto;
 
 import mypageDao.NoticeDao;
 import mypageDto.NoticeDto;
@@ -35,7 +33,6 @@ public class login_controller extends HttpServlet {
 		
 		UserDao dao = new UserDao();
 		NoticeDao nDao = new NoticeDao();
-		referenceDao rDao = new referenceDao();
 		HttpSession session = request.getSession();
 
 		if(command.equals("loginform")) {
@@ -50,43 +47,7 @@ public class login_controller extends HttpServlet {
 				session.setAttribute("userdto", userdto);
 				session.setMaxInactiveInterval(60*60);
 
-				//유저 로그인 시 ( *관리자 로그인 시 구현 필요)
-				if(userdto.getUser_type().equals("USER")) {
-					//순위 표시
-					request.setAttribute("name", userdto.getUser_name());
-					request.setAttribute("point", userdto.getUser_point());
-					int no = userdto.getUser_no();
-					UserDto ps = dao.pointSelect(no);
-					request.setAttribute("no", ps.getUser_no());
-					List<UserDto> list = dao.pointAll();
-					request.setAttribute("rank_list", list);
-					
-					//공지 사항 리스트
-					List<NoticeDto> noti_list = nDao.selectAll(); 
-					request.setAttribute("noti_list", noti_list);
-					System.out.println(userdto.getGrade());
-					
-					//자료실 리스트
-					List<referenceDto> sDto = rDao.selectGrade(userdto.getGrade());
-					request.setAttribute("grade_list", sDto);
-					 
-					
-					RequestDispatcher disp = request.getRequestDispatcher("login/main.jsp");
-					disp.forward(request, response);
-
-					
-
-				//어드민 로그인시
-				
-					
-
-				}else if(userdto.getUser_type().equals("ADMIN")){
-					RequestDispatcher disp = request.getRequestDispatcher("admin/admin_main.jsp");
-					disp.forward(request, response);
-
-				if(userdto.getEnabled_yn().equals("Y")){
 				if(userdto.getEnabled_yn().equals("N")){
-
 					PrintWriter writer = response.getWriter();
 					writer.println("<script type='text/javascript'>alert('탈퇴한 회원입니다');location.href='../login_controller.do?command=loginform';</script>");
 					writer.close();
@@ -114,7 +75,6 @@ public class login_controller extends HttpServlet {
 						RequestDispatcher disp = request.getRequestDispatcher("admin/admin_main.jsp");
 						disp.forward(request, response);
 					}
-
 				}
 
 				
