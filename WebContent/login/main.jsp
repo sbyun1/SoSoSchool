@@ -184,42 +184,38 @@
 <section>
   <div id="left">
     <!-- 동영상 -->
-    <div id="video">
-      <h3>최신 자료글</h3>
-         <table border="1">
+     <div id="video">
+      <h3>학년별 추천 영상</h3>
+         <table id="referenceTable" border="1">
         	<col width="900px"> <col width="200px">
-        	<tr>
-          	<th>제목</th>
-          	<th>날짜</th>
-          	</tr>
           	<tbody id="tbody">
           	<c:choose>
           	
 				<c:when test = "${userdto.grade eq '1'}">
-		        	<c:forEach items = "${grade_list }" var= "dto">
-						<tr>
-							<td><a href = "reference_controller.do?command=grade1">${dto.rboard_title }</a></td>
-							<td>${dto.rboard_regdate }</td>
+					<h4>1학년</h4>
+						<tr style="width:100%">
+							<td style="width:33%;"colspan="1"><iframe height="315" src="https://www.youtube.com/embed/K4nJ1RZkf-8?start=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+							<td style="width:33%;"colspan="1"><iframe height="315" src="https://www.youtube.com/embed/88dFSVafleQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+							<td style="width:33%;"colspan="1"><iframe height="315" src="https://www.youtube.com/embed/nty9I0-Fvi8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
 						</tr>
-					</c:forEach>
 				</c:when>
 				
 				<c:when test = "${userdto.grade eq '2'}">
-		        	<c:forEach items = "${grade_list }" var= "dto">
-						<tr>
-							<td><a href = "reference_controller.do?command=grade2">${dto.rboard_title }</a></td>
-							<td>${dto.rboard_regdate }</td>
+				<h4>2학년</h4>
+						<tr style="width:100%">
+							<td style="width:33%;"colspan="1"><iframe height="315" src="https://www.youtube.com/embed/itrbyw-qflE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>						
+							<td style="width:33%;"colspan="1"><iframe height="315" src="https://www.youtube.com/embed/-YYeG6TSiK4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>						
+							<td style="width:33%;"colspan="1"><iframe height="315" src="https://www.youtube.com/embed/I_TkkYHqXJM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>						
 						</tr>
-					</c:forEach>
 				</c:when>
 				
 				<c:when test = "${userdto.grade eq '3'}">
-		        	<c:forEach items = "${grade_list }" var= "dto">
-						<tr>
-							<td><a href = "reference_controller.do?command=grade3">${dto.rboard_title }</a></td>
-							<td>${dto.rboard_regdate }</td>
+				<h4>3학년</h4>
+						<tr style="width:100%">
+							<td style="width:33%;"colspan="1"><iframe  height="315" src="https://www.youtube.com/embed/TFgeWHi7MnE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+							<td style="width:33%;"colspan="1"><iframe  height="315" src="https://www.youtube.com/embed/gghDRJVxFxU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+							<td style="width:33%;"colspan="1"><iframe  height="315" src="https://www.youtube.com/embed/ORY1pq9KQ0M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
 						</tr>
-					</c:forEach>
 				</c:when>				
 			</c:choose>
 			</tbody> 
