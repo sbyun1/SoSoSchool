@@ -85,11 +85,13 @@ public class login_controller extends HttpServlet {
 					disp.forward(request, response);
 
 				if(userdto.getEnabled_yn().equals("Y")){
+				if(userdto.getEnabled_yn().equals("N")){
+
 					PrintWriter writer = response.getWriter();
 					writer.println("<script type='text/javascript'>alert('탈퇴한 회원입니다');location.href='../login_controller.do?command=loginform';</script>");
 					writer.close();
 					session.invalidate();
-				}else if(userdto.getEnabled_yn().equals("N")){
+				}else if(userdto.getEnabled_yn().equals("Y")){
 					//유저 로그인 시 ( *관리자 로그인 시 구현 필요)
 					if(userdto.getUser_type().equals("USER")) {
 						//순위 표시
