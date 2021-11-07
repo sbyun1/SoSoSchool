@@ -199,16 +199,15 @@
 				<tr>
 					<td colspan = "2">
 					<input type = "button" value = "목록" onclick = "location.href='mypage_controller.do?command=mypage_qna'">
-					<input type = "button" value = "수정" onclick = "location.href='mypage_controller.do?command=qna_updateform&qna_no=${dto.qna_no}'">
-					<input type = "button" value = "삭제" onclick = "location.href='mypage_controller.do?command=qna_delete&qna_no=${dto.qna_no}'">
-					<input type = "button" value = "답글달기" onclick = "location.href='mypage_controller.do?command=qna_replyform&parentqna=${dto.qna_no}'">
 					
+						<c:if test = "${userdto.user_id == dto.qna_writer }">
+							<input type = "button" value = "수정" onclick = "location.href='mypage_controller.do?command=qna_updateform&qna_no=${dto.qna_no}'">
+							<input type = "button" value = "삭제" onclick = "location.href='mypage_controller.do?command=qna_delete&qna_no=${dto.qna_no}'">
+							<input type = "button" value = "답글달기" onclick = "location.href='mypage_controller.do?command=qna_replyform&parentqna=${dto.qna_no}'">
+						</c:if>
 					
 					</td>
-		
-		
-		</tr>													
-						
+				</tr>													
 			</table>
 		</div>			
 	</div>

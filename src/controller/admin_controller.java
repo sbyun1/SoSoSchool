@@ -4,7 +4,11 @@ import com.soso.login.Dao.UserDao;
 import com.soso.login.Dto.UserDto;
 import group.groupDao;
 import group.groupDto;
+import mypageDao.NoticeDao;
+import mypageDao.QnaDao;
 import mypageDao.changeStarDao;
+import mypageDto.NoticeDto;
+import mypageDto.QnaDto;
 import mypageDto.changeStarDto;
 
 import java.io.IOException;
@@ -39,6 +43,8 @@ public class admin_controller extends HttpServlet {
 		//Dao 불러오는 코드
 		groupDao groupdao = new groupDao();					//소그룹 dao
 		changeStarDao changestardao = new changeStarDao();	//상품교환 dao
+		NoticeDao Ndao = new NoticeDao();					//공지 dao
+		QnaDao Qdao = new QnaDao();							//qna dao
 
 		//소그룹
 		if(command.equals("group")){
@@ -62,6 +68,178 @@ public class admin_controller extends HttpServlet {
 
 			dispatch("admin/admin_changeStar_board_list.jsp", request, response);
 		}
+		
+		
+		//공지사항
+		else if(command.equals("admin_notice")) {
+			List<NoticeDto> noti_list = Ndao.selectAll(); //전체 리스트를 가져와서 selectAll실행
+			
+			request.setAttribute("list", noti_list);
+			RequestDispatcher disp = request.getRequestDispatcher("admin/admin_notice.jsp");
+			disp.forward(request, response);
+		}
+		//공지 디테일
+		else if(command.equals("notice_detail")){
+			int noti_no = Integer.parseInt(request.getParameter("noti_no"));
+			NoticeDto dto = Ndao.selectOne(noti_no);
+			
+			request.setAttribute("dto", dto);
+			RequestDispatcher dp = request.getRequestDispatcher("admin/admin_notice_detail.jsp");
+
+			dp.forward(request, response);
+		}
+		//공지 수정
+		else if(command.equals("notice_updateform")) {
+			int noti_no = Integer.parseInt(request.getParameter("noti_no"));
+			NoticeDto dto = Ndao.selectOne(noti_no);
+			request.setAttribute("dto", dto);
+			dispatch("admin/admin_notice_update.jsp", request, response);
+		}
+		
+		else if(command.equals("notice_update")) {
+			int noti_no = Integer.parseInt(request.getParameter("noti_no"));
+			String noti_title = request.getParameter("noti_title");
+			String noti_content = request.getParameter("noti_content");
+			
+			NoticeDto dto = new NoticeDto();
+			dto.setNoti_no(noti_no);
+			dto.setNoti_title(noti_title);
+			dto.setNoti_content(noti_content);
+			
+			int res = Ndao.update(dto);
+			
+			if(res > 0) {
+				dispatch("admin_controller.do?command=admin_notice", request, response);
+				
+			}else {
+				dispatch("admin_controller.do?command=notice_detail&noti_no="+noti_no, request, response);
+			}
+		}
+		//공지삭제
+		else if(command.equals("notice_delete")) {
+			int noti_no = Integer.parseInt(request.getParameter("noti_no"));
+			int res = Ndao.delete(noti_no);
+			
+			if(res > 0) {
+				dispatch("admin_controller.do?command=admin_notice", request, response);
+			}else {
+				dispatch("admin_controller.do?command=notice_detail&noti_no="+noti_no, request, response);
+			}
+		}
+		
+		//공지 작성
+		else if(command.equals("notice_writeform")) {
+			
+			response.sendRedirect("admin/admin_notice_write.jsp");
+		}
+		else if(command.equals("notice_write")) {
+			String notice_title = request.getParameter("notice_title");
+			String notice_content = request.getParameter("notice_content");
+			
+			NoticeDto dto = new NoticeDto();
+			dto.setNoti_title(notice_title);
+			dto.setNoti_content(notice_content);
+			
+			int res = Ndao.insert(dto);
+			
+			if(res > 0) {
+				dispatch("admin_controller.do?command=admin_notice",request,response);
+			}else {
+				dispatch("admin_controller.do?command=notice_writeform", request, response);
+			}
+		}
+		
+		//qna
+		else if(command.equals("admin_qna")) {
+			List<QnaDto> qna_list = Qdao.selectAll(); //전체 리스트를 가져와서 selectAll실행
+			
+			request.setAttribute("list", qna_list);
+			RequestDispatcher disp = request.getRequestDispatcher("admin/admin_qna.jsp");
+			disp.forward(request, response);
+		}
+		//qna 디테일
+		else if(command.equals("qna_detail")) {
+			int qna_no = Integer.parseInt(request.getParameter("qna_no"));
+			QnaDto dto = new QnaDto();
+			dto = Qdao.selectOne(qna_no);
+			
+			request.setAttribute("dto", dto);
+			RequestDispatcher dp = request.getRequestDispatcher("admin/admin_qna_detail.jsp");
+
+			dp.forward(request, response);
+		}
+		//qna 답글달기
+		else if(command.equals("qna_replyform")) {
+			int parentqna_no = Integer.parseInt(request.getParameter("parentqna"));
+			
+			QnaDto dto = Qdao.selectOne(parentqna_no);
+			request.setAttribute("parentqna", dto);
+			dispatch("admin/admin_qna_reply.jsp", request, response);
+		}
+		else if(command.equals("qna_reply")) {
+			int parentqna_no = Integer.parseInt(request.getParameter("parentqna_no"));
+			String qna_writer = request.getParameter("qna_writer");
+			String qna_title = request.getParameter("qna_title");
+			String qna_content = request.getParameter("qna_content");
+			
+			QnaDto parentQna = Qdao.selectOne(parentqna_no);
+			
+			int parentgno = parentQna.getQna_gno();
+			int parentgsq = parentQna.getQna_gsq();
+			int parenttab = parentQna.getQna_tab();
+			
+			QnaDto dto = new QnaDto(0, parentgno, parentgsq, parenttab, qna_title, qna_writer, qna_content, null); 
+			boolean res = Qdao.reply_logic(dto);
+			
+			if(res) {
+				response.sendRedirect("admin_controller.do?command=admin_qna");
+			}else {
+				response.sendRedirect("admin_controller.do?command=qna_detail&qna_no="+parentqna_no);
+			}
+			
+		}
+		//qna 삭제
+		else if(command.equals("qna_delete")) {
+			int qna_no = Integer.parseInt(request.getParameter("qna_no"));
+			int res = Qdao.delete(qna_no);
+			
+			if(res > 0) {
+				dispatch("admin_controller.do?command=admin_qna",request, response);
+			}
+			else {
+				dispatch("admin_controller.do?command=qna_detail&qna_no="+qna_no, request, response);
+			}
+			
+		}
+		
+		//qna 수정
+		else if(command.equals("qna_updateform")) {
+			int qna_no = Integer.parseInt(request.getParameter("qna_no"));
+		
+			QnaDto dto = Qdao.selectOne(qna_no);
+			request.setAttribute("dto", dto);
+			dispatch("admin/admin_qna_update.jsp", request, response);
+		}
+		else if(command.equals("qna_update")) {
+			int qna_no = Integer.parseInt(request.getParameter("qna_no"));
+			String qna_title =request.getParameter("qna_title");
+			String qna_content = request.getParameter("qna_content");
+			
+			QnaDto dto = new QnaDto();
+			dto.setQna_no(qna_no);
+			dto.setQna_title(qna_title);
+			dto.setQna_content(qna_content);
+			
+			int res = Qdao.update(dto);
+			
+			if(res > 0) {
+				dispatch("admin_controller.do?command=admin_qna", request, response);
+				
+			}else {
+				dispatch("admin_controller.do?command=qna_detail&qna_no="+qna_no, request, response);
+			}
+		}
+		
 
 	}
 

@@ -71,6 +71,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	
 	}
 	button{
 		width: 200px;
@@ -82,6 +83,7 @@
 		outline: 0;
 		color: white;
 		border-radius: 10px;
+		cursor:pointer;
 	}
  </style>   
 <body>
@@ -94,10 +96,10 @@
 	</div>
 	<div id="top_form">
 		<div class="button_form">
-			<button>공지사항 추가</button>
+			<button onclick = "location.href='../admin_controller.do?command=admin_notice'">공지사항 관리</button>
 		</div>
 		<div class="button_form">
-			<button>QNA 추가</button>
+			<button onclick = "location.href='../admin_controller.do?command=admin_qna'">QNA 관리</button>
 		</div>
 		<div class="button_form">
 			<button>자료실 추가</button>

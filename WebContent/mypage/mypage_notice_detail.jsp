@@ -93,6 +93,7 @@
         -khtml-user-select: none;
         -webkit-user-select: none;
         user-select: none;
+        height: 700px;
     }
     /*성적표*/
     section .mainform #mainlist{
@@ -126,9 +127,27 @@
     	justify-content: center;
     }
 	.noti_table{
+	
 		text-align:center;
-		
+		width: 600px;
+		border-collapse: collapse;
+		border-top: 1px solid #444444;
+		border:1px;
 	}
+    td{
+   
+    border-bottom: 1px solid #FAF0F4;
+ 
+    }
+    th{
+    background-color:rgb(173,175,255);
+   
+    padding: 10px;
+    }
+    
+    tr:nth-child(2n){
+    background-color:#FBF4F5;
+    }
     
     /*푸터*/
     footer{
@@ -181,28 +200,29 @@
 					<td>${dto.noti_regdate }</td>
 				</tr>
 				<tr>
-				    <th>제목1</th>
+				    <th>제목</th>
 				    <td>${dto.noti_title }</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
 					<td>${dto.noti_writer }</td>
 				</tr>
+					<tr>
+					<th colspan = "2"> 공지사항</th>
+					
+				</tr>
 				<tr>
-					<th>공지사항</th>
-					<td><textarea cols = "60" rows = "10">${dto.noti_content }</textarea> </td>
+					<td colspan = "2"
+					style = "width: 300px; height:200px;">
+					${dto.noti_content }
+					</td>
 				</tr>
 		
 				<tr>
 					<td colspan = "2">
 					<input type = "button" value = "목록" onclick = "location.href='mypage_controller.do?command=mypage_notice'">
-					<input type = "button" value = "수정" onclick = "location.href='mypage_controller.do?command=notice_updateform&noti_no=${dto.noti_no}'">
-					<input type = "button" value = "삭제" onclick = "location.href='mypage_controller.do?command=notice_delete&noti_no=${dto.noti_no}'">
-					
 					</td>
-		
-		
-		</tr>													
+				</tr>													
 						
 			</table>
 		</div>			

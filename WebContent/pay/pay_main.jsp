@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>결제하기</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <style type = "text/css">
 @font-face {
@@ -167,9 +168,10 @@
     }
 }
 	function kakaopay(){
-		console.log()
-    	// getter
+		if(${userdto.user_id ne null}){
+    	
     	var IMP = window.IMP;
+		var user_no = ${userdto.user_no}
     	IMP.init('imp70079286');
     	//var money = $('input[name="pay_opt"]:checked').val();
     	
@@ -204,27 +206,55 @@
                     }
             	
             	})
-
-            		var msg = '결제가 완료되었습니다.';
+            		/*var msg = '결제가 완료되었습니다.';
                     msg += '고유ID : ' + rsp.imp_uid;
                     msg += '상점 거래ID : ' + rsp.merchant_uid;
                     msg += '결제 금액 : ' + rsp.paid_amount;
                     msg += '카드 승인번호 : ' + rsp.apply_num;
-                    alert(msg);
-                    var user_no = ${userdto.user_no}
-                    location.href = "../mypage_controller.do?command=userSub&user_no="+user_no;
+                    */
                     
-            
+                    Swal.fire({
+              		  title: '결제성공',
+              		  text: "소소스쿨의 입학을 환영합니다!.",
+              		  icon: 'success',
+              		  buttons: "확인",
+              		}).then((value) => {
+              			if(value){
+                            location.href = "../mypage_controller.do?command=userSub&user_no="+user_no;
+              			}	
+              		});
 
             } else {
-                var msg = '결제에 실패하였습니다.';
+                Swal.fire({
+            		  title: '결제실패',
+            		  text: "에러내용 : " + rsp.error_msg,
+            		  icon: 'error',
+            		  buttons: "확인",
+            		}).then((value) => {
+            			if(value){
+            				location.href="../pay_controller.do?command=pay_main";
+            			}	
+            		});
+              /*  var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
             
             	alert(msg);
             	location.href="../pay_controller.do?command=pay_main"; //실패 : alert창 확인 후 이동할 url 설정
-            
+            */
             }
         });
+		}else{
+			Swal.fire({
+      		  title: '로그인 해주세요',
+      		  text: "세션 만료",
+      		  icon: 'warning',
+      		  buttons: "확인",
+      		}).then((value) => {
+      			if(value){
+      				location.href='../login_controller.do?command=login';
+      			}	
+      		});
+		} 
     };        
 
 

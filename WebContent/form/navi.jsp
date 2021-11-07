@@ -189,13 +189,13 @@
 
 
     function pay_main(){
-        if(${userdto.user_id eq null}){
+       /* if(${userdto.user_id eq null}){
             alert("잘못된 접근");
             location.href='../login/login.jsp'
-        }else{
+        }else{*/
             location.href='../pay_controller.do?command=pay_main'
             
-        }
+        //}
     }
 
     

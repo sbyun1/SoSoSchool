@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>회원정보수정</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <style>
 @font-face {
@@ -88,7 +89,7 @@
     /*메인 구역*/
     section .mainform{
         width: 750px;     /*메인 구역 전체 width값*/
-        min-height: 1100px;
+        min-height: 1050px;
         display: flex;
         flex-wrap: wrap;
         -ms-user-select: none;      /*드래그 금지*/
@@ -242,8 +243,8 @@
             text-align: right;
             width:540px;
             min-width:650px;
-            height: 800px;
-            min-height: 800px;
+            height: 650px;
+            min-height: 650px;
             display: flex;
   			justify-content: center;
   			
@@ -530,6 +531,9 @@
   		 alert("변경을 원하시면 고객문의 게시판을 이용해주세요");
   	 }
   	 
+
+  	 
+  	 
     </script>
 
 
@@ -554,7 +558,7 @@
 			<img src = "../img/userupdate.png"
 			style="width: 600px; height:180px; padding: 10px">
 		</div>
-			<form method="post" action="../mypage_controller.do?command=mypage_userUpdate">
+			<form name = "userinfo" method="post" action="../mypage_controller.do?command=mypage_userUpdate">
 			<input type = "hidden" name = "user_no" value = "${userdto.user_no }">
 			
         <div class="inner">
@@ -576,17 +580,6 @@
                     <input type="text" id="student_name" name="student_name" 
                     value = "${userdto.user_name }" readonly="true" onclick = "contact();"></li>
                     
-             
-                <li><label class="reg" for="new_password">비밀번호 변경</label>
-                    <input type="password" id="new_password" name="new_password" 
-                    	maxlength="15" placeholder="8자리 이상의 영문 소문자, 숫자 조합" 
-                    	onchange="pwChk()"></li>
-                    
-                <li><label class="reg" for="chk_password">비밀번호 확인</label>
-                    <input type="password" id="chk_password" name="chk_password" maxlength="15" 
-                    	placeholder="비밀번호 재입력" onchange="pwChk()">
-                    		<p id="check">비밀번호를 입력해주세요.</p></li>
-                
                 <li><label class="reg" for="chk_tel">휴대폰 번호</label>
                     <input type="tel" id="chk_tel" name="chk_tel"
                      value = "${userdto.phone }" placeholder="-없이 숫자만 입력해주세요." onchange="telChk()"></li>
@@ -645,9 +638,7 @@
         </fieldset>
         <fieldset class="sendform">
             <input type="submit" class="btn" value="변경하기">
-            <input type="submit" class="btn" value="비밀번호 변경">
-            
-            <input type="reset" class="btn2" value="돌아가기"
+            <input type="button" class="btn2" value="돌아가기"
             onclick="location.href='../mypage_controller.do?command=userinfo&user_no=${userdto.user_no}'"><br>
             
         </fieldset>

@@ -128,6 +128,42 @@ public class UserInfoDao extends JDBCTemplate {
 		return res;
 	}
 
+	public static int userPwChange(UserDto userInfo,String user_new_pw) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		
+		int res = 0;
+		
+		String sql = "UPDATE SOSO_USER SET USER_PW = ? WHERE USER_NO = ?";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1,user_new_pw);
+			pstm.setInt(2,userInfo.getUser_no());
+			System.out.println("03. query 준비 " + sql);
+			
+			res = pstm.executeUpdate();
+			System.out.println(("04. query 실행 및 리턴"));
+			
+			if(res > 0) {
+				commit(con);
+			}
+			else {
+				rollback(con);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("3/4단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			close(con);
+			System.out.println("05. db 종료\n");
+		}
+		
+		return res;
+	}
+
 	
 
 }

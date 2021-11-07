@@ -150,7 +150,27 @@
     background-color:#FBF4F5;;
     }
     
- 
+    input{
+     font-family: 'GowunDodum-Regular';
+    }
+    #write_btn{
+    	width: 100px;
+    	height:50px;
+    	background-color:rgb(173,175,255);
+    	border:none;
+    	border-radius: 20px;
+    	font-size: 15pt;
+    	margin-top: 20px;
+    	margin-left: 330px;
+    	color:white;
+    	cursor:pointer;
+    }
+ 	#write_btn:hover{
+ 		background-color: #FBF4F5;
+ 		color: blue;
+ 	
+ 	}
+ 	
     
     /*푸터*/
     footer{
@@ -186,6 +206,7 @@
 			style="width: 700px; height:170px; padding: 10px">
 		</div>
 		<div id = "container">  
+		
 			<table class = "qna_table" border = "1">
 				<col width = "50px"><col width = "400px"><col width = "150px"><col width = "100px">
 				<tr>
@@ -216,15 +237,9 @@
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
-				<tr>
-					<td colspan = "4" style = "border:none">
-					<input type = "button" value = "문의하기" onclick = "location.href='mypage_controller.do?command=qna_writeform'">
-				</td>
-				</tr>
-			</table>
-			
-			
-		</div>			
+				</table>
+		</div>	
+				<input type = "button" id = "write_btn" value = "문의하기" onclick = "location.href='mypage_controller.do?command=qna_writeform'">
 	</div>
 </div>
 <div class="loginboard_form">

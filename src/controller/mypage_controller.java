@@ -72,65 +72,7 @@ public class mypage_controller extends HttpServlet {
 
 			dp.forward(request, response);
 		}
-		//공지작성//
-		else if(command.equals("notice_writeform")) {
-			
-			response.sendRedirect("mypage/mypage_notice_write.jsp");
-		}
-		else if(command.equals("notice_write")) {
-			String notice_title = request.getParameter("notice_title");
-			String notice_content = request.getParameter("notice_content");
-			
-			NoticeDto dto = new NoticeDto();
-			dto.setNoti_title(notice_title);
-			dto.setNoti_content(notice_content);
-			
-			int res = Ndao.insert(dto);
-			
-			if(res > 0) {
-				dispatch("mypage_controller.do?command=mypage_notice",request,response);
-			}else {
-				dispatch("mypage_controller.do?command=notice_writeform", request, response);
-			}
-		}
-		//공지 업데이트//
-		else if(command.equals("notice_updateform")) {
-			int noti_no = Integer.parseInt(request.getParameter("noti_no"));
-			NoticeDto dto = Ndao.selectOne(noti_no);
-			request.setAttribute("dto", dto);
-			dispatch("mypage/notice_update.jsp", request, response);
-		}
 		
-		else if(command.equals("notice_update")) {
-			int noti_no = Integer.parseInt(request.getParameter("noti_no"));
-			String noti_title = request.getParameter("noti_title");
-			String noti_content = request.getParameter("noti_content");
-			
-			NoticeDto dto = new NoticeDto();
-			dto.setNoti_no(noti_no);
-			dto.setNoti_title(noti_title);
-			dto.setNoti_content(noti_content);
-			
-			int res = Ndao.update(dto);
-			
-			if(res > 0) {
-				dispatch("mypage_controller.do?command=mypage_notice", request, response);
-				
-			}else {
-				dispatch("mypage_controller.do?command=notice_detail&noti_no="+noti_no, request, response);
-			}
-		}
-		//공지 삭제//
-		else if(command.equals("notice_delete")) {
-			int noti_no = Integer.parseInt(request.getParameter("noti_no"));
-			int res = Ndao.delete(noti_no);
-			
-			if(res > 0) {
-				dispatch("mypage_controller.do?command=mypage_notice", request, response);
-			}else {
-				dispatch("mypage_controller.do?command=notice_detail&noti_no="+noti_no, request, response);
-			}
-		}
 		
 		/**************마이페이지 회원정보 수정 페이지**************************/
 		else if(command.equals("userinfo")) {
@@ -153,6 +95,7 @@ public class mypage_controller extends HttpServlet {
 		}
 		
 		else if(command.equals("mypage_userUpdate")){
+			
 			int user_no = Integer.parseInt(request.getParameter("user_no"));
 			String user_pr = request.getParameter("user_pr");
 			String user_id = request.getParameter("parent_id");
@@ -183,8 +126,10 @@ public class mypage_controller extends HttpServlet {
 			PrintWriter writer = response.getWriter();
 			
 			if(res > 0) {
-	            writer.println("<script type='text/javascript'>alert('정보가 변경되었습니다.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
-	            writer.close();
+			//dispatch("mypage_controller.do?command=userinfo&user_no="+user_no, request, response);
+	          writer.println("<script type='text/javascript'>alert('정보가 변경되었습니다.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
+	          writer.close();
+	           
 			}
 			else {
 			
@@ -193,6 +138,45 @@ public class mypage_controller extends HttpServlet {
 			}
 		} 
 		
+		 
+		 /**** 비밀번호 변경 ****/
+		else if(command.equals("pwchgeform")) {
+			int user_no = Integer.parseInt(request.getParameter("user_no"));
+			UserDto userdto = userdao.selectuser(user_no);
+			
+			request.setAttribute("userdto", userdto);
+			dispatch("mypage/mypage_pwChange.jsp", request, response);
+		}
+		 
+		 
+		 
+		 
+		else if(command.equals("userPwChange")) {
+			int user_no = Integer.parseInt(request.getParameter("user_no"));
+			String user_new_pw = request.getParameter("new_password");
+			
+			UserDto userInfo = userdao.selectuser(user_no);
+			int res = UserInfoDao.userPwChange(userInfo,user_new_pw); 
+			
+			PrintWriter writer = response.getWriter();
+			
+			if(res > 0) {
+				 writer.println("<script type='text/javascript'>alert('성공하였습니다'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
+		         writer.close();
+		         
+	            //dispatch("mypage_controller.do?command=userinfo&user_no="+user_no, request, response);
+			}
+			else {
+			
+				 writer.println("<script type='text/javascript'>alert('실패하였습니다\n 고객문의를 이용주세요.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
+		         writer.close();
+			}
+			
+			
+			
+		}
+		 
+		 
 		/*******************회원 탈퇴: enabled_yn을 y로 바꿈****************/
 		else if(command.equals("userdisable")) {
 			int user_no = Integer.parseInt(request.getParameter("user_no"));
@@ -263,7 +247,7 @@ public class mypage_controller extends HttpServlet {
 		
 			QnaDto dto = Qdao.selectOne(qna_no);
 			request.setAttribute("dto", dto);
-			dispatch("mypage/qna_update.jsp", request, response);
+			dispatch("mypage/mypage_qna_update.jsp", request, response);
 		}
 		else if(command.equals("qna_update")) {
 			int qna_no = Integer.parseInt(request.getParameter("qna_no"));
@@ -349,9 +333,9 @@ public class mypage_controller extends HttpServlet {
 			PrintWriter writer = response.getWriter();
 			
 			if(res > 0) {
-				writer.println("<script type='text/javascript'>alert('성공하였습니다.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
-		        writer.close();
-				response.sendRedirect("mypage/mypage_pay_manage.jsp");
+				//writer.println("<script type='text/javascript'>alert('성공하였습니다.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
+		       // writer.close();
+				response.sendRedirect("mypage/mypage_usernfo.jsp");
 			
 			}
 			else {

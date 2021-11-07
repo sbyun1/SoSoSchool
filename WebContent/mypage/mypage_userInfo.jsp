@@ -234,12 +234,14 @@
             text-align: center;
             min-height: 100px;
             justify-content: center;
+           
+           
         }
         .regisform{
             text-align: right;
             width:540px;
-            height: 600px;
-            min-height: 600px;
+            height: 570px;
+            min-height: 570px;
             display: flex;
   			justify-text: center;
   			margin-left:30px;
@@ -279,7 +281,23 @@
        	fieldset{
   			border: 0;
   		}
+  		.sendform > .updatebtn{
+	        background: rgb(173,175,255);
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+            justify-content: center;
+            border-radius: 4px;
+            margin-left: 230px;
+            padding: 9px;
+            transition: .3s;
+            border: none;
+            outline: none;
+  		}
   		
+  		.sendform > .updatebtn:hover{
+  			opacity: 0.6;
+  		}
   		.sendform > .btn{
 	        background: rgb(173,175,255);
             cursor: pointer;
@@ -287,7 +305,7 @@
             color: white;
             justify-content: center;
             border-radius: 4px;
-            margin-left: 290px;
+            margin-left: 3px;
             padding: 9px;
             transition: .3s;
             border: none;
@@ -533,6 +551,16 @@
  		location.href = "../mypage_controller.do?command=userupdateform&user_no="+user_no;
  	}
  	
+ 	function userPwChange(user_no){
+ 		location.href = "../mypage_controller.do?command=pwchgeform&user_no="+user_no;
+ 	}
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
  	function userDisable(user_no){
 
  		var result = confirm("정말 탈퇴하시겠습니까?\n탈퇴 후 재가입을 하려면 고객센터로 문의해야합니다");
@@ -639,10 +667,11 @@
             </ul>
         </fieldset>
         <fieldset class="sendform">
-            
-            <input type = "button" class="btn" value = "수정" onclick = "userUpdate(${userdto.user_no});"> 
-            <input type="button" class="btn2" value="회원탈퇴" onclick = "userDisable(${userdto.user_no});"><br>
-            
+        	
+            <input type = "button" class="updatebtn" value = "수정" onclick = "userUpdate(${userdto.user_no});"> 
+            <input type="button" class="btn" value="비밀번호 변경" onclick = "userPwChange(${userdto.user_no});">
+            <input type="button" class="btn2" value="회원탈퇴" onclick = "userDisable(${userdto.user_no});">
+        
         </fieldset>
    		</div>
   	 
