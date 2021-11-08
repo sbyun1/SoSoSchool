@@ -9,6 +9,7 @@
 <head>
     <title>공지사항</title>
 </head>
+
 <style>
 @font-face {
     font-family: 'GowunDodum-Regular';
@@ -19,7 +20,7 @@
     body{
         margin: 0;
         padding: 0;
-        min-width: 1400px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
+        min-width: 1190px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
         min-height: 650px;
         font-family: 'GowunDodum-Regular';
     }
@@ -52,7 +53,7 @@
     }
     /*본문 구역*/
     section{
-        min-width: 100%;
+        min-width: 1190px;
         display: flex;
         justify-content: center;
     }
@@ -94,7 +95,7 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    /*성적표*/
+   
     section .mainform #mainlist{
         min-width: 750px;         /*메인 구역 안 width 값*/
         display: flex;
@@ -119,14 +120,33 @@
         -webkit-user-select: none;
         user-select: none;
     }
-   
+    #container{
+    	width: 750px;
+    	display: flex;
+    	justify-content: center;
+    }
 	.noti_table{
 	
 		text-align:center;
-	
-		
+		width: 600px;
+		border-collapse: collapse;
+		border-top: 1px solid #444444;
+		border:none;
 	}
+    td{
+    border:none;
+    border-bottom: 1px solid #FAF0F4;
+ 
+    }
+    th{
+    background-color:rgb(173,175,255);
+    border:none;
+    padding: 10px;
+    }
     
+    tr:nth-child(2n){
+    background-color:#FBF4F5;
+    }
     /*푸터*/
     footer{
         background-color:rgb(233,233,236);
@@ -143,7 +163,14 @@
         user-select: none;
     }
 </style>
-
+<script type="text/javascript">
+	window.onload = function (){
+		if(${userdto.user_id eq null}){
+			alert("세션 만료");
+			location.href='../main_controller.do?command=start';
+		}
+	}
+</script>
 <body>
 <header>
      <img src = "../img/logo.png">
@@ -153,21 +180,22 @@
 </nav>
 <section>
 <div class="menuform">
-    <%@ include file="/form/mypage_menubar.jsp"%>
+    <%@ include file="../form/mypage_menubar.jsp"%>
 </div>
 <div class="mainform">
 	<div id="mainlist" style="height:150px">
-		<div class="title" style="width: 750px; height:150px">
-			공지사항	
+		<div class="title" style="width: 750px; height:200px">
+			<img src = "../img/noti.png"
+			style="width: 600px; height:150px; padding: 30px">	
 		</div>
 		<div id = "container">  
 			<table class = "noti_table" border = "1">
-				<col width = "100px"><col width = "500px"><col width = "150px"><col width = "150px">
+				<col width = "100px"><col width = "350px"><col width = "100px"><col width = "100px">
 				<tr>
-				    <th>No.</th>
+				    <th style = "border-top-left-radius:20px">No.</th>
 				    <th>제목</th>
 				    <th>작성자</th>
-				    <th>작성일</th>
+				    <th style = "border-top-right-radius:20px">작성일</th>
 				</tr>
 				<c:choose>
 					<c:when test = "${empty list }">
@@ -185,6 +213,17 @@
 							</tr>
 						</c:forEach>
 					</c:otherwise>
+				</c:choose>
+				
+				<c:choose>
+					<c:when test = "${userdto.user_type == 'admin' }">
+				<tr>
+					<td colspan = "4"
+					style = "border:none; background-color:#ffffff">
+						<input type = "button" value = "공지사항 작성" onclick = "location.href='mypage_controller.do?command=notice_writeform'">
+					</td>
+				</tr>
+				</c:when>
 				</c:choose>
 			</table>
 		</div>			

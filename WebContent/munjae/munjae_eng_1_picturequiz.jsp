@@ -1,22 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<% request.setCharacterEncoding("UTF-8");%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html>
 <html>
 <head>
-    <title>결제관리</title>
+<meta charset="UTF-8">
+<title>학습하기-영어-그림맞추기</title>
 </head>
-<style>
-@font-face {
-    font-family: 'GowunDodum-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-    body{
+<style type="text/css">
+	body{
         margin: 0;
         padding: 0;
         min-width: 1400px;  /*브라우저 축소해도 요소가 깨지는것을 방지*/
@@ -25,7 +21,7 @@
     }
     /*헤더*/
     header{
-        
+        background-color: aliceblue;
         min-width: 100%;
         height: 120px;
         display: flex;
@@ -56,36 +52,10 @@
         display: flex;
         justify-content: center;
     }
-    /*메뉴 리스트*/
-    section .menuform{
-        background-color: aliceblue;
-        width: 210px;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-    section .menuform #menu{
-        list-style: none;
-        margin: 0px 0px auto auto;
-        padding-left: 0px;
-        font-size: 35px;
-        font-weight: bold;
-    }
-    section .menuform #menu li{
-        text-align: center;
-        margin: 50px auto 50px auto;
-    }
-    section .menuform #menu .li_selec{
-        font-size: 20px;
-        border-radius: 45px;
-        background-color:(173,175,255);
-        width:180px;
-    }
+    
     /*메인 구역*/
     section .mainform{
-        width: 750px;     /*메인 구역 전체 width값*/
+        width: 960px;     /*메인 구역 전체 width값*/
         display: flex;
         flex-wrap: wrap;
         -ms-user-select: none;      /*드래그 금지*/
@@ -94,18 +64,18 @@
         -webkit-user-select: none;
         user-select: none;
     }
-    /*성적표*/
+    
     section .mainform #mainlist{
-        min-width: 750px;         /*메인 구역 안 width 값*/
+        min-width: 960px;         /*메인 구역 안 width 값*/
         display: flex;
         flex-wrap: wrap;
+        list-style: none;
     }
     section .mainform #mainlist .title{
-        width: 750px;
-        height:150px;
-        font-size: 50px;
+        min-width: 960px;
+        min-height: 150px;
+        font-size: 20px;
         font-weight: bold;
-        display: flex;
         align-items: center;
         justify-content: center;
     }
@@ -113,11 +83,10 @@
     /*로그인 구역*/
     section .loginboard_form{
         width: 230px;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
         user-select: none;
+        margin-left:50px;
+       
+        
     }
     section .loginboard_form #loginboard{
         background-color: lightgrey;
@@ -181,20 +150,6 @@
         border: 0;
         outline: 0;
     }
-	.pay_table{
-	
-		text-align:center;
-	
-		
-	}
-	
-   #container{
-    	padding-left:50px;
-    	padding-right:100px;
-    	
-    }
-    
-    
     /*푸터*/
     footer{
         background-color:rgb(233,233,236);
@@ -210,69 +165,106 @@
         -webkit-user-select: none;
         user-select: none;
     }
+	#btn{
+		border:0;
+		padding:5px;
+		font-size:20px;
+		font-weight:bold;
+	}
+	span{
+		align:center;
+	}
+	ul{
+	text-align: center;
+	list-style: none;
+	}
+	@font-face {
+    font-family: 'GowunDodum-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff%27) format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
 </style>
 <body>
-<header>
-     <img src = "../img/logo.png">
+<header style="border:1px black; height: 120px; width: 1200px;">
+	<h1><img src="../img/logo.png"></h1>
 </header>
-<nav>
-    <%@ include file="../form/navi.jsp"%>
+<nav style="border: 1px solid rgb(173,175,255); background-color: rgb(173,175,255);">
+    <%@ include file="../form/navi.jsp" %>
 </nav>
 <section>
-<div class="menuform">
-    <ul id="menu">
-        <li style="margin-left: 10px">마이페이지</li>
-        <li class="li_selec">나의 학습 현황</li>
-        <li class="li_selec">상품교환</li>
-        <li class="li_selec">공지사항</li>
-        <li class="li_selec">고객문의(Q&A)</li>
-        <li class="li_selec">회원 정보 수정/탈퇴</li>
-        <li class="li_selec">결제 관리</li>
-    </ul>
-</div>
-<div class="mainform">
-	<div id="mainlist" style="height:150px">
-		<div class="title" style="width: 750px; height:150px">
-			결제관리	
-		</div>
-		<div id = "container">  
-						ㅇㅇㅇ님은 서비스 구독중입니다. <!--  추후 구독여부 데이터 가져와 작성 n일경우 구독중이 아닙니다-->
-			<input type = "button" value = "구독하러 가기" onclick = ""><!--네비의 결제페이지 이동 -->
-            <table class = "pay_table" border = "1"
-            	style = "">
-               
-                <tr><!-- 구독정보 테이블의 데이터를 가져온다 -->
-                    <th>구독 시작일:</th>
-                    <td>2021/08/30</td>
-                </tr>
-                <tr>
-                    <th>구독 종료일:</th>
-                    <td>2021/10/29</td>
-                </tr>
-                <tr>
-                    <th>구독 개월수:</th>
-                    <td>2달</td>
-                </tr>
-                <tr>    
-                    <th>남은 일수:</th>
-                    <td>60일</td>
-                </tr>
-                <tr>
-                    <th>월 가격정보:</th>
-                    <td>19,900원</td>
-                </tr>
-                
-               
-            </table>
-		</div>			
-	</div>
-</div>
-<div class="loginboard_form">
- 	<%@ include file="../form/logout.jsp"%>	
-</div>
+
+	<div class="mainform">
+        <div id="mainlist">
+	        <div style="text-align:center; margin:30px;">
+			   <button type="button" id="btn" style="margin-right:120px;"><img src="https://img.icons8.com/color/48/000000/abc.png"/><br>알파벳</button>
+			   <button type="button" id="btn" style="margin-left:120px; margin-right: 120px;"><img src="https://img.icons8.com/doodle/48/000000/help.png"/><br>영어단어</button>
+			   <button type="button" id="btn" style="margin-left:120px; background-color:rgb(173,175,255);"><img src="https://img.icons8.com/doodle/48/000000/picture.png"/><br>그림맞추기</button>
+			</div>
+            
+            
+                  	<div class="title">
+                  	<div>
+	                그림을 보고 단어를 입력해주세요
+	        		</div>
+	        		<hr>
+	        	<div>
+	        	<ul>
+	        		<li>
+					    <div style="text-align:center;">
+					        <img src="https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/58/000000/external-apple-fruit-vitaliy-gorbachev-flat-vitaly-gorbachev-1.png"
+					        	style="width:120px; height:120px;"/>
+				   		</div>
+				   	</li>
+				   	<li>
+		   				<label><b>AP</b></label>
+    					<input style="width:30px;" type="text" id="answer" value="">
+    					<label><b>E</b></label>
+    				</li>
+    				<li>
+    					<input type="submit" value="정답확인">
+    				</li>
+    			</ul>
+    			</div>
+            </div>
+          
+		
+        </div>
+    </div>
+    <div class="loginboard_form">
+        <div id="loginboard">
+            <div id="imgform">
+                <div id="image">
+                    <img src="img/img01.png">
+                </div>
+                <div id="setting">
+                    <img src="img/setting.jpg">
+                </div>
+            </div>
+            <div id="right">
+                <div id="textform">
+                    <div id="name">
+                        김이름님 환영합니다
+                    </div>
+                    <div id="location">
+                        나의 소속 소모임<br>
+                        소속 도서관
+                    </div>
+                    <div id="star">
+                        ★ 별 개수
+                    </div>
+                </div>
+                <div id="logoutbuttonform">
+                    <button>로그아웃</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-<footer>
-	<%@ include file="../form/footer.jsp"%>
-</footer>
-</body>
+    <div>
+		<footer>
+			<%@ include file="../form/footer.jsp" %>
+		</footer>
+	</div>
+	</body>
 </html>

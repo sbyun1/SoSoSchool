@@ -1,3 +1,4 @@
+<%@page import="com.soso.login.Dto.UserDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,7 +21,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        min-width: 80px;
+        width: 80px;
         height: 190px;
     }
     section .loginboard_form #loginboard #imgform #image img{
@@ -70,31 +71,37 @@
         outline: 0;
     }
 </style>
+<script type="text/javascript">
+    function logout(){
+        location.href='../login_controller.do?command=logout';
+    }
+</script>
 <body>
 	    <div id="loginboard">
         <div id="imgform">
-            <div id="image">
+            <div id="image" style="width: 80px; height:65px">
                 <img src="../img/img01.png">
             </div>
-            <div id="setting">
+            <div id="setting" style="width: 20px; height:40px">
                 <img src="../img/setting.jpg">
             </div>
         </div>
         <div id="right">
             <div id="textform">
                 <div id="name">
-                    김이름님 환영합니다
+                    ${userdto.user_name}님 환영합니다
                 </div>
                 <div id="location">
-                    나의 소속 소모임<br>
-                    소속 도서관
+<%--                    나의 소속 소모임<br>--%>
+<%--                    소속 도서관--%>
+                    나의 포인트<br><br>
                 </div>
                 <div id="star">
-                    ★ 별 개수
+                    ★ ${userdto.user_point}
                 </div>
             </div>
             <div id="logoutbuttonform">
-                <button>로그아웃</button>
+                <button onclick="logout();">로그아웃</button>
             </div>
         </div>
     </div>

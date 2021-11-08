@@ -90,12 +90,117 @@ public class NoticeDao extends JDBCTemplate{
 			close(con);
 			System.out.println("05.  db 종료\n");
 		}
-		System.out.println("test");
+	
 		return res;
 		
 	}
+
+	public int insert(NoticeDto dto) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		
+		int res = 0;
+		
+		
+		String sql = " INSERT INTO NOTICE VALUES (NOTI_NO_SQ.NEXTVAL, NOTI_GNO_SQ.NEXTVAL,"
+				+ "1, 0, ?, DEFAULT, ?, DEFAULT)";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, dto.getNoti_title());
+			pstm.setString(2, dto.getNoti_content());
+			System.out.println("03. query 준비: " + sql);
+			
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 준비");
+			
+			if(res > 0) {
+				commit(con);
+			}else {
+				rollback(con);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("3/4단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			close(con);
+			System.out.println("05. db 종료\n");
+		}
+		
+		return res;
+	}
+
+	public int update(NoticeDto dto) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		String sql = " UPDATE NOTICE SET NOTI_TITLE = ?, NOTI_CONTENT = ? WHERE NOTI_NO = ? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1,dto.getNoti_title());
+			pstm.setString(2, dto.getNoti_content());
+			pstm.setInt(3, dto.getNoti_no());
+			System.out.println("03. query 준비: " + sql);
+			
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+			
+			if(res > 0) {
+				commit(con);
+			}else {
+				rollback(con);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("3/4단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			close(con);
+			System.out.println("05. db 종료\n");
+		}
+		
+		return res;
+	}
+
+	public int delete(int noti_no) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		String sql = " DELETE FROM NOTICE WHERE NOTI_NO = ? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, noti_no);
+			System.out.println("03. query 준비: " + sql);
+			
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+			
+			if(res > 0) {
+				commit(con);
+			}else {
+				rollback(con);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("3/4단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			close(con);
+			System.out.println("05. db 종료\n");
+		}
+		return res;
+	}
 	
 	
+
 	
 	
 	
