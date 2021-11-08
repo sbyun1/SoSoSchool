@@ -2,14 +2,17 @@ package controller;
 
 import com.soso.login.Dao.UserDao;
 import com.soso.login.Dto.UserDto;
+import com.soso.ref.dao.referenceDao;
+import com.soso.ref.dto.referenceDto;
 import group.groupDao;
 import group.groupDto;
-import mypageDao.NoticeDao;
-import mypageDao.QnaDao;
 import mypageDao.changeStarDao;
-import mypageDto.NoticeDto;
-import mypageDto.QnaDto;
 import mypageDto.changeStarDto;
+import mypageDao.NoticeDao;
+import mypageDto.NoticeDto;
+import mypageDao.QnaDao;
+import mypageDto.QnaDto;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,6 +46,7 @@ public class admin_controller extends HttpServlet {
 		//Dao 불러오는 코드
 		groupDao groupdao = new groupDao();					//소그룹 dao
 		changeStarDao changestardao = new changeStarDao();	//상품교환 dao
+		referenceDao referenceDao = new referenceDao();		//자료실 dao
 		NoticeDao Ndao = new NoticeDao();					//공지 dao
 		QnaDao Qdao = new QnaDao();							//qna dao
 
@@ -68,6 +72,34 @@ public class admin_controller extends HttpServlet {
 
 			dispatch("admin/admin_changeStar_board_list.jsp", request, response);
 		}
+		//자료실
+		else if(command.equals("ref")){
+			List<referenceDto> list_all = referenceDao.selectall();
+			request.setAttribute("list_all", list_all);
+			//국어
+			List<referenceDto> kor_1 = referenceDao.select(1, "KOR");
+			List<referenceDto> kor_2 = referenceDao.select(2, "KOR");
+			List<referenceDto> kor_3 = referenceDao.select(3, "KOR");
+			request.setAttribute("kor_1", kor_1);
+			request.setAttribute("kor_2", kor_2);
+			request.setAttribute("kor_3", kor_3);
+			//영어
+			List<referenceDto> eng_1 = referenceDao.select(1, "ENG");
+			List<referenceDto> eng_2 = referenceDao.select(2, "ENG");
+			List<referenceDto> eng_3 = referenceDao.select(3, "ENG");
+			request.setAttribute("eng_1", eng_1);
+			request.setAttribute("eng_2", eng_2);
+			request.setAttribute("eng_3", eng_3);
+			//수학
+			List<referenceDto> math_1 = referenceDao.select(1, "MATH");
+			List<referenceDto> math_2 = referenceDao.select(2, "MATH");
+			List<referenceDto> math_3 = referenceDao.select(3, "MATH");
+			request.setAttribute("math_1", math_1);
+			request.setAttribute("math_2", math_2);
+			request.setAttribute("math_3", math_3);
+
+			dispatch("admin/admin_ref_board_list.jsp", request, response);
+		}		
 		
 		
 		//공지사항

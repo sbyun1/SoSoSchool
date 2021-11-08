@@ -221,37 +221,41 @@
 			<div class="title">
             	게시글 보기
             </div>
-			<form action="../reference_controller.do" method="post">
-				<input type="hidden" name="command" value="boardinsert">
-				<table border="1">
-					<col width="70px">
-					<col width="500px">
-					<tr>
-						<th>NO</th>
-						<td>${referencedto.rboard_no }</td>
-					</tr>
-					<tr>
-						<th>DATE</th>
-						<td>${referencedto.rboard_regdate }</td>
-					</tr>
-					<tr>
-						<th>TITLE</th>
-						<td>${referencedto.rboard_title }</td>
-					</tr>
-					<tr>
-						<td colspan="2"><iframe width="560" height="315" src="https://www.youtube.com/embed/K4nJ1RZkf-8?start=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td> 
-					</tr>
-					<tr>
-						<td colspan="2">
-							<input type="button" value="수정" 
-									onclick="location.href='mycontroller.jsp?command=boardupdateform&rboard_no=${referencedto.rboard_no }'">
-							<input type="button" value="삭제" 
-									onclick="location.href='mycontroller.jsp?command=boarddelete&rboard_no=${referencedto.rboard_no }'">
-							<input type="button" value="목록" onclick="">
-						</td>
-			 		</tr>
-				</table>
-			</form>
+			<div style="width: 750px; min-height: 500px; display: flex; flex-wrap: wrap">
+				<div style="width: 85px"></div>
+				<form action="../reference_controller.do" method="post">
+					<input type="hidden" name="command" value="boardinsert">
+					<table border="1" style="width: 580px">
+						<col width="70px">
+						<col width="500px">
+						<tr>
+							<th>NO</th>
+							<td>${referencedto.rboard_no }</td>
+						</tr>
+						<tr>
+							<th>DATE</th>
+							<td>${referencedto.rboard_regdate }</td>
+						</tr>
+						<tr>
+							<th>TITLE</th>
+							<td>${referencedto.rboard_title }</td>
+						</tr>
+						<tr>
+							<td colspan="2"><div style="width: 100%; min-height: 300px">${referencedto.rboard_content}<div></div></td>
+						</tr>
+						<%--					<tr>--%>
+						<%--						<td colspan="2">--%>
+						<%--							<input type="button" value="수정" --%>
+						<%--									onclick="location.href='mycontroller.jsp?command=boardupdateform&rboard_no=${referencedto.rboard_no }'">--%>
+						<%--							<input type="button" value="삭제" --%>
+						<%--									onclick="location.href='mycontroller.jsp?command=boarddelete&rboard_no=${referencedto.rboard_no }'">--%>
+						<%--							<input type="button" value="목록" onclick="">--%>
+						<%--						</td>--%>
+						<%--			 		</tr>--%>
+					</table>
+				</form>
+				<div style="width: 85px"></div>
+			</div>
 		</div>
 	</div>
 <div class="loginboard_form">

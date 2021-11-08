@@ -209,7 +209,7 @@
                 <div id="board_list_form" style="display: flex; flex-wrap: wrap; width: 1190px">
                     <c:choose>
                         <c:when test="${empty list_all}">
-                            <td>게시글이 없습니다..</td>
+                            <div>게시글이 없습니다..</div>
                         </c:when>
                         <c:otherwise>
 

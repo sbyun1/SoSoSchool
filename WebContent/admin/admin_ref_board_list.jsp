@@ -102,7 +102,195 @@
                     <option value="grade3_eng">3학년 영어</option>
                 </select>
             </div>
+            <script type="text/javascript">
+                var selectoption = document.getElementById("select_grade");
+                selectoption = selectoption.options[selectoption.selectedIndex].value;
 
+                window.onload = function (){
+                    if(selectoption == 'none'){
+                        var tr_all = document.getElementById("board_list_form");
+                        var gg =
+                            "<c:forEach var="list_all" items="${list_all}">"+
+                            "<div style='width : 1190px; height : 100px; display: flex; flex-wrap: wrap;'>"+
+                            "<div style='width : 90px; height : 100%'>${list_all.rboard_no}</div>"+
+                            "<div style='width : 300px' onclick=" + "location.href='reference_controller.do?command=board_detail&rboard_no=${list_all.rboard_no}'" + " class='title'>${list_all.rboard_title}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_grade}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_subject}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_type}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_regdate}</div>"+
+                            "</div>"+
+                            "</c:forEach>";
+                        tr_all.innerHTML = gg;
+                    }
+                }
+            </script>
+            <script type="text/javascript">
+                function change_region(){
+                    var selectoption = document.getElementById("select_grade");
+                    selectoption = selectoption.options[selectoption.selectedIndex].value;
+
+                    if(selectoption == 'none'){
+                        var tr_all = document.getElementById("board_list_form");
+                        tr_all.innerHTML="";
+                        var gg =
+                            "<c:forEach var="list_all" items="${list_all}">"+
+                            "<div style='width : 1190px; height : 100px; display: flex; flex-wrap: wrap;'>"+
+                            "<div style='width : 90px; height : 100%'>${list_all.rboard_no}</div>"+
+                            "<div style='width : 300px' onclick=" + "location.href='reference_controller.do?command=board_detail&rboard_no=${list_all.rboard_no}'" + " class='title'>${list_all.rboard_title}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_grade}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_subject}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_type}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_regdate}</div>"+
+                            "</div>"+
+                            "</c:forEach>";
+                        tr_all.innerHTML = gg;
+                    }
+                    else if(selectoption == 'grade1_kor'){
+                        var tr_all = document.getElementById("board_list_form");
+                        tr_all.innerHTML="";
+                        var gg =
+                            "<c:forEach var="list_all" items="${kor_1}">"+
+                            "<div style='width : 1190px; height : 100px; display: flex; flex-wrap: wrap;'>"+
+                            "<div style='width : 90px; height : 100%'>${list_all.rboard_no}</div>"+
+                            "<div style='width : 300px' onclick=" + "location.href='reference_controller.do?command=board_detail&rboard_no=${list_all.rboard_no}'" + " class='title'>${list_all.rboard_title}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_grade}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_subject}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_type}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_regdate}</div>"+
+                            "</div>"+
+                            "</c:forEach>";
+                        tr_all.innerHTML = gg;
+                    }
+                    else if(selectoption == 'grade1_math'){
+                        var tr_all = document.getElementById("board_list_form");
+                        tr_all.innerHTML="";
+                        var gg =
+                            "<c:forEach var="list_all" items="${math_1}">"+
+                            "<div style='width : 1190px; height : 100px; display: flex; flex-wrap: wrap;'>"+
+                            "<div style='width : 90px; height : 100%'>${list_all.rboard_no}</div>"+
+                            "<div style='width : 300px' onclick=" + "location.href='reference_controller.do?command=board_detail&rboard_no=${list_all.rboard_no}'" + " class='title'>${list_all.rboard_title}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_grade}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_subject}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_type}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_regdate}</div>"+
+                            "</div>"+
+                            "</c:forEach>";
+                        tr_all.innerHTML = gg;
+                    }
+                    else if(selectoption == 'grade1_eng'){
+                        var tr_all = document.getElementById("board_list_form");
+                        tr_all.innerHTML="";
+                        var gg =
+                            "<c:forEach var="list_all" items="${eng_1}">"+
+                            "<div style='width : 1190px; height : 100px; display: flex; flex-wrap: wrap;'>"+
+                            "<div style='width : 90px; height : 100%'>${list_all.rboard_no}</div>"+
+                            "<div style='width : 300px' onclick=" + "location.href='reference_controller.do?command=board_detail&rboard_no=${list_all.rboard_no}'" + " class='title'>${list_all.rboard_title}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_grade}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_subject}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_type}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_regdate}</div>"+
+                            "</div>"+
+                            "</c:forEach>";
+                        tr_all.innerHTML = gg;
+                    }
+                    else if(selectoption == 'grade2_kor'){
+                        var tr_all = document.getElementById("board_list_form");
+                        tr_all.innerHTML="";
+                        var gg =
+                            "<c:forEach var="list_all" items="${kor_2}">"+
+                            "<div style='width : 1190px; height : 100px; display: flex; flex-wrap: wrap;'>"+
+                            "<div style='width : 90px; height : 100%'>${list_all.rboard_no}</div>"+
+                            "<div style='width : 300px' onclick=" + "location.href='reference_controller.do?command=board_detail&rboard_no=${list_all.rboard_no}'" + " class='title'>${list_all.rboard_title}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_grade}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_subject}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_type}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_regdate}</div>"+
+                            "</div>"+
+                            "</c:forEach>";
+                        tr_all.innerHTML = gg;
+                    }
+                    else if(selectoption == 'grade2_math'){
+                        var tr_all = document.getElementById("board_list_form");
+                        tr_all.innerHTML="";
+                        var gg =
+                            "<c:forEach var="list_all" items="${math_2}">"+
+                            "<div style='width : 1190px; height : 100px; display: flex; flex-wrap: wrap;'>"+
+                            "<div style='width : 90px; height : 100%'>${list_all.rboard_no}</div>"+
+                            "<div style='width : 300px' onclick=" + "location.href='reference_controller.do?command=board_detail&rboard_no=${list_all.rboard_no}'" + " class='title'>${list_all.rboard_title}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_grade}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_subject}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_type}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_regdate}</div>"+
+                            "</div>"+
+                            "</c:forEach>";
+                        tr_all.innerHTML = gg;
+                    }
+                    else if(selectoption == 'grade2_eng'){
+                        var tr_all = document.getElementById("board_list_form");
+                        tr_all.innerHTML="";
+                        var gg =
+                            "<c:forEach var="list_all" items="${eng_2}">"+
+                            "<div style='width : 1190px; height : 100px; display: flex; flex-wrap: wrap;'>"+
+                            "<div style='width : 90px; height : 100%'>${list_all.rboard_no}</div>"+
+                            "<div style='width : 300px' onclick=" + "location.href='reference_controller.do?command=board_detail&rboard_no=${list_all.rboard_no}'" + " class='title'>${list_all.rboard_title}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_grade}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_subject}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_type}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_regdate}</div>"+
+                            "</div>"+
+                            "</c:forEach>";
+                        tr_all.innerHTML = gg;
+                    }
+                    else if(selectoption == 'grade3_kor'){
+                        var tr_all = document.getElementById("board_list_form");
+                        tr_all.innerHTML="";
+                        var gg =
+                            "<c:forEach var="list_all" items="${kor_3}">"+
+                            "<div style='width : 1190px; height : 100px; display: flex; flex-wrap: wrap;'>"+
+                            "<div style='width : 90px; height : 100%'>${list_all.rboard_no}</div>"+
+                            "<div style='width : 300px' onclick=" + "location.href='reference_controller.do?command=board_detail&rboard_no=${list_all.rboard_no}'" + " class='title'>${list_all.rboard_title}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_grade}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_subject}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_type}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_regdate}</div>"+
+                            "</div>"+
+                            "</c:forEach>";
+                        tr_all.innerHTML = gg;
+                    }
+                    else if(selectoption == 'grade3_math'){
+                        var tr_all = document.getElementById("board_list_form");
+                        tr_all.innerHTML="";
+                        var gg =
+                            "<c:forEach var="list_all" items="${math_3}">"+
+                            "<div style='width : 1190px; height : 100px; display: flex; flex-wrap: wrap;'>"+
+                            "<div style='width : 90px; height : 100%'>${list_all.rboard_no}</div>"+
+                            "<div style='width : 300px' onclick=" + "location.href='reference_controller.do?command=board_detail&rboard_no=${list_all.rboard_no}'" + " class='title'>${list_all.rboard_title}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_grade}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_subject}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_type}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_regdate}</div>"+
+                            "</div>"+
+                            "</c:forEach>";
+                        tr_all.innerHTML = gg;
+                    }
+                    else if(selectoption == 'grade3_eng'){
+                        var tr_all = document.getElementById("board_list_form");
+                        tr_all.innerHTML="";
+                        var gg =
+                            "<c:forEach var="list_all" items="${eng_3}">"+
+                            "<div style='width : 1190px; height : 100px; display: flex; flex-wrap: wrap;'>"+
+                            "<div style='width : 90px; height : 100%'>${list_all.rboard_no}</div>"+
+                            "<div style='width : 300px' onclick=" + "location.href='reference_controller.do?command=board_detail&rboard_no=${list_all.rboard_no}'" + " class='title'>${list_all.rboard_title}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_grade}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_subject}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_type}</div>"+
+                            "<div style='width : 200px; height : 100%'>${list_all.rboard_regdate}</div>"+
+                            "</div>"+
+                            "</c:forEach>";
+                        tr_all.innerHTML = gg;
+                    }
+                }
+            </script>
             <div style="display: flex; flex-wrap: wrap; justify-content: center; width: 1190px">
                 <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; height: 80px">
                     <div style="width: 90px">글번호</div>
@@ -115,7 +303,7 @@
                 <div id="board_list_form" style="display: flex; flex-wrap: wrap; width: 1190px">
                     <c:choose>
                         <c:when test="${empty list_all}">
-                            <td>게시글이 없습니다..</td>
+                            <div>게시글이 없습니다..</div>
                         </c:when>
                         <c:otherwise>
 

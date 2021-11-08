@@ -333,9 +333,11 @@ public class mypage_controller extends HttpServlet {
 			PrintWriter writer = response.getWriter();
 			
 			if(res > 0) {
-				//writer.println("<script type='text/javascript'>alert('성공하였습니다.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
-		       // writer.close();
-				response.sendRedirect("mypage/mypage_usernfo.jsp");
+				
+				dispatch("mypage_controller.do?command=userinfo&user_no="+user_no, request, response);
+			//	writer.println("<script type='text/javascript'>alert('성공하였습니다.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
+			//	writer.close();
+				
 			
 			}
 			else {
@@ -461,32 +463,42 @@ public class mypage_controller extends HttpServlet {
 			int user_star = Integer.parseInt(request.getParameter("user_star"));	//현재 본인 계정의 포인트
 
 			changeStarDto changeStarDto = changestardao.selectone(gi_no);	//선택한 상품 개수 가져오기
+			 UserDto userdto = userdao.selectuser(user_no);
 
-			//선택한 상품의 가격이 본인이 가지고 있는 포인트보다 많을 경우
-			if(changeStarDto.getGi_prize() > user_star){
-				jsResponse("포인트가 부족함 ㅇㅇ", "mypage_controller.do?command=mypage_changestar", response);
-			}
-			//선택한 상품의 가격이 본인이 가지고 있는 포인트보다 같거나 작을경우(구매 가능할 경우)
-			else if(changeStarDto.getGi_prize() <= user_star){
-				int res = changestardao.buygift(gi_no);	//상품 교환
-				int change_user_star = user_star - changeStarDto.getGi_prize();	//상품 교환 후 계정 포인트 차감
+			 if(userdto.getSub_yn().equals("N")){
+				 jsResponse("구독 부터 하세요", "mypage_controller.do?command=mypage_changestar", response);
+			 }else{
+				 if(changeStarDto.getGi_stock() <= 0) {
+					 jsResponse("상품 소진", "mypage_controller.do?command=mypage_changestar", response);
+				 }else{
+					 //선택한 상품의 가격이 본인이 가지고 있는 포인트보다 많을 경우
+					 if(changeStarDto.getGi_prize() > user_star){
+						 jsResponse("포인트가 부족함", "mypage_controller.do?command=mypage_changestar", response);
+					 }
+					 //선택한 상품의 가격이 본인이 가지고 있는 포인트보다 같거나 작을경우(구매 가능할 경우)
+					 else if(changeStarDto.getGi_prize() <= user_star){
+						 int res = changestardao.buygift(gi_no);	//상품 교환
+						 int change_user_star = user_star - changeStarDto.getGi_prize();	//상품 교환 후 계정 포인트 차감
 
-				System.out.println(change_user_star);
+						 System.out.println(change_user_star);
 
-				if(res > 0){
-					int update_star = userdao.update_star(change_user_star, user_no);
-					if(update_star > 0){
-						HttpSession session = request.getSession();
-						UserDto userdto = userdao.selectuser(user_no);
-						session.setAttribute("userdto", userdto);
-						jsResponse("상품 교환 성공", "../mypage_controller.do?command=mypage_changestar", response);
-					}else {
-						jsResponse("포인트 차감에서 실패", "../mypage_controller.do?command=mypage_changestar", response);
-					}
-				}else {
-					jsResponse("상품 교환에서 실패", "../mypage_controller.do?command=mypage_changestar", response);
-				}
-			}
+						 if(res > 0){
+							 int update_star = userdao.update_star(change_user_star, user_no);
+							 if(update_star > 0){
+								 HttpSession session = request.getSession();
+
+								 session.setAttribute("userdto", userdto);
+								 jsResponse("상품 교환 성공", "../mypage_controller.do?command=mypage_changestar", response);
+							 }else {
+								 jsResponse("포인트 차감에서 실패", "../mypage_controller.do?command=mypage_changestar", response);
+							 }
+						 }else {
+							 jsResponse("상품 교환에서 실패", "../mypage_controller.do?command=mypage_changestar", response);
+						 }
+					 }
+				 }
+			 }
+
 		}
 		//관리자 페이지 - 상품 수정
 		else if(command.equals("changestar_value")){

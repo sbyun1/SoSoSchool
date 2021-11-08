@@ -93,7 +93,12 @@
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
-            location.href='../group_controller.do?command=group_map&user_no=${userdto.user_no}'
+            if(${userdto.sub_yn eq 'N'}){
+                alert("구독 부터 하세요");
+                location.href='../pay_controller.do?command=pay_main';
+            }else {
+                location.href='../group_controller.do?command=group_map&user_no=${userdto.user_no}'
+            }
         }
     }
     
@@ -102,7 +107,12 @@
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
-            location.href='../group_controller.do?command=group_chat&user_no=${userdto.user_no}'
+            if(${userdto.sub_yn eq 'N'}){
+                alert("구독 부터 하세요");
+                location.href='../pay_controller.do?command=pay_main';
+            }else{
+                location.href='../group_controller.do?command=group_chat&user_no=${userdto.user_no}'
+            }
         }
     }
     
@@ -149,7 +159,12 @@
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
-            location.href='../group_controller.do?command=group_main&user_no=${userdto.user_no}&region=${userdto.region}'
+            if(${userdto.sub_yn eq 'N'}){
+                alert("구독 부터 하세요");
+                location.href='../pay_controller.do?command=pay_main';
+            }else{
+                location.href='../group_controller.do?command=group_main&user_no=${userdto.user_no}&region=${userdto.region}'
+            }
         }
     }
 
@@ -158,8 +173,12 @@
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
-
-            location.href='../reference_controller.do?command=grade1'
+            if(${userdto.sub_yn eq 'N'}){
+                alert("구독 부터 하세요");
+                location.href='../pay_controller.do?command=pay_main';
+            }else{
+                location.href='../reference_controller.do?command=grade1'
+            }
         }
     }
     
@@ -168,8 +187,12 @@
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
-
-            location.href='../reference_controller.do?command=grade2'
+            if(${userdto.sub_yn eq 'N'}){
+                alert("구독 부터 하세요");
+                location.href='../pay_controller.do?command=pay_main';
+            }else{
+                location.href='../reference_controller.do?command=grade2'
+            }
         }
     }
     
@@ -178,8 +201,12 @@
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
-
-            location.href='../reference_controller.do?command=grade3'
+            if(${userdto.sub_yn eq 'N'}){
+                alert("구독 부터 하세요");
+                location.href='../pay_controller.do?command=pay_main';
+            }else{
+                location.href='../reference_controller.do?command=grade3'
+            }
         }
 
     }
@@ -189,13 +216,13 @@
 
 
     function pay_main(){
-       /* if(${userdto.user_id eq null}){
+        if(${userdto.user_id eq null}){
             alert("잘못된 접근");
             location.href='../login/login.jsp'
-        }else{*/
+        }else{
             location.href='../pay_controller.do?command=pay_main'
             
-        //}
+        }
     }
 
     
@@ -205,7 +232,12 @@
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
-        	location.href='../munjae_controller.do?command=math_first&user_no=${userdto.user_no}'
+            if(${userdto.sub_yn eq 'N'}){
+                alert("구독 부터 하세요");
+                location.href='../pay_controller.do?command=pay_main';
+            }else{
+                location.href='../munjae_controller.do?command=math_first&user_no=${userdto.user_no}'
+            }
         }
     }
     
@@ -215,9 +247,13 @@
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
-
-        	location.href='../munjae_controller.do?command=eng_first&user_no=${userdto.user_no}'
-        } 
+            if(${userdto.sub_yn eq 'N'}){
+                alert("구독 부터 하세요");
+                location.href='../pay_controller.do?command=pay_main';
+            }else{
+                location.href='../munjae_controller.do?command=eng_first&user_no=${userdto.user_no}'
+            }
+        }
     }
 
     function munjae_kor(){
@@ -226,7 +262,12 @@
             alert("잘못된 접근");
             location.href='../login/login.jsp'
         }else{
-        	  location.href='../munjae_controller.do?command=kor_first&user_no=${userdto.user_no}'
+            if(${userdto.sub_yn eq 'N'}){
+                alert("구독 부터 하세요");
+                location.href='../pay_controller.do?command=pay_main';
+            }else{
+                location.href='../munjae_controller.do?command=kor_first&user_no=${userdto.user_no}'
+            }
         }
     }
 

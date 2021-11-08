@@ -206,6 +206,28 @@
 	     margin:30px;
 	     flex-direction: column;       
 	   }
+	.noti_table{
+
+		text-align:center;
+		width: 700px;
+		border-collapse: collapse;
+		border-top: 1px solid #444444;
+		border:none;
+	}
+	td{
+		border:none;
+		border-bottom: 1px solid #FAF0F4;
+
+	}
+	th{
+		background-color:rgb(173,175,255);
+		border:none;
+		padding: 10px;
+	}
+
+	tr:nth-child(2n){
+		background-color:#FBF4F5;
+	}
 
 </style>
 </head>
@@ -227,14 +249,14 @@
             </div> 
 			<div id="right" class="reference_borad">
 				<h2>국어자료</h2>
-				<table border="1">
+				<table border="1" class="noti_table">
 					<col width="100px">
 					<col width="650px">
 					<col width="100px">
 					<tr>
-						<th>NO.</th>
+						<th style = "border-top-left-radius:20px">NO.</th>
 						<th>제목</th>
-						<th>작성일</th>
+						<th style = "border-top-right-radius:20px">작성일</th>
 					</tr>
 					<c:choose>
 						<c:when test="${empty kor_list }">
@@ -246,75 +268,74 @@
 		                  <c:forEach items="${kor_list }" var="referenceDto">
 		                     <tr>
 		                        <td>${referenceDto.rboard_no }</td>
-								<td>${referenceDto.rboard_title }</td>
+								 <td><a style="cursor: pointer" onclick="location.href='reference_controller.do?command=boarddetail&rboard_no=${referenceDto.rboard_no}'">${referenceDto.rboard_title }</a></td>
 								<td>${referenceDto.rboard_regdate }</td>
 		                     </tr>
 		                  </c:forEach>
 		               </c:otherwise>
 					</c:choose>
 				</table>
-				<a href="../reference_controller.do?command=ref_grade1_kor">더보기</a>
+				<a style="cursor: pointer; width: 60px" onclick="location.href='../reference_controller.do?command=ref_grade3_kor'">더보기</a>
 			</div>
 	        <div class="reference_borad">
 				<h2>수학자료</h2>
-				<table border="1">
+				<table border="1" class="noti_table">
 					<col width="100px">
 					<col width="650px">
 					<col width="100px">
 					<tr>
-						<th>NO.</th>
+						<th style = "border-top-left-radius:20px">NO.</th>
 						<th>제목</th>
-						<th>작성일</th>
+						<th style = "border-top-right-radius:20px">작성일</th>
 					</tr>
 					<c:choose>
-						<c:when test="${empty list }">
+						<c:when test="${empty math_list }">
 							<tr>
 								<td colspan="4">----작성된 글이 존재하지 않습니다-----</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="dto" items="${list }">
+							<c:forEach var="math_dto" items="${math_list }">
 		                     <tr>
-		                        <td>${referenceDto.rboard_no }</td>
-								<td>${referenceDto.rboard_title }</td>
-								<td>${referenceDto.rboard_regdate }</td>
+		                        <td>${math_dto.rboard_no }</td>
+								 <td><a style="cursor: pointer" onclick="location.href='reference_controller.do?command=boarddetail&rboard_no=${math_dto.rboard_no}'">${math_dto.rboard_title }</a></td>
+								<td>${math_dto.rboard_regdate }</td>
 		                     </tr>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>					
 				</table>
-				<a href="#">더보기</a>
+				<a style="cursor: pointer; width: 60px" onclick="location.href='../reference_controller.do?command=ref_grade3_math'">더보기</a>
 			</div>
 	        <div class="reference_borad">
 				<h2>영어자료</h2>
-				<table border="1">
+				<table border="1" class="noti_table">
 					<col width="100px">
 					<col width="650px">
 					<col width="100px">
 					<tr>
-						<th>NO.</th>
+						<th style = "border-top-left-radius:20px">NO.</th>
 						<th>제목</th>
-						<th>작성일</th>
+						<th style = "border-top-right-radius:20px">작성일</th>
 					</tr>
 					<c:choose>
-						<c:when test="${empty list }">
+						<c:when test="${empty eng_list }">
 							<tr>
 								<td colspan="4">----작성된 글이 존재하지 않습니다-----</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="dto" items="${list }">
+							<c:forEach var="eng_dto" items="${eng_list }">
 								<tr>
-									<td>${dto.seq }</td>
-									<td>${dto.writer }</td>
-									<td><a href="controller.do?command=detail&seq=${dto.seq }">${dto.title }</a></td>
-									<td>${dto.regdate }</td>
+									<td>${eng_dto.rboard_no }</td>
+									<td><a style="cursor: pointer" onclick="location.href='reference_controller.do?command=boarddetail&rboard_no=${eng_dto.rboard_no}'">${eng_dto.rboard_title }</a></td>
+									<td>${eng_dto.rboard_regdate }</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>					
 				</table>
-				<a href="#">더보기</a>
+				<a style="cursor: pointer; width: 60px" onclick="location.href='../reference_controller.do?command=ref_grade3_eng'">더보기</a>
 			</div>
 		</div>
 	</div>

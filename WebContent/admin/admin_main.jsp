@@ -101,8 +101,8 @@
 		<div class="button_form">
 			<button onclick = "location.href='../admin_controller.do?command=admin_qna'">QNA 관리</button>
 		</div>
-		<div class="button_form">
-			<button>자료실 추가</button>
+	<div class="button_form">
+			<button onclick="location.href='../admin_controller.do?command=ref'">자료실 추가</button>
 		</div>
 	</div>
 	<div id="bottom_form">
