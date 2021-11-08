@@ -71,7 +71,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> origin/1108
 	}
 	button{
 		width: 200px;
@@ -83,7 +86,10 @@
 		outline: 0;
 		color: white;
 		border-radius: 10px;
+<<<<<<< HEAD
 		cursor:pointer;
+=======
+>>>>>>> origin/1108
 	}
  </style>   
 <body>
@@ -96,12 +102,14 @@
 	</div>
 	<div id="top_form">
 		<div class="button_form">
+
 			<button onclick = "location.href='../admin_controller.do?command=admin_notice'">공지사항 관리</button>
 		</div>
 		<div class="button_form">
 			<button onclick = "location.href='../admin_controller.do?command=admin_qna'">QNA 관리</button>
 		</div>
-	<div class="button_form">
+	
+		<div class="button_form">
 			<button onclick="location.href='../admin_controller.do?command=ref'">자료실 추가</button>
 		</div>
 	</div>
@@ -113,7 +121,10 @@
 			<button onclick="location.href='../admin_controller.do?command=changestar'">상품 추가</button>
 		</div>
 		<div class="button_form">
-			<button>회원관리 추가</button>
+
+			
+			<button onclick="location.href='../admin_controller.do?command=admin_user'">회원관리 추가</button>
+
 		</div>
 	</div>
 	<div style="width: 1190px; height: 100%; display: flex; flex-wrap: wrap; justify-content: center; align-items: center">

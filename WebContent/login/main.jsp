@@ -91,7 +91,7 @@
         
 		#left { 
 			color: #333;
-			border: 1px solid #ccc;
+			border-right: 1px solid #ccc;
 			background:white;
 			margin: 0px 5px 5px 0px;
 			padding: 10px;
@@ -167,6 +167,41 @@
 	    #map{
 	    display:flex;
 	    }
+	    #referenceTable{
+	    	border-collapse: collapse;
+	    	border:none;
+	    
+	    }
+	    .noti_table{
+	
+		text-align:center;
+		border: 1px solid #ccc;
+		border-collapse: collapse;
+		border-top: 1px solid #444444;
+		border:none;
+	}
+    td{
+    border:none;
+    border-bottom: 1px solid #FAF0F4;
+ 
+    }
+    th{
+    background-color:rgb(173,175,255);
+    border:none;
+    padding: 10px;
+    }
+    
+    tr:nth-child(2n){
+    background-color:#FBF4F5;
+    }
+    
+    #rank-table{
+    	margin-left: 10px;
+    
+    }
+   #grade{
+    	margin:0px;
+    }
 </style>
 <script type="text/javascript">
 	window.onload = function (){
@@ -185,14 +220,15 @@
   <div id="left">
     <!-- 동영상 -->
      <div id="video">
-      <h3>학년별 추천 영상</h3>
-         <table id="referenceTable" border="1">
+     <div><img src = "../img/video.png" style = " width: 500px; height:130px; margin-left:200px;"></div>
+      
+         <table id="referenceTable" border="none">
         	<col width="900px"> <col width="200px">
           	<tbody id="tbody">
           	<c:choose>
           	
 				<c:when test = "${userdto.grade eq '1'}">
-					<h4>1학년</h4>
+					<h4 id = "grade">1학년</h4>
 						<tr style="width:100%">
 							<td style="width:33%;"colspan="1"><iframe height="315" src="https://www.youtube.com/embed/K4nJ1RZkf-8?start=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
 							<td style="width:33%;"colspan="1"><iframe height="315" src="https://www.youtube.com/embed/88dFSVafleQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
@@ -201,7 +237,7 @@
 				</c:when>
 				
 				<c:when test = "${userdto.grade eq '2'}">
-				<h4>2학년</h4>
+				<h4 id = "grade">2학년</h4>
 						<tr style="width:100%">
 							<td style="width:33%;"colspan="1"><iframe height="315" src="https://www.youtube.com/embed/itrbyw-qflE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>						
 							<td style="width:33%;"colspan="1"><iframe height="315" src="https://www.youtube.com/embed/-YYeG6TSiK4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>						
@@ -210,7 +246,7 @@
 				</c:when>
 				
 				<c:when test = "${userdto.grade eq '3'}">
-				<h4>3학년</h4>
+				<h4 id = "grade">3학년</h4>
 						<tr style="width:100%">
 							<td style="width:33%;"colspan="1"><iframe  height="315" src="https://www.youtube.com/embed/TFgeWHi7MnE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
 							<td style="width:33%;"colspan="1"><iframe  height="315" src="https://www.youtube.com/embed/gghDRJVxFxU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
@@ -224,9 +260,12 @@
     
         <!-- 공지사항 -->
     <div>
-   		   <h3><a onClick="top.location='javascript:location.reload()'">공지사항</a></h3>
+   		   
+   		   <div><img src= "../img/noti_1.png" onClick="top.location='javascript:location.reload()'"
+   			style = " width: 500px; height:130px; margin-left:200px; margin-top: 20px"></div>
+   		   
       <div id="notic">
-        <table border="1">
+        <table class = "noti_table" border="1">
         	<col width="900px"> <col width="200px">
         	<tr>
           	<th>제목</th>
@@ -239,7 +278,7 @@
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach items = "${noti_list}" var = "dto">
+						<c:forEach items = "${noti_list}" var = "dto" end = "3">
 							<tr>
 								<td><a href = "mypage_controller.do?command=notice_detail&noti_no=${dto.noti_no }">${dto.noti_title }</a></td>
 								<td>${dto.noti_regdate }</td>
@@ -248,15 +287,18 @@
 					</c:otherwise>
 			</c:choose>
         </table>
+        <h3 style = "text-align: right" onclick = "">더보기</h3>
       </div>
     </div>
     
     
     <!-- 소모임 -->
     <div>
-      <h3>내 주변 소모임</h3>
+    	
+      
       <div id="group">
         <div id="mapform">
+        <div><img src = "../img/group.png" style = " width: 500px; height:130px; margin-left:200px; margin-top: 50px; margin"></div>
                 <c:choose>
                     <c:when test="${userdto.region eq 'SEOUL'}">
                     	<h4>서울 도서관</h4>

@@ -214,7 +214,8 @@
         </div>
         <div id="rightform">      <%--오른쪽 구역(이미지, 랭킹)--%>
             <div id="imgform">
-
+				<img src = "../img/group2.png" 
+				style = " width: 320px;height: 300px;margin-right: 60px;">
             </div>
             <div id="rankingform">
                 <div id="ranking_name" style="font-weight: bold;">

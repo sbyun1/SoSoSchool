@@ -58,7 +58,7 @@ public class referenceDao extends JDBCTemplate{
 		ResultSet rs = null;
 		List<referenceDto> res = new ArrayList<referenceDto>();
 		
-		String sql = " SELECT * FROM REF_BOARD WHERE RBOARD_GRADE=? AND RBOARD_SUBJECT=? ";
+		String sql = " SELECT * FROM REF_BOARD WHERE RBOARD_GRADE=? AND RBOARD_SUBJECT=? ORDER BY RBOARD_NO DESC";
 	
 		try {
 			pstm = con.prepareStatement(sql);

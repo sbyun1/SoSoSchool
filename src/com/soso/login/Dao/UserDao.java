@@ -539,8 +539,102 @@ public class UserDao extends JDBCTemplate{
 		}
 		return res;
 	}
+	public List<UserDto> selectall(){
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		List<UserDto> list = new ArrayList<UserDto>();
+
+		String sql = "SELECT * FROM SOSO_USER ORDER BY ENABLED_YN DESC";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			System.out.println("03. query 준비 " + sql);
+
+			rs = pstm.executeQuery();
+			System.out.println("04. query 실행 및 리턴");
+
+			while(rs.next()){
+				UserDto dto = new UserDto();
+				dto.setUser_no(rs.getInt(1));
+				dto.setUser_pr(rs.getString(2));
+				dto.setUser_name(rs.getString(3));
+				dto.setUser_id(rs.getString(4));
+				dto.setUser_pw(rs.getString(5));
+				dto.setGrade(rs.getInt(6));
+				dto.setPostcode(rs.getString(7));
+				dto.setRoadAddr(rs.getString(8));
+				dto.setDetailAddr(rs.getString(9));
+				dto.setPhone(rs.getString(10));
+				dto.setEmail(rs.getString(11));
+				dto.setUser_point(rs.getInt(12));
+				dto.setUser_star(rs.getInt(13));
+				dto.setSub_yn(rs.getString(14));
+				dto.setEnabled_yn(rs.getString(15));
+				dto.setUser_type(rs.getString(16));
+				dto.setRegion(rs.getString(17));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(con);
+			close(rs);
+			close(pstm);
+			System.out.println("05. db 종료");
+		}
+		return list;
+	}
+	public int updateuser(UserDto user){
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		String sql = "UPDATE SOSO_USER SET USER_PR = ?, USER_NAME = ?, USER_ID = ?, USER_PW = ?," +
+				" GRADE = ?, POSTCODE = ?, ROADADDR = ?, DETAILADDR = ?, PHONE = ?," +
+				" EMAIL = ?, USER_POINT = ?, USER_STAR = ?, SUB_YN = ?, ENABLED_YN = ?," +
+				" USER_TYPE = ?, REGION = ? WHERE USER_NO = ?  ";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, user.getUser_pr());
+			pstm.setString(2, user.getUser_name());
+			pstm.setString(3, user.getUser_id());
+			pstm.setString(4, user.getUser_pw());
+			pstm.setInt(5, user.getGrade());
+			pstm.setString(6, user.getPostcode());
+			pstm.setString(7, user.getRoadAddr());
+			pstm.setString(8, user.getDetailAddr());
+			pstm.setString(9, user.getPhone());
+			pstm.setString(10, user.getEmail());
+			pstm.setInt(11, user.getUser_point());
+			pstm.setInt(12, user.getUser_star());
+			pstm.setString(13, user.getSub_yn());
+			pstm.setString(14, user.getEnabled_yn());
+			pstm.setString(15, user.getUser_type());
+			pstm.setString(16, user.getRegion());
+			pstm.setInt(17, user.getUser_no());
+			System.out.println("03. query 준비 " + sql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+			if(res > 0){
+				commit(con);
+			}else{
+				rollback(con);
+			}
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		}finally {
+			close(con);
+			close(pstm);
+		}
+		return res;
+	}
 }
 
 	
-
 

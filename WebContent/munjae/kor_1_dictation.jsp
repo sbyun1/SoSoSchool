@@ -213,7 +213,6 @@
                     document.forms[0].elements[i+2].classList.add("fail");
                 }
             }
-            alert(correct);
             var sum = 5 * correct;
             outputString = "<p>"+examineeName+" 님의</p>";
             outputString += "<p>"+year+"년 "+month+"월 "+date+"일 "+weekToday+" 계산 퀴즈 결과</p>";

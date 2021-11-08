@@ -147,21 +147,36 @@
     tr:nth-child(2n){
     background-color:#FBF4F5;
     }
-    /*푸터*/
-    footer{
-        background-color:rgb(233,233,236);
-        min-width: 100%;
-        min-height: 150px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
+	input{
+     font-family: 'GowunDodum-Regular';
     }
+ 	textarea{
+       font-family: 'GowunDodum-Regular';
+       background-color:#FBF4F5;
+       padding: 50px;
+       border:none;
+       font-size: 10pt;
+       resize:none;
+       width:600px;
+       height: 400px;
+    }
+     .btn{
+    	width: 200px;
+    	height:50px;
+    	background-color:rgb(173,175,255);
+    	border:none;
+    	border-radius: 20px;
+    	font-size: 15pt;
+    	margin-top: 20px;
+    	margin-left: 10px;
+    	color:white;
+    	cursor:pointer;
+    }
+ 	.btn:hover{
+ 		background-color: #FBF4F5;
+ 		color: rgb(173,175,255);
+ 	
+ 	}
 </style>
 <script type="text/javascript">
 	window.onload = function (){
@@ -188,19 +203,24 @@
 				<table class = "noti_table" border = "1">
 				<tr>
 				    <th>제목</th>
-				    <td><input type = "text" name = "notice_title"></td>
+				    <td><input type = "text" name = "notice_title"
+				    style = "width: 500px; height: 40px; border:none"
+				   ></td>
 				</tr>
 			
 			
 				<tr>
-					<th>공지사항</th>
-					<td><textarea cols = "60" rows = "10" name = "notice_content"></textarea> </td>
+					<th colspan = "2">공지사항</th>
+					
+				</tr>
+				<tr>
+					<td colspan = "2"><textarea name = "notice_content"></textarea> </td>
 				</tr>
 		
 				<tr>
 				<td colspan = "3">
-					<input type = "submit" value = "작성">
-					<input type = "button" value = "취소" onclick = "location.href='../admin_controller.do?command=admin_notice'">
+					<input type = "submit" class = "btn" value = "작성">
+					<input type = "button" class = "btn" value = "취소" onclick = "location.href='../admin_controller.do?command=admin_notice'">
 					
 				</td>
 			</tr>												

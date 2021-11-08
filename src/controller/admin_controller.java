@@ -6,15 +6,15 @@ import com.soso.ref.dao.referenceDao;
 import com.soso.ref.dto.referenceDto;
 import group.groupDao;
 import group.groupDto;
-import mypageDao.changeStarDao;
-import mypageDto.changeStarDto;
 import mypageDao.NoticeDao;
-import mypageDto.NoticeDto;
 import mypageDao.QnaDao;
+import mypageDao.changeStarDao;
+import mypageDto.NoticeDto;
 import mypageDto.QnaDto;
-
+import mypageDto.changeStarDto;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -99,13 +99,80 @@ public class admin_controller extends HttpServlet {
 			request.setAttribute("math_3", math_3);
 
 			dispatch("admin/admin_ref_board_list.jsp", request, response);
-		}		
-		
-		
+		}
+		//유저 수정 리스트
+		else if(command.equals("admin_user")){
+			List<UserDto> list = userdao.selectall();
+
+			request.setAttribute("list", list);
+
+			dispatch("admin/admin_user_board_list.jsp", request, response);
+		}
+		//수정 게시판 이동
+		else if(command.equals("user_detail")){
+			int user_no = Integer.parseInt(request.getParameter("user_no"));
+
+			UserDto user = userdao.selectuser(user_no);
+
+			request.setAttribute("user", user);
+
+			dispatch("admin/admin_user_board_detail.jsp", request, response);
+		}
+		//유저 수정
+		else if(command.equals("user_update")){
+			int user_no = Integer.parseInt(request.getParameter("user_no"));
+			String user_pr = request.getParameter("user_pr");
+			String user_name = request.getParameter("user_name");
+			String user_id = request.getParameter("user_id");
+			String user_pw = request.getParameter("user_pw");
+			int grade = Integer.parseInt(request.getParameter("grade"));
+			String postcode = request.getParameter("postcode");
+			String roadAddr = request.getParameter("roadAddr");
+			String detailAddr = request.getParameter("detailAddr");
+			String phone = request.getParameter("phone");
+			String email = request.getParameter("email");
+			int user_point = Integer.parseInt(request.getParameter("user_point"));
+			int user_star = Integer.parseInt(request.getParameter("user_star"));
+			String sub_yn = request.getParameter("sub_yn");
+			String region = request.getParameter("region");
+			String user_type = request.getParameter("user_type");
+			String enabled_yn = request.getParameter("enabled_yn");
+
+			userdto.setUser_no(user_no);
+			userdto.setUser_pr(user_pr);
+			userdto.setUser_name(user_name);
+			userdto.setUser_id(user_id);
+			userdto.setUser_pw(user_pw);
+			userdto.setGrade(grade);
+			userdto.setPostcode(postcode);
+			userdto.setRoadAddr(roadAddr);
+			userdto.setDetailAddr(detailAddr);
+			userdto.setPhone(phone);
+			userdto.setEmail(email);
+			userdto.setUser_point(user_point);
+			userdto.setUser_star(user_star);
+			userdto.setSub_yn(sub_yn);
+			userdto.setRegion(region);
+			userdto.setUser_type(user_type);
+			userdto.setEnabled_yn(enabled_yn);
+
+			int res = userdao.updateuser(userdto);
+
+			if(res > 0){
+				PrintWriter writer = response.getWriter();
+				writer.println("<script type='text/javascript'>alert('수정 성공'); location.href='../admin_controller.do?command=admin_user';</script>");
+				writer.close();
+			}else{
+				PrintWriter writer = response.getWriter();
+				writer.println("<script type='text/javascript'>alert('수정 실패'); location.href='../admin_controller.do?command=admin_user';</script>");
+				writer.close();
+			}
+
+		}
 		//공지사항
 		else if(command.equals("admin_notice")) {
 			List<NoticeDto> noti_list = Ndao.selectAll(); //전체 리스트를 가져와서 selectAll실행
-			
+
 			request.setAttribute("list", noti_list);
 			RequestDispatcher disp = request.getRequestDispatcher("admin/admin_notice.jsp");
 			disp.forward(request, response);
@@ -114,7 +181,7 @@ public class admin_controller extends HttpServlet {
 		else if(command.equals("notice_detail")){
 			int noti_no = Integer.parseInt(request.getParameter("noti_no"));
 			NoticeDto dto = Ndao.selectOne(noti_no);
-			
+
 			request.setAttribute("dto", dto);
 			RequestDispatcher dp = request.getRequestDispatcher("admin/admin_notice_detail.jsp");
 
@@ -127,22 +194,22 @@ public class admin_controller extends HttpServlet {
 			request.setAttribute("dto", dto);
 			dispatch("admin/admin_notice_update.jsp", request, response);
 		}
-		
+
 		else if(command.equals("notice_update")) {
 			int noti_no = Integer.parseInt(request.getParameter("noti_no"));
 			String noti_title = request.getParameter("noti_title");
 			String noti_content = request.getParameter("noti_content");
-			
+
 			NoticeDto dto = new NoticeDto();
 			dto.setNoti_no(noti_no);
 			dto.setNoti_title(noti_title);
 			dto.setNoti_content(noti_content);
-			
+
 			int res = Ndao.update(dto);
-			
+
 			if(res > 0) {
 				dispatch("admin_controller.do?command=admin_notice", request, response);
-				
+
 			}else {
 				dispatch("admin_controller.do?command=notice_detail&noti_no="+noti_no, request, response);
 			}
@@ -151,40 +218,40 @@ public class admin_controller extends HttpServlet {
 		else if(command.equals("notice_delete")) {
 			int noti_no = Integer.parseInt(request.getParameter("noti_no"));
 			int res = Ndao.delete(noti_no);
-			
+
 			if(res > 0) {
 				dispatch("admin_controller.do?command=admin_notice", request, response);
 			}else {
 				dispatch("admin_controller.do?command=notice_detail&noti_no="+noti_no, request, response);
 			}
 		}
-		
+
 		//공지 작성
 		else if(command.equals("notice_writeform")) {
-			
+
 			response.sendRedirect("admin/admin_notice_write.jsp");
 		}
 		else if(command.equals("notice_write")) {
 			String notice_title = request.getParameter("notice_title");
 			String notice_content = request.getParameter("notice_content");
-			
+
 			NoticeDto dto = new NoticeDto();
 			dto.setNoti_title(notice_title);
 			dto.setNoti_content(notice_content);
-			
+
 			int res = Ndao.insert(dto);
-			
+
 			if(res > 0) {
 				dispatch("admin_controller.do?command=admin_notice",request,response);
 			}else {
 				dispatch("admin_controller.do?command=notice_writeform", request, response);
 			}
 		}
-		
+
 		//qna
 		else if(command.equals("admin_qna")) {
 			List<QnaDto> qna_list = Qdao.selectAll(); //전체 리스트를 가져와서 selectAll실행
-			
+
 			request.setAttribute("list", qna_list);
 			RequestDispatcher disp = request.getRequestDispatcher("admin/admin_qna.jsp");
 			disp.forward(request, response);
@@ -194,7 +261,7 @@ public class admin_controller extends HttpServlet {
 			int qna_no = Integer.parseInt(request.getParameter("qna_no"));
 			QnaDto dto = new QnaDto();
 			dto = Qdao.selectOne(qna_no);
-			
+
 			request.setAttribute("dto", dto);
 			RequestDispatcher dp = request.getRequestDispatcher("admin/admin_qna_detail.jsp");
 
@@ -203,7 +270,7 @@ public class admin_controller extends HttpServlet {
 		//qna 답글달기
 		else if(command.equals("qna_replyform")) {
 			int parentqna_no = Integer.parseInt(request.getParameter("parentqna"));
-			
+
 			QnaDto dto = Qdao.selectOne(parentqna_no);
 			request.setAttribute("parentqna", dto);
 			dispatch("admin/admin_qna_reply.jsp", request, response);
@@ -213,41 +280,41 @@ public class admin_controller extends HttpServlet {
 			String qna_writer = request.getParameter("qna_writer");
 			String qna_title = request.getParameter("qna_title");
 			String qna_content = request.getParameter("qna_content");
-			
+
 			QnaDto parentQna = Qdao.selectOne(parentqna_no);
-			
+
 			int parentgno = parentQna.getQna_gno();
 			int parentgsq = parentQna.getQna_gsq();
 			int parenttab = parentQna.getQna_tab();
-			
-			QnaDto dto = new QnaDto(0, parentgno, parentgsq, parenttab, qna_title, qna_writer, qna_content, null); 
+
+			QnaDto dto = new QnaDto(0, parentgno, parentgsq, parenttab, qna_title, qna_writer, qna_content, null);
 			boolean res = Qdao.reply_logic(dto);
-			
+
 			if(res) {
 				response.sendRedirect("admin_controller.do?command=admin_qna");
 			}else {
 				response.sendRedirect("admin_controller.do?command=qna_detail&qna_no="+parentqna_no);
 			}
-			
+
 		}
 		//qna 삭제
 		else if(command.equals("qna_delete")) {
 			int qna_no = Integer.parseInt(request.getParameter("qna_no"));
 			int res = Qdao.delete(qna_no);
-			
+
 			if(res > 0) {
 				dispatch("admin_controller.do?command=admin_qna",request, response);
 			}
 			else {
 				dispatch("admin_controller.do?command=qna_detail&qna_no="+qna_no, request, response);
 			}
-			
+
 		}
-		
+
 		//qna 수정
 		else if(command.equals("qna_updateform")) {
 			int qna_no = Integer.parseInt(request.getParameter("qna_no"));
-		
+
 			QnaDto dto = Qdao.selectOne(qna_no);
 			request.setAttribute("dto", dto);
 			dispatch("admin/admin_qna_update.jsp", request, response);
@@ -256,24 +323,23 @@ public class admin_controller extends HttpServlet {
 			int qna_no = Integer.parseInt(request.getParameter("qna_no"));
 			String qna_title =request.getParameter("qna_title");
 			String qna_content = request.getParameter("qna_content");
-			
+
 			QnaDto dto = new QnaDto();
 			dto.setQna_no(qna_no);
 			dto.setQna_title(qna_title);
 			dto.setQna_content(qna_content);
-			
+
 			int res = Qdao.update(dto);
-			
+
 			if(res > 0) {
 				dispatch("admin_controller.do?command=admin_qna", request, response);
-				
+
 			}else {
 				dispatch("admin_controller.do?command=qna_detail&qna_no="+qna_no, request, response);
 			}
 		}
-		
-
 	}
+
 
 	private void dispatch(String url, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatch = request.getRequestDispatcher(url);

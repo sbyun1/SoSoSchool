@@ -151,6 +151,16 @@
     input{
      font-family: 'GowunDodum-Regular';
     }
+    textarea{
+       font-family: 'GowunDodum-Regular';
+       background-color:#FBF4F5;
+       padding: 50px;
+       border:none;
+       font-size: 10pt;
+       resize:none;
+       width:600px;
+       height: 400px;
+    }
     .btn{
         width: 50px;
     	height:50px;
@@ -210,16 +220,11 @@
 					<td>${dto.noti_writer }</td>
 				</tr>
 				<tr>
-					<th colspan = "2"> 공지사항</th>
-					
+					<th colspan = "2">내용</th>
 				</tr>
 				<tr>
-					<td colspan = "2"
-					style = "width: 300px; height:400px;">
-					${dto.noti_content }
-					</td>
+					<td colspan = "2"><textarea name = "notice_content" readonly="true">${dto.noti_content } </textarea> </td>
 				</tr>
-		
 				<tr>
 					<td colspan = "2">
 					<input type = "button" class = "btn" value = "목록" onclick = "location.href='../admin_controller.do?command=admin_notice'">

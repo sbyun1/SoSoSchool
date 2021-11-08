@@ -261,7 +261,7 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
-		                  <c:forEach items="${kor_list }" var="referenceDto">
+		                  <c:forEach items="${kor_list }" var="referenceDto" end="2">
 		                     <tr>
 		                        <td>${referenceDto.rboard_no }</td>
 								 <td><a style="cursor: pointer" onclick="location.href='reference_controller.do?command=boarddetail&rboard_no=${referenceDto.rboard_no}'">${referenceDto.rboard_title }</a></td>
@@ -291,7 +291,7 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${math_list }" var="referenceDto">
+							<c:forEach items="${math_list }" var="referenceDto" end="2">
 		                     <tr>
 		                        <td>${referenceDto.rboard_no }</td>
 								 <td><a style="cursor: pointer" onclick="location.href='reference_controller.do?command=boarddetail&rboard_no=${referenceDto.rboard_no}'">${referenceDto.rboard_title }</a></td>
@@ -321,7 +321,7 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${eng_list }" var="referenceDto">
+							<c:forEach items="${eng_list }" var="referenceDto" end="2">
 		                     <tr>
 		                        <td>${referenceDto.rboard_no }</td>
 								 <td><a style="cursor: pointer" onclick="location.href='reference_controller.do?command=boarddetail&rboard_no=${referenceDto.rboard_no}'">${referenceDto.rboard_title }</a></td>

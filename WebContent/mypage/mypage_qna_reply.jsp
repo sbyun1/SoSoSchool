@@ -87,6 +87,7 @@
     /*메인 구역*/
     section .mainform{
         width: 750px;     /*메인 구역 전체 width값*/
+        height: 900px;
         display: flex;
         flex-wrap: wrap;
         -ms-user-select: none;      /*드래그 금지*/
@@ -187,10 +188,58 @@
     	display: flex;
     	justify-content: center;
     }
-	.noti_table{
-		
-		
+.qna_table{
+	
+		text-align:center;
+		width: 600px;
+		border-collapse: collapse;
+		border-top: 1px solid #444444;
+		border:1px;
 	}
+    td{
+   
+    border-bottom: 1px solid #FAF0F4;
+ 
+    }
+    th{
+    background-color:rgb(173,175,255);
+   
+    padding: 10px;
+    }
+    
+    tr:nth-child(2n){
+    background-color:#FBF4F5;
+    }
+    textarea{
+       font-family: 'GowunDodum-Regular';
+       background-color:#FBF4F5;
+       padding: 50px;
+       border:none;
+       font-size: 10pt;
+       resize:none;
+       width:600px;
+       height: 400px;
+    } 
+   input{
+     font-family: 'GowunDodum-Regular';
+    } 
+  .btn{
+    	width: 200px;
+    	height:50px;
+    	background-color:rgb(173,175,255);
+    	border:none;
+    	border-radius: 20px;
+    	font-size: 15pt;
+    	margin-top: 20px;
+    	margin-left: 10px;
+    	color:white;
+    	cursor:pointer;
+    }
+ 	.btn:hover{
+ 		background-color: #FBF4F5;
+ 		color: rgb(173,175,255);
+ 	
+ 	} 
     
     /*푸터*/
     footer{
@@ -233,22 +282,25 @@
 				<tr>
 				    <th>제목</th>
 				    <td><input type = "text" name = "qna_title" value = "RE:${parentqna.qna_title }"
-				    readonly = "true"></td>
+				    readonly = "true" style = "width: 400px; height: 40px; border:none"></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
 					<td><input type = "text" name = "qna_writer" value = "${userdto.user_id }"
-					readonly = "true"></td>
+					readonly = "true" style = "width: 400px; height: 40px; border:none; background-color:#FBF4F5"></td>
 				</tr>
 				<tr>
-					<th>내용</th>
-					<td><textarea cols = "60" rows = "10" name = "qna_content"></textarea> </td>
+					<th colspan = "2">내용</th>
+					
+				</tr>
+				<tr>
+					<td colspan = "2"><textarea autofocus name = "qna_content"></textarea> </td>
 				</tr>
 		
 				<tr>
 					<td colspan = "2">
-					<input type = "submit" value = "작성">
-					<input type = "button" value = "취소" onclick = "location.href='mypage_controller.do?command=mypage_qna'">
+					<input type = "submit" class = "btn" value = "작성">
+					<input type = "button" class = "btn" value = "취소" onclick = "location.href='mypage_controller.do?command=mypage_qna'">
 					</td>
 				</tr>														
 			</table>

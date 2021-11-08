@@ -93,7 +93,7 @@
         -khtml-user-select: none;
         -webkit-user-select: none;
         user-select: none;
-        height: 700px;
+        height: 1000px;
     }
     /*성적표*/
     section .mainform #mainlist{
@@ -148,7 +148,36 @@
     tr:nth-child(2n){
     background-color:#FBF4F5;
     }
-    
+    textarea{
+       font-family: 'GowunDodum-Regular';
+       background-color:#FBF4F5;
+       padding: 50px;
+       border:none;
+       font-size: 10pt;
+       resize:none;
+       width:600px;
+       height: 400px;
+    } 
+   input{
+     font-family: 'GowunDodum-Regular';
+    } 
+  .btn{
+    	width: 200px;
+    	height:50px;
+    	background-color:rgb(173,175,255);
+    	border:none;
+    	border-radius: 20px;
+    	font-size: 15pt;
+    	margin-top: 20px;
+    	margin-left: 10px;
+    	color:white;
+    	cursor:pointer;
+    }
+ 	.btn:hover{
+ 		background-color: #FBF4F5;
+ 		color: rgb(173,175,255);
+ 	
+ 	}  
     /*푸터*/
     footer{
         background-color:rgb(233,233,236);
@@ -212,15 +241,12 @@
 					
 				</tr>
 				<tr>
-					<td colspan = "2"
-					style = "width: 300px; height:200px;">
-					${dto.noti_content }
-					</td>
+					<td colspan = "2"><textarea name = "notice_content" readonly="true">${dto.noti_content } </textarea> </td>
 				</tr>
 		
 				<tr>
 					<td colspan = "2">
-					<input type = "button" value = "목록" onclick = "location.href='mypage_controller.do?command=mypage_notice'">
+					<input type = "button" class = "btn" value = "목록" onclick = "location.href='mypage_controller.do?command=mypage_notice'">
 					</td>
 				</tr>													
 						

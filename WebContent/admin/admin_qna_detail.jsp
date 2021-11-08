@@ -125,6 +125,19 @@
     	display: flex;
     	justify-content: center;
     }
+  	input{
+     font-family: 'GowunDodum-Regular';
+    }
+    textarea{
+       font-family: 'GowunDodum-Regular';
+       background-color:#FBF4F5;
+       padding: 50px;
+       border:none;
+       font-size: 10pt;
+       resize:none;
+       width:600px;
+       height: 400px;
+    }
 	.noti_table{
 	
 		text-align:center;
@@ -147,20 +160,24 @@
     tr:nth-child(2n){
     background-color:#FBF4F5;
     }
-    /*푸터*/
-    footer{
-        background-color:rgb(233,233,236);
-        min-width: 100%;
-        min-height: 150px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
+  .btn{
+        width: 100px;
+    	height:50px;
+    	background-color:rgb(173,175,255);
+    	border:none;
+    	border-radius: 20px;
+    	font-size: 13pt;
+    	margin-top: 20px;
+    	margin-left: 10px;
+    	color:white;
+    	cursor:pointer;
+    	margin-top: 2px;
+    	margin-bottom: 10px;
+    }
+    .btn:hover{
+    	background-color: #FBF4F5;
+ 		color: rgb(173,175,255);
+    
     }
 </style>
 <script type="text/javascript">
@@ -178,7 +195,7 @@
 <div class="mainform">
 	<div id="mainlist" style="height:150px">
 		<div class="title" style="width: 750px; height:200px">
-			<img src = "../img/noti.png"
+			<img src = "../img/qna.png"
 			style="width: 600px; height:150px; padding: 30px">	
 		</div>
 		<div id = "container">  
@@ -200,18 +217,21 @@
 					<td>${dto.qna_writer }</td>
 				</tr>
 				<tr>
-					<th>문의내용</th>
-					<td><textarea cols = "60" rows = "10">${dto.qna_content }</textarea> </td>
+					<th colspan = "2">문의내용</th>
+				</tr>
+				<tr>
+					<td colspan = "2"><textarea readonly = "true">${dto.qna_content }</textarea> </td>
+					
 				</tr>
 		
 				<tr>
 					<td colspan = "2">
-					<input type = "button" value = "목록" onclick = "location.href='../admin_controller.do?command=admin_qna'">
-					<input type = "button" value = "답글달기" onclick = "location.href='../admin_controller.do?command=qna_replyform&parentqna=${dto.qna_no}'">
+					<input type = "button" class = "btn" value = "목록" onclick = "location.href='../admin_controller.do?command=admin_qna'">
+					<input type = "button" class = "btn" value = "답글달기" onclick = "location.href='../admin_controller.do?command=qna_replyform&parentqna=${dto.qna_no}'">
 						<c:if test = "${dto.qna_writer == 'ADMIN' }">
-							<input type = "button" value = "수정" onclick = "location.href='admin_controller.do?command=qna_updateform&qna_no=${dto.qna_no}'">
+							<input type = "button" class = "btn" value = "수정" onclick = "location.href='admin_controller.do?command=qna_updateform&qna_no=${dto.qna_no}'">
 						</c:if>
-					<input type = "button" value = "삭제" onclick = "location.href='../admin_controller.do?command=qna_delete&qna_no=${dto.qna_no}'">
+					<input type = "button" class = "btn" value = "삭제" onclick = "location.href='../admin_controller.do?command=qna_delete&qna_no=${dto.qna_no}'">
 					</td>
 				</tr>			
 		
