@@ -333,6 +333,9 @@ public class mypage_controller extends HttpServlet {
 			PrintWriter writer = response.getWriter();
 			
 			if(res > 0) {
+				HttpSession session = request.getSession();
+				UserDto userdto = userdao.selectuser(user_no);
+				session.setAttribute("userdto", userdto);
 				
 				dispatch("mypage_controller.do?command=userinfo&user_no="+user_no, request, response);
 			//	writer.println("<script type='text/javascript'>alert('성공하였습니다.'); location.href='../mypage_controller.do?command=userinfo&user_no="+user_no+"';</script>");
