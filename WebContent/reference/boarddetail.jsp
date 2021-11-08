@@ -203,6 +203,43 @@
 	     margin:30px;
 	     flex-direction: column;       
 	}
+	
+	.ref_table{
+	
+		text-align:center;
+		width: 600px;
+		border-collapse: collapse;
+		border-top: 1px solid #444444;
+		border:1px;
+	}
+    td{
+   
+    border-bottom: 1px solid #FAF0F4;
+ 
+    }
+    th{
+    background-color:rgb(173,175,255);
+   
+    padding: 10px;
+    }
+    
+    tr:nth-child(2n){
+    background-color:#FBF4F5;
+    }
+    /*푸터*/
+    input{
+     font-family: 'GowunDodum-Regular';
+    }
+    textarea{
+       font-family: 'GowunDodum-Regular';
+       background-color:#FBF4F5;
+       padding: 50px;
+       border:none;
+       font-size: 10pt;
+       resize:none;
+       width:600px;
+       height: 400px;
+    }
 </style>
 </head>
 <body>
@@ -225,7 +262,7 @@
 				<div style="width: 85px"></div>
 				<form action="../reference_controller.do" method="post">
 					<input type="hidden" name="command" value="boardinsert">
-					<table border="1" style="width: 580px">
+					<table class = "ref_table" border="1" style="width: 580px">
 						<col width="70px">
 						<col width="500px">
 						<tr>
