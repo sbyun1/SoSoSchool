@@ -75,6 +75,32 @@
         width : 200px;
         height : 100%;
     }
+    input{
+     font-family: 'GowunDodum-Regular';
+    }
+    .qna_table{
+	
+		text-align:center;
+		width: 1100px;
+		border-collapse: collapse;
+		border-top: 1px solid #444444;
+		border:none;
+	}
+    td{
+    border:none;
+    border-bottom: 1px solid #FAF0F4;
+ 
+    }
+    th{
+    background-color:rgb(173,175,255);
+    border:none;
+    padding: 10px;
+    }
+    
+    tr:nth-child(2n){
+    background-color:#FBF4F5;
+    }
+
 </style>
 <title>QNA관리</title>
 </head>

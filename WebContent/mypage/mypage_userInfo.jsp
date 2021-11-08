@@ -643,7 +643,7 @@
                 <label class="reg" for="new_email">구독여부 (Y/N)</label>
                 	
                     <input type="text" id="subs_yn" name="subs_yn"
-                    value = "${userdto.sub_yn }">
+                    value = "${userdto.sub_yn }" readonly = "true">
                 </li>
                 
                 <li><label class="reg" for="region">지역</label>

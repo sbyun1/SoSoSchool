@@ -75,6 +75,48 @@
         width : 200px;
         height : 100%;
     }
+    input{
+     font-family: 'GowunDodum-Regular';
+    }
+    .noti_table{
+	
+		text-align:center;
+		width: 1100px;
+		border-collapse: collapse;
+		border-top: 1px solid #444444;
+		border:none;
+	}
+    td{
+    border:none;
+    border-bottom: 1px solid #FAF0F4;
+ 
+    }
+    th{
+    background-color:rgb(173,175,255);
+    border:none;
+    padding: 10px;
+    }
+    
+    tr:nth-child(2n){
+    background-color:#FBF4F5;
+    }
+     #write_btn{
+    	width: 200px;
+    	height:50px;
+    	background-color:rgb(173,175,255);
+    	border:none;
+    	border-radius: 20px;
+    	font-size: 15pt;
+    	margin-top: 20px;
+    	margin-left: 10px;
+    	color:white;
+    	cursor:pointer;
+    }
+ 	#write_btn:hover{
+ 		background-color: #FBF4F5;
+ 		color: rgb(173,175,255);
+ 	
+ 	}
 </style>
 <title>공지사항 관리</title>
 </head>
@@ -120,7 +162,7 @@
 				<tr>
 					<td colspan = "4"
 					style = "border:none; background-color:#ffffff">
-						<input type = "button" value = "공지사항 작성" onclick = "location.href='admin_controller.do?command=notice_writeform'">
+						<input type = "button" id = "write_btn" value = "공지사항 작성" onclick = "location.href='admin_controller.do?command=notice_writeform'">
 					</td>
 				</tr>
 				</c:when>

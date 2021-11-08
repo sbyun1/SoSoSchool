@@ -148,20 +148,30 @@
     background-color:#FBF4F5;
     }
     /*푸터*/
-    footer{
-        background-color:rgb(233,233,236);
-        min-width: 100%;
-        min-height: 150px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
+    input{
+     font-family: 'GowunDodum-Regular';
     }
+    .btn{
+        width: 50px;
+    	height:50px;
+    	background-color:rgb(173,175,255);
+    	border:none;
+    	border-radius: 20px;
+    	font-size: 15pt;
+    	margin-top: 20px;
+    	margin-left: 10px;
+    	color:white;
+    	cursor:pointer;
+    	margin-top: 2px;
+    	margin-bottom: 10px;
+    }
+    .btn:hover{
+    	background-color: #FBF4F5;
+ 		color: rgb(173,175,255);
+    
+    }
+    
+    
 </style>
 <script type="text/javascript">
 	window.onload = function (){
@@ -205,16 +215,16 @@
 				</tr>
 				<tr>
 					<td colspan = "2"
-					style = "width: 300px; height:200px;">
+					style = "width: 300px; height:400px;">
 					${dto.noti_content }
 					</td>
 				</tr>
 		
 				<tr>
 					<td colspan = "2">
-					<input type = "button" value = "목록" onclick = "location.href='../admin_controller.do?command=admin_notice'">
-					<input type = "button" value = "수정" onclick = "location.href='../admin_controller.do?command=notice_updateform&noti_no=${dto.noti_no}'">
-					<input type = "button" value = "삭제" onclick = "location.href='../admin_controller.do?command=notice_delete&noti_no=${dto.noti_no}'">
+					<input type = "button" class = "btn" value = "목록" onclick = "location.href='../admin_controller.do?command=admin_notice'">
+					<input type = "button" class = "btn" value = "수정" onclick = "location.href='../admin_controller.do?command=notice_updateform&noti_no=${dto.noti_no}'">
+					<input type = "button" class = "btn" value = "삭제" onclick = "location.href='../admin_controller.do?command=notice_delete&noti_no=${dto.noti_no}'">
 					
 					</td>
 		
